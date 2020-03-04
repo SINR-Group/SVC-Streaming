@@ -1,0 +1,8 @@
+utils/path2d_stroker.o: utils/path2d_stroker.c \
+ /home/mallesh/coding/gpac/include/gpac/path2d.h \
+ /home/mallesh/coding/gpac/include/gpac/maths.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h

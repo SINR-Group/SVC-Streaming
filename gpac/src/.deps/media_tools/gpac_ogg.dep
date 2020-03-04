@@ -1,0 +1,13 @@
+media_tools/gpac_ogg.o: media_tools/gpac_ogg.c \
+ /home/mallesh/coding/gpac/include/gpac/internal/ogg.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/internal/isomedia_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/isomedia.h \
+ /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/sync_layer.h

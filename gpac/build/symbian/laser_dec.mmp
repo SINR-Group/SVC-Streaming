@@ -1,0 +1,8 @@
+TARGET gm_laser_dec.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\laser_dec
+SOURCE laser_dec.c

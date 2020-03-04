@@ -1,0 +1,310 @@
+TARGET libgpac.dll
+TARGETTYPE DLL
+CAPABILITY	NetworkServices
+UID		0x1000008d 0xf01f9073
+
+//allow writable static data
+EPOCALLOWDLLDATA
+
+//comment if you don't have JS
+#if 1
+MACRO GPAC_HAS_SPIDERMONKEY
+MACRO XP_PC
+SYSTEMINCLUDE ..\..\extra_lib\include\js
+STATICLIBRARY libjs.lib
+#endif
+
+//comment if you don't have libpng
+#if 1
+MACRO GPAC_HAS_PNG
+SYSTEMINCLUDE ..\..\extra_lib\include\png
+STATICLIBRARY libpng.lib 
+#endif
+
+
+//comment if you don't have libjpeg
+#if 1
+MACRO GPAC_HAS_JPEG
+SYSTEMINCLUDE ..\..\extra_lib\include\jpeg
+STATICLIBRARY libjpeg.lib 
+#endif
+
+//comment if you don't have OpenGL ES 
+#if 1
+MACRO GPAC_USE_GLES1X
+LIBRARY libgles_cm.lib
+#else
+MACRO GPAC_DISABLE_3D
+#endif
+
+
+//Common tools
+SOURCEPATH ..\..\src\utils
+SOURCE base_encoding.c
+SOURCE bitstream.c
+SOURCE color.c
+SOURCE configfile.c
+SOURCE downloader.c
+SOURCE error.c
+SOURCE list.c
+SOURCE map.c
+SOURCE math.c
+SOURCE module.c
+SOURCE path2d.c
+SOURCE path2d_stroker.c
+SOURCE token.c
+SOURCE uni_bidi.c
+SOURCE url.c
+SOURCE utf.c
+SOURCE xml_parser.c
+SOURCE sha1.c
+// zlib symbian on sybian SDKs doesn't come with gzio
+SOURCE gzio.cpp
+//SOURCE zutil.c
+// symbian-specific stuff
+SOURCE symbian_os.cpp
+SOURCE symbian_net.cpp
+
+//IETF tools
+SOURCEPATH ..\..\src\ietf
+SOURCE rtcp.c
+SOURCE rtp.c
+SOURCE rtp_packetizer.c
+SOURCE rtp_depacketizer.c
+SOURCE rtp_pck_3gpp.c
+SOURCE rtp_pck_mpeg12.c
+SOURCE rtp_pck_mpeg4.c
+SOURCE rtsp_command.c
+SOURCE rtsp_common.c
+SOURCE rtsp_response.c
+SOURCE rtsp_session.c
+SOURCE sdp.c
+
+//BIFS
+SOURCEPATH ..\..\src\bifs
+SOURCE arith_decoder.c
+SOURCE bifs_codec.c
+SOURCE bifs_node_tables.c
+SOURCE com_dec.c
+SOURCE com_enc.c
+SOURCE conditional.c
+SOURCE field_decode.c
+SOURCE field_encode.c
+SOURCE memory_decoder.c
+SOURCE predictive_mffield.c
+SOURCE quantize.c
+SOURCE script_dec.c
+SOURCE script_enc.c
+SOURCE unquantize.c
+
+//LASeR
+SOURCEPATH ..\..\src\laser
+SOURCE lsr_enc.c
+SOURCE lsr_dec.c
+SOURCE lsr_tables.c
+
+//IsoMedia
+SOURCEPATH ..\..\src\isomedia
+SOURCE avc_ext.c
+SOURCE box_code_3gpp.c
+SOURCE box_code_apple.c
+SOURCE box_code_base.c
+SOURCE box_code_drm.c
+SOURCE box_code_meta.c
+SOURCE box_dump.c
+SOURCE box_funcs.c
+SOURCE data_map.c
+SOURCE hint_track.c
+SOURCE hinting.c
+SOURCE drm_sample.c
+SOURCE isom_intern.c
+SOURCE isom_read.c
+SOURCE isom_store.c
+SOURCE isom_write.c
+SOURCE media.c
+SOURCE media_odf.c
+SOURCE meta.c
+SOURCE movie_fragments.c
+SOURCE sample_descs.c
+SOURCE stbl_read.c
+SOURCE stbl_write.c
+SOURCE track.c
+SOURCE tx3g.c 
+
+//OD Framework
+SOURCEPATH ..\..\src\odf
+SOURCE desc_private.c
+SOURCE descriptors.c
+SOURCE ipmpx_code.c
+SOURCE ipmpx_dump.c
+SOURCE ipmpx_parse.c
+SOURCE oci_codec.c
+SOURCE odf_code.c
+SOURCE odf_codec.c
+SOURCE odf_command.c
+SOURCE odf_dump.c
+SOURCE odf_parse.c
+SOURCE qos.c
+SOURCE slc.c
+
+//scenegraph
+SOURCEPATH ..\..\src\scenegraph
+SOURCE base_scenegraph.c
+SOURCE mpeg4_animators.c
+SOURCE commands.c
+SOURCE mpeg4_nodes.c
+SOURCE mpeg4_valuator.c
+SOURCE vrml_interpolators.c
+SOURCE vrml_proto.c
+SOURCE vrml_route.c
+SOURCE vrml_script.c
+SOURCE vrml_smjs.c
+SOURCE vrml_tools.c
+SOURCE x3d_nodes.c
+SOURCE smil_anim.c
+SOURCE smil_timing.c
+SOURCE dom_events.c
+SOURCE dom_smjs.c
+SOURCE svg_attributes.c
+SOURCE svg_types.c
+SOURCE svg_smjs.c
+SOURCE svg_properties.c
+SOURCE xbl_process.c
+SOURCE xml_ns.c
+
+//crypto
+SOURCEPATH ..\..\src\crypto
+SOURCE g_crypt.c
+SOURCE g_crypt_openssl.c
+SOURCE g_crypt_tinyaes.c
+SOURCE tiny_aes.c
+
+//media tools
+SOURCEPATH ..\..\src\media_tools
+SOURCE av_parsers.c
+SOURCE avilib.c
+SOURCE gpac_ogg.c
+SOURCE img.c
+SOURCE ismacryp.c
+SOURCE isom_hinter.c
+SOURCE isom_tools.c
+SOURCE media_export.c
+SOURCE media_import.c
+SOURCE mpeg2_ps.c
+SOURCE text_import.c
+SOURCE saf.c
+SOURCE mpegts.c
+SOURCE vobsub.c
+
+
+//scene manager
+SOURCEPATH ..\..\src\scene_manager
+SOURCE loader_bt.c
+SOURCE loader_isom.c
+SOURCE loader_qt.c
+SOURCE loader_xmt.c
+SOURCE scene_dump.c
+SOURCE scene_manager.c
+SOURCE scene_stats.c
+SOURCE swf_bifs.c
+SOURCE swf_parse.c
+SOURCE text_to_bifs.c
+SOURCE encode_cbk.c
+SOURCE encode_isom.c
+SOURCE loader_svg.c
+
+//terminal
+SOURCEPATH ..\..\src\terminal
+SOURCE channel.c
+SOURCE clock.c
+SOURCE decoder.c
+SOURCE term_node_init.c
+SOURCE input_sensor.c
+SOURCE media_control.c
+SOURCE media_manager.c
+SOURCE media_memory.c
+SOURCE media_object.c
+SOURCE media_sensor.c
+SOURCE mpeg4_inline.c
+SOURCE network_service.c
+SOURCE object_browser.c
+SOURCE object_manager.c
+SOURCE scene.c
+SOURCE svg_external.c
+SOURCE terminal.c 
+
+//compositor
+SOURCEPATH ..\..\src\compositor
+SOURCE audio_input.c
+SOURCE audio_mixer.c
+SOURCE audio_render.c
+SOURCE bindable.c
+SOURCE camera.c
+SOURCE compositor.c
+SOURCE compositor_2d.c
+SOURCE compositor_3d.c
+SOURCE compositor_node_init.c
+SOURCE drawable.c
+SOURCE events.c
+SOURCE font_engine.c
+SOURCE hardcoded_protos.c
+SOURCE mesh.c
+SOURCE mesh_collide.c
+SOURCE mesh_tesselate.c
+SOURCE mpeg4_animstream.c
+SOURCE mpeg4_audio.c
+SOURCE mpeg4_background.c
+SOURCE mpeg4_background2d.c
+SOURCE mpeg4_bitmap.c
+SOURCE mpeg4_composite.c
+SOURCE mpeg4_form.c
+SOURCE mpeg4_geometry_2d.c
+SOURCE mpeg4_geometry_3d.c
+SOURCE mpeg4_geometry_ifs2d.c
+SOURCE mpeg4_geometry_ils2d.c
+SOURCE mpeg4_gradients.c
+SOURCE mpeg4_grouping.c
+SOURCE mpeg4_grouping_2d.c
+SOURCE mpeg4_grouping_3d.c
+SOURCE mpeg4_layer_2d.c
+SOURCE mpeg4_layer_3d.c
+SOURCE mpeg4_layout.c
+SOURCE mpeg4_lighting.c
+SOURCE mpeg4_path_layout.c
+SOURCE mpeg4_sensors.c
+SOURCE mpeg4_sound.c
+SOURCE mpeg4_text.c
+SOURCE mpeg4_textures.c
+SOURCE mpeg4_timesensor.c
+SOURCE mpeg4_viewport.c
+SOURCE navigate.c
+SOURCE offscreen_cache.c
+SOURCE svg_base.c
+SOURCE svg_font.c
+SOURCE svg_geometry.c
+SOURCE svg_grouping.c
+SOURCE svg_media.c
+SOURCE svg_paint_servers.c
+SOURCE svg_text.c
+SOURCE texturing.c
+SOURCE texturing_gl.c
+SOURCE visual_manager.c
+SOURCE visual_manager_2d.c
+SOURCE visual_manager_2d_draw.c
+SOURCE visual_manager_3d.c
+SOURCE visual_manager_3d_gl.c
+SOURCE x3d_geometry.c
+
+SYSTEMINCLUDE \epoc32\include \epoc32\include\libc ..\..\include
+
+LIBRARY euser.lib estlib.lib ezlib.lib hal.lib
+
+#if defined(WINS)
+    deffile ..\..\build\symbian\libgpac_symbian.def
+#else if defined(ARM)
+    deffile ..\..\build\symbian\libgpac_symbian.def
+#endif
+
+//EXPORTUNFROZEN
+//  nostrictdef
+

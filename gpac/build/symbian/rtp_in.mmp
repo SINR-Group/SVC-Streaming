@@ -1,0 +1,14 @@
+TARGET gm_rtp_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\rtp_in
+SOURCE rtp_in.c
+SOURCE rtp_session.c
+SOURCE rtp_signaling.c
+SOURCE rtp_stream.c
+SOURCE sdp_fetch.c
+SOURCE sdp_load.c
+

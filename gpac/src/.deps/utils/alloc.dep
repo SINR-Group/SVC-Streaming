@@ -1,0 +1,5 @@
+utils/alloc.o: utils/alloc.c /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h

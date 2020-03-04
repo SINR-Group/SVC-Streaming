@@ -1,0 +1,29 @@
+TARGET gm_img_in.dll
+
+//enable if you have libopenjpeg
+#if 0
+MACRO GPAC_HAS_JP2
+SYSTEMINCLUDE ..\..\extra_lib\include\openjpeg
+STATICLIBRARY libopenjpeg.lib 
+
+//THIS MUST BE SET BEFORE EPOC LIBS OTHERWISE LINKER IS SCREWED !!
+#if defined(GCCE)
+#else
+LIBRARY egcc.lib
+#endif
+
+#endif
+
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\img_in
+SOURCE img_dec.c
+SOURCE img_in.c
+SOURCE bmp_dec.c
+SOURCE png_dec.c
+SOURCE jpeg_dec.c
+SOURCE jp2_dec.c
+

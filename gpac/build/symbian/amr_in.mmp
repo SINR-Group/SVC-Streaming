@@ -1,0 +1,11 @@
+TARGET gm_amr_in.dll
+
+//only compile demux part
+MACRO GPAC_AMR_IN_STANDALONE
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\amr_dec
+SOURCE amr_in.c

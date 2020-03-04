@@ -1,0 +1,9 @@
+TARGET gm_timedtext.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\timedtext
+SOURCE timedtext_in.c
+SOURCE timedtext_dec.c

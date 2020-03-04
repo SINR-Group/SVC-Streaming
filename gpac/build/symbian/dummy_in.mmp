@@ -1,0 +1,9 @@
+TARGET gm_dummy_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\dummy_in
+SOURCE dummy_in.c
+

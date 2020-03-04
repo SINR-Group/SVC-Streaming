@@ -1,0 +1,19 @@
+media_tools/isom_tools.o: media_tools/isom_tools.c \
+ /home/mallesh/coding/gpac/include/gpac/internal/media_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/media_tools.h \
+ /home/mallesh/coding/gpac/include/gpac/isomedia.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/sync_layer.h \
+ /home/mallesh/coding/gpac/include/gpac/avparse.h \
+ /home/mallesh/coding/gpac/include/gpac/config_file.h \
+ /home/mallesh/coding/gpac/include/gpac/ietf.h \
+ /home/mallesh/coding/gpac/include/gpac/network.h \
+ /home/mallesh/coding/gpac/include/gpac/internal/isomedia_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/constants.h

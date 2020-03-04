@@ -1,0 +1,10 @@
+TARGET gm_ctx_load.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\ctx_load
+SOURCE ctx_load.c
+
+EXPORTUNFROZEN

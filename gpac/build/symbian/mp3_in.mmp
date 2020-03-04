@@ -1,0 +1,22 @@
+TARGET gm_mp3_in.dll
+
+
+//comment if you don't have libmad
+MACRO GPAC_HAS_MAD
+MACRO FPM_ARM
+STATICLIBRARY libmad.lib 
+SYSTEMINCLUDE ..\..\extra_lib\include\mad
+
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\mp3_in
+SOURCE mp3_in.c
+SOURCE mad_dec.c
+
+#if defined(GCCE)
+#else
+LIBRARY egcc.lib
+#endif

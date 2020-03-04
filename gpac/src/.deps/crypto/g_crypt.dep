@@ -1,0 +1,8 @@
+crypto/g_crypt.o: crypto/g_crypt.c \
+ /home/mallesh/coding/gpac/include/gpac/internal/crypt_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/crypt.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h

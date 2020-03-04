@@ -1,0 +1,8 @@
+utils/configfile.o: utils/configfile.c \
+ /home/mallesh/coding/gpac/include/gpac/config_file.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h

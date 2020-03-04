@@ -1,0 +1,9 @@
+TARGET gm_odf_dec.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\odf_dec
+SOURCE odf_dec.c
+

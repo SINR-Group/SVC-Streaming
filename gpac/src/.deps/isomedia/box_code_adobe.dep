@@ -1,0 +1,12 @@
+isomedia/box_code_adobe.o: isomedia/box_code_adobe.c \
+ /home/mallesh/coding/gpac/include/gpac/internal/isomedia_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/isomedia.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/sync_layer.h

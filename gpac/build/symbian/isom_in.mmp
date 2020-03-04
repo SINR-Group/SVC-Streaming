@@ -1,0 +1,12 @@
+TARGET gm_isom_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\isom_in
+SOURCE isom_cache.c
+SOURCE load.c
+SOURCE read.c
+SOURCE read_ch.c
+

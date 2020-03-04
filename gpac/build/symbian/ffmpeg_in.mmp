@@ -1,0 +1,15 @@
+TARGET gm_ffmpeg_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\ffmpeg_in
+SOURCE ffmpeg_decode.c
+SOURCE ffmpeg_demux.c
+SOURCE ffmpeg_load.c
+
+SYSTEMINCLUDE ..\..\extra_lib\include
+STATICLIBRARY libffmpeg.lib 
+LIBRARY ezlib.lib
+

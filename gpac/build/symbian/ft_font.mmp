@@ -1,0 +1,18 @@
+TARGET gm_ft_font.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\ft_font
+SOURCE ft_font.c
+
+SYSTEMINCLUDE ..\..\extra_lib\include\freetype
+
+LIBRARY ezlib.lib 
+STATICLIBRARY libfreetype.lib
+
+#if defined(GCCE)
+#else
+LIBRARY egcc.lib
+#endif

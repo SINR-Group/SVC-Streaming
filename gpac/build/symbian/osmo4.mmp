@@ -1,0 +1,90 @@
+
+/*config for symbian 9.x*/
+#if defined(GCCE)
+
+TARGET            Osmo4.exe
+TARGETTYPE        EXE
+SECUREID	0xf01f9075
+UID		0 0xf01f9075
+VENDORID	0
+
+CAPABILITY	NetworkServices
+EPOCSTACKSIZE	0x8000
+/*up to 8M for gpac - this should be tuned per device !!*/
+EPOCHEAPSIZE 0x4000 0x800000
+
+#else
+/*config for symbian 8.x*/
+
+TARGET            Osmo4.app
+TARGETTYPE        app
+UID               0x100039CE 0x1000AC00
+TARGETPATH        \system\apps\Osmo4
+
+EPOCALLOWDLLDATA
+
+#endif
+
+//MACRO GPAC_GUI_ONLY
+
+/*source code*/
+SOURCEPATH        ..\..\applications\osmo4_sym
+SOURCE            osmo4.cpp
+SOURCE            osmo4_view.cpp
+SOURCE            osmo4_ui.cpp
+SOURCE            playlist.cpp
+
+
+
+/*resource files*/
+SOURCEPATH        ..\..\applications\osmo4_sym\res
+
+#if defined(GCCE)
+
+START RESOURCE    Osmo4.rss
+HEADER
+TARGETPATH resource\apps
+END //RESOURCE
+
+START RESOURCE    Osmo4_reg.rss
+#ifdef WINSCW
+TARGETPATH 	  \private\10003a3f\apps
+#else
+TARGETPATH 	  \private\10003a3f\import\apps
+#endif
+END //RESOURCE
+
+#else
+
+RESOURCE          Osmo4_gen.rss
+RESOURCE          Osmo4_caption.rss
+
+#endif
+
+
+USERINCLUDE    ..\..\applications\osmo4_sym ..\..\applications\osmo4_sym\res
+
+SYSTEMINCLUDE \epoc32\include \epoc32\include\libc ..\..\include
+
+LIBRARY           euser.lib apparc.lib cone.lib eikcore.lib avkon.lib efsrv.lib estlib.lib ws32.lib bafl.lib eikcoctl.lib
+
+//gpac core lib
+LIBRARY           libgpac.lib
+
+//when using skin support
+LIBRARY           aknskins.lib 
+
+#if defined(GCCE)
+//hardware key listener stuff
+LIBRARY           remconcoreapi.lib remconinterfacebase.lib 
+#endif
+
+LANG SC
+
+#if defined(GCCE)
+#else
+AIF             Osmo4.aif ..\..\applications\osmo4_sym\aif osmo4aif.rss c12 osmo4_icon.bmp osmo4_icon_mask.bmp osmo4_menu.bmp osmo4_menu_mask.bmp
+#endif
+
+
+// End of File

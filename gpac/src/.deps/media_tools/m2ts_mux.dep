@@ -1,0 +1,20 @@
+media_tools/m2ts_mux.o: media_tools/m2ts_mux.c \
+ /home/mallesh/coding/gpac/include/gpac/mpegts.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/network.h \
+ /home/mallesh/coding/gpac/include/gpac/thread.h \
+ /home/mallesh/coding/gpac/include/gpac/internal/odf_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/sync_layer.h \
+ /home/mallesh/coding/gpac/include/gpac/esi.h \
+ /home/mallesh/coding/gpac/include/gpac/constants.h \
+ /home/mallesh/coding/gpac/include/gpac/media_tools.h \
+ /home/mallesh/coding/gpac/include/gpac/isomedia.h \
+ /home/mallesh/coding/gpac/include/gpac/avparse.h \
+ /home/mallesh/coding/gpac/include/gpac/config_file.h

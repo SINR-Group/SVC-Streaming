@@ -1,0 +1,224 @@
+#!/bin/bash -e
+
+echo -e "\n\033[32m If you have problem using this script, read the README in  trunk/gpac/build/android \033[0m\n"
+
+NDK=0
+SDK=0
+JDK=0
+REBUILD=0
+CLEAN=0
+
+for i in $*
+do
+
+#! Check for force rebuild
+ if [ "$i" = "-force_rebuild" ]
+then
+  echo -e "\033[31m Usage: $0 Force Rebuild : Activated \033[0m"
+  REBUILD=1
+fi
+
+ if [ "$i" = "-clean" ]
+then
+  CLEAN=1
+fi
+
+#! Check for the NDK path
+ if [ "${i%=*}" = "-ndk" ]
+then
+  echo -e "\033[31m Usage: $0 Path to Android NDK : Ok \033[0m"
+  NDK=1
+  export PATH="$(echo $i | cut -d"=" -f2):$PATH"
+fi
+
+#! Check for the SDK path
+ if [ "${i%=*}" = "-sdk" ]
+then
+  echo -e "\033[31m Usage: $0 Path to Android SDK : Ok \033[0m"
+  SDK=1
+  export PATH="$(echo $i | cut -d"=" -f2)/tools:$PATH"
+  export ANDROID_HOME="$(echo $i | cut -d"=" -f2)/"
+  
+fi
+
+#! Check for the JDK path
+ if [ "${i%=*}" = "-jdk" ]
+then
+  echo -e "\033[31m Usage: $0 Path to JDK : Ok \033[0m"
+  JDK=1
+  export JAVA_HOME="$(echo $i | cut -d"=" -f2)"
+fi
+
+done
+
+if [ $NDK -eq 0 ]
+then
+  echo "\nUsage: $0 PATH_TO_ANDROID_NDK [ADDITIONAL_NDK-BUILD arguments] : You must give as first argument the directory path of the NDK, add -ndk=PATH_TO_NDK"
+  exit 1
+fi
+
+if [ $SDK -eq 0 ]
+then
+  echo -e "\n\033[34m Usage: $0 PATH_TO_ANDROID_SDK : You have not give the directory path of SDK. Auto build of Osmo4.apk not possible. Build it with Eclipse or add -sdk=PATH_TO_SDK\033[0m"
+fi
+
+if [ $JDK -eq 0 ]
+then
+  echo -e "\n\033[34m Usage: $0 PATH_TO_JDK : You have not give the directory path of JDK. Auto build of Osmo4.apk not possible. Build it with Eclipse or add -jdk=PATH_TO_JDK \033[0m"
+fi
+
+if [ $REBUILD -eq 0 ]
+then
+  echo -e "\n\033[33m Usage: $0 Force Rebuild : Add -force_rebuild to rebuild the whole solution \033[0m"
+fi
+
+if [ -z $JAVA_HOME ]
+then
+  echo "The JAVA_HOME environment variable must be set if you build without Android studio"
+  echo "Please refer to https://github.com/gpac/gpac/commit/705e199c8eadf35774520206d7f7cf1a043c0539"
+  
+fi
+
+if [ -z $ANDROID_HOME ]
+then
+  echo "The ANDROID_HOME environment variable must be set if you build without Android studio"
+  echo "Please refer to https://github.com/gpac/gpac/commit/705e199c8eadf35774520206d7f7cf1a043c0539"
+ 
+fi
+
+echo -e "\n $PATH"
+
+# Be sure to resolve if script not called from its directory
+export BUILDPATH=$(dirname "$0")
+cd $BUILDPATH
+export BUILDPATH=$(pwd)
+echo "Current Dir = $BUILDPATH"
+
+echo "Building lib gpac ..."
+cd ../../../
+BASEPATH=$(pwd)
+#check revision.h is here
+./check_revision.sh
+version="`grep '#define GPAC_GIT_REVISION' \"./include/gpac/revision.h\" | cut -d '"' -f 2`"
+
+#rm -rf $BUILDPATH/../obj/*
+
+cd $BUILDPATH
+
+if [ $CLEAN -eq 1 ]
+then
+echo -n "Cleaning all from $BUILDPATH..."
+ndk-build clean
+cd $BASEPATH/applications/osmo4_android_studio/
+./gradlew clean
+cd -
+exit 0
+fi
+
+echo -n "Buiding all libs from $BUILDPATH..."
+if [ $REBUILD -eq 1 ]
+then
+ndk-build clean
+cd $BASEPATH/applications/osmo4_android_studio/
+./gradlew clean
+cd -
+ndk-build -B
+else
+ndk-build
+fi
+echo "[OK] build successful."
+
+#echo "Copying modules to modules dir..."
+cd ../libs/
+#for i in $(find . -name 'gm*.so')
+#do
+#	echo -n "$i..."
+#	cp "$i" "$BASEPATH/applications/osmo4_android/res/raw/"
+#done
+#echo
+#echo "[OK] success."
+
+LIBS_DIR="$BASEPATH/applications/osmo4_android_studio/app/src/main/libs"
+mkdir -p $LIBS_DIR
+echo "Copying libs to libs dir $LIBS_DIR ..."
+for i in $(find . -name '*.so')
+do
+	echo -n " Copy $i"
+	TMP_DIR=$(dirname $i)
+	echo $TMP_DIR
+	mkdir -p "$LIBS_DIR/$TMP_DIR"
+	cp "$i" "$LIBS_DIR/$i"
+done
+echo
+echo "[OK] success module for Osmo4."
+
+
+LIBS_DIR="$BASEPATH/applications/mp4box_android/libs"
+mkdir -p $LIBS_DIR
+echo "Copying libs to libs dir $LIBS_DIR ..."
+for i in $(find . \( -name '*.so' \) -a \( -name "*ft2*" -o -name "*edit*" -o -name "*libgpac.so*" -o -name "*jpeg*" -o -name "*js_osmo*" -o -name "*mp4box*" -o -name "*openjpeg*" -o -name "*png*" -o -name "*libz.*" \) )
+do
+	echo " Copy $i"
+	TMP_DIR=$(dirname $i)
+	mkdir -p "$LIBS_DIR/$TMP_DIR"
+	cp "$i" "$LIBS_DIR/$i"
+done
+echo
+echo "[OK] success module for MP4box."
+
+LIBS_DIR="$BASEPATH/applications/osmo4_android_studio/app/src/main/libs"
+mkdir -p $LIBS_DIR
+cd "$BASEPATH/extra_lib/lib/android"
+echo "Copying all extra libs to $LIBS_DIR ..."
+for i in $(find . \( -name '*.so' \))
+do
+	echo " Copy $i"
+	TMP_DIR=$(dirname $i)
+	mkdir -p "$LIBS_DIR/$TMP_DIR"
+	cp "$i" "$LIBS_DIR/$i"
+done
+echo "[OK] success extra lib for Osmo4."
+
+LIBS_DIR="$BASEPATH/applications/mp4box_android/libs"
+mkdir -p $LIBS_DIR
+cd "$BASEPATH/extra_lib/lib/android"
+echo "Copying all extra libs to $LIBS_DIR ..."
+
+for i in $(find . \( -name '*.so' \) -a \( -name "*ft2*" -o -name "*edit*" -o -name "*libgpac.so*" -o -name "*jpeg*" -o -name "*js_osmo*" -o -name "*mp4box*" -o -name "*openjpeg*" -o -name "*png*" -o -name "*libz.*" \) )
+do
+	echo " Copy $i"
+	TMP_DIR=$(dirname $i)
+	mkdir -p "$LIBS_DIR/$TMP_DIR"
+	cp "$i" "$LIBS_DIR/$i"
+done
+echo "[OK] success extra lib MP4box."
+
+ASSETS_DIR="$BASEPATH/applications/osmo4_android_studio/app/src/main/assets/"
+mkdir -p $ASSETS_DIR
+
+echo "Copying gui folder to $ASSETS_DIR ..."
+cp -R "$BASEPATH/gui" $ASSETS_DIR
+echo "[OK] success GUI for Osmo4."
+
+echo "Copying shaders folder to $ASSETS_DIR ..."
+cp -R "$BASEPATH/shaders" $ASSETS_DIR
+echo "[OK] success Shader Folder for Osmo4."
+
+if [ \( $SDK -eq 1 \) -a \( $JDK -eq 1 \) ]
+then
+	echo "Building osmo4 apk"
+	cd $BASEPATH/applications/osmo4_android_studio/
+	./gradlew assembleDebug
+	cd -
+	if [ -f $BASEPATH/osmo4-$(grep "\#define GPAC_VERSION " $BASEPATH/include/gpac/version.h | cut -d "\"" -f 2 )-rev$version.apk ]
+	then
+	echo -e "\nOld Osmo4.apk found. Removing it ..." 
+	rm $BASEPATH/osmo4-$(grep "\#define GPAC_VERSION " $BASEPATH/include/gpac/version.h | cut -d "\"" -f 2 )-rev$version.apk
+	fi  
+	
+	cp $BASEPATH/applications/osmo4_android_studio/app/build/outputs/apk/app-debug.apk $BASEPATH/osmo4-$(grep "\#define GPAC_VERSION " $BASEPATH/include/gpac/version.h | cut -d "\"" -f 2 )-rev$version.apk
+	echo "[OK] success Building osmo4 apk"
+else
+	echo "Run project with Android studio to generate APK"
+fi
+	

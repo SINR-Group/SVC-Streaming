@@ -1,0 +1,19 @@
+isomedia/box_dump.o: isomedia/box_dump.c \
+ /home/mallesh/coding/gpac/include/gpac/internal/isomedia_dev.h \
+ /home/mallesh/coding/gpac/include/gpac/isomedia.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/gpac/include/gpac/list.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/sync_layer.h \
+ /home/mallesh/coding/gpac/include/gpac/utf.h \
+ /home/mallesh/coding/gpac/include/gpac/network.h \
+ /home/mallesh/coding/gpac/include/gpac/color.h \
+ /home/mallesh/coding/gpac/include/gpac/constants.h \
+ /home/mallesh/coding/gpac/include/gpac/maths.h \
+ /home/mallesh/coding/gpac/include/gpac/avparse.h \
+ /home/mallesh/coding/gpac/include/gpac/base_coding.h

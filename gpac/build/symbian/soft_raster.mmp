@@ -1,0 +1,15 @@
+TARGET gm_soft_raster.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\soft_raster
+SOURCE ftgrays.c
+SOURCE raster_load.c
+SOURCE raster_565.c
+SOURCE raster_argb.c
+SOURCE raster_rgb.c
+SOURCE stencil.c
+SOURCE surface.c
+

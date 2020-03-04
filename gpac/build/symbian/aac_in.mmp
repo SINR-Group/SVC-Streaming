@@ -1,0 +1,15 @@
+TARGET gm_aac_in.dll
+
+//uncomment to try with faad support - currently crashing ...
+//MACRO GPAC_HAS_FAAD
+//STATICLIBRARY libfaad.lib 
+//SYSTEMINCLUDE ..\..\extra_lib\include\faad
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\aac_in
+SOURCE aac_in.c
+SOURCE faad_dec.c
+

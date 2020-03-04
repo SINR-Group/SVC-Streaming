@@ -1,0 +1,34 @@
+TARGET gm_xvid_dec.dll
+
+MACRO __MARM__
+MACRO __MARM_ARMI__
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\xvid_dec
+SOURCE xvid_dec_wce.cpp
+SOURCEPATH ..\..\modules\xvid_dec\xvid_wce
+SOURCE bitstream.cpp
+SOURCE CodecAPI.cpp
+SOURCE decoder.cpp
+SOURCE font.cpp
+SOURCE gmc.cpp
+SOURCE idct.cpp
+SOURCE image.cpp
+SOURCE interpolate8x8.cpp
+SOURCE mbcoding.cpp
+SOURCE mbprediction.cpp
+SOURCE mem_align.cpp
+SOURCE mem_transfer.cpp
+SOURCE qpel_tab.cpp
+SOURCE quant_h263.cpp
+SOURCE quant_matrix.cpp
+SOURCE quant_mpeg.cpp
+SOURCE reduced.cpp
+SOURCE xvid.cpp
+//SOURCE xvid_ppc.asm
+
+
+SYSTEMINCLUDE ..\..\modules\xvid_dec\xvid_wce

@@ -1,0 +1,8 @@
+media_tools/mpeg2_ps.o: media_tools/mpeg2_ps.c media_tools/mpeg2_ps.h \
+ /home/mallesh/coding/gpac/include/gpac/avparse.h \
+ /home/mallesh/coding/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h

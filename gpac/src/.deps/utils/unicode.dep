@@ -1,0 +1,4 @@
+utils/unicode.o: utils/unicode.c \
+ /home/mallesh/coding/gpac/include/gpac/unicode.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h

@@ -1,0 +1,9 @@
+TARGET gm_bifs_dec.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\bifs_dec
+SOURCE bifs_dec.c
+

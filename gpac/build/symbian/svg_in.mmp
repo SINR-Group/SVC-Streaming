@@ -1,0 +1,10 @@
+TARGET gm_svg_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\svg_in
+SOURCE svg_in.c
+
+LIBRARY ezlib.lib

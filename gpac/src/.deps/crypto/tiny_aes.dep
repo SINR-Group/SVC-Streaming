@@ -1,0 +1,3 @@
+crypto/tiny_aes.o: crypto/tiny_aes.c crypto/tiny_aes.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h

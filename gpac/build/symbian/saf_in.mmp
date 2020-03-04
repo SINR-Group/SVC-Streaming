@@ -1,0 +1,9 @@
+TARGET gm_saf_in.dll
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\saf_in
+SOURCE saf_in.c
+

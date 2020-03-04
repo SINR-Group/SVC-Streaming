@@ -1,0 +1,9 @@
+utils/color.o: utils/color.c \
+ /home/mallesh/coding/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/gpac/config.h \
+ /home/mallesh/coding/gpac/include/gpac/version.h \
+ /home/mallesh/coding/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/gpac/include/gpac/constants.h \
+ /home/mallesh/coding/gpac/include/gpac/color.h \
+ /home/mallesh/coding/gpac/include/gpac/maths.h

@@ -1,0 +1,25 @@
+TARGET gm_epoc_hw.dll
+
+//OpenGL libs
+#if 1
+MACRO GPAC_USE_GLES1X
+LIBRARY libgles_cm.lib
+#endif
+
+//common config of all modules
+#include ".\module_base.mmp"
+
+//source
+SOURCEPATH ..\..\modules\epoc_hw
+SOURCE epoc_vout.cpp
+SOURCE epoc_aout.cpp
+SOURCE epoc_codec.cpp
+
+LIBRARY ws32.lib 
+//video libs
+LIBRARY fbscli.lib 
+//audio libs
+LIBRARY MediaClientAudioStream.lib
+//codec libs
+LIBRARY mmfserverbaseclasses.lib
+

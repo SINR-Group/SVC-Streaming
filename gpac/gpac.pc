@@ -1,0 +1,12 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${exec_prefix}/include
+
+Name: gpac
+Description: GPAC Multimedia Framework
+URL: http://gpac.sourceforge.net
+Version:0.8.0
+Cflags: -I${prefix}/include
+Libs: -L${libdir} -lgpac
+Libs.private: -lgpac_static -lm -lGL -lGLU -lX11  -lz -lssl -lcrypto -ljpeg -lpng -lpthread -ldl -llzma
