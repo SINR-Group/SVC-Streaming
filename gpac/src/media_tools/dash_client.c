@@ -5811,7 +5811,7 @@ static DownloadGroupStatus dash_download_group_download(GF_DashClient *dash, GF_
            return GF_IO_ERR;
         }
 
-        FILE *f = fopen(new_base_seg_url+34, "wb"); /* TODO: Extracting original filename. 34 is the length of URL minus original filename. Rn hardcoded. Need to fix. */
+        FILE *f = fopen(new_base_seg_url+35, "wb"); /* TODO: Extracting original filename. 34 is the length of URL minus original filename. Rn hardcoded. Need to fix. */
         fwrite(mem_address, sizeof(char), size, f);
         fclose(f);
         /* DSVC */
