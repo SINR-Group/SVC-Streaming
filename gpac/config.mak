@@ -15,7 +15,7 @@ WINDRES=windres
 INSTALL=install
 LIBTOOL=libtool
 INSTFLAGS=-p
-OPTFLAGS=-O3  -Wall -fno-strict-aliasing -Wno-pointer-sign -fPIC -DPIC -msse2 -DNDEBUG -DGPAC_HAVE_CONFIG_H -I"/home/mallesh/coding/gpac" -fvisibility="hidden"
+OPTFLAGS=-O3  -Wall -fno-strict-aliasing -Wno-pointer-sign -fPIC -DPIC -msse2 -DNDEBUG -DGPAC_HAVE_CONFIG_H -I"/home/mallesh/coding/svc/gpac" -fvisibility="hidden"
 CXXFLAGS= -Wall -fno-strict-aliasing -fPIC -DPIC
 LDFLAGS= -Wl,--warn-common -Wl,-z,defs
 SHFLAGS=-shared
@@ -144,9 +144,9 @@ RENOIR_ENABLE=no
 GPAC_ENST=no
 GPAC_ENST_INC=no
 SRC_LOCAL_PATH=yes
-SRC_PATH=/home/mallesh/coding/gpac
-BUILD_PATH=/home/mallesh/coding/gpac
-LOCAL_INC_PATH=/home/mallesh/coding/gpac/extra_lib/include
+SRC_PATH=/home/mallesh/coding/svc/gpac
+BUILD_PATH=/home/mallesh/coding/svc/gpac
+LOCAL_INC_PATH=/home/mallesh/coding/svc/gpac/extra_lib/include
 %.opic : %.c
 	@echo "  CC $<"
 	$(CC) $(CFLAGS) $(PIC_CFLAGS) -c $< -o $@

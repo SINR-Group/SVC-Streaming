@@ -1266,7 +1266,6 @@ int mp4client_main(int argc, char **argv)
 			return 0;
 		}
 	}
-    gui_mode = 0;
 
 #ifdef GPAC_MEMORY_TRACKING
 	gf_sys_init(mem_track);

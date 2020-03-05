@@ -1,7 +1,7 @@
 utils/os_config_init.o: utils/os_config_init.c \
- /home/mallesh/coding/gpac/include/gpac/config_file.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h
+ /home/mallesh/coding/svc/gpac/include/gpac/config_file.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h

@@ -1,7 +1,7 @@
 media_tools/avilib.o: media_tools/avilib.c \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/internal/avilib.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/internal/avilib.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h

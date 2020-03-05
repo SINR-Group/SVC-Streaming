@@ -1,3 +1,3 @@
 scenegraph/html5_mse_smjs.o: scenegraph/html5_mse_smjs.c \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h

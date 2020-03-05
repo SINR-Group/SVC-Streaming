@@ -1,8 +1,8 @@
 utils/path2d.o: utils/path2d.c \
- /home/mallesh/coding/gpac/include/gpac/path2d.h \
- /home/mallesh/coding/gpac/include/gpac/maths.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h
+ /home/mallesh/coding/svc/gpac/include/gpac/path2d.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/maths.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h

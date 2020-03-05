@@ -1,3 +1,4 @@
-utils/math.o: utils/math.c /home/mallesh/coding/gpac/include/gpac/maths.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h
+utils/math.o: utils/math.c \
+ /home/mallesh/coding/svc/gpac/include/gpac/maths.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h

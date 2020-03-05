@@ -1,11 +1,11 @@
 odf/slc.o: odf/slc.c \
- /home/mallesh/coding/gpac/include/gpac/internal/odf_dev.h \
- /home/mallesh/coding/gpac/include/gpac/mpeg4_odf.h \
- /home/mallesh/coding/gpac/include/gpac/list.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/bitstream.h \
- /home/mallesh/coding/gpac/include/gpac/sync_layer.h
+ /home/mallesh/coding/svc/gpac/include/gpac/internal/odf_dev.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/mpeg4_odf.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/list.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/sync_layer.h

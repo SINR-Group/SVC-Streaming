@@ -1,8 +1,8 @@
 media_tools/vobsub.o: media_tools/vobsub.c \
- /home/mallesh/coding/gpac/include/gpac/list.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/internal/vobsub.h
+ /home/mallesh/coding/svc/gpac/include/gpac/list.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/internal/vobsub.h

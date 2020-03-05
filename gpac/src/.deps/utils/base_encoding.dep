@@ -1,8 +1,8 @@
 utils/base_encoding.o: utils/base_encoding.c \
- /home/mallesh/coding/gpac/include/gpac/base_coding.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/constants.h
+ /home/mallesh/coding/svc/gpac/include/gpac/base_coding.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/constants.h

@@ -6,7 +6,7 @@ from zipfile import ZipFile
 class Packager:
 
     def __init__(self, path):
-        self.rates = 3
+        self.tracks = 5
         self.videos = 1
         self.segments = 5
         self.path = path
@@ -28,7 +28,7 @@ class Packager:
 
     # Arrange the segments in the dash format
     def formatSegments(self):
-        for r in range(self.rates):
+        for track in range(self.tracks):
             os.system('ls')
 
 path = '/home/mallesh/coding/svc/encoder/videos/'

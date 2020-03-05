@@ -1,8 +1,8 @@
 utils/ringbuffer.o: utils/ringbuffer.c \
- /home/mallesh/coding/gpac/include/gpac/ringbuffer.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/thread.h
+ /home/mallesh/coding/svc/gpac/include/gpac/ringbuffer.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/thread.h

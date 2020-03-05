@@ -1,12 +1,12 @@
 bifs/bifs_node_tables.o: bifs/bifs_node_tables.c \
- /home/mallesh/coding/gpac/include/gpac/internal/bifs_tables.h \
- /home/mallesh/coding/gpac/include/gpac/nodes_mpeg4.h \
- /home/mallesh/coding/gpac/include/gpac/scenegraph_vrml.h \
- /home/mallesh/coding/gpac/include/gpac/scenegraph.h \
- /home/mallesh/coding/gpac/include/gpac/list.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/maths.h
+ /home/mallesh/coding/svc/gpac/include/gpac/internal/bifs_tables.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/nodes_mpeg4.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/scenegraph_vrml.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/scenegraph.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/list.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/maths.h

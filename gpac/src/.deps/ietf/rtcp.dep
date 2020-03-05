@@ -1,13 +1,13 @@
 ietf/rtcp.o: ietf/rtcp.c \
- /home/mallesh/coding/gpac/include/gpac/internal/ietf_dev.h \
- /home/mallesh/coding/gpac/include/gpac/ietf.h \
- /home/mallesh/coding/gpac/include/gpac/list.h \
- /home/mallesh/coding/gpac/include/gpac/tools.h \
- /home/mallesh/coding/gpac/include/gpac/setup.h \
- /home/mallesh/coding/gpac/config.h \
- /home/mallesh/coding/gpac/include/gpac/version.h \
- /home/mallesh/coding/gpac/include/gpac/revision.h \
- /home/mallesh/coding/gpac/include/gpac/bitstream.h \
- /home/mallesh/coding/gpac/include/gpac/sync_layer.h \
- /home/mallesh/coding/gpac/include/gpac/network.h \
- /home/mallesh/coding/gpac/include/gpac/thread.h
+ /home/mallesh/coding/svc/gpac/include/gpac/internal/ietf_dev.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/ietf.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/list.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/tools.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/setup.h \
+ /home/mallesh/coding/svc/gpac/config.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/version.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/revision.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/bitstream.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/sync_layer.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/network.h \
+ /home/mallesh/coding/svc/gpac/include/gpac/thread.h
