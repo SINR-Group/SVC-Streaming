@@ -1,4 +1,5 @@
 import os
+import glob
 import numpy as np
 from zipfile import ZipFile
 
@@ -10,19 +11,28 @@ class Packager:
         self.videos = 1
         self.segments = 300
         self.path = path
-        self.gop = 7
+        self.gop = 8
+
+    def replicateSegments(self):
+        for v in range(1, self.videos+1):
+            npath = self.path+'video'+str(v)
+            fs = glob.glob(npath+'/*.zip')
+            for f in fs:
+                for i in range(self.segments):
+                    os.system('cp '+f+' '+f[:-5]+str(i)+'.zip')
 
     # Pack a group of frames as one segment
     def packFrames(self):
         for v in range(1, self.videos+1):
             npath = self.path+'video'+str(v)
-            fs = os.listdir(npath)
+            fs = os.listdir(npath+'/codes')
             fs = sorted(fs)
             for i in range(0, len(fs), self.gop):
-                zipper = ZipFile(npath+'/code_track5_'+str(i)+'.zip', 'w')
-                if i+self.gop > len(fs):
+                if (i+self.gop) > len(fs):
                     break
+                zipper = ZipFile(npath+'/code_track4_'+str(i)+'.zip', 'w')
                 for j in range(self.gop):
+                    zipper.write(npath+'/codes/'+fs[i+j])
                     zipper.write(npath+'/codes/'+fs[i+j])
                 zipper.close()
 
@@ -40,4 +50,5 @@ class Packager:
 path = '/home/mallesh/coding/svc/encoder/videos/'
 packager = Packager(path)
 #packager.packFrames()
+#packager.replicateSegments()
 packager.formatSegments()
