@@ -50,5 +50,5 @@ class Packager:
 path = '/home/mallesh/coding/svc/encoder/videos/'
 packager = Packager(path)
 #packager.packFrames()
-#packager.replicateSegments()
+packager.replicateSegments()
 packager.formatSegments()
