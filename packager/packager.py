@@ -8,7 +8,7 @@ class Packager:
     def __init__(self, path):
         self.tracks = 5
         self.videos = 1
-        self.segments = 5
+        self.segments = 300
         self.path = path
         self.gop = 7
 
@@ -28,10 +28,16 @@ class Packager:
 
     # Arrange the segments in the dash format
     def formatSegments(self):
-        for track in range(self.tracks):
-            os.system('ls')
+        for v in range(1, self.videos+1):
+            npath = self.path+'video'+str(v)
+            spath = './video_server/static/'
+            for track in range(1, self.tracks+1):
+                for seg in range(self.segments):
+                    dash_path = 'video_'+str(track)+'_dash'+str(seg)+'.zip'
+                    code = npath+'/code_track'+str(track)+'_'+str(seg)+'.zip'
+                    os.system('cp '+code+' '+spath+'video'+str(v)+'/'+dash_path)
 
 path = '/home/mallesh/coding/svc/encoder/videos/'
 packager = Packager(path)
-packager.packFrames()
+#packager.packFrames()
 packager.formatSegments()
