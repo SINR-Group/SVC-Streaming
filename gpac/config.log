@@ -8,8 +8,8 @@ Thread model: posix
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 
 *** CC/CXX Test Failed (args ) : 
 
-/tmp/ccrcCrxk.o: In function `main':
-gpac-conf--25601-.c:(.text.startup+0xe): undefined reference to `dlopen'
+/tmp/ccHdfxyJ.o: In function `main':
+gpac-conf--31466-.c:(.text.startup+0xe): undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 
 Source was: 
@@ -29,7 +29,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/firefox -L/usr/lib/firefox/ -lxul -lmozsqlite3 -lmozalloc -lnssutil3 -lnss3 -lnspr4 -lsmime3) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -39,7 +39,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/firefox -lnssutil3 -L/usr/lib/firefox/ -lxul -lmozsqlite3 -lmozalloc -lnssutil3 -lnss3 -lnspr4 -lsmime3 -lssl3) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -49,7 +49,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/local/include/js -L/usr/local/lib -ljs -lpthread) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -59,7 +59,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/local/include/js -Wl,--warn-common -Wl,-z,defs -ljs -lpthread) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -69,7 +69,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/include/js -L/lib -Wl,--warn-common -Wl,-z,defs -ljs -lpthread) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -79,7 +79,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/smjs -Wl,--warn-common -Wl,-z,defs -lsmjs -lpthread) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -89,7 +89,7 @@ int main( void ) { JSContext *cx=NULL; jsval rp; return JS_AddRoot(cx, &rp); }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/mozjs -Wl,--warn-common -Wl,-z,defs -lmozjs -lpthread) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -109,7 +109,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/local/include/js -L/usr/local/lib -ljs) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -119,7 +119,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/local/include/js -Wl,--warn-common -Wl,-z,defs -ljs) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -129,7 +129,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/include/js -L/lib -Wl,--warn-common -Wl,-z,defs -ljs) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -139,7 +139,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/smjs -Wl,--warn-common -Wl,-z,defs -lsmjs) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -149,7 +149,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -DXP_UNIX -I/usr/include/mozjs -Wl,--warn-common -Wl,-z,defs -lmozjs) : 
 
-/tmp/gpac-conf--25601-.c:1:19: fatal error: jsapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:19: fatal error: jsapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -173,12 +173,12 @@ Source was:
 int main( void ) { return 0; }
 
 
-*** CC/CXX Test Failed (args -o /tmp/gpac-conf--25601-.o /tmp/gpac-conf--25601-.c -Wl,--warn-common -Wl,-z,defs -lavcap) : 
+*** CC/CXX Test Failed (args -o /tmp/gpac-conf--31466-.o /tmp/gpac-conf--31466-.c -Wl,--warn-common -Wl,-z,defs -lavcap) : 
 
 cc1plus: warning: command line option ‘-Wno-pointer-sign’ is valid for C/ObjC but not for C++
-/tmp/gpac-conf--25601-.cpp:1:22: fatal error: Platinum.h: No such file or directory
+/tmp/gpac-conf--31466-.cpp:1:22: fatal error: Platinum.h: No such file or directory
 compilation terminated.
-/tmp/gpac-conf--25601-.c:1:25: fatal error: avcap/avcap.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:25: fatal error: avcap/avcap.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -195,12 +195,12 @@ int main( void ) {
 }
 
 
-*** CC/CXX Test Failed (args -o /tmp/gpac-conf--25601-.o /tmp/gpac-conf--25601-.c -I/home/mallesh/coding/svc/gpac/extra_lib/include -I/home/mallesh/coding/svc/gpac/extra_lib/include/avcap/linux -Wl,--warn-common -Wl,-z,defs -L/home/mallesh/coding/svc/gpac/extra_lib/lib/gcc -lavcap -lpthread) : 
+*** CC/CXX Test Failed (args -o /tmp/gpac-conf--31466-.o /tmp/gpac-conf--31466-.c -I/home/mallesh/coding/svc/gpac/extra_lib/include -I/home/mallesh/coding/svc/gpac/extra_lib/include/avcap/linux -Wl,--warn-common -Wl,-z,defs -L/home/mallesh/coding/svc/gpac/extra_lib/lib/gcc -lavcap -lpthread) : 
 
 cc1plus: warning: command line option ‘-Wno-pointer-sign’ is valid for C/ObjC but not for C++
-/tmp/gpac-conf--25601-.cpp:1:22: fatal error: Platinum.h: No such file or directory
+/tmp/gpac-conf--31466-.cpp:1:22: fatal error: Platinum.h: No such file or directory
 compilation terminated.
-In file included from /tmp/gpac-conf--25601-.c:1:0:
+In file included from /tmp/gpac-conf--31466-.c:1:0:
 /home/mallesh/coding/svc/gpac/extra_lib/include/avcap/avcap.h:29:27: fatal error: avcap-config.h: No such file or directory
 compilation terminated.
 
@@ -220,7 +220,7 @@ int main( void ) {
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -lOpenSVCDec) : 
 
-/tmp/gpac-conf--25601-.c:1:48: fatal error: OpenSVCDecoder/SVCDecoder_ietr_api.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:48: fatal error: OpenSVCDecoder/SVCDecoder_ietr_api.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -240,7 +240,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -I/usr/include -I/usr/local/include -L/usr/lib -L/usr/local/lib -lopenhevc -lm -lpthread -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:2:34: fatal error: libopenhevc/openhevc.h: No such file or directory
+/tmp/gpac-conf--31466-.c:2:34: fatal error: libopenhevc/openhevc.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -262,7 +262,7 @@ int main( void ) { oh_init(1, 1); return 0; }
 
 *** CC/CXX Test Failed (args -I/usr/local/include -L/usr/local/lib -lfreetype -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:1:22: fatal error: ft2build.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:22: fatal error: ft2build.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -275,7 +275,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -lopenjpeg) : 
 
-/tmp/gpac-conf--25601-.c:2:22: fatal error: openjpeg.h: No such file or directory
+/tmp/gpac-conf--31466-.c:2:22: fatal error: openjpeg.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -297,7 +297,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -lmad) : 
 
-/tmp/gpac-conf--25601-.c:1:17: fatal error: mad.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:17: fatal error: mad.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -317,7 +317,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -la52) : 
 
-/tmp/gpac-conf--25601-.c:4:29: fatal error: a52dec/mm_accel.h: No such file or directory
+/tmp/gpac-conf--31466-.c:4:29: fatal error: a52dec/mm_accel.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -345,7 +345,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -lfaad -lm) : 
 
-/tmp/gpac-conf--25601-.c:1:18: fatal error: faad.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:18: fatal error: faad.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -365,7 +365,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs -lfreenect) : 
 
-/tmp/gpac-conf--25601-.c:1:37: fatal error: libfreenect/libfreenect.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:37: fatal error: libfreenect/libfreenect.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -375,7 +375,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -I/home/mallesh/coding/svc/gpac/extra_lib/include/freenect -L/home/mallesh/coding/svc/gpac/extra_lib/lib/gcc -lfreenect) : 
 
-/tmp/gpac-conf--25601-.c:1:37: fatal error: libfreenect/libfreenect.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:37: fatal error: libfreenect/libfreenect.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -385,7 +385,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:1:27: fatal error: xmlrpc-c/base.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:27: fatal error: xmlrpc-c/base.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -399,7 +399,7 @@ return 0;
 
 *** CC/CXX Test Failed (args -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:1:23: fatal error: jack/jack.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:23: fatal error: jack/jack.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -411,7 +411,7 @@ return 0;
 
 *** CC/CXX Test Failed (args -I/usr/include/directfb -L-ldirectfb -lfusion -ldirect -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:1:22: fatal error: directfb.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:22: fatal error: directfb.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -421,7 +421,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -I/usr/X11R6/include -L/usr/X11R6/lib -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:2:31: fatal error: X11/extensions/Xv.h: No such file or directory
+/tmp/gpac-conf--31466-.c:2:31: fatal error: X11/extensions/Xv.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -433,7 +433,7 @@ int main( void ) { return 0; }
 
 *** CC/CXX Test Failed (args -lhidapi-hidraw -Wl,--warn-common -Wl,-z,defs) : 
 
-/tmp/gpac-conf--25601-.c:1:27: fatal error: hidapi/hidapi.h: No such file or directory
+/tmp/gpac-conf--31466-.c:1:27: fatal error: hidapi/hidapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -444,7 +444,7 @@ int main( void ) { hid_init(); hid_exit(); return 0; }
 *** CC/CXX Test Failed (args -I/usr/lib/xulrunner/sdk/include -Wl,--warn-common -Wl,-z,defs) : 
 
 cc1plus: warning: command line option ‘-Wno-pointer-sign’ is valid for C/ObjC but not for C++
-/tmp/gpac-conf--25601-.cpp:1:19: fatal error: npapi.h: No such file or directory
+/tmp/gpac-conf--31466-.cpp:1:19: fatal error: npapi.h: No such file or directory
 compilation terminated.
 
 Source was: 
@@ -455,7 +455,7 @@ int main( void ) { int a ; a = TINYGL ; return 0;}
 *** CC/CXX Test Failed (args -I/home/mallesh/coding/svc/gpac/extra_lib/include/gecko-sdk/include -Wl,--warn-common -Wl,-z,defs) : 
 
 cc1plus: warning: command line option ‘-Wno-pointer-sign’ is valid for C/ObjC but not for C++
-/tmp/gpac-conf--25601-.cpp:1:19: fatal error: npapi.h: No such file or directory
+/tmp/gpac-conf--31466-.cpp:1:19: fatal error: npapi.h: No such file or directory
 compilation terminated.
 
 Source was: 

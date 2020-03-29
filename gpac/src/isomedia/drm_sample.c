@@ -479,7 +479,7 @@ static GF_Err isom_set_protected_entry(GF_ISOFile *the_file, u32 trackNumber, u3
 	sinf->scheme_type->flags = flags;
 	sinf->scheme_type->scheme_type = scheme_type;
 	sinf->scheme_type->scheme_version = scheme_version;
-	if (sinf->scheme_type->flags == 1) {
+	if (sinf->scheme_type->flags == 1 && scheme_uri) {
 		sinf->scheme_type->URI = (char *)gf_malloc(sizeof(char)*strlen(scheme_uri));
 		memmove(sinf->scheme_type->URI, scheme_uri, strlen(scheme_uri));
 	}
@@ -1137,7 +1137,7 @@ GF_Err gf_isom_track_cenc_add_sample_info(GF_ISOFile *the_file, u32 trackNumber,
 GF_EXPORT
 void gf_isom_cenc_samp_aux_info_del(GF_CENCSampleAuxInfo *samp)
 {
-	//if (samp->IV) gf_free(samp->IV);
+	if (!samp) return;
 	if (samp->subsamples) gf_free(samp->subsamples);
 	gf_free(samp);
 }

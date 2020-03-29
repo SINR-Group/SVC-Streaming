@@ -407,7 +407,7 @@ GF_Err stbl_GetSampleInfos(GF_SampleTableBox *stbl, u32 sampleNumber, u64 *offse
 	if (!stbl || !sampleNumber) return GF_BAD_PARAM;
 	if (!stbl->ChunkOffset || !stbl->SampleToChunk) return GF_ISOM_INVALID_FILE;
 
-	if (stbl->SampleToChunk->nb_entries == stbl->SampleSize->sampleCount) {
+	if (stbl->SampleSize && stbl->SampleToChunk->nb_entries == stbl->SampleSize->sampleCount) {
 		ent = &stbl->SampleToChunk->entries[sampleNumber-1];
 		if (!ent) return GF_BAD_PARAM;
 		(*descIndex) = ent->sampleDescriptionIndex;
@@ -415,9 +415,13 @@ GF_Err stbl_GetSampleInfos(GF_SampleTableBox *stbl, u32 sampleNumber, u64 *offse
 		if (out_ent) *out_ent = ent;
 		if ( stbl->ChunkOffset->type == GF_ISOM_BOX_TYPE_STCO) {
 			stco = (GF_ChunkOffsetBox *)stbl->ChunkOffset;
+			if (!stco->offsets) return GF_ISOM_INVALID_FILE;
+
 			(*offset) = (u64) stco->offsets[sampleNumber - 1];
 		} else {
 			co64 = (GF_ChunkLargeOffsetBox *)stbl->ChunkOffset;
+			if (!co64->offsets) return GF_ISOM_INVALID_FILE;
+
 			(*offset) = co64->offsets[sampleNumber - 1];
 		}
 		return GF_OK;
@@ -480,7 +484,7 @@ sample_found:
 	//ok, get the size of all the previous samples in the chunk
 	offsetInChunk = 0;
 	//constant size
-	if (stbl->SampleSize->sampleSize) {
+	if (stbl->SampleSize && stbl->SampleSize->sampleSize) {
 		u32 diff = sampleNumber - stbl->SampleToChunk->firstSampleInCurrentChunk;
 		offsetInChunk += diff * stbl->SampleSize->sampleSize;
 	} else {

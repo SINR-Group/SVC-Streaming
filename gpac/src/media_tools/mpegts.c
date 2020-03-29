@@ -539,7 +539,7 @@ static u32 gf_m2ts_reframe_mpeg_video(GF_M2TS_Demuxer *ts, GF_M2TS_PES *pes, Boo
 	pck.flags = 0;
 
 	while (sc_pos+4<data_len) {
-		unsigned char *start = (unsigned char*)memchr(data+sc_pos, 0, data_len-sc_pos);
+		unsigned char *start = (unsigned char*)memchr(data+sc_pos, 0, data_len-sc_pos-3);
 		if (!start) break;
 		sc_pos = (u32) (start - (unsigned char*)data);
 
@@ -1272,7 +1272,7 @@ GF_EXPORT
 Bool gf_m2ts_crc32_check(char *data, u32 len)
 {
 	u32 crc = gf_crc_32(data, len);
-	u32 crc_val = GF_4CC((u8) data[len], (u8) data[len+1], (u8) data[len+2], (u8) data[len+3]);
+	u32 crc_val = GF_4CC((u32) data[len], (u8) data[len+1], (u8) data[len+2], (u8) data[len+3]);
 	return (crc==crc_val) ? GF_TRUE : GF_FALSE;
 }
 
@@ -1445,6 +1445,11 @@ static void gf_m2ts_section_complete(GF_M2TS_Demuxer *ts, GF_M2TS_SectionFilter 
 		/*parse header*/
 		data = (u8 *)sec->section;
 
+		if (sec->length < 2) {
+			GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, ("[MPEG-2 TS] M2TS Table parsing error, length %d is too small\n", sec->length) );
+			return;
+		}
+
 		/*look for proper table*/
 		table_id = data[0];
 
@@ -1468,6 +1473,10 @@ static void gf_m2ts_section_complete(GF_M2TS_Demuxer *ts, GF_M2TS_SectionFilter 
 
 		has_syntax_indicator = (data[1] & 0x80) ? 1 : 0;
 		if (has_syntax_indicator) {
+			if (sec->length < 5) {
+				GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, ("[MPEG-2 TS] M2TS Table parsing error, length %d is too small\n", sec->length) );
+				return;
+			}
 			extended_table_id = (data[3]<<8) | data[4];
 		} else {
 			extended_table_id = 0;
@@ -1650,9 +1659,9 @@ static u32 gf_m2ts_get_section_length(char byte0, char byte1, char byte2)
 {
 	u32 length;
 	if (gf_m2ts_is_long_section(byte0)) {
-		length = 3 + ( ((byte1<<8) | (byte2&0xff)) & 0xfff );
+		length = 3 + ( (((u8)byte1<<8) | (byte2&0xff)) & 0xfff );
 	} else {
-		length = 3 + ( ((byte1<<8) | (byte2&0xff)) & 0x3ff );
+		length = 3 + ( (((u8)byte1<<8) | (byte2&0xff)) & 0x3ff );
 	}
 	return length;
 }
@@ -2160,6 +2169,11 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 	data = section->data;
 	data_size = section->data_size;
 
+	if (data_size < 6) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, ("[MPEG-2 TS] Invalid PMT header data size %d\n", data_size ) );
+		return;
+	}
+
 	pmt->program->pcr_pid = ((data[0] & 0x1f) << 8) | data[1];
 
 	info_length = ((data[2]&0xf)<<8) | data[3];
@@ -2174,22 +2188,39 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 			if (tag == GF_M2TS_MPEG4_IOD_DESCRIPTOR) {
 				u32 size;
 				GF_BitStream *iod_bs;
+				if (len<2 || data_size <= 8 || data_size-8 < (u32)len-2)
+					break;
+
 				iod_bs = gf_bs_new((char *)data+8, len-2, GF_BITSTREAM_READ);
-				if (pmt->program->pmt_iod) gf_odf_desc_del((GF_Descriptor *)pmt->program->pmt_iod);
+				if (pmt->program->pmt_iod) {
+					gf_odf_desc_del((GF_Descriptor *)pmt->program->pmt_iod);
+					pmt->program->pmt_iod = NULL;
+				}
 				e = gf_odf_parse_descriptor(iod_bs , (GF_Descriptor **) &pmt->program->pmt_iod, &size);
 				gf_bs_del(iod_bs );
+				if (pmt->program->pmt_iod && pmt->program->pmt_iod->tag != GF_ODF_IOD_TAG) {
+					GF_LOG( GF_LOG_ERROR, GF_LOG_CONTAINER, ("pmt iod has wrong tag %d\n", pmt->program->pmt_iod->tag) );
+					gf_odf_desc_del((GF_Descriptor *)pmt->program->pmt_iod);
+					pmt->program->pmt_iod = NULL;
+				}
 				if (e==GF_OK) {
 					/*remember program number for service/program selection*/
-					if (pmt->program->pmt_iod) pmt->program->pmt_iod->ServiceID = pmt->program->number;
-					/*if empty IOD (freebox case), discard it and use dynamic declaration of object*/
-					if (!gf_list_count(pmt->program->pmt_iod->ESDescriptors)) {
-						gf_odf_desc_del((GF_Descriptor *)pmt->program->pmt_iod);
-						pmt->program->pmt_iod = NULL;
+					if (pmt->program->pmt_iod) {
+						pmt->program->pmt_iod->ServiceID = pmt->program->number;
+						/*if empty IOD (freebox case), discard it and use dynamic declaration of object*/
+						if (!gf_list_count(pmt->program->pmt_iod->ESDescriptors)) {
+							gf_odf_desc_del((GF_Descriptor *)pmt->program->pmt_iod);
+							pmt->program->pmt_iod = NULL;
+						}
 					}
 				}
 			} else if (tag == GF_M2TS_METADATA_POINTER_DESCRIPTOR) {
 				GF_BitStream *metadatapd_bs;
 				GF_M2TS_MetadataPointerDescriptor *metapd;
+
+				if (data_size <= 8 || data_size-6 < (u32)len)
+					break;
+
 				metadatapd_bs = gf_bs_new((char *)data+6, len, GF_BITSTREAM_READ);
 				metapd = gf_m2ts_read_metadata_pointer_descriptor(metadatapd_bs, len);
 				gf_bs_del(metadatapd_bs);
@@ -2225,7 +2256,7 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 	}
 
 	nb_hevc = nb_hevc_temp = nb_shvc = nb_shvc_temp = nb_mhvc = nb_mhvc_temp = 0;
-	while (pos<data_size) {
+	while (data_size>4 && pos<data_size-5) {
 		GF_M2TS_PES *pes = NULL;
 		GF_M2TS_SECTION_ES *ses = NULL;
 		GF_M2TS_ES *es = NULL;
@@ -2235,6 +2266,11 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 		stream_type = data[0];
 		pid = ((data[1] & 0x1f) << 8) | data[2];
 		desc_len = ((data[3] & 0xf) << 8) | data[4];
+
+		if (desc_len > data_size-5) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, ("[MPEG-2 TS] Invalid PMT es descriptor size for PID %d\n", pid ) );
+			break;
+		}
 
 		GF_LOG(GF_LOG_DEBUG, GF_LOG_CONTAINER, ("stream_type :%d \n",stream_type));
 		switch (stream_type) {
@@ -2374,7 +2410,9 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 			if (es) {
 				switch (tag) {
 				case GF_M2TS_ISO_639_LANGUAGE_DESCRIPTOR:
-					pes->lang = GF_4CC(' ', data[2], data[3], data[4]);
+					if (pes) {
+						pes->lang = GF_4CC(' ', data[2], data[3], data[4]);
+					}
 					break;
 				case GF_M2TS_MPEG4_SL_DESCRIPTOR:
 #ifdef FORCE_DISABLE_MPEG4SL_OVER_MPEG2TS
@@ -2411,12 +2449,14 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 				}
 				break;
 				case GF_M2TS_DVB_SUBTITLING_DESCRIPTOR:
-					pes->sub.language[0] = data[2];
-					pes->sub.language[1] = data[3];
-					pes->sub.language[2] = data[4];
-					pes->sub.type = data[5];
-					pes->sub.composition_page_id = (data[6]<<8) | data[7];
-					pes->sub.ancillary_page_id = (data[8]<<8) | data[9];
+					if (pes) {
+						pes->sub.language[0] = data[2];
+						pes->sub.language[1] = data[3];
+						pes->sub.language[2] = data[4];
+						pes->sub.type = data[5];
+						pes->sub.composition_page_id = (data[6]<<8) | data[7];
+						pes->sub.ancillary_page_id = (data[8]<<8) | data[9];
+					}
 
 					es->stream_type = GF_M2TS_DVB_SUBTITLE;
 					break;
@@ -2489,7 +2529,6 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 			}
 			desc_len-=len+2;
 		}
-
 		if (es && !es->stream_type) {
 			gf_free(es);
 			es = NULL;
@@ -2536,14 +2575,14 @@ static void gf_m2ts_process_pmt(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *pmt, GF
 			if (!(es->flags & GF_M2TS_ES_IS_SECTION) ) gf_m2ts_set_pes_framing(pes, GF_M2TS_PES_FRAMING_SKIP);
 
 			nb_es++;
-		}
 
-		if (es->stream_type == GF_M2TS_VIDEO_HEVC) nb_hevc++;
-		else if (es->stream_type == GF_M2TS_VIDEO_HEVC_TEMPORAL) nb_hevc_temp++;
-		else if (es->stream_type == GF_M2TS_VIDEO_SHVC) nb_shvc++;
-		else if (es->stream_type == GF_M2TS_VIDEO_SHVC_TEMPORAL) nb_shvc_temp++;
-		else if (es->stream_type == GF_M2TS_VIDEO_MHVC) nb_mhvc++;
-		else if (es->stream_type == GF_M2TS_VIDEO_MHVC_TEMPORAL) nb_mhvc_temp++;
+			if (es->stream_type == GF_M2TS_VIDEO_HEVC) nb_hevc++;
+			else if (es->stream_type == GF_M2TS_VIDEO_HEVC_TEMPORAL) nb_hevc_temp++;
+			else if (es->stream_type == GF_M2TS_VIDEO_SHVC) nb_shvc++;
+			else if (es->stream_type == GF_M2TS_VIDEO_SHVC_TEMPORAL) nb_shvc_temp++;
+			else if (es->stream_type == GF_M2TS_VIDEO_MHVC) nb_mhvc++;
+			else if (es->stream_type == GF_M2TS_VIDEO_MHVC_TEMPORAL) nb_mhvc_temp++;
+		}
 	}
 
 	//Table 2-139, implied hierarchy indexes
@@ -2668,6 +2707,10 @@ static void gf_m2ts_process_pat(GF_M2TS_Demuxer *ts, GF_M2TS_SECTION_ES *ses, GF
 			gf_list_add(prog->streams, pmt);
 			pmt->pid = prog->pmt_pid;
 			pmt->program = prog;
+			if (ts->ess[pmt->pid]) {
+				GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, ("Redefinition of pmt for pid %d\n", pid));
+				gf_m2ts_es_del(ts->ess[pmt->pid], ts);
+			}
 			ts->ess[pmt->pid] = (GF_M2TS_ES *)pmt;
 			pmt->sec = gf_m2ts_section_filter_new(gf_m2ts_process_pmt, 0);
 		}
@@ -2756,7 +2799,13 @@ void gf_m2ts_pes_header(GF_M2TS_PES *pes, unsigned char *data, u32 data_size, GF
 {
 	u32 has_pts, has_dts;
 	u32 len_check;
+
 	memset(pesh, 0, sizeof(GF_M2TS_PESHeader));
+
+	if (data_size < 6) {
+		GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, ("PES Header is too small (%d < 6)\n", data_size));
+		return;
+	}
 
 	len_check = 0;
 
@@ -3085,8 +3134,9 @@ static void gf_m2ts_get_adaptation_field(GF_M2TS_Demuxer *ts, GF_M2TS_Adaptation
 	paf->adaptation_field_extension_flag = (data[0] & 0x1) ? 1 : 0;
 
 	af_extension = data + 1;
+
 	if (paf->PCR_flag == 1) {
-		u32 base = (data[1] << 24) | (data[2] << 16) | (data[3] << 8) | data[4];
+		u32 base = ((u32)data[1] << 24) | (data[2] << 16) | (data[3] << 8) | data[4];
 		u64 PCR = (u64) base;
 		paf->PCR_base = (PCR << 1) | (data[5] >> 7);
 		paf->PCR_ext = ((data[5] & 1) << 8) | data[6];
@@ -3107,6 +3157,10 @@ static void gf_m2ts_get_adaptation_field(GF_M2TS_Demuxer *ts, GF_M2TS_Adaptation
 			af_extension += 1 + priv_bytes;
 		}
 
+		if ((u32)(af_extension-data) >= size) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, ("[MPEG-2 TS] PID %d: Bad Adaptation Extension found\n", pid));
+			return;
+		}
 		afext_bytes = af_extension[0];
 		ltw_flag = af_extension[1] & 0x80 ? 1 : 0;
 		pwr_flag = af_extension[1] & 0x40 ? 1 : 0;
@@ -3669,6 +3723,8 @@ GF_Err gf_m2ts_set_pes_framing(GF_M2TS_PES *pes, u32 mode)
 			gf_m2ts_set_pes_framing(o_pes, GF_M2TS_PES_FRAMING_SKIP);
 
 		GF_LOG(GF_LOG_INFO, GF_LOG_CONTAINER, ("[MPEG-2 TS] Reassinging PID %d from program %d to program %d\n", pes->pid, o_pes->program->number, pes->program->number) );
+		gf_m2ts_es_del((GF_M2TS_ES*)o_pes, pes->program->ts);
+
 		pes->program->ts->ess[pes->pid] = (GF_M2TS_ES *) pes;
 	}
 
@@ -3828,19 +3884,30 @@ void gf_m2ts_demux_del(GF_M2TS_Demuxer *ts)
 
 	for (i=0; i<GF_M2TS_MAX_STREAMS; i++) {
 		//bacause of pure PCR streams, en ES might be reassigned on 2 PIDs, one for the ES and one for the PCR
-		if (ts->ess[i] && (ts->ess[i]->pid==i)) gf_m2ts_es_del(ts->ess[i], ts);
+		if (ts->ess[i] && (ts->ess[i]->pid==i)) {
+			gf_m2ts_es_del(ts->ess[i], ts);
+		}
 	}
 	if (ts->buffer) gf_free(ts->buffer);
 	while (gf_list_count(ts->programs)) {
 		GF_M2TS_Program *p = (GF_M2TS_Program *)gf_list_last(ts->programs);
 		gf_list_rem_last(ts->programs);
+
+		while (gf_list_count(p->streams)) {
+			GF_M2TS_ES *es = (GF_M2TS_ES *)gf_list_last(p->streams);
+			gf_list_rem_last(p->streams);
+			gf_m2ts_es_del(es, ts);
+		}
 		gf_list_del(p->streams);
 		/*reset OD list*/
 		if (p->additional_ods) {
 			gf_odf_desc_list_del(p->additional_ods);
 			gf_list_del(p->additional_ods);
 		}
-		if (p->pmt_iod) gf_odf_desc_del((GF_Descriptor *)p->pmt_iod);
+		if (p->pmt_iod) {
+			gf_odf_desc_del((GF_Descriptor *)p->pmt_iod);
+			p->pmt_iod = NULL;
+		}
 		gf_free(p);
 	}
 	gf_list_del(ts->programs);
