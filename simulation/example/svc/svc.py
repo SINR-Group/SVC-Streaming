@@ -1211,7 +1211,7 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--replace', metavar = 'REPLACEMENT',
                         choices = choices, default  =  'none',
                         help = 'Set replacement strategy (%s).' % ', '.join(choices))
-    parser.add_argument('-b', '--max-buffer', metavar = 'MAXBUFFER', type = float, default = 25,
+    parser.add_argument('-b', '--max-buffer', metavar = 'MAXBUFFER', type = float, default = 150,
                         help = 'Specify the maximum buffer size in seconds.')
     parser.add_argument('-noa', '--no-abandon', action = 'store_true',
                         help = 'Disable abandonment.')
@@ -1421,7 +1421,7 @@ if __name__ == '__main__':
         if replace == None:
             if download_metric.abandon_to_quality == None:
                 buffer_contents += [quality]
-                print (buffer_contents)
+                #print (buffer_contents)
                 next_segment += 1
             else:
                 abandon_to_quality = download_metric.abandon_to_quality
@@ -1432,7 +1432,7 @@ if __name__ == '__main__':
                     fs_discarded[replace] = str(buffer_contents[replace])+str(quality)
                     discard_bitrate += manifest.bitrates[buffer_contents[replace]]
                     buffer_contents[replace] = quality
-                    print (buffer_contents, fs_discarded)
+                    #print (buffer_contents, fs_discarded)
                 else:
                     print('WARNING: too late to replace')
                     pass
