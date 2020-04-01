@@ -104,9 +104,11 @@ GF_Err MergeFragment(GF_MovieFragmentBox *moof, GF_ISOFile *mov)
 			if (a->type == GF_ISOM_BOX_TYPE_PSSH) {
 				GF_ProtectionSystemHeaderBox *pssh = (GF_ProtectionSystemHeaderBox *)gf_isom_box_new(GF_ISOM_BOX_TYPE_PSSH);
 				memmove(pssh->SystemID, ((GF_ProtectionSystemHeaderBox *)a)->SystemID, 16);
-				pssh->KID_count = ((GF_ProtectionSystemHeaderBox *)a)->KID_count;
-				pssh->KIDs = (bin128 *)gf_malloc(pssh->KID_count*sizeof(bin128));
-				memmove(pssh->KIDs, ((GF_ProtectionSystemHeaderBox *)a)->KIDs, pssh->KID_count*sizeof(bin128));
+				if (((GF_ProtectionSystemHeaderBox *)a)->KIDs && ((GF_ProtectionSystemHeaderBox *)a)->KID_count > 0) {
+					pssh->KID_count = ((GF_ProtectionSystemHeaderBox *)a)->KID_count;
+					pssh->KIDs = (bin128 *)gf_malloc(pssh->KID_count*sizeof(bin128));
+					memmove(pssh->KIDs, ((GF_ProtectionSystemHeaderBox *)a)->KIDs, pssh->KID_count*sizeof(bin128));
+				}
 				pssh->private_data_size = ((GF_ProtectionSystemHeaderBox *)a)->private_data_size;
 				pssh->private_data = (u8 *)gf_malloc(pssh->private_data_size*sizeof(char));
 				memmove(pssh->private_data, ((GF_ProtectionSystemHeaderBox *)a)->private_data, pssh->private_data_size);
@@ -117,9 +119,11 @@ GF_Err MergeFragment(GF_MovieFragmentBox *moof, GF_ISOFile *mov)
 		}
 	}
 
-	mov->NextMoofNumber = moof->mfhd->sequence_number;
-	//update movie duration
-	if (mov->moov->mvhd->duration < MaxDur) mov->moov->mvhd->duration = MaxDur;
+	if (moof->mfhd) {
+		mov->NextMoofNumber = moof->mfhd->sequence_number;
+		//update movie duration
+		if (mov->moov->mvhd->duration < MaxDur) mov->moov->mvhd->duration = MaxDur;
+	}
 	return GF_OK;
 }
 
@@ -418,8 +422,8 @@ GF_Err gf_isom_parse_movie_boxes(GF_ISOFile *mov, u64 *bytesMissing, Bool progre
 			} else {
 				/*merge all info*/
 				e = MergeFragment((GF_MovieFragmentBox *)a, mov);
-				if (e) return e;
 				gf_isom_box_del(a);
+				if (e) return e;
 			}
 			break;
 #endif

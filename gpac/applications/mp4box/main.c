@@ -552,7 +552,7 @@ void PrintImportUsage()
 	        " \"                       v0-bs : uses MPEG AudioSampleEntry v0 and the channel count from the bitstream (even if greater than 2) - default\n"
 	        " \"                       v0-2  : uses MPEG AudioSampleEntry v0 and the channel count is forced to 2\n"
 	        " \"                       v1    : uses MPEG AudioSampleEntry v1 and the channel count from the bitstream\n"
-	        " \"                       v1-qt : uses QuickTime Sound Sample Description Version 1 and the channel count from the bitstream (even if greater than 2)\n"
+	        " \"                       v1-qt : uses QuickTime Sound Sample Description Version 1 and the channel count from the bitstream (even if greater than 2). This will also trigger using alis data references instead of url, even for non-audio tracks.\n"
 			" \":audio_roll=N\"      adds a roll sample group with roll_distance = N\n"
 	        " \":mpeg4\"             same as -mpeg4 option\n"
 	        " \":nosei\"             discard all SEI messages during import\n"
@@ -4424,29 +4424,31 @@ int mp4boxMain(int argc, char **argv)
 	}
 
 #if !defined(GPAC_DISABLE_MEDIA_IMPORT) && !defined(GPAC_DISABLE_ISOM_WRITE)
-	if (nb_add) {
-		u8 open_mode = GF_ISOM_OPEN_EDIT;
-		if (force_new) {
-			open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
-		} else {
-			FILE *test = gf_fopen(inName, "rb");
-			if (!test) {
+	if (nb_add || nb_cat) {
+		if (nb_add) {
+			u8 open_mode = GF_ISOM_OPEN_EDIT;
+			if (force_new) {
 				open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
-				if (!outName) outName = inName;
 			} else {
-				gf_fclose(test);
-				if (! gf_isom_probe_file(inName) ) {
+				FILE *test = gf_fopen(inName, "rb");
+				if (!test) {
 					open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
 					if (!outName) outName = inName;
+				} else {
+					gf_fclose(test);
+					if (! gf_isom_probe_file(inName) ) {
+						open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
+						if (!outName) outName = inName;
+					}
 				}
 			}
-		}
 
-		open_edit = GF_TRUE;
-		file = gf_isom_open(inName, open_mode, tmpdir);
-		if (!file) {
-			fprintf(stderr, "Cannot open destination file %s: %s\n", inName, gf_error_to_string(gf_isom_last_error(NULL)) );
-			return mp4box_cleanup(1);
+			open_edit = GF_TRUE;
+			file = gf_isom_open(inName, open_mode, tmpdir);
+			if (!file) {
+				fprintf(stderr, "Cannot open destination file %s: %s\n", inName, gf_error_to_string(gf_isom_last_error(NULL)) );
+				return mp4box_cleanup(1);
+			}
 		}
 
 		for (i=0; i<(u32) argc; i++) {
@@ -4481,37 +4483,28 @@ int mp4boxMain(int argc, char **argv)
 					}
 				}
 				i++;
-			}
-		}
+			} else if (!strcmp(argv[i], "-cat") || !strcmp(argv[i], "-catx") || !strcmp(argv[i], "-catpl")) {
+				if (!file) {
+					u8 open_mode = GF_ISOM_OPEN_EDIT;
+					if (force_new) {
+						open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
+					} else {
+						FILE *test = gf_fopen(inName, "rb");
+						if (!test) {
+							open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
+							if (!outName) outName = inName;
+						}
+						else gf_fclose(test);
+					}
 
-		/*unless explicitly asked, remove all systems tracks*/
-		if (!keep_sys_tracks) remove_systems_tracks(file);
-		needSave = GF_TRUE;
-	}
-
-	if (nb_cat) {
-		if (!file) {
-			u8 open_mode = GF_ISOM_OPEN_EDIT;
-			if (force_new) {
-				open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
-			} else {
-				FILE *test = gf_fopen(inName, "rb");
-				if (!test) {
-					open_mode = (do_flat) ? GF_ISOM_OPEN_WRITE : GF_ISOM_WRITE_EDIT;
-					if (!outName) outName = inName;
+					open_edit = GF_TRUE;
+					file = gf_isom_open(inName, open_mode, tmpdir);
+					if (!file) {
+						fprintf(stderr, "Cannot open destination file %s: %s\n", inName, gf_error_to_string(gf_isom_last_error(NULL)) );
+						return mp4box_cleanup(1);
+					}
 				}
-				else gf_fclose(test);
-			}
 
-			open_edit = GF_TRUE;
-			file = gf_isom_open(inName, open_mode, tmpdir);
-			if (!file) {
-				fprintf(stderr, "Cannot open destination file %s: %s\n", inName, gf_error_to_string(gf_isom_last_error(NULL)) );
-				return mp4box_cleanup(1);
-			}
-		}
-		for (i=0; i<(u32)argc; i++) {
-			if (!strcmp(argv[i], "-cat") || !strcmp(argv[i], "-catx") || !strcmp(argv[i], "-catpl")) {
 				e = cat_isomedia_file(file, argv[i+1], import_flags, import_fps, agg_samples, tmpdir, force_cat, align_cat, !strcmp(argv[i], "-catx") ? GF_TRUE : GF_FALSE, !strcmp(argv[i], "-catpl") ? GF_TRUE : GF_FALSE);
 				if (e) {
 					fprintf(stderr, "Error appending %s: %s\n", argv[i+1], gf_error_to_string(e));
@@ -4519,13 +4512,14 @@ int mp4boxMain(int argc, char **argv)
 					return mp4box_cleanup(1);
 				}
 				i++;
+
 			}
 		}
+
 		/*unless explicitly asked, remove all systems tracks*/
 		if (!keep_sys_tracks) remove_systems_tracks(file);
-
-		needSave = GF_TRUE;
 		if (conv_type && can_convert_to_isma(file)) conv_type = GF_ISOM_CONV_TYPE_ISMA;
+		needSave = GF_TRUE;
 	}
 #endif /*!GPAC_DISABLE_MEDIA_IMPORT && !GPAC_DISABLE_ISOM_WRITE*/
 
@@ -4648,12 +4642,12 @@ int mp4boxMain(int argc, char **argv)
 		/*setup dash*/
 		dasher = gf_dasher_new(szMPD, dash_profile, tmpdir, dash_scale, dash_ctx);
 		if (!dasher) {
-			return mp4box_cleanup(1);
-			return GF_OUT_OF_MEM;
+			return mp4box_cleanup(GF_OUT_OF_MEM);
 		}
 		e = gf_dasher_set_info(dasher, dash_title, cprt, dash_more_info, dash_source);
 		if (e) {
 			fprintf(stderr, "DASH Error: %s\n", gf_error_to_string(e));
+			gf_dasher_del(dasher);
 			return mp4box_cleanup(1);
 		}
 		if (dash_start_date) gf_dasher_set_start_date(dasher, dash_start_date);
@@ -4664,6 +4658,7 @@ int mp4boxMain(int argc, char **argv)
 			e = gf_dasher_add_base_url(dasher, mpd_base_urls[i]);
 			if (e) {
 				fprintf(stderr, "DASH Error: %s\n", gf_error_to_string(e));
+				gf_dasher_del(dasher);
 				return mp4box_cleanup(1);
 			}
 		}
@@ -4705,6 +4700,7 @@ int mp4boxMain(int argc, char **argv)
 		}
 		if (e) {
 			fprintf(stderr, "DASH Setup Error: %s\n", gf_error_to_string(e));
+			gf_dasher_del(dasher);
 			return mp4box_cleanup(1);
 		}
 

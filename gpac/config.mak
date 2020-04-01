@@ -15,7 +15,7 @@ WINDRES=windres
 INSTALL=install
 LIBTOOL=libtool
 INSTFLAGS=-p
-OPTFLAGS=-O3  -Wall -fno-strict-aliasing -Wno-pointer-sign -fPIC -DPIC -msse2 -DNDEBUG -DGPAC_HAVE_CONFIG_H -I"/home/mallesh/coding/svc/gpac" -fvisibility="hidden"
+OPTFLAGS=-O3  -Wall -fno-strict-aliasing -Wno-pointer-sign -fPIC -DPIC -msse2 -DNDEBUG -Wno-deprecated -Wno-deprecated-declarations -Wno-int-in-bool-context -DGPAC_HAVE_CONFIG_H -I"/home/mallesh/coding/svc/gpac" -fvisibility="hidden"
 CXXFLAGS= -Wall -fno-strict-aliasing -fPIC -DPIC
 LDFLAGS= -Wl,--warn-common -Wl,-z,defs
 SHFLAGS=-shared

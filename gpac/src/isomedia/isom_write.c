@@ -79,7 +79,8 @@ GF_Err FlushCaptureMode(GF_ISOFile *movie)
 	/*we have a trick here: the data will be stored on the fly, so the first
 	thing in the file is the MDAT. As we don't know if we have a large file (>4 GB) or not
 	do as if we had one and write 16 bytes: 4 (type) + 4 (size) + 8 (largeSize)...*/
-	gf_bs_write_int(movie->editFileMap->bs, 0, 128);
+	gf_bs_write_long_int(movie->editFileMap->bs, 0, 64);
+	gf_bs_write_long_int(movie->editFileMap->bs, 0, 64);
 	return GF_OK;
 }
 
@@ -672,9 +673,6 @@ GF_Err gf_isom_new_mpeg4_description(GF_ISOFile *movie,
 	if (e) {
 		gf_odf_desc_del((GF_Descriptor *)new_esd);
 		return e;
-	}
-	if (new_esd->URLString) {
-
 	}
 	return e;
 }
@@ -3230,15 +3228,23 @@ GF_Err gf_isom_clone_track(GF_ISOFile *orig_file, u32 orig_track, GF_ISOFile *de
 		}
 	}
 
+	if (!new_tk->Media->information->dataInformation->dref) return GF_BAD_PARAM;
+
 	/*reset data ref*/
 	if (! (flags & GF_ISOM_CLONE_TRACK_KEEP_DREF) ) {
+		Bool use_alis = GF_FALSE;
+		if (! (flags & GF_ISOM_CLONE_TRACK_NO_QT)) {
+			GF_Box *b = gf_list_get(new_tk->Media->information->dataInformation->dref->other_boxes, 0);
+			if (b && b->type==GF_QT_BOX_TYPE_ALIS)
+				use_alis = GF_TRUE;
+		}
 		gf_isom_box_array_del(new_tk->Media->information->dataInformation->dref->other_boxes);
 		new_tk->Media->information->dataInformation->dref->other_boxes = gf_list_new();
 		/*update data ref*/
 		entry = (GF_SampleEntryBox*)gf_list_get(new_tk->Media->information->sampleTable->SampleDescription->other_boxes, 0);
 		if (entry) {
 			u32 dref;
-			Media_CreateDataRef(dest_file, new_tk->Media->information->dataInformation->dref, NULL, NULL, &dref);
+			Media_CreateDataRef(dest_file, new_tk->Media->information->dataInformation->dref, use_alis ?  "alis" : NULL, NULL, &dref);
 			entry->dataReferenceIndex = dref;
 		}
 	} else {
@@ -6182,9 +6188,11 @@ GF_Err gf_isom_clone_pssh(GF_ISOFile *output, GF_ISOFile *input, Bool in_moof) {
 		if (a->type == GF_ISOM_BOX_TYPE_PSSH) {
 			GF_ProtectionSystemHeaderBox *pssh = (GF_ProtectionSystemHeaderBox *)gf_isom_box_new(GF_ISOM_BOX_TYPE_PSSH);
 			memmove(pssh->SystemID, ((GF_ProtectionSystemHeaderBox *)a)->SystemID, 16);
-			pssh->KID_count = ((GF_ProtectionSystemHeaderBox *)a)->KID_count;
-			pssh->KIDs = (bin128 *)gf_malloc(pssh->KID_count*sizeof(bin128));
-			memmove(pssh->KIDs, ((GF_ProtectionSystemHeaderBox *)a)->KIDs, pssh->KID_count*sizeof(bin128));
+			if (((GF_ProtectionSystemHeaderBox *)a)->KIDs && ((GF_ProtectionSystemHeaderBox *)a)->KID_count > 0) {
+				pssh->KID_count = ((GF_ProtectionSystemHeaderBox *)a)->KID_count;
+				pssh->KIDs = (bin128 *)gf_malloc(pssh->KID_count*sizeof(bin128));
+				memmove(pssh->KIDs, ((GF_ProtectionSystemHeaderBox *)a)->KIDs, pssh->KID_count*sizeof(bin128));
+			}
 			pssh->private_data_size = ((GF_ProtectionSystemHeaderBox *)a)->private_data_size;
 			pssh->private_data = (u8 *)gf_malloc(pssh->private_data_size*sizeof(char));
 			memmove(pssh->private_data, ((GF_ProtectionSystemHeaderBox *)a)->private_data, pssh->private_data_size);

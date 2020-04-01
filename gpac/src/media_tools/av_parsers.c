@@ -379,7 +379,7 @@ void gf_m4v_rewrite_pl(char **o_data, u32 *o_dataLen, u8 PL)
 static GF_Err M4V_Reset(GF_M4VParser *m4v, u64 start)
 {
 	gf_bs_seek(m4v->bs, start);
-	assert(start < 1<<31);
+	assert(start < (u64)1<<31);
 	m4v->current_object_start = (u32) start;
 	m4v->current_object_type = 0;
 	return GF_OK;
@@ -801,7 +801,7 @@ GF_Err gf_m4v_rewrite_par(char **o_data, u32 *o_dataLen, s32 par_n, s32 par_d)
 		size = end - start;
 		/*store previous object*/
 		if (size) {
-			assert (size < 1<<31);
+			assert (size < (u64)1<<31);
 			if (size) gf_bs_write_data(mod, *o_data + start, (u32) size);
 			start = end;
 		}
@@ -2400,7 +2400,7 @@ u64 read_leb128(GF_BitStream *bs, u8 *opt_Leb128Bytes) {
 	u8 Leb128Bytes = 0, i = 0;
 	for (i = 0; i < 8; i++) {
 		u8 leb128_byte = gf_bs_read_u8(bs);
-		value |= ((leb128_byte & 0x7f) << (i * 7));
+		value |= (((u64)(leb128_byte & 0x7f)) << (i * 7));
 		Leb128Bytes += 1;
 		if (!(leb128_byte & 0x80)) {
 			break;
@@ -2756,7 +2756,7 @@ static void av1_parse_tile_info(GF_BitStream *bs, AV1State *state)
 			maxTileAreaSb = (sbRows * sbCols) >> (minLog2Tiles + 1);
 		else
 			maxTileAreaSb = sbRows * sbCols;
-		maxTileHeightSb = MAX(maxTileAreaSb / widestTileSb, 1);
+		maxTileHeightSb = widestTileSb ? MAX(maxTileAreaSb / widestTileSb, 1) : 1;
 
 		startSb = 0;
 		for (i = 0; startSb < sbRows; i++) {
@@ -3362,12 +3362,13 @@ static void av1_parse_uncompressed_header(GF_BitStream *bs, AV1State *state)
 			for (i = 0; i < AV1_REFS_PER_FRAME; i++) {
 				if (!frame_refs_short_signaling)
 					ref_frame_idx[i] = gf_bs_read_int(bs, 3);
-					if (state->frame_id_numbers_present_flag) {
-						u32 n = state->delta_frame_id_length_minus_2 + 2;
-						/*delta_frame_id_minus_1 =*/ gf_bs_read_int(bs, n);
-						//DeltaFrameId = delta_frame_id_minus_1 + 1;
-						//expectedFrameId[i] = ((current_frame_id + (1 << idLen) - DeltaFrameId) % (1 << idLen));
-					}
+
+				if (state->frame_id_numbers_present_flag) {
+					u32 n = state->delta_frame_id_length_minus_2 + 2;
+					/*delta_frame_id_minus_1 =*/ gf_bs_read_int(bs, n);
+					//DeltaFrameId = delta_frame_id_minus_1 + 1;
+					//expectedFrameId[i] = ((current_frame_id + (1 << idLen) - DeltaFrameId) % (1 << idLen));
+				}
 			}
 			if (frame_size_override_flag && !error_resilient_mode) {
 				frame_size_with_refs(bs, state, frame_size_override_flag);
@@ -4251,7 +4252,7 @@ u32 gf_mp3_get_next_header(FILE* in)
 
 		if (state==3) {
 			bytes[state] = b;
-			return GF_4CC(bytes[0], bytes[1], bytes[2], bytes[3]);
+			return GF_4CC((u32)bytes[0], bytes[1], bytes[2], bytes[3]);
 		}
 		if (state==2) {
 			if (((b & 0xF0) == 0) || ((b & 0xF0) == 0xF0) || ((b & 0x0C) == 0x0C)) {
@@ -4307,7 +4308,7 @@ u32 gf_mp3_get_next_header_mem(const char *buffer, u32 size, u32 *pos)
 		if (state==3) {
 			u32 val;
 			bytes[state] = b;
-			val = GF_4CC(bytes[0], bytes[1], bytes[2], bytes[3]);
+			val = GF_4CC((u32)bytes[0], bytes[1], bytes[2], bytes[3]);
 			if (gf_mp3_frame_size(val)) {
 				*pos = dropped;
 				return val;

@@ -1,0 +1,175 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Abr	svc.py	/^class Abr:$/;"	c
+Bba	svc.py	/^class Bba(Abr):$/;"	c
+Bola	svc.py	/^class Bola(Abr):$/;"	c
+BolaEnh	svc.py	/^class BolaEnh(Abr):$/;"	c
+DownloadProgress	svc.py	/^DownloadProgress = namedtuple('DownloadProgress',$/;"	v
+Dynamic	svc.py	/^class Dynamic(Abr):$/;"	c
+DynamicDash	svc.py	/^class DynamicDash(Abr):$/;"	c
+Ewma	svc.py	/^class Ewma(ThroughputHistory):$/;"	c
+FastSwitch	svc.py	/^class FastSwitch:$/;"	c
+ManifestInfo	svc.py	/^ManifestInfo = namedtuple('ManifestInfo', 'segment_time bitrates utilities segments')$/;"	v
+NetworkModel	svc.py	/^class NetworkModel:$/;"	c
+NetworkPeriod	svc.py	/^NetworkPeriod = namedtuple('NetworkPeriod', 'time bandwidth latency')$/;"	v
+NoReplace	svc.py	/^class NoReplace(FastSwitch):$/;"	c
+Replace	svc.py	/^class Replace(FastSwitch):$/;"	c
+STARTUP	svc.py	/^        STARTUP = 1$/;"	v	class:BolaEnh.State
+STEADY	svc.py	/^        STEADY = 2$/;"	v	class:BolaEnh.State
+SlidingWindow	svc.py	/^class SlidingWindow(ThroughputHistory):$/;"	c
+State	svc.py	/^    class State(Enum):$/;"	c	class:BolaEnh
+ThroughputHistory	svc.py	/^class ThroughputHistory:$/;"	c
+ThroughputRule	svc.py	/^class ThroughputRule(Abr):$/;"	c
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Abr
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Bba
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Bola
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:BolaEnh
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Dynamic
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:DynamicDash
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Ewma
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:SlidingWindow
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:ThroughputHistory
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:ThroughputRule
+__init__	svc.py	/^    def __init__(self, network_trace):$/;"	m	class:NetworkModel
+__init__	svc.py	/^    def __init__(self, strategy):$/;"	m	class:Replace
+abandon_grace_time	svc.py	/^    abandon_grace_time = 500$/;"	v	class:ThroughputRule
+abandon_multiplier	svc.py	/^    abandon_multiplier = 1.8$/;"	v	class:ThroughputRule
+abandoned_to_quality	svc.py	/^    abandoned_to_quality = None$/;"	v
+abr	svc.py	/^    abr = abr_list[args.abr](config)$/;"	v
+abr_default	svc.py	/^abr_default = 'bolae'$/;"	v
+abr_list	svc.py	/^abr_list = {}$/;"	v
+advertize_new_network_quality	svc.py	/^def advertize_new_network_quality(quality, previous_quality):$/;"	f
+args	svc.py	/^    args = parser.parse_args()$/;"	v
+average_default	svc.py	/^average_default = 'ewma'$/;"	v
+average_list	svc.py	/^average_list = {}$/;"	v
+bbb	simulate-svc.py	/^    bbb = load_json('bbb.json')$/;"	v
+bbb4k	simulate-svc.py	/^    bbb4k = load_json('bbb4k.json')$/;"	v
+bitrates	svc.py	/^    bitrates = manifest['bitrates_kbps']$/;"	v
+buffer_contents	svc.py	/^    buffer_contents = []$/;"	v
+buffer_fcc	svc.py	/^    buffer_fcc = 0$/;"	v
+buffer_size	svc.py	/^    buffer_size = args.max_buffer * 1000$/;"	v
+cdf	simulate-svc.py	/^def cdf(l, margin = 0.025):$/;"	f
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Abr
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Bola
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:BolaEnh
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Dynamic
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:DynamicDash
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:FastSwitch
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Replace
+check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:ThroughputRule
+check_replace	svc.py	/^    def check_replace(self, quality):$/;"	m	class:FastSwitch
+check_replace	svc.py	/^    def check_replace(self, quality):$/;"	m	class:Replace
+choices	svc.py	/^    choices = ['none', 'left', 'right']$/;"	v
+config	svc.py	/^    config = {'buffer_size': buffer_size,$/;"	v
+config	svc.py	/^    config = {'window_size': args.window_size, 'half_life': args.half_life}$/;"	v
+count	svc.py	/^    count = len(manifest.segments)$/;"	v
+default_half_life	svc.py	/^    default_half_life = [8000, 3000]$/;"	v	class:Ewma
+default_window_size	svc.py	/^    default_window_size = [3]$/;"	v	class:SlidingWindow
+delay	svc.py	/^    def delay(self, time):$/;"	m	class:NetworkModel
+deplete_buffer	svc.py	/^def deplete_buffer(time):$/;"	f
+do_download	svc.py	/^    def do_download(self, size):$/;"	m	class:NetworkModel
+do_figure	simulate-svc.py	/^def do_figure(prefix, subfigs, algorithms, metrics, term = None):$/;"	f
+do_latency_delay	svc.py	/^    def do_latency_delay(self, delay_units):$/;"	m	class:NetworkModel
+do_minimal_download	svc.py	/^    def do_minimal_download(self, size, min_size, min_time):$/;"	m	class:NetworkModel
+do_minimal_latency_delay	svc.py	/^    def do_minimal_latency_delay(self, delay_units, min_time):$/;"	m	class:NetworkModel
+download	svc.py	/^    def download(self, size, idx, quality, buffer_level, check_abandon = None):$/;"	m	class:NetworkModel
+download_metric	svc.py	/^    download_metric = network.download(size, 0, quality, 0)$/;"	v
+download_time	svc.py	/^    download_time = download_metric.time - download_metric.time_to_first_bit$/;"	v
+estimate_average	svc.py	/^    estimate_average = 0$/;"	v
+figure_12_13	simulate-svc.py	/^def figure_12_13():$/;"	f
+gamma_p	svc.py	/^    gamma_p = args.gamma_p$/;"	v
+get_buffer_level	svc.py	/^def get_buffer_level():$/;"	f
+get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:Abr
+get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:Dynamic
+get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:DynamicDash
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Abr
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Bba
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Bola
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:BolaEnh
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Dynamic
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:DynamicDash
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:ThroughputRule
+goodestimate_average	svc.py	/^    goodestimate_average = 0$/;"	v
+goodestimate_count	svc.py	/^    goodestimate_count = 0$/;"	v
+l	svc.py	/^    l = download_metric.time_to_first_bit$/;"	v
+last_played	svc.py	/^    last_played = None$/;"	v
+load_json	simulate-svc.py	/^def load_json(path):$/;"	f
+load_json	svc.py	/^def load_json(path):$/;"	f
+low_buffer_safety_factor	svc.py	/^    low_buffer_safety_factor = 0.5$/;"	v	class:BolaEnh
+low_buffer_safety_factor	svc.py	/^    low_buffer_safety_factor = 0.5$/;"	v	class:ThroughputRule
+low_buffer_safety_factor_init	svc.py	/^    low_buffer_safety_factor_init = 0.9$/;"	v	class:BolaEnh
+low_buffer_safety_factor_init	svc.py	/^    low_buffer_safety_factor_init = 0.9$/;"	v	class:ThroughputRule
+low_buffer_threshold	svc.py	/^    low_buffer_threshold = 10000$/;"	v	class:Dynamic
+manifest	svc.py	/^    manifest = ManifestInfo(segment_time = manifest['segment_duration_ms'],$/;"	v
+manifest	svc.py	/^    manifest = load_json(args.movie)$/;"	v
+max_buffer_for_quality	svc.py	/^    def max_buffer_for_quality(self, quality):$/;"	m	class:BolaEnh
+max_buffer_size	svc.py	/^    max_buffer_size = args.max_buffer * 1000$/;"	v
+max_store	svc.py	/^    max_store = 20$/;"	v	class:SlidingWindow
+mean_stddev	simulate-svc.py	/^def mean_stddev(l):$/;"	f
+min_buffer_for_quality	svc.py	/^    def min_buffer_for_quality(self, quality):$/;"	m	class:BolaEnh
+min_progress_size	svc.py	/^    min_progress_size = 12000$/;"	v	class:NetworkModel
+min_progress_time	svc.py	/^    min_progress_time = 50$/;"	v	class:NetworkModel
+minimum_buffer	svc.py	/^    minimum_buffer = 10000$/;"	v	class:BolaEnh
+minimum_buffer_per_level	svc.py	/^    minimum_buffer_per_level = 2000$/;"	v	class:BolaEnh
+network	svc.py	/^    network = NetworkModel(network_trace)$/;"	v
+network_trace	svc.py	/^    network_trace = [NetworkPeriod(time      = p['duration_ms'],$/;"	v
+network_trace	svc.py	/^    network_trace = load_json(args.network)$/;"	v
+next_network_period	svc.py	/^    def next_network_period(self):$/;"	m	class:NetworkModel
+next_segment	svc.py	/^    next_segment = 1$/;"	v
+overestimate_average	svc.py	/^    overestimate_average = 0$/;"	v
+overestimate_count	svc.py	/^    overestimate_count = 0$/;"	v
+parser	svc.py	/^    parser = argparse.ArgumentParser(description = 'Simulate an ABR session.',$/;"	v
+pending_quality_up	svc.py	/^    pending_quality_up = []$/;"	v
+played_bitrate	svc.py	/^    played_bitrate = 0$/;"	v
+played_utility	svc.py	/^    played_utility = 0$/;"	v
+playout_buffer	svc.py	/^def playout_buffer():$/;"	f
+process_quality_up	svc.py	/^def process_quality_up(now):$/;"	f
+push	svc.py	/^    def push(self, time, tput, lat):$/;"	m	class:Ewma
+push	svc.py	/^    def push(self, time, tput, lat):$/;"	m	class:SlidingWindow
+push	svc.py	/^    def push(self, time, tput, lat):$/;"	m	class:ThroughputHistory
+quality	svc.py	/^    quality = abr.get_first_quality()$/;"	v
+quality_from_buffer	svc.py	/^    def quality_from_buffer(self):$/;"	m	class:Bola
+quality_from_buffer	svc.py	/^    def quality_from_buffer(self, level):$/;"	m	class:BolaEnh
+quality_from_buffer_placeholder	svc.py	/^    def quality_from_buffer_placeholder(self):$/;"	m	class:BolaEnh
+quality_from_throughput	svc.py	/^    def quality_from_throughput(self, tput):$/;"	m	class:Abr
+rampup_origin	svc.py	/^    rampup_origin = 0$/;"	v
+rampup_threshold	svc.py	/^    rampup_threshold = args.rampup_threshold$/;"	v
+rampup_time	svc.py	/^    rampup_time = None$/;"	v
+reaction_metrics	svc.py	/^    reaction_metrics = []$/;"	v
+rebuffer_event_count	svc.py	/^    rebuffer_event_count = 0$/;"	v
+rebuffer_time	svc.py	/^    rebuffer_time = 0$/;"	v
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Abr
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Bba
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:BolaEnh
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Dynamic
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:DynamicDash
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Abr
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Bba
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:BolaEnh
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Dynamic
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:DynamicDash
+report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Abr
+report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Bba
+report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Bola
+report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:BolaEnh
+safety_factor	svc.py	/^    safety_factor = 0.9$/;"	v	class:ThroughputRule
+size	svc.py	/^    size = manifest.segments[0][quality]$/;"	v
+startup_time	svc.py	/^    startup_time = download_time$/;"	v
+t	simulate-svc.py	/^            t = threading.Thread(target = thread_run_gnuplot, args = (plotting, ))$/;"	v
+t	svc.py	/^    t = download_metric.size \/ download_time$/;"	v
+thread_run_gnuplot	simulate-svc.py	/^def thread_run_gnuplot(plotting):$/;"	f
+thread_run_sabre	simulate-svc.py	/^def thread_run_sabre(results, command):$/;"	f
+throughput_history	svc.py	/^    throughput_history = average_list[args.moving_average](config)$/;"	v
+time	svc.py	/^    time = count * manifest.segment_time + rebuffer_time + startup_time$/;"	v
+to_time_average	svc.py	/^    to_time_average = 1 \/ (total_play_time \/ manifest.segment_time)$/;"	v
+total_bitrate_change	svc.py	/^    total_bitrate_change = 0$/;"	v
+total_log_bitrate_change	svc.py	/^    total_log_bitrate_change = 0$/;"	v
+total_play_time	svc.py	/^    total_play_time = 0$/;"	v
+total_reaction_time	svc.py	/^    total_reaction_time = 0$/;"	v
+utilities	svc.py	/^    utilities = [math.log(b) + utility_offset for b in bitrates]$/;"	v
+utility_offset	svc.py	/^    utility_offset = 0 - math.log(bitrates[0]) # so utilities[0] = 0$/;"	v
+verbose	svc.py	/^    verbose = args.verbose$/;"	v

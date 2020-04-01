@@ -5798,24 +5798,6 @@ static DownloadGroupStatus dash_download_group_download(GF_DashClient *dash, GF_
 		else
 			local_file_name = dash->dash_io->get_cache_name(dash->dash_io, base_group->segment_download);
 
-        /* DSVC */
-        u32 size;
-        u8 *mem_address;
-        if (!local_file_name) {
-            GF_LOG(GF_LOG_ERROR, GF_LOG_DASH, ("[DASH] Error - cannot connect service: cache problem %s\n", local_file_name));
-            dash->dash_io->del(dash->dash_io, base_group->segment_download);
-            base_group->segment_download = NULL;
-            return GF_IO_ERR;
-        }
-        if (sscanf(local_file_name, "gmem://%d@%p", &size, &mem_address) != 2) {
-           return GF_IO_ERR;
-        }
-
-        FILE *f = fopen(new_base_seg_url+35, "wb"); /* TODO: Extracting original filename. 34 is the length of URL minus original filename. Rn hardcoded. Need to fix. */
-        fwrite(mem_address, sizeof(char), size, f);
-        fclose(f);
-        /* DSVC */
-
 		file_size = dash->dash_io->get_total_size(dash->dash_io, base_group->segment_download);
 		if (file_size==0) {
 			empty_file = GF_TRUE;
@@ -7067,6 +7049,9 @@ GF_EXPORT
 void gf_dash_set_algo(GF_DashClient *dash, GF_DASHAdaptationAlgorithm algo)
 {
 	dash->adaptation_algorithm = algo;
+
+    printf("algo: %d\n", algo);
+
 	switch (dash->adaptation_algorithm) {
 	case GF_DASH_ALGO_GPAC_LEGACY_BUFFER:
 		dash->rate_adaptation_algo = dash_do_rate_adaptation_legacy_buffer;
@@ -8524,6 +8509,7 @@ void gf_dash_group_set_buffer_levels(GF_DashClient *dash, u32 idx, u32 buffer_mi
 	if (!group) return;
 	group->buffer_min_ms = buffer_min_ms;
 	group->buffer_max_ms = buffer_max_ms;
+
 	if (group->max_buffer_playout_ms > buffer_max_ms) {
 		GF_LOG(GF_LOG_WARNING, GF_LOG_DASH, ("[DASH] Max buffer %d less than max playout buffer %d, overwriting max playout buffer\n", buffer_max_ms, group->max_buffer_playout_ms));
 		group->max_buffer_playout_ms = buffer_max_ms;

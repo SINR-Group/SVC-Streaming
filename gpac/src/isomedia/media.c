@@ -366,7 +366,7 @@ GF_Err Media_GetESD(GF_MediaBox *mdia, u32 sampleDescIndex, GF_ESD **out_esd, Bo
 		return GF_OK;
 	} else {
 		if (!esd && !*out_esd) return GF_ISOM_INVALID_MEDIA;
-		if (*out_esd == NULL) gf_odf_desc_copy((GF_Descriptor *)esd, (GF_Descriptor **)out_esd);
+		if (*out_esd == NULL) return gf_odf_desc_copy((GF_Descriptor *)esd, (GF_Descriptor **)out_esd);
 	}
 	return GF_OK;
 }
@@ -571,12 +571,13 @@ GF_Err Media_CheckDataEntry(GF_MediaBox *mdia, u32 dataEntryIndex)
 Bool Media_IsSelfContained(GF_MediaBox *mdia, u32 StreamDescIndex)
 {
 	u32 drefIndex=0;
-	GF_FullBox *a;
+	GF_FullBox *a=NULL;
 	GF_SampleEntryBox *se = NULL;
 
 	Media_GetSampleDesc(mdia, StreamDescIndex, &se, &drefIndex);
 	if (!drefIndex) return 0;
-	a = (GF_FullBox*)gf_list_get(mdia->information->dataInformation->dref->other_boxes, drefIndex - 1);
+	if (mdia && mdia->information && mdia->information->dataInformation && mdia->information->dataInformation->dref)
+		a = (GF_FullBox*)gf_list_get(mdia->information->dataInformation->dref->other_boxes, drefIndex - 1);
 	if (!a) {
 		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, ("[iso file] broken file: Data reference index set to %d but no data reference entry found\n", drefIndex));
 		return 0;
@@ -696,6 +697,9 @@ GF_Err Media_SetDuration(GF_TrackBox *trak)
 	u64 DTS;
 	GF_SttsEntry *ent;
 	u32 nbSamp;
+
+	if (!trak || !trak->Media || !trak->Media->information || !trak->Media->information->sampleTable)
+		return GF_ISOM_INVALID_FILE;
 
 	if (!trak->Media->information->sampleTable->SampleSize || !trak->Media->information->sampleTable->TimeToSample)
 		return GF_ISOM_INVALID_FILE;
@@ -820,16 +824,19 @@ GF_Err Media_SetDrefURL(GF_DataEntryURLBox *dref_entry, const char *origName, co
 GF_Err Media_CreateDataRef(GF_ISOFile *movie, GF_DataReferenceBox *dref, char *URLname, char *URNname, u32 *dataRefIndex)
 {
 	GF_Err e;
+	Bool use_alis=GF_FALSE;
 	GF_DataEntryURLBox *entry;
 
 	GF_Err dref_AddDataEntry(GF_DataReferenceBox *ptr, GF_Box *entry);
 
+	if (URLname && !strcmp(URLname, "alis")) {
+		URLname = NULL;
+		use_alis=GF_TRUE;
+	}
 	if (!URLname && !URNname) {
 		//THIS IS SELF CONTAIN, create a regular entry if needed
-		entry = (GF_DataEntryURLBox *) gf_isom_box_new(GF_ISOM_BOX_TYPE_URL);
-		entry->location = NULL;
-		entry->flags = 0;
-		entry->flags |= 1;
+		entry = (GF_DataEntryURLBox *) gf_isom_box_new(use_alis ? GF_QT_BOX_TYPE_ALIS : GF_ISOM_BOX_TYPE_URL);
+		entry->flags = 1;
 		e = dref_AddDataEntry(dref, (GF_Box *)entry);
 		if (e) return e;
 		*dataRefIndex = gf_list_count(dref->other_boxes);
