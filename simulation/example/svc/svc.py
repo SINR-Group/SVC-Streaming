@@ -1088,6 +1088,26 @@ class DynamicDash(Abr):
 
 abr_list['dynamicdash'] = DynamicDash
 
+class Pensieve(Abr):
+
+    def __init__(self, config):
+        pass
+
+    def get_quality_delay(self, segment_index):
+        raise NotImplementedError
+
+    def report_delay(self, delay):
+        pass
+
+    def report_download(self, metrics, is_replacment):
+        pass
+
+    def report_seek(self, where):
+        pass
+
+
+abr_list['pensieve'] = Pensieve
+
 class Bba(Abr):
 
     def __init__(self, config):
