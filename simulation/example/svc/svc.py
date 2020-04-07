@@ -31,6 +31,23 @@ import string
 from collections import namedtuple
 from enum import Enum
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES']=''
+
+import numpy as np
+import tensorflow as tf
+import a3c
+
+## The following parameters are specific to Pensieve ABR
+S_INFO = 6  # bit_rate, buffer_size, rebuffering_time, bandwidth_measurement, chunk_til_video_end
+S_LEN = 8  # take how many frames in the past
+A_DIM = 6
+ACTOR_LR_RATE = 0.0001
+CRITIC_LR_RATE = 0.001
+NN_MODEL = './pensieve_pretrained_models/pretrain_linear_reward.ckpt'
+DEFAULT_QUALITY = 0
+## End of Pensieve parameters
+
 # Units used throughout:
 #     size     : bits
 #     time     : ms
@@ -1088,10 +1105,40 @@ class DynamicDash(Abr):
 
 abr_list['dynamicdash'] = DynamicDash
 
+# Simply copied the code from Pensieve: https://github.com/hongzimao/pensieve
 class Pensieve(Abr):
 
     def __init__(self, config):
-        pass
+        self.sess = tf.Session()
+
+        self.actor = a3c.ActorNetwork(self.sess, state_dim=[S_INFO, S_LEN], action_dim=A_DIM, learning_rate=ACTOR_LR_RATE)
+        self.critic = a3c.CriticNetwork(self.sess, state_dim=[S_INFO, S_LEN], learning_rate=CRITIC_LR_RATE)
+
+        self.sess.run(tf.initialize_all_variables())
+        self.saver = tf.train.Saver()
+
+        # restore neural net parameters
+        self.nn_model = NN_MODEL
+        if self.nn_model is not None:  # nn_model is the path to file
+            self.saver.restore(self.sess, self.nn_model)
+            print("Model restored.")
+
+        self.init_action = np.zeros(A_DIM)
+        self.init_action[DEFAULT_QUALITY] = 1
+
+        self.s_batch = [np.zeros((S_INFO, S_LEN))]
+        self.a_batch = [self.init_action]
+        self.r_batch = []
+
+        self.train_counter = 0
+
+        self.last_bit_rate = DEFAULT_QUALITY
+        self.last_total_rebuf = 0
+        # need this storage, because observation only contains total rebuffering time
+        # we compute the difference to get
+
+        self.video_chunk_count = 0
+
 
     def get_quality_delay(self, segment_index):
         raise NotImplementedError
@@ -1307,6 +1354,8 @@ if __name__ == '__main__':
     abr_list[args.abr].use_abr_o = args.abr_osc
     abr_list[args.abr].use_abr_u = not args.abr_osc
     abr = abr_list[args.abr](config)
+    tabr = Pensieve(config)
+    print (tabr)
     network = NetworkModel(network_trace)
 
     if args.replace == 'left':
