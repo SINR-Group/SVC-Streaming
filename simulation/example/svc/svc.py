@@ -46,6 +46,11 @@ ACTOR_LR_RATE = 0.0001
 CRITIC_LR_RATE = 0.001
 NN_MODEL = './pensieve_pretrained_models/pretrain_linear_reward.ckpt'
 DEFAULT_QUALITY = 0
+M_IN_K = 1000.0
+REBUF_PENALTY = 4.3  # 1 sec rebuffering -> this number of Mbps
+SMOOTH_PENALTY = 1
+RAND_RANGE = 1000
+VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]
 ## End of Pensieve parameters
 
 # Units used throughout:
@@ -1139,9 +1144,73 @@ class Pensieve(Abr):
 
         self.video_chunk_count = 0
 
+    def get_rebuffer_time():
+        rt = 0
+
+        return rt
 
     def get_quality_delay(self, segment_index):
-        raise NotImplementedError
+        rebuffer_time = float(self.get_rebuffer_time() - self.last_total_rebuf)
+        reward = VIDEO_BIT_RATE[self.last_quality] / M_IN_K - REBUF_PENALTY * rebuffer_time / M_IN_K - SMOOTH_PENALTY * np.abs(VIDEO_BIT_RATE[self.last_quality] - self.last_bit_rate) / M_IN_K
+
+        self.last_bit_rate = VIDEO_BIT_RATE[self.last_quality]
+        self.last_total_rebuf = self.get_rebuffer_time()
+        
+        # retrieve previous state
+        if len(self.s_batch) == 0:
+            state = [np.zeros((S_INFO, S_LEN))]
+        else:
+            state = np.array(self.s_batch[-1], copy=True)
+        
+        # compute bandwidth measurement
+        video_chunk_fetch_time = post_data['lastChunkFinishTime'] - post_data['lastChunkStartTime']
+        video_chunk_size = post_data['lastChunkSize']
+        
+        # compute number of video chunks left
+        video_chunk_remain = TOTAL_VIDEO_CHUNKS - self.video_chunk_coount
+        self.video_chunk_coount += 1
+        
+        # dequeue history record
+        state = np.roll(state, -1, axis=1)
+        
+        next_video_chunk_sizes = []
+        for i in xrange(A_DIM):
+            next_video_chunk_sizes.append(get_chunk_size(i, self.input_dict['video_chunk_coount']))
+        
+        # this should be S_INFO number of terms
+        try:
+            state[0, -1] = VIDEO_BIT_RATE[self.last_quality] / float(np.max(VIDEO_BIT_RATE))
+            state[1, -1] = post_data['buffer'] / BUFFER_NORM_FACTOR
+            state[2, -1] = float(video_chunk_size) / float(video_chunk_fetch_time) / M_IN_K  # kilo byte / ms
+            state[3, -1] = float(video_chunk_fetch_time) / M_IN_K / BUFFER_NORM_FACTOR  # 10 sec
+            state[4, :A_DIM] = np.array(next_video_chunk_sizes) / M_IN_K / M_IN_K  # mega byte
+            state[5, -1] = np.minimum(video_chunk_remain, CHUNK_TIL_VIDEO_END_CAP) / float(CHUNK_TIL_VIDEO_END_CAP)
+        except ZeroDivisionError:
+            # this should occur VERY rarely (1 out of 3000), should be a dash issue
+            # in this case we ignore the observation and roll back to an eariler one
+            if len(self.s_batch) == 0:
+                state = [np.zeros((S_INFO, S_LEN))]
+            else:
+                state = np.array(self.s_batch[-1], copy=True)
+        
+        action_prob = self.actor.predict(np.reshape(state, (1, S_INFO, S_LEN)))
+        action_cumsum = np.cumsum(action_prob)
+        bit_rate = (action_cumsum > np.random.randint(1, RAND_RANGE) / float(RAND_RANGE)).argmax()
+        # Note: we need to discretize the probability into 1/RAND_RANGE steps,
+        # because there is an intrinsic discrepancy in passing single state and batch states
+        
+        quality = get_quality(str(bit_rate))
+        
+        # record [state, action, reward]
+        # put it here after training, notice there is a shift in reward storage
+        if end_of_video:
+            self.s_batch = [np.zeros((S_INFO, S_LEN))]
+        else:
+            self.s_batch.append(state)
+
+        self.last_quality = quality
+
+        return (quality, 0)
 
     def report_delay(self, delay):
         pass
@@ -1354,7 +1423,7 @@ if __name__ == '__main__':
     abr_list[args.abr].use_abr_o = args.abr_osc
     abr_list[args.abr].use_abr_u = not args.abr_osc
     abr = abr_list[args.abr](config)
-    tabr = Pensieve(config)
+    #tabr = Pensieve(config)
     print (tabr)
     network = NetworkModel(network_trace)
 
