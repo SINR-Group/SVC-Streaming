@@ -4,26 +4,49 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ACTOR_LR_RATE	svc.py	/^ACTOR_LR_RATE = 0.0001$/;"	v
+A_DIM	a3c.py	/^A_DIM = 6$/;"	v
+A_DIM	svc.py	/^A_DIM = 6$/;"	v
 Abr	svc.py	/^class Abr:$/;"	c
+ActorNetwork	a3c.py	/^class ActorNetwork(object):$/;"	c
+BUFFER_NORM_FACTOR	svc.py	/^BUFFER_NORM_FACTOR = 10.0$/;"	v
 Bba	svc.py	/^class Bba(Abr):$/;"	c
 Bola	svc.py	/^class Bola(Abr):$/;"	c
 BolaEnh	svc.py	/^class BolaEnh(Abr):$/;"	c
+CRITIC_LR_RATE	svc.py	/^CRITIC_LR_RATE = 0.001$/;"	v
+CriticNetwork	a3c.py	/^class CriticNetwork(object):$/;"	c
+DEFAULT_QUALITY	svc.py	/^DEFAULT_QUALITY = 0  # default video quality without agent$/;"	v
 DownloadProgress	svc.py	/^DownloadProgress = namedtuple('DownloadProgress',$/;"	v
 Dynamic	svc.py	/^class Dynamic(Abr):$/;"	c
 DynamicDash	svc.py	/^class DynamicDash(Abr):$/;"	c
+ENTROPY_EPS	a3c.py	/^ENTROPY_EPS = 1e-6$/;"	v
+ENTROPY_WEIGHT	a3c.py	/^ENTROPY_WEIGHT = 0.5$/;"	v
 Ewma	svc.py	/^class Ewma(ThroughputHistory):$/;"	c
 FastSwitch	svc.py	/^class FastSwitch:$/;"	c
+GAMMA	a3c.py	/^GAMMA = 0.99$/;"	v
+M_IN_K	svc.py	/^M_IN_K = 1000.0$/;"	v
 ManifestInfo	svc.py	/^ManifestInfo = namedtuple('ManifestInfo', 'segment_time bitrates utilities segments')$/;"	v
+NN_MODEL	svc.py	/^NN_MODEL = '.\/pensieve_pretrained_models\/pretrain_linear_reward.ckpt'$/;"	v
 NetworkModel	svc.py	/^class NetworkModel:$/;"	c
 NetworkPeriod	svc.py	/^NetworkPeriod = namedtuple('NetworkPeriod', 'time bandwidth latency')$/;"	v
 NoReplace	svc.py	/^class NoReplace(FastSwitch):$/;"	c
+Pensieve	svc.py	/^class Pensieve(Abr):$/;"	c
+RAND_RANGE	svc.py	/^RAND_RANGE = 1000$/;"	v
+REBUF_PENALTY	svc.py	/^REBUF_PENALTY = 4.3  # 1 sec rebuffering -> this number of Mbps$/;"	v
 Replace	svc.py	/^class Replace(FastSwitch):$/;"	c
+SMOOTH_PENALTY	svc.py	/^SMOOTH_PENALTY = 1$/;"	v
 STARTUP	svc.py	/^        STARTUP = 1$/;"	v	class:BolaEnh.State
 STEADY	svc.py	/^        STEADY = 2$/;"	v	class:BolaEnh.State
+S_INFO	a3c.py	/^S_INFO = 4$/;"	v
+S_INFO	svc.py	/^S_INFO = 6  # bit_rate, buffer_size, rebuffering_time, bandwidth_measurement, chunk_til_video_end$/;"	v
+S_LEN	svc.py	/^S_LEN = 8  # take how many frames in the past$/;"	v
 SlidingWindow	svc.py	/^class SlidingWindow(ThroughputHistory):$/;"	c
 State	svc.py	/^    class State(Enum):$/;"	c	class:BolaEnh
 ThroughputHistory	svc.py	/^class ThroughputHistory:$/;"	c
 ThroughputRule	svc.py	/^class ThroughputRule(Abr):$/;"	c
+VIDEO_BIT_RATE	svc.py	/^VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]$/;"	v
+__init__	a3c.py	/^    def __init__(self, sess, state_dim, action_dim, learning_rate):$/;"	m	class:ActorNetwork
+__init__	a3c.py	/^    def __init__(self, sess, state_dim, learning_rate):$/;"	m	class:CriticNetwork
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Abr
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Bba
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Bola
@@ -31,6 +54,7 @@ __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:BolaEnh
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Dynamic
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:DynamicDash
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Ewma
+__init__	svc.py	/^    def __init__(self, config):$/;"	m	class:Pensieve
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:SlidingWindow
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:ThroughputHistory
 __init__	svc.py	/^    def __init__(self, config):$/;"	m	class:ThroughputRule
@@ -43,6 +67,8 @@ abr	svc.py	/^    abr = abr_list[args.abr](config)$/;"	v
 abr_default	svc.py	/^abr_default = 'bolae'$/;"	v
 abr_list	svc.py	/^abr_list = {}$/;"	v
 advertize_new_network_quality	svc.py	/^def advertize_new_network_quality(quality, previous_quality):$/;"	f
+apply_gradients	a3c.py	/^    def apply_gradients(self, actor_gradients):$/;"	m	class:ActorNetwork
+apply_gradients	a3c.py	/^    def apply_gradients(self, critic_gradients):$/;"	m	class:CriticNetwork
 args	svc.py	/^    args = parser.parse_args()$/;"	v
 average_default	svc.py	/^average_default = 'ewma'$/;"	v
 average_list	svc.py	/^average_list = {}$/;"	v
@@ -52,6 +78,7 @@ bitrates	svc.py	/^    bitrates = manifest['bitrates_kbps']$/;"	v
 buffer_contents	svc.py	/^    buffer_contents = []$/;"	v
 buffer_fcc	svc.py	/^    buffer_fcc = 0$/;"	v
 buffer_size	svc.py	/^    buffer_size = args.max_buffer * 1000$/;"	v
+build_summaries	a3c.py	/^def build_summaries():$/;"	f
 cdf	simulate-svc.py	/^def cdf(l, margin = 0.025):$/;"	f
 check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Abr
 check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	m	class:Bola
@@ -64,13 +91,19 @@ check_abandon	svc.py	/^    def check_abandon(self, progress, buffer_level):$/;"	
 check_replace	svc.py	/^    def check_replace(self, quality):$/;"	m	class:FastSwitch
 check_replace	svc.py	/^    def check_replace(self, quality):$/;"	m	class:Replace
 choices	svc.py	/^    choices = ['none', 'left', 'right']$/;"	v
+compute_entropy	a3c.py	/^def compute_entropy(x):$/;"	f
+compute_gradients	a3c.py	/^def compute_gradients(s_batch, a_batch, r_batch, terminal, actor, critic):$/;"	f
 config	svc.py	/^    config = {'buffer_size': buffer_size,$/;"	v
 config	svc.py	/^    config = {'window_size': args.window_size, 'half_life': args.half_life}$/;"	v
 count	svc.py	/^    count = len(manifest.segments)$/;"	v
+create_actor_network	a3c.py	/^    def create_actor_network(self):$/;"	m	class:ActorNetwork
+create_critic_network	a3c.py	/^    def create_critic_network(self):$/;"	m	class:CriticNetwork
 default_half_life	svc.py	/^    default_half_life = [8000, 3000]$/;"	v	class:Ewma
 default_window_size	svc.py	/^    default_window_size = [3]$/;"	v	class:SlidingWindow
 delay	svc.py	/^    def delay(self, time):$/;"	m	class:NetworkModel
 deplete_buffer	svc.py	/^def deplete_buffer(time):$/;"	f
+discard_bitrate	svc.py	/^    discard_bitrate = 0$/;"	v
+discount	a3c.py	/^def discount(x, gamma):$/;"	f
 do_download	svc.py	/^    def do_download(self, size):$/;"	m	class:NetworkModel
 do_figure	simulate-svc.py	/^def do_figure(prefix, subfigs, algorithms, metrics, term = None):$/;"	f
 do_latency_delay	svc.py	/^    def do_latency_delay(self, delay_units):$/;"	m	class:NetworkModel
@@ -80,19 +113,34 @@ download	svc.py	/^    def download(self, size, idx, quality, buffer_level, check
 download_metric	svc.py	/^    download_metric = network.download(size, 0, quality, 0)$/;"	v
 download_time	svc.py	/^    download_time = download_metric.time - download_metric.time_to_first_bit$/;"	v
 estimate_average	svc.py	/^    estimate_average = 0$/;"	v
+figure11	simulate-svc.py	/^def figure11():$/;"	f
+figure12_write_network	simulate-svc.py	/^def figure12_write_network():$/;"	f
+figure6a	simulate-svc.py	/^def figure6a():$/;"	f
+figure6b	simulate-svc.py	/^def figure6b():$/;"	f
+figure8	simulate-svc.py	/^def figure8():$/;"	f
 figure_12_13	simulate-svc.py	/^def figure_12_13():$/;"	f
+figure_1_4	simulate-svc.py	/^def figure_1_4():$/;"	f
+figure_7_10	simulate-svc.py	/^def figure_7_10():$/;"	f
+fs_discarded	svc.py	/^    fs_discarded = {}$/;"	v
 gamma_p	svc.py	/^    gamma_p = args.gamma_p$/;"	v
 get_buffer_level	svc.py	/^def get_buffer_level():$/;"	f
+get_chunk_size	svc.py	/^    def get_chunk_size(quality, segment_index):$/;"	m	class:Pensieve
 get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:Abr
 get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:Dynamic
 get_first_quality	svc.py	/^    def get_first_quality(self):$/;"	m	class:DynamicDash
+get_gradients	a3c.py	/^    def get_gradients(self, inputs, acts, act_grad_weights):$/;"	m	class:ActorNetwork
+get_gradients	a3c.py	/^    def get_gradients(self, inputs, td_target):$/;"	m	class:CriticNetwork
+get_network_params	a3c.py	/^    def get_network_params(self):$/;"	m	class:ActorNetwork
+get_network_params	a3c.py	/^    def get_network_params(self):$/;"	m	class:CriticNetwork
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Abr
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Bba
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Bola
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:BolaEnh
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Dynamic
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:DynamicDash
+get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:Pensieve
 get_quality_delay	svc.py	/^    def get_quality_delay(self, segment_index):$/;"	m	class:ThroughputRule
+get_td	a3c.py	/^    def get_td(self, inputs, td_target):$/;"	m	class:CriticNetwork
 goodestimate_average	svc.py	/^    goodestimate_average = 0$/;"	v
 goodestimate_count	svc.py	/^    goodestimate_count = 0$/;"	v
 l	svc.py	/^    l = download_metric.time_to_first_bit$/;"	v
@@ -127,6 +175,8 @@ pending_quality_up	svc.py	/^    pending_quality_up = []$/;"	v
 played_bitrate	svc.py	/^    played_bitrate = 0$/;"	v
 played_utility	svc.py	/^    played_utility = 0$/;"	v
 playout_buffer	svc.py	/^def playout_buffer():$/;"	f
+predict	a3c.py	/^    def predict(self, inputs):$/;"	m	class:ActorNetwork
+predict	a3c.py	/^    def predict(self, inputs):$/;"	m	class:CriticNetwork
 process_quality_up	svc.py	/^def process_quality_up(now):$/;"	f
 push	svc.py	/^    def push(self, time, tput, lat):$/;"	m	class:Ewma
 push	svc.py	/^    def push(self, time, tput, lat):$/;"	m	class:SlidingWindow
@@ -147,16 +197,21 @@ report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Bba
 report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:BolaEnh
 report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Dynamic
 report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:DynamicDash
+report_delay	svc.py	/^    def report_delay(self, delay):$/;"	m	class:Pensieve
 report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Abr
 report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Bba
 report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:BolaEnh
 report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Dynamic
 report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:DynamicDash
+report_download	svc.py	/^    def report_download(self, metrics, is_replacment):$/;"	m	class:Pensieve
 report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Abr
 report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Bba
 report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Bola
 report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:BolaEnh
+report_seek	svc.py	/^    def report_seek(self, where):$/;"	m	class:Pensieve
 safety_factor	svc.py	/^    safety_factor = 0.9$/;"	v	class:ThroughputRule
+set_network_params	a3c.py	/^    def set_network_params(self, input_network_params):$/;"	m	class:ActorNetwork
+set_network_params	a3c.py	/^    def set_network_params(self, input_network_params):$/;"	m	class:CriticNetwork
 size	svc.py	/^    size = manifest.segments[0][quality]$/;"	v
 startup_time	svc.py	/^    startup_time = download_time$/;"	v
 t	simulate-svc.py	/^            t = threading.Thread(target = thread_run_gnuplot, args = (plotting, ))$/;"	v
@@ -170,6 +225,8 @@ total_bitrate_change	svc.py	/^    total_bitrate_change = 0$/;"	v
 total_log_bitrate_change	svc.py	/^    total_log_bitrate_change = 0$/;"	v
 total_play_time	svc.py	/^    total_play_time = 0$/;"	v
 total_reaction_time	svc.py	/^    total_reaction_time = 0$/;"	v
+train	a3c.py	/^    def train(self, inputs, acts, act_grad_weights):$/;"	m	class:ActorNetwork
+train	a3c.py	/^    def train(self, inputs, td_target):$/;"	m	class:CriticNetwork
 utilities	svc.py	/^    utilities = [math.log(b) + utility_offset for b in bitrates]$/;"	v
 utility_offset	svc.py	/^    utility_offset = 0 - math.log(bitrates[0]) # so utilities[0] = 0$/;"	v
 verbose	svc.py	/^    verbose = args.verbose$/;"	v
