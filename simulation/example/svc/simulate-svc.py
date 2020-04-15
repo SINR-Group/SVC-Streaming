@@ -116,6 +116,7 @@ def do_figure(prefix, subfigs, algorithms, metrics, term = None):
                     threads.pop(0)
         
                 command = ['python3', './svc.py', '-n', dir + '/' + trace] + args
+                print (command)
                 t = threading.Thread(target = thread_run_sabre, args = (results, command))
                 threads.append(t)
                 t.start()

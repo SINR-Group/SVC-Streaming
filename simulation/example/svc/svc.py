@@ -31,6 +31,29 @@ import string
 from collections import namedtuple
 from enum import Enum
 
+import os
+os.environ['CUDA_VISIBLE_DEVICES']=''
+
+import numpy as np
+import tensorflow as tf
+import a3c
+
+## The following parameters are specific to Pensieve ABR
+S_INFO = 6  # bit_rate, buffer_size, rebuffering_time, bandwidth_measurement, chunk_til_video_end
+S_LEN = 8  # take how many frames in the past
+A_DIM = 6
+ACTOR_LR_RATE = 0.0001
+CRITIC_LR_RATE = 0.001
+NN_MODEL = './pensieve_pretrained_models/pretrain_linear_reward.ckpt'
+DEFAULT_QUALITY = 0  # default video quality without agent
+M_IN_K = 1000.0
+REBUF_PENALTY = 4.3  # 1 sec rebuffering -> this number of Mbps
+SMOOTH_PENALTY = 1
+RAND_RANGE = 1000
+VIDEO_BIT_RATE = [300,750,1200,1850,2850,4300]
+BUFFER_NORM_FACTOR = 10.0
+## End of Pensieve parameters
+
 # Units used throughout:
 #     size     : bits
 #     time     : ms
@@ -1088,6 +1111,135 @@ class DynamicDash(Abr):
 
 abr_list['dynamicdash'] = DynamicDash
 
+# Simply copied the code from Pensieve: https://github.com/hongzimao/pensieve
+class Pensieve(Abr):
+
+    def __init__(self, config):
+        self.sess = tf.Session()
+
+        self.actor = a3c.ActorNetwork(self.sess, state_dim=[S_INFO, S_LEN], action_dim=A_DIM, learning_rate=ACTOR_LR_RATE)
+        self.critic = a3c.CriticNetwork(self.sess, state_dim=[S_INFO, S_LEN], learning_rate=CRITIC_LR_RATE)
+
+        self.sess.run(tf.initialize_all_variables())
+        self.saver = tf.train.Saver()
+
+        # restore neural net parameters
+        self.nn_model = NN_MODEL
+        if self.nn_model is not None:  # nn_model is the path to file
+            self.saver.restore(self.sess, self.nn_model)
+            print("Model restored.")
+
+        self.init_action = np.zeros(A_DIM)
+        self.init_action[DEFAULT_QUALITY] = 1
+
+        self.s_batch = [np.zeros((S_INFO, S_LEN))]
+        self.a_batch = [self.init_action]
+        self.r_batch = []
+
+        self.train_counter = 0
+
+        self.last_quality = DEFAULT_QUALITY
+        self.last_bit_rate = DEFAULT_QUALITY
+        self.last_total_rebuf = 0
+        # need this storage, because observation only contains total rebuffering time
+        # we compute the difference to get
+
+        self.video_chunk_count = 0
+        self.chunk_fetch_time = 0
+        self.chunk_size = 0
+
+    def get_chunk_size(self, quality, segment_index):
+        global manifest
+
+        if segment_index+A_DIM <= len(manifest.segments):
+            return manifest.segments[segment_index][quality]
+        else:
+            return 0
+
+    def get_quality_delay(self, segment_index):
+        global rebuffer_time
+        global manifest
+
+        rebuffer_time = float(rebuffer_time - self.last_total_rebuf)
+        reward = manifest.bitrates[self.last_quality] / M_IN_K - REBUF_PENALTY * rebuffer_time / M_IN_K - SMOOTH_PENALTY * np.abs(manifest.bitrates[self.last_quality] - self.last_bit_rate) / M_IN_K
+
+        self.last_bit_rate = manifest.bitrates[self.last_quality]
+        self.last_total_rebuf = rebuffer_time
+        
+        # retrieve previous state
+        if len(self.s_batch) == 0:
+            state = [np.zeros((S_INFO, S_LEN))]
+        else:
+            state = np.array(self.s_batch[-1], copy=True)
+        
+        # compute bandwidth measurement
+        video_chunk_fetch_time = self.chunk_fetch_time
+        video_chunk_size = self.chunk_size
+        
+        # compute number of video chunks left
+        video_chunk_remain = len(manifest.segments) - self.video_chunk_count
+        self.video_chunk_count += 1
+        
+        # dequeue history record
+        state = np.roll(state, -1, axis=1)
+        
+        next_video_chunk_sizes = []
+        for i in range(A_DIM):
+            next_video_chunk_sizes.append(self.get_chunk_size(i, self.video_chunk_count))
+        
+        # this should be S_INFO number of terms
+        try:
+            state[0, -1] = manifest.bitrates[self.last_quality] / float(np.max(manifest.bitrates))
+            state[1, -1] = get_buffer_level() / BUFFER_NORM_FACTOR
+            state[2, -1] = float(video_chunk_size) / float(video_chunk_fetch_time) / M_IN_K  # kilo byte / ms
+            state[3, -1] = float(video_chunk_fetch_time) / M_IN_K / BUFFER_NORM_FACTOR  # 10 sec
+            state[4, :A_DIM] = np.array(next_video_chunk_sizes) / M_IN_K / M_IN_K  # mega byte
+            state[5, -1] = np.minimum(video_chunk_remain, len(manifest.segments)) / float(len(manifest.segments))
+        except ZeroDivisionError:
+            # this should occur VERY rarely (1 out of 3000), should be a dash issue
+            # in this case we ignore the observation and roll back to an eariler one
+            if len(self.s_batch) == 0:
+                state = [np.zeros((S_INFO, S_LEN))]
+            else:
+                state = np.array(self.s_batch[-1], copy=True)
+        
+        action_prob = self.actor.predict(np.reshape(state, (1, S_INFO, S_LEN)))
+        action_cumsum = np.cumsum(action_prob)
+        bit_rate = (action_cumsum > np.random.randint(1, RAND_RANGE) / float(RAND_RANGE)).argmax()
+        # Note: we need to discretize the probability into 1/RAND_RANGE steps,
+        # because there is an intrinsic discrepancy in passing single state and batch states
+
+        print(bit_rate, self.video_chunk_count)
+        #quality = np.random.randint(2)#get_quality(str(bit_rate))
+        quality = bit_rate
+        
+        # record [state, action, reward]
+        # put it here after training, notice there is a shift in reward storage
+        if self.video_chunk_count >= len(manifest.segments):
+            self.s_batch = [np.zeros((S_INFO, S_LEN))]
+        else:
+            self.s_batch.append(state)
+
+        self.last_quality = quality
+
+        return (quality, 0)
+
+    def report_delay(self, delay):
+        pass
+
+    def report_download(self, metrics, is_replacment):
+        global manifest
+
+        self.last_quality = metrics.quality
+        self.chunk_size = metrics.size
+        self.chunk_fetch_time = metrics.time
+
+    def report_seek(self, where):
+        pass
+
+
+abr_list['pensieve'] = Pensieve
+
 class Bba(Abr):
 
     def __init__(self, config):
@@ -1311,6 +1463,10 @@ if __name__ == '__main__':
     throughput_history.push(download_time, t, l)
     #print('%d,%d -> %d,%d' % (t, l, throughput, latency))
     total_play_time += download_metric.time
+    
+    if args.abr == 'pensieve':
+        print('Running Pensieve Algorithm\n')
+        abr.report_download(download_metric, 0)
 
     if verbose:
         print('[%d-%d]  %d: q=%d s=%d/%d t=%d=%d+%d bl=0->0->%d' %

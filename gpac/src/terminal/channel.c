@@ -1820,7 +1820,7 @@ void gf_es_on_connect(GF_Channel *ch)
 	ch->MinBuffer = ch->MaxBuffer = 0;
 
 	/*set default values*/
-	com.buffer.max = 1000;
+	com.buffer.max = 10000;
 	com.buffer.min = 0;
 	sOpt = gf_cfg_get_key(ch->odm->term->user->config, "Network", "BufferLength");
 	if (sOpt) com.buffer.max = atoi(sOpt);
