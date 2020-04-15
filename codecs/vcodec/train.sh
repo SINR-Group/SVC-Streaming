@@ -9,9 +9,9 @@ iters=$3
 outdir=$4
 
 train="/home/mallesh/deepvideo/data/dhf1k/train"
-eval="/home/mallesh/deepvideo/data/eval"
+eval="/home/mallesh/deepvideo/data/vtl/test"
 train_mv="/home/mallesh/deepvideo/data/dhf1k/train_mv"
-eval_mv="../eval_mv"
+eval_mv="/home/mallesh/deepvideo/data/vtl/test_mv"
 
 if [[ ${hier} == "0" ]]; then
   distance1=6
@@ -61,4 +61,6 @@ python3 -u train.py \
   --iterations ${iters} \
   --load-model-name "demo" \
   --load-iter 20000 \
-  --out-dir ${outdir}
+  --out-dir ${outdir} \
+  --save-out-img \
+  --save-codes \
