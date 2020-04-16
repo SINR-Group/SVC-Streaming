@@ -1,0 +1,1261 @@
+Namespace(batch_size=2, bits=8, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=7, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='h2/model_iters_7', num_crops=2, out_dir='vtl_output/hrch_2_itr7', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/dhf1k/train...
+38400 images loaded.
+	distance=1/2
+Loader for 38400 images (19200 batches) created.
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(56, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 20000
+Loading encoder from h2/model_iters_7/demo_encoder_00020000.pth...
+Loading binarizer from h2/model_iters_7/demo_binarizer_00020000.pth...
+Loading decoder from h2/model_iters_7/demo_decoder_00020000.pth...
+Loading unet from h2/model_iters_7/demo_unet_00020000.pth...
+Loading d2 from h2/model_iters_7/demo_d2_00020000.pth...
+[TRAIN] Iter[20001]; LR: 0.00025; Rec1 Loss: 0.031038; Rec2 Loss: 0.026176; Backprop: 0.0355 sec; Batch: 0.3977 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Creating directory vtl_output/hrch_2_itr7/iter20001/codes.
+Creating directory vtl_output/hrch_2_itr7/iter20001/images.
+Results: Encoding time: 151032us 	 ECCV Decoding time: 69131us 	 Our Decoding time: 11068us
+Results: Encoding time: 142181us 	 ECCV Decoding time: 69008us 	 Our Decoding time: 10949us
+Results: Encoding time: 141766us 	 ECCV Decoding time: 68979us 	 Our Decoding time: 10974us
+Results: Encoding time: 141831us 	 ECCV Decoding time: 68849us 	 Our Decoding time: 10983us
+Results: Encoding time: 142267us 	 ECCV Decoding time: 69040us 	 Our Decoding time: 10944us
+Results: Encoding time: 142220us 	 ECCV Decoding time: 69063us 	 Our Decoding time: 11009us
+Results: Encoding time: 141644us 	 ECCV Decoding time: 68685us 	 Our Decoding time: 10983us
+Results: Encoding time: 142116us 	 ECCV Decoding time: 68953us 	 Our Decoding time: 10937us
+Results: Encoding time: 141770us 	 ECCV Decoding time: 68900us 	 Our Decoding time: 10973us
+Results: Encoding time: 142479us 	 ECCV Decoding time: 68971us 	 Our Decoding time: 10927us
+Results: Encoding time: 142469us 	 ECCV Decoding time: 69225us 	 Our Decoding time: 11003us
+Results: Encoding time: 142201us 	 ECCV Decoding time: 68974us 	 Our Decoding time: 10931us
+Results: Encoding time: 141629us 	 ECCV Decoding time: 69145us 	 Our Decoding time: 11047us
+Results: Encoding time: 142225us 	 ECCV Decoding time: 68952us 	 Our Decoding time: 10942us
+Results: Encoding time: 143418us 	 ECCV Decoding time: 68992us 	 Our Decoding time: 10917us
+Results: Encoding time: 141969us 	 ECCV Decoding time: 68878us 	 Our Decoding time: 10976us
+Results: Encoding time: 141955us 	 ECCV Decoding time: 68785us 	 Our Decoding time: 10982us
+Results: Encoding time: 142994us 	 ECCV Decoding time: 69185us 	 Our Decoding time: 10969us
+Results: Encoding time: 142048us 	 ECCV Decoding time: 69147us 	 Our Decoding time: 10985us
+Results: Encoding time: 141643us 	 ECCV Decoding time: 68953us 	 Our Decoding time: 10953us
+Results: Encoding time: 142613us 	 ECCV Decoding time: 69241us 	 Our Decoding time: 10976us
+Results: Encoding time: 141456us 	 ECCV Decoding time: 68934us 	 Our Decoding time: 10962us
+Results: Encoding time: 141642us 	 ECCV Decoding time: 68852us 	 Our Decoding time: 10986us
+Results: Encoding time: 142356us 	 ECCV Decoding time: 69171us 	 Our Decoding time: 10933us
+Results: Encoding time: 141876us 	 ECCV Decoding time: 68921us 	 Our Decoding time: 10979us
+Results: Encoding time: 142031us 	 ECCV Decoding time: 68946us 	 Our Decoding time: 10938us
+Results: Encoding time: 142350us 	 ECCV Decoding time: 68873us 	 Our Decoding time: 10937us
+Results: Encoding time: 141879us 	 ECCV Decoding time: 69139us 	 Our Decoding time: 11057us
+Results: Encoding time: 142739us 	 ECCV Decoding time: 69084us 	 Our Decoding time: 10973us
+Results: Encoding time: 142149us 	 ECCV Decoding time: 68934us 	 Our Decoding time: 10979us
+Results: Encoding time: 141883us 	 ECCV Decoding time: 68914us 	 Our Decoding time: 10974us
+Results: Encoding time: 142346us 	 ECCV Decoding time: 69030us 	 Our Decoding time: 10973us
+Results: Encoding time: 142000us 	 ECCV Decoding time: 68937us 	 Our Decoding time: 10938us
+Results: Encoding time: 141933us 	 ECCV Decoding time: 68898us 	 Our Decoding time: 10921us
+Results: Encoding time: 141295us 	 ECCV Decoding time: 68543us 	 Our Decoding time: 10983us
+Results: Encoding time: 142328us 	 ECCV Decoding time: 69168us 	 Our Decoding time: 10943us
+Results: Encoding time: 141583us 	 ECCV Decoding time: 68752us 	 Our Decoding time: 10994us
+Results: Encoding time: 142228us 	 ECCV Decoding time: 69183us 	 Our Decoding time: 10979us
+Results: Encoding time: 141503us 	 ECCV Decoding time: 68686us 	 Our Decoding time: 10971us
+Results: Encoding time: 142257us 	 ECCV Decoding time: 69100us 	 Our Decoding time: 10938us
+Results: Encoding time: 141159us 	 ECCV Decoding time: 69108us 	 Our Decoding time: 11064us
+Results: Encoding time: 141766us 	 ECCV Decoding time: 68975us 	 Our Decoding time: 10918us
+Results: Encoding time: 141930us 	 ECCV Decoding time: 68941us 	 Our Decoding time: 10985us
+Results: Encoding time: 141659us 	 ECCV Decoding time: 68831us 	 Our Decoding time: 10963us
+Results: Encoding time: 141905us 	 ECCV Decoding time: 68951us 	 Our Decoding time: 10931us
+Results: Encoding time: 141804us 	 ECCV Decoding time: 69059us 	 Our Decoding time: 11060us
+Results: Encoding time: 141987us 	 ECCV Decoding time: 69004us 	 Our Decoding time: 10934us
+Results: Encoding time: 142240us 	 ECCV Decoding time: 68968us 	 Our Decoding time: 10994us
+Results: Encoding time: 141657us 	 ECCV Decoding time: 68667us 	 Our Decoding time: 10975us
+Results: Encoding time: 142372us 	 ECCV Decoding time: 69110us 	 Our Decoding time: 10973us
+Results: Encoding time: 142175us 	 ECCV Decoding time: 69042us 	 Our Decoding time: 11022us
+Results: Encoding time: 142080us 	 ECCV Decoding time: 69026us 	 Our Decoding time: 10927us
+Results: Encoding time: 142529us 	 ECCV Decoding time: 69253us 	 Our Decoding time: 10980us
+Results: Encoding time: 141791us 	 ECCV Decoding time: 69204us 	 Our Decoding time: 11027us
+Results: Encoding time: 141880us 	 ECCV Decoding time: 68995us 	 Our Decoding time: 10928us
+Results: Encoding time: 142395us 	 ECCV Decoding time: 69014us 	 Our Decoding time: 10937us
+Results: Encoding time: 141795us 	 ECCV Decoding time: 68923us 	 Our Decoding time: 10983us
+Results: Encoding time: 141451us 	 ECCV Decoding time: 68863us 	 Our Decoding time: 11066us
+Results: Encoding time: 142595us 	 ECCV Decoding time: 68997us 	 Our Decoding time: 10914us
+Results: Encoding time: 142536us 	 ECCV Decoding time: 69080us 	 Our Decoding time: 11054us
+Results: Encoding time: 141995us 	 ECCV Decoding time: 68905us 	 Our Decoding time: 10977us
+Results: Encoding time: 142591us 	 ECCV Decoding time: 69140us 	 Our Decoding time: 11058us
+Results: Encoding time: 142077us 	 ECCV Decoding time: 69016us 	 Our Decoding time: 10950us
+Results: Encoding time: 142479us 	 ECCV Decoding time: 68975us 	 Our Decoding time: 10974us
+Results: Encoding time: 142194us 	 ECCV Decoding time: 69062us 	 Our Decoding time: 11019us
+Results: Encoding time: 141766us 	 ECCV Decoding time: 68858us 	 Our Decoding time: 10976us
+Results: Encoding time: 142218us 	 ECCV Decoding time: 68975us 	 Our Decoding time: 10939us
+Results: Encoding time: 142550us 	 ECCV Decoding time: 69173us 	 Our Decoding time: 11025us
+Results: Encoding time: 141667us 	 ECCV Decoding time: 68699us 	 Our Decoding time: 10984us
+Results: Encoding time: 142984us 	 ECCV Decoding time: 69354us 	 Our Decoding time: 10960us
+Results: Encoding time: 142909us 	 ECCV Decoding time: 69250us 	 Our Decoding time: 10972us
+Results: Encoding time: 142974us 	 ECCV Decoding time: 69090us 	 Our Decoding time: 10980us
+Results: Encoding time: 142177us 	 ECCV Decoding time: 68964us 	 Our Decoding time: 10945us
+Results: Encoding time: 142498us 	 ECCV Decoding time: 68983us 	 Our Decoding time: 10936us
+Results: Encoding time: 143089us 	 ECCV Decoding time: 69292us 	 Our Decoding time: 10944us
+Results: Encoding time: 141917us 	 ECCV Decoding time: 68901us 	 Our Decoding time: 10977us
+Results: Encoding time: 142891us 	 ECCV Decoding time: 69264us 	 Our Decoding time: 10972us
+Results: Encoding time: 142056us 	 ECCV Decoding time: 69213us 	 Our Decoding time: 11013us
+Results: Encoding time: 141743us 	 ECCV Decoding time: 68732us 	 Our Decoding time: 10972us
+Results: Encoding time: 142335us 	 ECCV Decoding time: 69007us 	 Our Decoding time: 10970us
+Results: Encoding time: 141682us 	 ECCV Decoding time: 68933us 	 Our Decoding time: 10979us
+Results: Encoding time: 142040us 	 ECCV Decoding time: 69035us 	 Our Decoding time: 11055us
+Results: Encoding time: 142754us 	 ECCV Decoding time: 69441us 	 Our Decoding time: 10965us
+Results: Encoding time: 142016us 	 ECCV Decoding time: 69033us 	 Our Decoding time: 11088us
+Results: Encoding time: 142434us 	 ECCV Decoding time: 69060us 	 Our Decoding time: 10936us
+Results: Encoding time: 142741us 	 ECCV Decoding time: 69103us 	 Our Decoding time: 10932us
+Results: Encoding time: 141588us 	 ECCV Decoding time: 69064us 	 Our Decoding time: 11035us
+Results: Encoding time: 141878us 	 ECCV Decoding time: 68831us 	 Our Decoding time: 10976us
+Results: Encoding time: 142608us 	 ECCV Decoding time: 69185us 	 Our Decoding time: 10985us
+Results: Encoding time: 141740us 	 ECCV Decoding time: 68903us 	 Our Decoding time: 10941us
+Results: Encoding time: 141220us 	 ECCV Decoding time: 68695us 	 Our Decoding time: 10972us
+Results: Encoding time: 142776us 	 ECCV Decoding time: 69166us 	 Our Decoding time: 10975us
+Results: Encoding time: 141155us 	 ECCV Decoding time: 69055us 	 Our Decoding time: 11042us
+Results: Encoding time: 142359us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 10978us
+Results: Encoding time: 142215us 	 ECCV Decoding time: 69105us 	 Our Decoding time: 11016us
+Results: Encoding time: 141820us 	 ECCV Decoding time: 68895us 	 Our Decoding time: 10986us
+Results: Encoding time: 142870us 	 ECCV Decoding time: 69401us 	 Our Decoding time: 10969us
+Results: Encoding time: 141704us 	 ECCV Decoding time: 69145us 	 Our Decoding time: 11009us
+Results: Encoding time: 141555us 	 ECCV Decoding time: 69014us 	 Our Decoding time: 10967us
+Results: Encoding time: 142079us 	 ECCV Decoding time: 68850us 	 Our Decoding time: 10976us
+Results: Encoding time: 142368us 	 ECCV Decoding time: 68967us 	 Our Decoding time: 10972us
+Results: Encoding time: 142064us 	 ECCV Decoding time: 69118us 	 Our Decoding time: 10994us
+Results: Encoding time: 142288us 	 ECCV Decoding time: 68944us 	 Our Decoding time: 10971us
+Results: Encoding time: 142379us 	 ECCV Decoding time: 69061us 	 Our Decoding time: 10979us
+Results: Encoding time: 141656us 	 ECCV Decoding time: 68830us 	 Our Decoding time: 10974us
+Results: Encoding time: 142722us 	 ECCV Decoding time: 69227us 	 Our Decoding time: 10976us
+Results: Encoding time: 141534us 	 ECCV Decoding time: 68789us 	 Our Decoding time: 10991us
+Results: Encoding time: 142868us 	 ECCV Decoding time: 69287us 	 Our Decoding time: 10973us
+Results: Encoding time: 142557us 	 ECCV Decoding time: 69199us 	 Our Decoding time: 10987us
+Results: Encoding time: 141949us 	 ECCV Decoding time: 69177us 	 Our Decoding time: 11070us
+Results: Encoding time: 142863us 	 ECCV Decoding time: 69413us 	 Our Decoding time: 10963us
+Results: Encoding time: 142499us 	 ECCV Decoding time: 69047us 	 Our Decoding time: 10928us
+Results: Encoding time: 141939us 	 ECCV Decoding time: 68985us 	 Our Decoding time: 10940us
+Results: Encoding time: 141750us 	 ECCV Decoding time: 68655us 	 Our Decoding time: 10977us
+Results: Encoding time: 142631us 	 ECCV Decoding time: 69059us 	 Our Decoding time: 10929us
+Results: Encoding time: 142196us 	 ECCV Decoding time: 68893us 	 Our Decoding time: 10924us
+Results: Encoding time: 141451us 	 ECCV Decoding time: 68866us 	 Our Decoding time: 10974us
+Results: Encoding time: 142407us 	 ECCV Decoding time: 69053us 	 Our Decoding time: 10928us
+Results: Encoding time: 141952us 	 ECCV Decoding time: 69015us 	 Our Decoding time: 10987us
+Results: Encoding time: 141566us 	 ECCV Decoding time: 68745us 	 Our Decoding time: 10975us
+Results: Encoding time: 141946us 	 ECCV Decoding time: 69041us 	 Our Decoding time: 10931us
+Results: Encoding time: 142122us 	 ECCV Decoding time: 68893us 	 Our Decoding time: 10980us
+Results: Encoding time: 141821us 	 ECCV Decoding time: 69039us 	 Our Decoding time: 10938us
+Results: Encoding time: 142622us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 10984us
+Results: Encoding time: 142645us 	 ECCV Decoding time: 69133us 	 Our Decoding time: 10984us
+Results: Encoding time: 142622us 	 ECCV Decoding time: 69229us 	 Our Decoding time: 10983us
+Results: Encoding time: 142122us 	 ECCV Decoding time: 69071us 	 Our Decoding time: 10930us
+Results: Encoding time: 142222us 	 ECCV Decoding time: 69102us 	 Our Decoding time: 11017us
+Results: Encoding time: 142864us 	 ECCV Decoding time: 69436us 	 Our Decoding time: 10970us
+Results: Encoding time: 142706us 	 ECCV Decoding time: 69148us 	 Our Decoding time: 10968us
+Results: Encoding time: 141986us 	 ECCV Decoding time: 68945us 	 Our Decoding time: 10948us
+Results: Encoding time: 142199us 	 ECCV Decoding time: 68996us 	 Our Decoding time: 10924us
+Results: Encoding time: 142664us 	 ECCV Decoding time: 69047us 	 Our Decoding time: 10919us
+Results: Encoding time: 141840us 	 ECCV Decoding time: 68955us 	 Our Decoding time: 10976us
+Results: Encoding time: 142266us 	 ECCV Decoding time: 69030us 	 Our Decoding time: 11019us
+Results: Encoding time: 142077us 	 ECCV Decoding time: 68932us 	 Our Decoding time: 10932us
+Results: Encoding time: 142761us 	 ECCV Decoding time: 69137us 	 Our Decoding time: 10962us
+Results: Encoding time: 141918us 	 ECCV Decoding time: 68937us 	 Our Decoding time: 10972us
+Results: Encoding time: 141803us 	 ECCV Decoding time: 68838us 	 Our Decoding time: 10963us
+Results: Encoding time: 142063us 	 ECCV Decoding time: 69117us 	 Our Decoding time: 11007us
+Results: Encoding time: 141902us 	 ECCV Decoding time: 68789us 	 Our Decoding time: 10977us
+Results: Encoding time: 143042us 	 ECCV Decoding time: 69168us 	 Our Decoding time: 10982us
+Results: Encoding time: 141754us 	 ECCV Decoding time: 68926us 	 Our Decoding time: 10959us
+Results: Encoding time: 143052us 	 ECCV Decoding time: 69358us 	 Our Decoding time: 10958us
+Results: Encoding time: 142148us 	 ECCV Decoding time: 69204us 	 Our Decoding time: 11016us
+Results: Encoding time: 142613us 	 ECCV Decoding time: 69343us 	 Our Decoding time: 10976us
+Results: Encoding time: 142267us 	 ECCV Decoding time: 68973us 	 Our Decoding time: 10973us
+Results: Encoding time: 142392us 	 ECCV Decoding time: 69140us 	 Our Decoding time: 10985us
+Results: Encoding time: 142376us 	 ECCV Decoding time: 69064us 	 Our Decoding time: 10983us
+Results: Encoding time: 141954us 	 ECCV Decoding time: 69029us 	 Our Decoding time: 10967us
+Results: Encoding time: 141779us 	 ECCV Decoding time: 68921us 	 Our Decoding time: 10995us
+Results: Encoding time: 142564us 	 ECCV Decoding time: 69184us 	 Our Decoding time: 10972us
+Results: Encoding time: 141730us 	 ECCV Decoding time: 68796us 	 Our Decoding time: 11065us
+Results: Encoding time: 142099us 	 ECCV Decoding time: 69001us 	 Our Decoding time: 10930us
+Results: Encoding time: 142515us 	 ECCV Decoding time: 69222us 	 Our Decoding time: 11023us
+Results: Encoding time: 141619us 	 ECCV Decoding time: 68581us 	 Our Decoding time: 10978us
+Results: Encoding time: 142453us 	 ECCV Decoding time: 68896us 	 Our Decoding time: 10925us
+Results: Encoding time: 141681us 	 ECCV Decoding time: 68880us 	 Our Decoding time: 10960us
+Results: Encoding time: 142073us 	 ECCV Decoding time: 69002us 	 Our Decoding time: 10926us
+Results: Encoding time: 142709us 	 ECCV Decoding time: 69148us 	 Our Decoding time: 10975us
+Results: Encoding time: 142043us 	 ECCV Decoding time: 68923us 	 Our Decoding time: 10976us
+Results: Encoding time: 142135us 	 ECCV Decoding time: 69222us 	 Our Decoding time: 11032us
+Results: Encoding time: 142684us 	 ECCV Decoding time: 69382us 	 Our Decoding time: 10970us
+Results: Encoding time: 142251us 	 ECCV Decoding time: 69268us 	 Our Decoding time: 11012us
+Results: Encoding time: 141088us 	 ECCV Decoding time: 68526us 	 Our Decoding time: 10985us
+Results: Encoding time: 141660us 	 ECCV Decoding time: 68959us 	 Our Decoding time: 11166us
+Results: Encoding time: 142436us 	 ECCV Decoding time: 69227us 	 Our Decoding time: 10986us
+Results: Encoding time: 141365us 	 ECCV Decoding time: 68690us 	 Our Decoding time: 10972us
+Results: Encoding time: 142964us 	 ECCV Decoding time: 69287us 	 Our Decoding time: 10979us
+Results: Encoding time: 141831us 	 ECCV Decoding time: 68906us 	 Our Decoding time: 10969us
+Results: Encoding time: 141017us 	 ECCV Decoding time: 68514us 	 Our Decoding time: 10941us
+Results: Encoding time: 142527us 	 ECCV Decoding time: 69322us 	 Our Decoding time: 10975us
+Results: Encoding time: 142020us 	 ECCV Decoding time: 68945us 	 Our Decoding time: 10979us
+Results: Encoding time: 142434us 	 ECCV Decoding time: 69201us 	 Our Decoding time: 11019us
+Results: Encoding time: 141922us 	 ECCV Decoding time: 68771us 	 Our Decoding time: 10970us
+Results: Encoding time: 142569us 	 ECCV Decoding time: 68895us 	 Our Decoding time: 10971us
+Results: Encoding time: 142360us 	 ECCV Decoding time: 69243us 	 Our Decoding time: 11021us
+Results: Encoding time: 141952us 	 ECCV Decoding time: 68878us 	 Our Decoding time: 10973us
+Results: Encoding time: 142647us 	 ECCV Decoding time: 69318us 	 Our Decoding time: 10979us
+Results: Encoding time: 141625us 	 ECCV Decoding time: 68947us 	 Our Decoding time: 10966us
+Results: Encoding time: 142193us 	 ECCV Decoding time: 69134us 	 Our Decoding time: 11007us
+Results: Encoding time: 141414us 	 ECCV Decoding time: 68753us 	 Our Decoding time: 10995us
+Results: Encoding time: 142639us 	 ECCV Decoding time: 69457us 	 Our Decoding time: 10976us
+Results: Encoding time: 142739us 	 ECCV Decoding time: 69315us 	 Our Decoding time: 10971us
+Results: Encoding time: 141654us 	 ECCV Decoding time: 68933us 	 Our Decoding time: 11068us
+Results: Encoding time: 141439us 	 ECCV Decoding time: 68753us 	 Our Decoding time: 10980us
+Results: Encoding time: 142854us 	 ECCV Decoding time: 69224us 	 Our Decoding time: 10980us
+Results: Encoding time: 141902us 	 ECCV Decoding time: 68961us 	 Our Decoding time: 11022us
+Results: Encoding time: 141744us 	 ECCV Decoding time: 68776us 	 Our Decoding time: 10978us
+Results: Encoding time: 142306us 	 ECCV Decoding time: 69176us 	 Our Decoding time: 10970us
+Results: Encoding time: 141850us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 11015us
+Results: Encoding time: 141765us 	 ECCV Decoding time: 68730us 	 Our Decoding time: 10965us
+Results: Encoding time: 142628us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 10973us
+Results: Encoding time: 142454us 	 ECCV Decoding time: 69254us 	 Our Decoding time: 10970us
+Results: Encoding time: 141604us 	 ECCV Decoding time: 68831us 	 Our Decoding time: 10969us
+Results: Encoding time: 141830us 	 ECCV Decoding time: 68949us 	 Our Decoding time: 10941us
+Results: Encoding time: 142716us 	 ECCV Decoding time: 69313us 	 Our Decoding time: 10986us
+Results: Encoding time: 142178us 	 ECCV Decoding time: 69250us 	 Our Decoding time: 11010us
+Results: Encoding time: 141602us 	 ECCV Decoding time: 69005us 	 Our Decoding time: 10930us
+Results: Encoding time: 142232us 	 ECCV Decoding time: 69249us 	 Our Decoding time: 10974us
+Results: Encoding time: 141442us 	 ECCV Decoding time: 68824us 	 Our Decoding time: 10963us
+Results: Encoding time: 142613us 	 ECCV Decoding time: 69229us 	 Our Decoding time: 10975us
+Results: Encoding time: 141528us 	 ECCV Decoding time: 68778us 	 Our Decoding time: 10960us
+Results: Encoding time: 142695us 	 ECCV Decoding time: 69233us 	 Our Decoding time: 10978us
+Results: Encoding time: 142189us 	 ECCV Decoding time: 69333us 	 Our Decoding time: 11022us
+Results: Encoding time: 142493us 	 ECCV Decoding time: 69142us 	 Our Decoding time: 10995us
+Results: Encoding time: 142694us 	 ECCV Decoding time: 69202us 	 Our Decoding time: 10973us
+Results: Encoding time: 141958us 	 ECCV Decoding time: 68775us 	 Our Decoding time: 10970us
+Results: Encoding time: 143029us 	 ECCV Decoding time: 69261us 	 Our Decoding time: 10992us
+Results: Encoding time: 141830us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 11054us
+Results: Encoding time: 142263us 	 ECCV Decoding time: 68992us 	 Our Decoding time: 10973us
+Results: Encoding time: 141999us 	 ECCV Decoding time: 68905us 	 Our Decoding time: 10969us
+Results: Encoding time: 141768us 	 ECCV Decoding time: 68727us 	 Our Decoding time: 10975us
+Results: Encoding time: 142475us 	 ECCV Decoding time: 69153us 	 Our Decoding time: 10967us
+Results: Encoding time: 141807us 	 ECCV Decoding time: 68958us 	 Our Decoding time: 10980us
+Results: Encoding time: 142223us 	 ECCV Decoding time: 69213us 	 Our Decoding time: 11020us
+Results: Encoding time: 142531us 	 ECCV Decoding time: 69408us 	 Our Decoding time: 10988us
+Results: Encoding time: 141873us 	 ECCV Decoding time: 69091us 	 Our Decoding time: 11071us
+Results: Encoding time: 142278us 	 ECCV Decoding time: 68973us 	 Our Decoding time: 10969us
+Results: Encoding time: 142901us 	 ECCV Decoding time: 69217us 	 Our Decoding time: 10938us
+Results: Encoding time: 142030us 	 ECCV Decoding time: 69159us 	 Our Decoding time: 10996us
+Results: Encoding time: 141802us 	 ECCV Decoding time: 68945us 	 Our Decoding time: 10933us
+Results: Encoding time: 142652us 	 ECCV Decoding time: 69319us 	 Our Decoding time: 10980us
+Results: Encoding time: 141841us 	 ECCV Decoding time: 68884us 	 Our Decoding time: 10985us
+Results: Encoding time: 142506us 	 ECCV Decoding time: 69427us 	 Our Decoding time: 10986us
+Results: Encoding time: 141655us 	 ECCV Decoding time: 68840us 	 Our Decoding time: 10973us
+Results: Encoding time: 142100us 	 ECCV Decoding time: 69132us 	 Our Decoding time: 10932us
+Results: Encoding time: 142517us 	 ECCV Decoding time: 69196us 	 Our Decoding time: 11022us
+Results: Encoding time: 141749us 	 ECCV Decoding time: 68939us 	 Our Decoding time: 10965us
+Results: Encoding time: 142673us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 10981us
+Results: Encoding time: 141435us 	 ECCV Decoding time: 68762us 	 Our Decoding time: 10977us
+Results: Encoding time: 142191us 	 ECCV Decoding time: 68927us 	 Our Decoding time: 10941us
+Results: Encoding time: 142480us 	 ECCV Decoding time: 69295us 	 Our Decoding time: 10966us
+Results: Encoding time: 142455us 	 ECCV Decoding time: 68934us 	 Our Decoding time: 10960us
+Results: Encoding time: 142295us 	 ECCV Decoding time: 68957us 	 Our Decoding time: 10987us
+Results: Encoding time: 142113us 	 ECCV Decoding time: 68942us 	 Our Decoding time: 10977us
+Results: Encoding time: 142829us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 10959us
+Results: Encoding time: 141624us 	 ECCV Decoding time: 68756us 	 Our Decoding time: 10984us
+Results: Encoding time: 141975us 	 ECCV Decoding time: 68982us 	 Our Decoding time: 10938us
+Results: Encoding time: 142015us 	 ECCV Decoding time: 69051us 	 Our Decoding time: 10986us
+Results: Encoding time: 141573us 	 ECCV Decoding time: 68833us 	 Our Decoding time: 10972us
+Results: Encoding time: 143005us 	 ECCV Decoding time: 69456us 	 Our Decoding time: 10974us
+Results: Encoding time: 142892us 	 ECCV Decoding time: 69176us 	 Our Decoding time: 10973us
+Results: Encoding time: 142415us 	 ECCV Decoding time: 69115us 	 Our Decoding time: 11008us
+Results: Encoding time: 141807us 	 ECCV Decoding time: 68868us 	 Our Decoding time: 10968us
+Results: Encoding time: 142921us 	 ECCV Decoding time: 69228us 	 Our Decoding time: 10960us
+Results: Encoding time: 142863us 	 ECCV Decoding time: 69200us 	 Our Decoding time: 10999us
+Results: Encoding time: 141929us 	 ECCV Decoding time: 68806us 	 Our Decoding time: 10972us
+Results: Encoding time: 142467us 	 ECCV Decoding time: 69197us 	 Our Decoding time: 10970us
+Results: Encoding time: 141938us 	 ECCV Decoding time: 69232us 	 Our Decoding time: 11041us
+Results: Encoding time: 142883us 	 ECCV Decoding time: 69268us 	 Our Decoding time: 10993us
+Results: Encoding time: 142455us 	 ECCV Decoding time: 69172us 	 Our Decoding time: 11041us
+Results: Encoding time: 141823us 	 ECCV Decoding time: 69040us 	 Our Decoding time: 10953us
+Results: Encoding time: 142296us 	 ECCV Decoding time: 69159us 	 Our Decoding time: 11105us
+Results: Encoding time: 142036us 	 ECCV Decoding time: 68982us 	 Our Decoding time: 10923us
+Results: Encoding time: 142139us 	 ECCV Decoding time: 69290us 	 Our Decoding time: 11025us
+Results: Encoding time: 142334us 	 ECCV Decoding time: 69056us 	 Our Decoding time: 10971us
+Results: Encoding time: 142299us 	 ECCV Decoding time: 68911us 	 Our Decoding time: 10988us
+Results: Encoding time: 142578us 	 ECCV Decoding time: 69168us 	 Our Decoding time: 10988us
+Results: Encoding time: 142822us 	 ECCV Decoding time: 69189us 	 Our Decoding time: 10970us
+Results: Encoding time: 141634us 	 ECCV Decoding time: 68808us 	 Our Decoding time: 10976us
+Results: Encoding time: 142787us 	 ECCV Decoding time: 69224us 	 Our Decoding time: 10978us
+Results: Encoding time: 141888us 	 ECCV Decoding time: 69196us 	 Our Decoding time: 11025us
+Results: Encoding time: 142652us 	 ECCV Decoding time: 69157us 	 Our Decoding time: 10971us
+Results: Encoding time: 141707us 	 ECCV Decoding time: 69137us 	 Our Decoding time: 11048us
+Results: Encoding time: 142265us 	 ECCV Decoding time: 68911us 	 Our Decoding time: 10969us
+Results: Encoding time: 142510us 	 ECCV Decoding time: 68932us 	 Our Decoding time: 10929us
+Results: Encoding time: 141546us 	 ECCV Decoding time: 68676us 	 Our Decoding time: 10959us
+Results: Encoding time: 141770us 	 ECCV Decoding time: 68904us 	 Our Decoding time: 11003us
+Results: Encoding time: 142084us 	 ECCV Decoding time: 68969us 	 Our Decoding time: 10977us
+Results: Encoding time: 142685us 	 ECCV Decoding time: 69327us 	 Our Decoding time: 10936us
+Results: Encoding time: 142311us 	 ECCV Decoding time: 68993us 	 Our Decoding time: 10931us
+Results: Encoding time: 142354us 	 ECCV Decoding time: 69151us 	 Our Decoding time: 10969us
+Results: Encoding time: 141496us 	 ECCV Decoding time: 68737us 	 Our Decoding time: 10985us
+Results: Encoding time: 142863us 	 ECCV Decoding time: 69301us 	 Our Decoding time: 10982us
+Results: Encoding time: 141951us 	 ECCV Decoding time: 68800us 	 Our Decoding time: 10969us
+Results: Encoding time: 142681us 	 ECCV Decoding time: 69069us 	 Our Decoding time: 10963us
+Results: Encoding time: 141773us 	 ECCV Decoding time: 69128us 	 Our Decoding time: 11063us
+Results: Encoding time: 142219us 	 ECCV Decoding time: 69053us 	 Our Decoding time: 10971us
+Results: Encoding time: 142825us 	 ECCV Decoding time: 69305us 	 Our Decoding time: 10982us
+Results: Encoding time: 141991us 	 ECCV Decoding time: 68752us 	 Our Decoding time: 10984us
+Results: Encoding time: 142051us 	 ECCV Decoding time: 68953us 	 Our Decoding time: 10947us
+Results: Encoding time: 142380us 	 ECCV Decoding time: 69051us 	 Our Decoding time: 10928us
+Results: Encoding time: 142126us 	 ECCV Decoding time: 69024us 	 Our Decoding time: 11019us
+Results: Encoding time: 142497us 	 ECCV Decoding time: 69375us 	 Our Decoding time: 10986us
+Results: Encoding time: 142911us 	 ECCV Decoding time: 69229us 	 Our Decoding time: 10970us
+Results: Encoding time: 143009us 	 ECCV Decoding time: 69393us 	 Our Decoding time: 10957us
+Results: Encoding time: 142102us 	 ECCV Decoding time: 68943us 	 Our Decoding time: 10972us
+Results: Encoding time: 142254us 	 ECCV Decoding time: 69005us 	 Our Decoding time: 10958us
+Results: Encoding time: 142266us 	 ECCV Decoding time: 69018us 	 Our Decoding time: 10941us
+Results: Encoding time: 143454us 	 ECCV Decoding time: 69156us 	 Our Decoding time: 10974us
+Results: Encoding time: 141883us 	 ECCV Decoding time: 69108us 	 Our Decoding time: 11058us
+Results: Encoding time: 143609us 	 ECCV Decoding time: 69286us 	 Our Decoding time: 10960us
+Results: Encoding time: 142956us 	 ECCV Decoding time: 69282us 	 Our Decoding time: 10984us
+Results: Encoding time: 142469us 	 ECCV Decoding time: 69317us 	 Our Decoding time: 11017us
+Results: Encoding time: 141922us 	 ECCV Decoding time: 68961us 	 Our Decoding time: 10964us
+Results: Encoding time: 142517us 	 ECCV Decoding time: 68981us 	 Our Decoding time: 10977us
+Results: Encoding time: 142754us 	 ECCV Decoding time: 69071us 	 Our Decoding time: 10969us
+Results: Encoding time: 143267us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 10971us
+Results: Encoding time: 142102us 	 ECCV Decoding time: 69199us 	 Our Decoding time: 11046us
+Results: Encoding time: 142745us 	 ECCV Decoding time: 69162us 	 Our Decoding time: 10973us
+Results: Encoding time: 142613us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 10984us
+Results: Encoding time: 142220us 	 ECCV Decoding time: 69208us 	 Our Decoding time: 11059us
+Results: Encoding time: 142635us 	 ECCV Decoding time: 69362us 	 Our Decoding time: 10978us
+Results: Encoding time: 142679us 	 ECCV Decoding time: 69322us 	 Our Decoding time: 11004us
+Results: Encoding time: 142469us 	 ECCV Decoding time: 69437us 	 Our Decoding time: 10972us
+Results: Encoding time: 141924us 	 ECCV Decoding time: 68885us 	 Our Decoding time: 10970us
+Results: Encoding time: 143115us 	 ECCV Decoding time: 69456us 	 Our Decoding time: 10983us
+Results: Encoding time: 142626us 	 ECCV Decoding time: 69288us 	 Our Decoding time: 10975us
+Results: Encoding time: 142513us 	 ECCV Decoding time: 69226us 	 Our Decoding time: 10974us
+Results: Encoding time: 141807us 	 ECCV Decoding time: 68863us 	 Our Decoding time: 10986us
+Results: Encoding time: 142305us 	 ECCV Decoding time: 69236us 	 Our Decoding time: 10973us
+Results: Encoding time: 142491us 	 ECCV Decoding time: 68884us 	 Our Decoding time: 10966us
+Results: Encoding time: 142613us 	 ECCV Decoding time: 69015us 	 Our Decoding time: 10932us
+Results: Encoding time: 142602us 	 ECCV Decoding time: 69118us 	 Our Decoding time: 10963us
+Results: Encoding time: 141922us 	 ECCV Decoding time: 68813us 	 Our Decoding time: 10985us
+Results: Encoding time: 142717us 	 ECCV Decoding time: 69120us 	 Our Decoding time: 10931us
+Results: Encoding time: 141958us 	 ECCV Decoding time: 68861us 	 Our Decoding time: 10955us
+Results: Encoding time: 142303us 	 ECCV Decoding time: 69285us 	 Our Decoding time: 11052us
+Results: Encoding time: 143081us 	 ECCV Decoding time: 69326us 	 Our Decoding time: 10975us
+Results: Encoding time: 142184us 	 ECCV Decoding time: 68936us 	 Our Decoding time: 10965us
+Results: Encoding time: 141910us 	 ECCV Decoding time: 69005us 	 Our Decoding time: 10930us
+Results: Encoding time: 143327us 	 ECCV Decoding time: 69320us 	 Our Decoding time: 10920us
+Results: Encoding time: 142136us 	 ECCV Decoding time: 69093us 	 Our Decoding time: 11008us
+Results: Encoding time: 142438us 	 ECCV Decoding time: 69170us 	 Our Decoding time: 10991us
+Results: Encoding time: 142359us 	 ECCV Decoding time: 69109us 	 Our Decoding time: 10975us
+Results: Encoding time: 141844us 	 ECCV Decoding time: 68997us 	 Our Decoding time: 11089us
+Results: Encoding time: 141902us 	 ECCV Decoding time: 68974us 	 Our Decoding time: 10979us
+Results: Encoding time: 141931us 	 ECCV Decoding time: 69184us 	 Our Decoding time: 10982us
+Results: Encoding time: 142698us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 10975us
+Results: Encoding time: 142060us 	 ECCV Decoding time: 69361us 	 Our Decoding time: 11025us
+Results: Encoding time: 142205us 	 ECCV Decoding time: 68842us 	 Our Decoding time: 10990us
+Results: Encoding time: 142399us 	 ECCV Decoding time: 69155us 	 Our Decoding time: 10976us
+Results: Encoding time: 142435us 	 ECCV Decoding time: 69222us 	 Our Decoding time: 10991us
+Results: Encoding time: 142093us 	 ECCV Decoding time: 69128us 	 Our Decoding time: 11030us
+Results: Encoding time: 142476us 	 ECCV Decoding time: 69285us 	 Our Decoding time: 10979us
+Results: Encoding time: 142431us 	 ECCV Decoding time: 69118us 	 Our Decoding time: 10932us
+Results: Encoding time: 141973us 	 ECCV Decoding time: 69017us 	 Our Decoding time: 11003us
+Results: Encoding time: 142402us 	 ECCV Decoding time: 69185us 	 Our Decoding time: 10985us
+Results: Encoding time: 142237us 	 ECCV Decoding time: 69210us 	 Our Decoding time: 11041us
+Results: Encoding time: 141687us 	 ECCV Decoding time: 68845us 	 Our Decoding time: 10984us
+Results: Encoding time: 142791us 	 ECCV Decoding time: 69256us 	 Our Decoding time: 10962us
+Results: Encoding time: 142065us 	 ECCV Decoding time: 69236us 	 Our Decoding time: 11031us
+Results: Encoding time: 142657us 	 ECCV Decoding time: 69364us 	 Our Decoding time: 10973us
+Results: Encoding time: 142923us 	 ECCV Decoding time: 69637us 	 Our Decoding time: 10996us
+Results: Encoding time: 141821us 	 ECCV Decoding time: 68755us 	 Our Decoding time: 10972us
+Results: Encoding time: 142588us 	 ECCV Decoding time: 69305us 	 Our Decoding time: 10981us
+Results: Encoding time: 141684us 	 ECCV Decoding time: 68855us 	 Our Decoding time: 10974us
+Results: Encoding time: 142927us 	 ECCV Decoding time: 69285us 	 Our Decoding time: 10915us
+Results: Encoding time: 142007us 	 ECCV Decoding time: 68962us 	 Our Decoding time: 10954us
+Results: Encoding time: 141597us 	 ECCV Decoding time: 68769us 	 Our Decoding time: 11015us
+Results: Encoding time: 142557us 	 ECCV Decoding time: 69213us 	 Our Decoding time: 10974us
+Results: Encoding time: 142374us 	 ECCV Decoding time: 69187us 	 Our Decoding time: 11000us
+Results: Encoding time: 142384us 	 ECCV Decoding time: 69138us 	 Our Decoding time: 10968us
+Results: Encoding time: 142891us 	 ECCV Decoding time: 69242us 	 Our Decoding time: 10981us
+Results: Encoding time: 142261us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 11044us
+Results: Encoding time: 143187us 	 ECCV Decoding time: 69235us 	 Our Decoding time: 10973us
+Results: Encoding time: 142940us 	 ECCV Decoding time: 69328us 	 Our Decoding time: 10981us
+Results: Encoding time: 142234us 	 ECCV Decoding time: 68973us 	 Our Decoding time: 10923us
+Results: Encoding time: 142880us 	 ECCV Decoding time: 69233us 	 Our Decoding time: 10951us
+Results: Encoding time: 142677us 	 ECCV Decoding time: 69428us 	 Our Decoding time: 10985us
+Results: Encoding time: 142513us 	 ECCV Decoding time: 69223us 	 Our Decoding time: 10984us
+Results: Encoding time: 142261us 	 ECCV Decoding time: 69085us 	 Our Decoding time: 11062us
+Results: Encoding time: 142667us 	 ECCV Decoding time: 69488us 	 Our Decoding time: 10977us
+Results: Encoding time: 141934us 	 ECCV Decoding time: 68790us 	 Our Decoding time: 10977us
+Results: Encoding time: 142689us 	 ECCV Decoding time: 69394us 	 Our Decoding time: 10950us
+Results: Encoding time: 142230us 	 ECCV Decoding time: 68860us 	 Our Decoding time: 10984us
+Results: Encoding time: 141554us 	 ECCV Decoding time: 68874us 	 Our Decoding time: 10967us
+Results: Encoding time: 142481us 	 ECCV Decoding time: 69151us 	 Our Decoding time: 11042us
+Results: Encoding time: 142703us 	 ECCV Decoding time: 69438us 	 Our Decoding time: 10978us
+Results: Encoding time: 142495us 	 ECCV Decoding time: 69348us 	 Our Decoding time: 10985us
+Results: Encoding time: 141368us 	 ECCV Decoding time: 68798us 	 Our Decoding time: 10969us
+Results: Encoding time: 142534us 	 ECCV Decoding time: 69310us 	 Our Decoding time: 10976us
+Results: Encoding time: 142301us 	 ECCV Decoding time: 68925us 	 Our Decoding time: 10974us
+Results: Encoding time: 141915us 	 ECCV Decoding time: 68832us 	 Our Decoding time: 10979us
+Results: Encoding time: 143003us 	 ECCV Decoding time: 69212us 	 Our Decoding time: 10981us
+Results: Encoding time: 141931us 	 ECCV Decoding time: 69129us 	 Our Decoding time: 11056us
+Results: Encoding time: 142762us 	 ECCV Decoding time: 69436us 	 Our Decoding time: 10973us
+Results: Encoding time: 141799us 	 ECCV Decoding time: 68899us 	 Our Decoding time: 10983us
+Results: Encoding time: 141943us 	 ECCV Decoding time: 68928us 	 Our Decoding time: 10928us
+Results: Encoding time: 142828us 	 ECCV Decoding time: 69183us 	 Our Decoding time: 10982us
+Results: Encoding time: 141675us 	 ECCV Decoding time: 68767us 	 Our Decoding time: 10961us
+Results: Encoding time: 142899us 	 ECCV Decoding time: 69319us 	 Our Decoding time: 10982us
+Results: Encoding time: 141935us 	 ECCV Decoding time: 69131us 	 Our Decoding time: 11066us
+Results: Encoding time: 142752us 	 ECCV Decoding time: 69318us 	 Our Decoding time: 10967us
+Results: Encoding time: 142385us 	 ECCV Decoding time: 68949us 	 Our Decoding time: 10961us
+Results: Encoding time: 142251us 	 ECCV Decoding time: 69039us 	 Our Decoding time: 10974us
+Results: Encoding time: 142521us 	 ECCV Decoding time: 69188us 	 Our Decoding time: 10980us
+Results: Encoding time: 142158us 	 ECCV Decoding time: 69084us 	 Our Decoding time: 11000us
+Results: Encoding time: 141812us 	 ECCV Decoding time: 68732us 	 Our Decoding time: 10976us
+Results: Encoding time: 142030us 	 ECCV Decoding time: 68948us 	 Our Decoding time: 10979us
+Results: Encoding time: 141730us 	 ECCV Decoding time: 68981us 	 Our Decoding time: 10968us
+Results: Encoding time: 142567us 	 ECCV Decoding time: 69290us 	 Our Decoding time: 10970us
+Results: Encoding time: 141512us 	 ECCV Decoding time: 68768us 	 Our Decoding time: 10968us
+Results: Encoding time: 142302us 	 ECCV Decoding time: 69322us 	 Our Decoding time: 10951us
+Results: Encoding time: 142833us 	 ECCV Decoding time: 69336us 	 Our Decoding time: 10976us
+Results: Encoding time: 142288us 	 ECCV Decoding time: 69119us 	 Our Decoding time: 10973us
+Results: Encoding time: 141731us 	 ECCV Decoding time: 69052us 	 Our Decoding time: 11064us
+Results: Encoding time: 142316us 	 ECCV Decoding time: 69033us 	 Our Decoding time: 10946us
+Results: Encoding time: 142294us 	 ECCV Decoding time: 69254us 	 Our Decoding time: 11035us
+Results: Encoding time: 142296us 	 ECCV Decoding time: 69154us 	 Our Decoding time: 10989us
+Results: Encoding time: 142773us 	 ECCV Decoding time: 69186us 	 Our Decoding time: 10987us
+Results: Encoding time: 141420us 	 ECCV Decoding time: 68910us 	 Our Decoding time: 10969us
+Results: Encoding time: 142453us 	 ECCV Decoding time: 69219us 	 Our Decoding time: 10984us
+Results: Encoding time: 142513us 	 ECCV Decoding time: 69333us 	 Our Decoding time: 10993us
+Results: Encoding time: 141612us 	 ECCV Decoding time: 69047us 	 Our Decoding time: 11076us
+Results: Encoding time: 142823us 	 ECCV Decoding time: 69423us 	 Our Decoding time: 10968us
+Results: Encoding time: 143040us 	 ECCV Decoding time: 69261us 	 Our Decoding time: 10974us
+Results: Encoding time: 141689us 	 ECCV Decoding time: 68908us 	 Our Decoding time: 10968us
+Results: Encoding time: 142184us 	 ECCV Decoding time: 69110us 	 Our Decoding time: 10989us
+Results: Encoding time: 142525us 	 ECCV Decoding time: 69066us 	 Our Decoding time: 10928us
+Results: Encoding time: 142272us 	 ECCV Decoding time: 69198us 	 Our Decoding time: 11003us
+Results: Encoding time: 141911us 	 ECCV Decoding time: 68761us 	 Our Decoding time: 10974us
+Results: Encoding time: 142389us 	 ECCV Decoding time: 69147us 	 Our Decoding time: 10974us
+Results: Encoding time: 141889us 	 ECCV Decoding time: 69278us 	 Our Decoding time: 10997us
+Results: Encoding time: 142151us 	 ECCV Decoding time: 69086us 	 Our Decoding time: 11058us
+Results: Encoding time: 142495us 	 ECCV Decoding time: 68994us 	 Our Decoding time: 10932us
+Results: Encoding time: 142154us 	 ECCV Decoding time: 68905us 	 Our Decoding time: 10934us
+Results: Encoding time: 142449us 	 ECCV Decoding time: 69264us 	 Our Decoding time: 11043us
+Results: Encoding time: 142550us 	 ECCV Decoding time: 69422us 	 Our Decoding time: 10975us
+Results: Encoding time: 142585us 	 ECCV Decoding time: 69071us 	 Our Decoding time: 10967us
+Results: Encoding time: 142081us 	 ECCV Decoding time: 69209us 	 Our Decoding time: 11040us
+Results: Encoding time: 141465us 	 ECCV Decoding time: 68693us 	 Our Decoding time: 10978us
+Results: Encoding time: 142632us 	 ECCV Decoding time: 69231us 	 Our Decoding time: 10969us
+Results: Encoding time: 141743us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 11070us
+Results: Encoding time: 142974us 	 ECCV Decoding time: 69396us 	 Our Decoding time: 10980us
+Results: Encoding time: 142551us 	 ECCV Decoding time: 69240us 	 Our Decoding time: 10965us
+Results: Encoding time: 142361us 	 ECCV Decoding time: 69155us 	 Our Decoding time: 10965us
+Results: Encoding time: 142335us 	 ECCV Decoding time: 69259us 	 Our Decoding time: 10979us
+Results: Encoding time: 142197us 	 ECCV Decoding time: 69043us 	 Our Decoding time: 10970us
+Results: Encoding time: 142556us 	 ECCV Decoding time: 69055us 	 Our Decoding time: 10926us
+Results: Encoding time: 142443us 	 ECCV Decoding time: 69440us 	 Our Decoding time: 11007us
+Results: Encoding time: 142366us 	 ECCV Decoding time: 69216us 	 Our Decoding time: 10975us
+Results: Encoding time: 142608us 	 ECCV Decoding time: 69194us 	 Our Decoding time: 10973us
+Results: Encoding time: 141628us 	 ECCV Decoding time: 69093us 	 Our Decoding time: 11056us
+Results: Encoding time: 142628us 	 ECCV Decoding time: 69354us 	 Our Decoding time: 10967us
+Results: Encoding time: 142709us 	 ECCV Decoding time: 69197us 	 Our Decoding time: 10991us
+Results: Encoding time: 141848us 	 ECCV Decoding time: 68903us 	 Our Decoding time: 10972us
+Results: Encoding time: 142344us 	 ECCV Decoding time: 69119us 	 Our Decoding time: 10982us
+Results: Encoding time: 142785us 	 ECCV Decoding time: 69191us 	 Our Decoding time: 10983us
+Results: Encoding time: 142026us 	 ECCV Decoding time: 69225us 	 Our Decoding time: 11035us
+Results: Encoding time: 142505us 	 ECCV Decoding time: 69313us 	 Our Decoding time: 11038us
+Results: Encoding time: 142501us 	 ECCV Decoding time: 69209us 	 Our Decoding time: 10983us
+Results: Encoding time: 142841us 	 ECCV Decoding time: 69303us 	 Our Decoding time: 10967us
+Results: Encoding time: 142788us 	 ECCV Decoding time: 69314us 	 Our Decoding time: 10982us
+Results: Encoding time: 142701us 	 ECCV Decoding time: 69256us 	 Our Decoding time: 10942us
+Results: Encoding time: 142204us 	 ECCV Decoding time: 68866us 	 Our Decoding time: 10991us
+Results: Encoding time: 142714us 	 ECCV Decoding time: 69179us 	 Our Decoding time: 10965us
+Results: Encoding time: 141463us 	 ECCV Decoding time: 68868us 	 Our Decoding time: 10969us
+Results: Encoding time: 142507us 	 ECCV Decoding time: 69310us 	 Our Decoding time: 10983us
+Results: Encoding time: 142440us 	 ECCV Decoding time: 69154us 	 Our Decoding time: 10998us
+Results: Encoding time: 143481us 	 ECCV Decoding time: 69740us 	 Our Decoding time: 10982us
+Results: Encoding time: 141811us 	 ECCV Decoding time: 68944us 	 Our Decoding time: 10929us
+Results: Encoding time: 142821us 	 ECCV Decoding time: 69057us 	 Our Decoding time: 10936us
+Results: Encoding time: 142326us 	 ECCV Decoding time: 69263us 	 Our Decoding time: 11049us
+Results: Encoding time: 142026us 	 ECCV Decoding time: 68891us 	 Our Decoding time: 10930us
+Results: Encoding time: 141710us 	 ECCV Decoding time: 69002us 	 Our Decoding time: 10990us
+Results: Encoding time: 142539us 	 ECCV Decoding time: 69148us 	 Our Decoding time: 10972us
+Results: Encoding time: 141627us 	 ECCV Decoding time: 68840us 	 Our Decoding time: 10986us
+Results: Encoding time: 142252us 	 ECCV Decoding time: 69116us 	 Our Decoding time: 10941us
+Results: Encoding time: 142370us 	 ECCV Decoding time: 69291us 	 Our Decoding time: 11042us
+Results: Encoding time: 142179us 	 ECCV Decoding time: 69099us 	 Our Decoding time: 10989us
+Results: Encoding time: 141917us 	 ECCV Decoding time: 69006us 	 Our Decoding time: 10973us
+Results: Encoding time: 142873us 	 ECCV Decoding time: 69226us 	 Our Decoding time: 10985us
+Results: Encoding time: 142170us 	 ECCV Decoding time: 69254us 	 Our Decoding time: 11024us
+Results: Encoding time: 141803us 	 ECCV Decoding time: 68908us 	 Our Decoding time: 10980us
+Results: Encoding time: 141929us 	 ECCV Decoding time: 68878us 	 Our Decoding time: 10980us
+Results: Encoding time: 141589us 	 ECCV Decoding time: 68772us 	 Our Decoding time: 10985us
+Results: Encoding time: 142930us 	 ECCV Decoding time: 69307us 	 Our Decoding time: 10983us
+Results: Encoding time: 142104us 	 ECCV Decoding time: 69213us 	 Our Decoding time: 11028us
+Results: Encoding time: 141807us 	 ECCV Decoding time: 69091us 	 Our Decoding time: 10986us
+Results: Encoding time: 142933us 	 ECCV Decoding time: 69267us 	 Our Decoding time: 10980us
+Results: Encoding time: 142445us 	 ECCV Decoding time: 69135us 	 Our Decoding time: 10968us
+Results: Encoding time: 142568us 	 ECCV Decoding time: 69242us 	 Our Decoding time: 10962us
+Results: Encoding time: 142222us 	 ECCV Decoding time: 69096us 	 Our Decoding time: 10971us
+Results: Encoding time: 142848us 	 ECCV Decoding time: 69391us 	 Our Decoding time: 10987us
+Results: Encoding time: 143153us 	 ECCV Decoding time: 69183us 	 Our Decoding time: 10975us
+Results: Encoding time: 142747us 	 ECCV Decoding time: 69361us 	 Our Decoding time: 10991us
+Results: Encoding time: 142466us 	 ECCV Decoding time: 69305us 	 Our Decoding time: 10963us
+Results: Encoding time: 141731us 	 ECCV Decoding time: 68921us 	 Our Decoding time: 10984us
+Results: Encoding time: 141734us 	 ECCV Decoding time: 68700us 	 Our Decoding time: 10975us
+Results: Encoding time: 142864us 	 ECCV Decoding time: 69226us 	 Our Decoding time: 10982us
+Results: Encoding time: 142156us 	 ECCV Decoding time: 69271us 	 Our Decoding time: 11013us
+Results: Encoding time: 142110us 	 ECCV Decoding time: 68943us 	 Our Decoding time: 10935us
+Results: Encoding time: 142649us 	 ECCV Decoding time: 69081us 	 Our Decoding time: 10919us
+Results: Encoding time: 141531us 	 ECCV Decoding time: 68982us 	 Our Decoding time: 10965us
+Results: Encoding time: 141563us 	 ECCV Decoding time: 68699us 	 Our Decoding time: 10965us
+Results: Encoding time: 142757us 	 ECCV Decoding time: 69406us 	 Our Decoding time: 10968us
+Results: Encoding time: 142142us 	 ECCV Decoding time: 69059us 	 Our Decoding time: 10968us
+Results: Encoding time: 143113us 	 ECCV Decoding time: 69329us 	 Our Decoding time: 10981us
+Results: Encoding time: 141571us 	 ECCV Decoding time: 69294us 	 Our Decoding time: 11007us
+Results: Encoding time: 141633us 	 ECCV Decoding time: 68894us 	 Our Decoding time: 10955us
+Results: Encoding time: 142182us 	 ECCV Decoding time: 69033us 	 Our Decoding time: 10917us
+Results: Encoding time: 141980us 	 ECCV Decoding time: 68979us 	 Our Decoding time: 10945us
+Results: Encoding time: 142457us 	 ECCV Decoding time: 69287us 	 Our Decoding time: 10993us
+Results: Encoding time: 141781us 	 ECCV Decoding time: 68767us 	 Our Decoding time: 10986us
+Results: Encoding time: 142600us 	 ECCV Decoding time: 69305us 	 Our Decoding time: 10975us
+Results: Encoding time: 142371us 	 ECCV Decoding time: 69222us 	 Our Decoding time: 10992us
+Results: Encoding time: 141502us 	 ECCV Decoding time: 68853us 	 Our Decoding time: 10972us
+Results: Encoding time: 142768us 	 ECCV Decoding time: 69406us 	 Our Decoding time: 10999us
+Results: Encoding time: 141808us 	 ECCV Decoding time: 69183us 	 Our Decoding time: 10995us
+Results: Encoding time: 141890us 	 ECCV Decoding time: 68930us 	 Our Decoding time: 10976us
+Results: Encoding time: 142006us 	 ECCV Decoding time: 68908us 	 Our Decoding time: 10976us
+Results: Encoding time: 143054us 	 ECCV Decoding time: 69325us 	 Our Decoding time: 10978us
+Results: Encoding time: 141991us 	 ECCV Decoding time: 68826us 	 Our Decoding time: 10982us
+Results: Encoding time: 142392us 	 ECCV Decoding time: 69340us 	 Our Decoding time: 10972us
+Results: Encoding time: 141663us 	 ECCV Decoding time: 68882us 	 Our Decoding time: 10959us
+Results: Encoding time: 142140us 	 ECCV Decoding time: 69380us 	 Our Decoding time: 10988us
+Results: Encoding time: 141928us 	 ECCV Decoding time: 69014us 	 Our Decoding time: 10976us
+Results: Encoding time: 141954us 	 ECCV Decoding time: 69140us 	 Our Decoding time: 11039us
+Results: Encoding time: 142682us 	 ECCV Decoding time: 69383us 	 Our Decoding time: 10967us
+Results: Encoding time: 142422us 	 ECCV Decoding time: 69201us 	 Our Decoding time: 10985us
+Results: Encoding time: 142021us 	 ECCV Decoding time: 68907us 	 Our Decoding time: 10980us
+Results: Encoding time: 142664us 	 ECCV Decoding time: 69079us 	 Our Decoding time: 10931us
+Results: Encoding time: 143022us 	 ECCV Decoding time: 69549us 	 Our Decoding time: 11087us
+Results: Encoding time: 141651us 	 ECCV Decoding time: 68800us 	 Our Decoding time: 10972us
+Results: Encoding time: 142831us 	 ECCV Decoding time: 69339us 	 Our Decoding time: 10971us
+Results: Encoding time: 142250us 	 ECCV Decoding time: 69282us 	 Our Decoding time: 11032us
+Results: Encoding time: 142715us 	 ECCV Decoding time: 69437us 	 Our Decoding time: 10992us
+Results: Encoding time: 143119us 	 ECCV Decoding time: 69429us 	 Our Decoding time: 10979us
+Results: Encoding time: 142229us 	 ECCV Decoding time: 69271us 	 Our Decoding time: 11100us
+Results: Encoding time: 142840us 	 ECCV Decoding time: 69288us 	 Our Decoding time: 10979us
+Results: Encoding time: 142325us 	 ECCV Decoding time: 69074us 	 Our Decoding time: 10981us
+Results: Encoding time: 141733us 	 ECCV Decoding time: 68920us 	 Our Decoding time: 10926us
+Results: Encoding time: 142834us 	 ECCV Decoding time: 69308us 	 Our Decoding time: 10972us
+Results: Encoding time: 141615us 	 ECCV Decoding time: 68985us 	 Our Decoding time: 11086us
+Results: Encoding time: 142382us 	 ECCV Decoding time: 69154us 	 Our Decoding time: 10975us
+Results: Encoding time: 141587us 	 ECCV Decoding time: 69271us 	 Our Decoding time: 11053us
+Results: Encoding time: 142532us 	 ECCV Decoding time: 69331us 	 Our Decoding time: 10981us
+Results: Encoding time: 143313us 	 ECCV Decoding time: 69319us 	 Our Decoding time: 10995us
+Results: Encoding time: 142162us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 11025us
+Results: Encoding time: 142052us 	 ECCV Decoding time: 69238us 	 Our Decoding time: 10926us
+Results: Encoding time: 142450us 	 ECCV Decoding time: 69179us 	 Our Decoding time: 10964us
+Results: Encoding time: 142295us 	 ECCV Decoding time: 69225us 	 Our Decoding time: 11043us
+Results: Encoding time: 142391us 	 ECCV Decoding time: 69167us 	 Our Decoding time: 11064us
+Results: Encoding time: 142229us 	 ECCV Decoding time: 69084us 	 Our Decoding time: 10938us
+Results: Encoding time: 142323us 	 ECCV Decoding time: 68930us 	 Our Decoding time: 10972us
+Results: Encoding time: 141800us 	 ECCV Decoding time: 68886us 	 Our Decoding time: 10981us
+Results: Encoding time: 142920us 	 ECCV Decoding time: 69363us 	 Our Decoding time: 10981us
+Results: Encoding time: 141374us 	 ECCV Decoding time: 69179us 	 Our Decoding time: 11052us
+Results: Encoding time: 142808us 	 ECCV Decoding time: 69300us 	 Our Decoding time: 10977us
+Results: Encoding time: 142948us 	 ECCV Decoding time: 69204us 	 Our Decoding time: 10972us
+Results: Encoding time: 142937us 	 ECCV Decoding time: 69367us 	 Our Decoding time: 10979us
+Results: Encoding time: 142520us 	 ECCV Decoding time: 69369us 	 Our Decoding time: 11002us
+Results: Encoding time: 142456us 	 ECCV Decoding time: 68941us 	 Our Decoding time: 10982us
+Results: Encoding time: 142688us 	 ECCV Decoding time: 69177us 	 Our Decoding time: 10984us
+Results: Encoding time: 142314us 	 ECCV Decoding time: 69198us 	 Our Decoding time: 11038us
+Results: Encoding time: 141905us 	 ECCV Decoding time: 68899us 	 Our Decoding time: 10967us
+Results: Encoding time: 141923us 	 ECCV Decoding time: 68976us 	 Our Decoding time: 10995us
+Results: Encoding time: 141838us 	 ECCV Decoding time: 69021us 	 Our Decoding time: 11080us
+Results: Encoding time: 142419us 	 ECCV Decoding time: 68920us 	 Our Decoding time: 10971us
+Results: Encoding time: 142784us 	 ECCV Decoding time: 69272us 	 Our Decoding time: 10977us
+Results: Encoding time: 141667us 	 ECCV Decoding time: 68700us 	 Our Decoding time: 10984us
+Results: Encoding time: 142381us 	 ECCV Decoding time: 69281us 	 Our Decoding time: 10983us
+Results: Encoding time: 143184us 	 ECCV Decoding time: 69327us 	 Our Decoding time: 10940us
+Results: Encoding time: 142711us 	 ECCV Decoding time: 68997us 	 Our Decoding time: 10972us
+Results: Encoding time: 141712us 	 ECCV Decoding time: 68844us 	 Our Decoding time: 10975us
+Results: Encoding time: 143231us 	 ECCV Decoding time: 69141us 	 Our Decoding time: 10975us
+Results: Encoding time: 142621us 	 ECCV Decoding time: 69233us 	 Our Decoding time: 10997us
+Results: Encoding time: 143152us 	 ECCV Decoding time: 69490us 	 Our Decoding time: 10958us
+Results: Encoding time: 143007us 	 ECCV Decoding time: 69270us 	 Our Decoding time: 10969us
+Results: Encoding time: 142471us 	 ECCV Decoding time: 69201us 	 Our Decoding time: 11017us
+Results: Encoding time: 141832us 	 ECCV Decoding time: 68905us 	 Our Decoding time: 10981us
+Results: Encoding time: 142412us 	 ECCV Decoding time: 69087us 	 Our Decoding time: 10934us
+Results: Encoding time: 142611us 	 ECCV Decoding time: 69352us 	 Our Decoding time: 10992us
+Results: Encoding time: 141471us 	 ECCV Decoding time: 68754us 	 Our Decoding time: 10981us
+Results: Encoding time: 142979us 	 ECCV Decoding time: 69320us 	 Our Decoding time: 10983us
+Results: Encoding time: 142945us 	 ECCV Decoding time: 69266us 	 Our Decoding time: 10965us
+Results: Encoding time: 142285us 	 ECCV Decoding time: 69031us 	 Our Decoding time: 10969us
+Results: Encoding time: 142712us 	 ECCV Decoding time: 69294us 	 Our Decoding time: 10980us
+Results: Encoding time: 142465us 	 ECCV Decoding time: 69396us 	 Our Decoding time: 10958us
+Results: Encoding time: 142594us 	 ECCV Decoding time: 69170us 	 Our Decoding time: 10971us
+Results: Encoding time: 142347us 	 ECCV Decoding time: 69103us 	 Our Decoding time: 11064us
+Results: Encoding time: 142662us 	 ECCV Decoding time: 69227us 	 Our Decoding time: 10976us
+Results: Encoding time: 142825us 	 ECCV Decoding time: 69475us 	 Our Decoding time: 11116us
+Results: Encoding time: 142265us 	 ECCV Decoding time: 68915us 	 Our Decoding time: 10938us
+Results: Encoding time: 142604us 	 ECCV Decoding time: 69255us 	 Our Decoding time: 10982us
+Results: Encoding time: 141568us 	 ECCV Decoding time: 68739us 	 Our Decoding time: 10972us
+Results: Encoding time: 142956us 	 ECCV Decoding time: 69332us 	 Our Decoding time: 10974us
+Results: Encoding time: 143355us 	 ECCV Decoding time: 69251us 	 Our Decoding time: 10919us
+Results: Encoding time: 141941us 	 ECCV Decoding time: 68994us 	 Our Decoding time: 10967us
+Results: Encoding time: 142639us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 10914us
+Results: Encoding time: 142678us 	 ECCV Decoding time: 69217us 	 Our Decoding time: 11015us
+Results: Encoding time: 142676us 	 ECCV Decoding time: 69368us 	 Our Decoding time: 10973us
+Results: Encoding time: 142800us 	 ECCV Decoding time: 69361us 	 Our Decoding time: 10974us
+Results: Encoding time: 142443us 	 ECCV Decoding time: 69219us 	 Our Decoding time: 11035us
+Results: Encoding time: 142238us 	 ECCV Decoding time: 69176us 	 Our Decoding time: 10977us
+Results: Encoding time: 142456us 	 ECCV Decoding time: 69165us 	 Our Decoding time: 11010us
+Results: Encoding time: 141867us 	 ECCV Decoding time: 68782us 	 Our Decoding time: 10955us
+Results: Encoding time: 143170us 	 ECCV Decoding time: 69476us 	 Our Decoding time: 10980us
+Results: Encoding time: 142639us 	 ECCV Decoding time: 69011us 	 Our Decoding time: 10978us
+Results: Encoding time: 143013us 	 ECCV Decoding time: 69416us 	 Our Decoding time: 10969us
+Results: Encoding time: 142753us 	 ECCV Decoding time: 69397us 	 Our Decoding time: 10972us
+Results: Encoding time: 143065us 	 ECCV Decoding time: 69303us 	 Our Decoding time: 10987us
+Results: Encoding time: 142172us 	 ECCV Decoding time: 69241us 	 Our Decoding time: 11022us
+Results: Encoding time: 142227us 	 ECCV Decoding time: 69369us 	 Our Decoding time: 11031us
+Results: Encoding time: 141909us 	 ECCV Decoding time: 68909us 	 Our Decoding time: 10974us
+Results: Encoding time: 142804us 	 ECCV Decoding time: 69070us 	 Our Decoding time: 10953us
+Results: Encoding time: 142246us 	 ECCV Decoding time: 69185us 	 Our Decoding time: 10999us
+Results: Encoding time: 141903us 	 ECCV Decoding time: 68852us 	 Our Decoding time: 10961us
+Results: Encoding time: 142685us 	 ECCV Decoding time: 69262us 	 Our Decoding time: 10983us
+Results: Encoding time: 142223us 	 ECCV Decoding time: 68947us 	 Our Decoding time: 10968us
+Results: Encoding time: 142018us 	 ECCV Decoding time: 69143us 	 Our Decoding time: 11053us
+Results: Encoding time: 142414us 	 ECCV Decoding time: 69164us 	 Our Decoding time: 10971us
+Results: Encoding time: 142474us 	 ECCV Decoding time: 69237us 	 Our Decoding time: 10978us
+Results: Encoding time: 141889us 	 ECCV Decoding time: 69077us 	 Our Decoding time: 11056us
+Results: Encoding time: 142399us 	 ECCV Decoding time: 69418us 	 Our Decoding time: 10981us
+Results: Encoding time: 142808us 	 ECCV Decoding time: 69165us 	 Our Decoding time: 10993us
+Results: Encoding time: 142350us 	 ECCV Decoding time: 68853us 	 Our Decoding time: 10981us
+Results: Encoding time: 142691us 	 ECCV Decoding time: 69401us 	 Our Decoding time: 10973us
+Results: Encoding time: 142546us 	 ECCV Decoding time: 69294us 	 Our Decoding time: 10970us
+Results: Encoding time: 141876us 	 ECCV Decoding time: 69100us 	 Our Decoding time: 11075us
+Results: Encoding time: 142294us 	 ECCV Decoding time: 69424us 	 Our Decoding time: 10981us
+Results: Encoding time: 141724us 	 ECCV Decoding time: 68921us 	 Our Decoding time: 10918us
+Results: Encoding time: 142249us 	 ECCV Decoding time: 69346us 	 Our Decoding time: 10980us
+Results: Encoding time: 142909us 	 ECCV Decoding time: 69388us 	 Our Decoding time: 10986us
+Results: Encoding time: 142810us 	 ECCV Decoding time: 69394us 	 Our Decoding time: 10964us
+Results: Encoding time: 142023us 	 ECCV Decoding time: 69197us 	 Our Decoding time: 11066us
+Results: Encoding time: 142525us 	 ECCV Decoding time: 69256us 	 Our Decoding time: 10973us
+Results: Encoding time: 142520us 	 ECCV Decoding time: 69246us 	 Our Decoding time: 10977us
+Results: Encoding time: 141760us 	 ECCV Decoding time: 68805us 	 Our Decoding time: 10986us
+Results: Encoding time: 142383us 	 ECCV Decoding time: 69107us 	 Our Decoding time: 10979us
+Results: Encoding time: 142288us 	 ECCV Decoding time: 69240us 	 Our Decoding time: 11020us
+Results: Encoding time: 142589us 	 ECCV Decoding time: 69375us 	 Our Decoding time: 10982us
+Results: Encoding time: 141844us 	 ECCV Decoding time: 69034us 	 Our Decoding time: 11080us
+Results: Encoding time: 142969us 	 ECCV Decoding time: 69431us 	 Our Decoding time: 10979us
+Results: Encoding time: 143000us 	 ECCV Decoding time: 69278us 	 Our Decoding time: 10986us
+Results: Encoding time: 142086us 	 ECCV Decoding time: 69186us 	 Our Decoding time: 11047us
+Results: Encoding time: 142701us 	 ECCV Decoding time: 69392us 	 Our Decoding time: 10985us
+Results: Encoding time: 142549us 	 ECCV Decoding time: 69317us 	 Our Decoding time: 10990us
+Results: Encoding time: 141615us 	 ECCV Decoding time: 68644us 	 Our Decoding time: 10940us
+Results: Encoding time: 142982us 	 ECCV Decoding time: 69325us 	 Our Decoding time: 10972us
+Results: Encoding time: 141300us 	 ECCV Decoding time: 68729us 	 Our Decoding time: 10983us
+Results: Encoding time: 142955us 	 ECCV Decoding time: 69426us 	 Our Decoding time: 10996us
+Results: Encoding time: 142692us 	 ECCV Decoding time: 69249us 	 Our Decoding time: 10980us
+Results: Encoding time: 141498us 	 ECCV Decoding time: 68964us 	 Our Decoding time: 10983us
+Results: Encoding time: 142700us 	 ECCV Decoding time: 69506us 	 Our Decoding time: 10973us
+Results: Encoding time: 142312us 	 ECCV Decoding time: 68912us 	 Our Decoding time: 10972us
+Results: Encoding time: 142105us 	 ECCV Decoding time: 69108us 	 Our Decoding time: 11048us
+Results: Encoding time: 142972us 	 ECCV Decoding time: 69349us 	 Our Decoding time: 10965us
+Results: Encoding time: 142545us 	 ECCV Decoding time: 69213us 	 Our Decoding time: 11002us
+Results: Encoding time: 141454us 	 ECCV Decoding time: 68860us 	 Our Decoding time: 10981us
+Results: Encoding time: 142753us 	 ECCV Decoding time: 69212us 	 Our Decoding time: 10983us
+Results: Encoding time: 141811us 	 ECCV Decoding time: 68909us 	 Our Decoding time: 10983us
+Results: Encoding time: 142217us 	 ECCV Decoding time: 68880us 	 Our Decoding time: 10972us
+Results: Encoding time: 142653us 	 ECCV Decoding time: 69290us 	 Our Decoding time: 10983us
+Results: Encoding time: 142086us 	 ECCV Decoding time: 69047us 	 Our Decoding time: 11077us
+Results: Encoding time: 142587us 	 ECCV Decoding time: 69165us 	 Our Decoding time: 10979us
+Results: Encoding time: 142147us 	 ECCV Decoding time: 68916us 	 Our Decoding time: 10969us
+Results: Encoding time: 142937us 	 ECCV Decoding time: 69258us 	 Our Decoding time: 10974us
+Results: Encoding time: 141825us 	 ECCV Decoding time: 69069us 	 Our Decoding time: 10993us
+Results: Encoding time: 143252us 	 ECCV Decoding time: 69491us 	 Our Decoding time: 10977us
+Results: Encoding time: 141898us 	 ECCV Decoding time: 69019us 	 Our Decoding time: 10967us
+Results: Encoding time: 142674us 	 ECCV Decoding time: 69306us 	 Our Decoding time: 10977us
+Results: Encoding time: 142495us 	 ECCV Decoding time: 69362us 	 Our Decoding time: 10992us
+Results: Encoding time: 141493us 	 ECCV Decoding time: 68824us 	 Our Decoding time: 10980us
+Results: Encoding time: 142588us 	 ECCV Decoding time: 69019us 	 Our Decoding time: 10932us
+Results: Encoding time: 142111us 	 ECCV Decoding time: 69232us 	 Our Decoding time: 11041us
+Results: Encoding time: 143020us 	 ECCV Decoding time: 69297us 	 Our Decoding time: 10987us
+Results: Encoding time: 142274us 	 ECCV Decoding time: 69264us 	 Our Decoding time: 11004us
+Results: Encoding time: 141822us 	 ECCV Decoding time: 68773us 	 Our Decoding time: 10977us
+Results: Encoding time: 142708us 	 ECCV Decoding time: 69344us 	 Our Decoding time: 10963us
+Results: Encoding time: 142802us 	 ECCV Decoding time: 69265us 	 Our Decoding time: 10979us
+Results: Encoding time: 142102us 	 ECCV Decoding time: 69143us 	 Our Decoding time: 11036us
+Results: Encoding time: 141907us 	 ECCV Decoding time: 68901us 	 Our Decoding time: 10971us
+Results: Encoding time: 142842us 	 ECCV Decoding time: 69328us 	 Our Decoding time: 10966us
+Results: Encoding time: 141851us 	 ECCV Decoding time: 69148us 	 Our Decoding time: 11048us
+Results: Encoding time: 143370us 	 ECCV Decoding time: 69214us 	 Our Decoding time: 10979us
+Results: Encoding time: 141448us 	 ECCV Decoding time: 68802us 	 Our Decoding time: 10974us
+Results: Encoding time: 142644us 	 ECCV Decoding time: 69289us 	 Our Decoding time: 10976us
+Results: Encoding time: 142047us 	 ECCV Decoding time: 68876us 	 Our Decoding time: 10984us
+Results: Encoding time: 141836us 	 ECCV Decoding time: 68630us 	 Our Decoding time: 10944us
+Results: Encoding time: 142625us 	 ECCV Decoding time: 69267us 	 Our Decoding time: 10990us
+Results: Encoding time: 141861us 	 ECCV Decoding time: 68715us 	 Our Decoding time: 10983us
+Results: Encoding time: 142248us 	 ECCV Decoding time: 69060us 	 Our Decoding time: 10936us
+Results: Encoding time: 141866us 	 ECCV Decoding time: 69122us 	 Our Decoding time: 11070us
+Results: Encoding time: 142990us 	 ECCV Decoding time: 69156us 	 Our Decoding time: 10947us
+Results: Encoding time: 142390us 	 ECCV Decoding time: 68934us 	 Our Decoding time: 10930us
+Results: Encoding time: 142169us 	 ECCV Decoding time: 69029us 	 Our Decoding time: 10982us
+Results: Encoding time: 141948us 	 ECCV Decoding time: 69214us 	 Our Decoding time: 11023us
+Results: Encoding time: 142369us 	 ECCV Decoding time: 69058us 	 Our Decoding time: 10974us
+Results: Encoding time: 142671us 	 ECCV Decoding time: 69273us 	 Our Decoding time: 10976us
+Results: Encoding time: 142260us 	 ECCV Decoding time: 69210us 	 Our Decoding time: 11038us
+Results: Encoding time: 142465us 	 ECCV Decoding time: 69254us 	 Our Decoding time: 10979us
+Results: Encoding time: 142279us 	 ECCV Decoding time: 69225us 	 Our Decoding time: 11019us
+Results: Encoding time: 142102us 	 ECCV Decoding time: 68973us 	 Our Decoding time: 10951us
+Results: Encoding time: 142378us 	 ECCV Decoding time: 68940us 	 Our Decoding time: 10983us
+Results: Encoding time: 141966us 	 ECCV Decoding time: 68980us 	 Our Decoding time: 10976us
+Results: Encoding time: 142534us 	 ECCV Decoding time: 69187us 	 Our Decoding time: 10985us
+Results: Encoding time: 143112us 	 ECCV Decoding time: 69648us 	 Our Decoding time: 11096us
+Results: Encoding time: 142538us 	 ECCV Decoding time: 69138us 	 Our Decoding time: 10962us
+Results: Encoding time: 142792us 	 ECCV Decoding time: 69289us 	 Our Decoding time: 10988us
+Results: Encoding time: 141900us 	 ECCV Decoding time: 69067us 	 Our Decoding time: 11050us
+Results: Encoding time: 142087us 	 ECCV Decoding time: 69027us 	 Our Decoding time: 10968us
+Results: Encoding time: 141822us 	 ECCV Decoding time: 68934us 	 Our Decoding time: 10939us
+Results: Encoding time: 141866us 	 ECCV Decoding time: 68976us 	 Our Decoding time: 10978us
+Results: Encoding time: 141630us 	 ECCV Decoding time: 68746us 	 Our Decoding time: 10972us
+Results: Encoding time: 143171us 	 ECCV Decoding time: 69011us 	 Our Decoding time: 10951us
+Results: Encoding time: 142201us 	 ECCV Decoding time: 69208us 	 Our Decoding time: 11014us
+Results: Encoding time: 141914us 	 ECCV Decoding time: 68894us 	 Our Decoding time: 10979us
+Results: Encoding time: 142902us 	 ECCV Decoding time: 69247us 	 Our Decoding time: 10966us
+Results: Encoding time: 142127us 	 ECCV Decoding time: 69062us 	 Our Decoding time: 11014us
+Results: Encoding time: 141794us 	 ECCV Decoding time: 69016us 	 Our Decoding time: 10910us
+Results: Encoding time: 142001us 	 ECCV Decoding time: 69260us 	 Our Decoding time: 11020us
+Results: Encoding time: 141742us 	 ECCV Decoding time: 68904us 	 Our Decoding time: 10959us
+Results: Encoding time: 142947us 	 ECCV Decoding time: 69316us 	 Our Decoding time: 10976us
+Results: Encoding time: 142638us 	 ECCV Decoding time: 69389us 	 Our Decoding time: 11002us
+Results: Encoding time: 141749us 	 ECCV Decoding time: 68808us 	 Our Decoding time: 10909us
+Results: Encoding time: 142636us 	 ECCV Decoding time: 69170us 	 Our Decoding time: 10973us
+Results: Encoding time: 142828us 	 ECCV Decoding time: 69309us 	 Our Decoding time: 10983us
+Results: Encoding time: 141932us 	 ECCV Decoding time: 69172us 	 Our Decoding time: 10977us
+Results: Encoding time: 142562us 	 ECCV Decoding time: 69247us 	 Our Decoding time: 10974us
+Results: Encoding time: 142301us 	 ECCV Decoding time: 68931us 	 Our Decoding time: 10965us
+Results: Encoding time: 142277us 	 ECCV Decoding time: 69146us 	 Our Decoding time: 10974us
+Results: Encoding time: 143113us 	 ECCV Decoding time: 69377us 	 Our Decoding time: 10969us
+Results: Encoding time: 142097us 	 ECCV Decoding time: 69214us 	 Our Decoding time: 11035us
+Results: Encoding time: 142500us 	 ECCV Decoding time: 69187us 	 Our Decoding time: 10969us
+Results: Encoding time: 142482us 	 ECCV Decoding time: 69177us 	 Our Decoding time: 11018us
+Results: Encoding time: 142087us 	 ECCV Decoding time: 69000us 	 Our Decoding time: 10928us
+Results: Encoding time: 142490us 	 ECCV Decoding time: 69244us 	 Our Decoding time: 10974us
+Results: Encoding time: 142042us 	 ECCV Decoding time: 68988us 	 Our Decoding time: 10957us
+Results: Encoding time: 142748us 	 ECCV Decoding time: 69482us 	 Our Decoding time: 10980us
+Results: Encoding time: 141704us 	 ECCV Decoding time: 68884us 	 Our Decoding time: 10932us
+Results: Encoding time: 142081us 	 ECCV Decoding time: 69210us 	 Our Decoding time: 10998us
+Results: Encoding time: 141861us 	 ECCV Decoding time: 68907us 	 Our Decoding time: 10991us
+Results: Encoding time: 142142us 	 ECCV Decoding time: 68949us 	 Our Decoding time: 10920us
+Results: Encoding time: 142743us 	 ECCV Decoding time: 69223us 	 Our Decoding time: 10973us
+Results: Encoding time: 142492us 	 ECCV Decoding time: 69201us 	 Our Decoding time: 10995us
+Results: Encoding time: 142078us 	 ECCV Decoding time: 68942us 	 Our Decoding time: 11064us
+Results: Encoding time: 142226us 	 ECCV Decoding time: 69144us 	 Our Decoding time: 10979us
+Results: Encoding time: 142231us 	 ECCV Decoding time: 69069us 	 Our Decoding time: 11056us
+Results: Encoding time: 142146us 	 ECCV Decoding time: 69002us 	 Our Decoding time: 10968us
+Results: Encoding time: 143072us 	 ECCV Decoding time: 69440us 	 Our Decoding time: 10976us
+Results: Encoding time: 142019us 	 ECCV Decoding time: 69138us 	 Our Decoding time: 11056us
+Results: Encoding time: 142638us 	 ECCV Decoding time: 69402us 	 Our Decoding time: 10963us
+Results: Encoding time: 142478us 	 ECCV Decoding time: 69189us 	 Our Decoding time: 10971us
+Results: Encoding time: 142083us 	 ECCV Decoding time: 69187us 	 Our Decoding time: 11041us
+Results: Encoding time: 141774us 	 ECCV Decoding time: 68778us 	 Our Decoding time: 10974us
+Results: Encoding time: 142829us 	 ECCV Decoding time: 69185us 	 Our Decoding time: 10967us
+Results: Encoding time: 142167us 	 ECCV Decoding time: 69220us 	 Our Decoding time: 10993us
+Results: Encoding time: 142018us 	 ECCV Decoding time: 69070us 	 Our Decoding time: 10994us
+Results: Encoding time: 142162us 	 ECCV Decoding time: 68950us 	 Our Decoding time: 10982us
+Results: Encoding time: 142806us 	 ECCV Decoding time: 69230us 	 Our Decoding time: 10976us
+Results: Encoding time: 142390us 	 ECCV Decoding time: 69340us 	 Our Decoding time: 10989us
+Results: Encoding time: 141919us 	 ECCV Decoding time: 69078us 	 Our Decoding time: 11068us
+Results: Encoding time: 142772us 	 ECCV Decoding time: 69222us 	 Our Decoding time: 10987us
+Results: Encoding time: 142411us 	 ECCV Decoding time: 69189us 	 Our Decoding time: 11017us
+Results: Encoding time: 141906us 	 ECCV Decoding time: 68750us 	 Our Decoding time: 10969us
+Results: Encoding time: 142700us 	 ECCV Decoding time: 69232us 	 Our Decoding time: 10970us
+Results: Encoding time: 142723us 	 ECCV Decoding time: 69238us 	 Our Decoding time: 10974us
+Results: Encoding time: 142176us 	 ECCV Decoding time: 69221us 	 Our Decoding time: 11025us
+Results: Encoding time: 142650us 	 ECCV Decoding time: 69421us 	 Our Decoding time: 10976us
+Results: Encoding time: 142471us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 10960us
+Results: Encoding time: 142635us 	 ECCV Decoding time: 69167us 	 Our Decoding time: 10970us
+Results: Encoding time: 142460us 	 ECCV Decoding time: 69240us 	 Our Decoding time: 11015us
+Results: Encoding time: 141843us 	 ECCV Decoding time: 68993us 	 Our Decoding time: 10988us
+Results: Encoding time: 142743us 	 ECCV Decoding time: 69255us 	 Our Decoding time: 10971us
+Results: Encoding time: 142266us 	 ECCV Decoding time: 69019us 	 Our Decoding time: 11016us
+Results: Encoding time: 141890us 	 ECCV Decoding time: 68737us 	 Our Decoding time: 10966us
+Results: Encoding time: 142633us 	 ECCV Decoding time: 69167us 	 Our Decoding time: 10983us
+Results: Encoding time: 142159us 	 ECCV Decoding time: 68948us 	 Our Decoding time: 10972us
+Results: Encoding time: 142292us 	 ECCV Decoding time: 69175us 	 Our Decoding time: 10975us
+Results: Encoding time: 142183us 	 ECCV Decoding time: 68950us 	 Our Decoding time: 10979us
+Results: Encoding time: 142054us 	 ECCV Decoding time: 69086us 	 Our Decoding time: 11009us
+Results: Encoding time: 141928us 	 ECCV Decoding time: 68861us 	 Our Decoding time: 10977us
+Results: Encoding time: 141816us 	 ECCV Decoding time: 68962us 	 Our Decoding time: 10931us
+Results: Encoding time: 143067us 	 ECCV Decoding time: 69223us 	 Our Decoding time: 10971us
+Results: Encoding time: 142063us 	 ECCV Decoding time: 69028us 	 Our Decoding time: 11024us
+Results: Encoding time: 141931us 	 ECCV Decoding time: 68928us 	 Our Decoding time: 11081us
+Results: Encoding time: 142708us 	 ECCV Decoding time: 69205us 	 Our Decoding time: 10980us
+Results: Encoding time: 141364us 	 ECCV Decoding time: 68746us 	 Our Decoding time: 10972us
+Results: Encoding time: 142015us 	 ECCV Decoding time: 68685us 	 Our Decoding time: 10983us
+Results: Encoding time: 142929us 	 ECCV Decoding time: 69454us 	 Our Decoding time: 10961us
+Results: Encoding time: 142451us 	 ECCV Decoding time: 69200us 	 Our Decoding time: 10982us
+Results: Encoding time: 141796us 	 ECCV Decoding time: 68855us 	 Our Decoding time: 10984us
+Results: Encoding time: 141911us 	 ECCV Decoding time: 68867us 	 Our Decoding time: 10971us
+Results: Encoding time: 142031us 	 ECCV Decoding time: 68994us 	 Our Decoding time: 10945us
+Results: Encoding time: 141732us 	 ECCV Decoding time: 68925us 	 Our Decoding time: 10979us
+Results: Encoding time: 142565us 	 ECCV Decoding time: 69142us 	 Our Decoding time: 10972us
+Results: Encoding time: 142682us 	 ECCV Decoding time: 69089us 	 Our Decoding time: 10976us
+Results: Encoding time: 142597us 	 ECCV Decoding time: 69268us 	 Our Decoding time: 10997us
+Results: Encoding time: 143086us 	 ECCV Decoding time: 69357us 	 Our Decoding time: 10984us
+Results: Encoding time: 142442us 	 ECCV Decoding time: 68945us 	 Our Decoding time: 10977us
+Results: Encoding time: 142561us 	 ECCV Decoding time: 69117us 	 Our Decoding time: 11022us
+Results: Encoding time: 142037us 	 ECCV Decoding time: 69209us 	 Our Decoding time: 11049us
+Results: Encoding time: 142336us 	 ECCV Decoding time: 69088us 	 Our Decoding time: 10973us
+Results: Encoding time: 142726us 	 ECCV Decoding time: 69287us 	 Our Decoding time: 10970us
+Results: Encoding time: 142210us 	 ECCV Decoding time: 69243us 	 Our Decoding time: 11025us
+Results: Encoding time: 141937us 	 ECCV Decoding time: 68842us 	 Our Decoding time: 10974us
+Results: Encoding time: 142547us 	 ECCV Decoding time: 69373us 	 Our Decoding time: 10971us
+Results: Encoding time: 142351us 	 ECCV Decoding time: 69236us 	 Our Decoding time: 11022us
+Results: Encoding time: 142443us 	 ECCV Decoding time: 69147us 	 Our Decoding time: 10968us
+Results: Encoding time: 142662us 	 ECCV Decoding time: 69205us 	 Our Decoding time: 10968us
+Results: Encoding time: 141973us 	 ECCV Decoding time: 68819us 	 Our Decoding time: 10947us
+Results: Encoding time: 142031us 	 ECCV Decoding time: 68856us 	 Our Decoding time: 10978us
+Results: Encoding time: 142597us 	 ECCV Decoding time: 69275us 	 Our Decoding time: 10969us
+Results: Encoding time: 142303us 	 ECCV Decoding time: 69214us 	 Our Decoding time: 10995us
+Results: Encoding time: 141700us 	 ECCV Decoding time: 68684us 	 Our Decoding time: 10961us
+Results: Encoding time: 142790us 	 ECCV Decoding time: 69343us 	 Our Decoding time: 10973us
+Results: Encoding time: 142107us 	 ECCV Decoding time: 69212us 	 Our Decoding time: 11034us
+Results: Encoding time: 141114us 	 ECCV Decoding time: 68991us 	 Our Decoding time: 10941us
+Results: Encoding time: 141871us 	 ECCV Decoding time: 68926us 	 Our Decoding time: 10975us
+Results: Encoding time: 141017us 	 ECCV Decoding time: 68747us 	 Our Decoding time: 10977us
+Results: Encoding time: 142951us 	 ECCV Decoding time: 69290us 	 Our Decoding time: 10961us
+Results: Encoding time: 141419us 	 ECCV Decoding time: 68795us 	 Our Decoding time: 10982us
+Results: Encoding time: 142307us 	 ECCV Decoding time: 69092us 	 Our Decoding time: 10928us
+Results: Encoding time: 142731us 	 ECCV Decoding time: 69256us 	 Our Decoding time: 10990us
+Results: Encoding time: 142470us 	 ECCV Decoding time: 69135us 	 Our Decoding time: 11035us
+Results: Encoding time: 142795us 	 ECCV Decoding time: 69411us 	 Our Decoding time: 10985us
+Results: Encoding time: 142387us 	 ECCV Decoding time: 69120us 	 Our Decoding time: 10995us
+Results: Encoding time: 142265us 	 ECCV Decoding time: 69138us 	 Our Decoding time: 10977us
+Results: Encoding time: 142773us 	 ECCV Decoding time: 69316us 	 Our Decoding time: 10981us
+Results: Encoding time: 142055us 	 ECCV Decoding time: 68747us 	 Our Decoding time: 10933us
+Results: Encoding time: 142014us 	 ECCV Decoding time: 69262us 	 Our Decoding time: 11047us
+Results: Encoding time: 142965us 	 ECCV Decoding time: 69425us 	 Our Decoding time: 10981us
+Results: Encoding time: 142396us 	 ECCV Decoding time: 69160us 	 Our Decoding time: 10973us
+Results: Encoding time: 142134us 	 ECCV Decoding time: 69209us 	 Our Decoding time: 11036us
+Results: Encoding time: 142010us 	 ECCV Decoding time: 69044us 	 Our Decoding time: 10966us
+Results: Encoding time: 142697us 	 ECCV Decoding time: 69251us 	 Our Decoding time: 10984us
+Results: Encoding time: 142959us 	 ECCV Decoding time: 69193us 	 Our Decoding time: 10972us
+Results: Encoding time: 142311us 	 ECCV Decoding time: 68780us 	 Our Decoding time: 10986us
+Results: Encoding time: 141914us 	 ECCV Decoding time: 69029us 	 Our Decoding time: 10995us
+Results: Encoding time: 142892us 	 ECCV Decoding time: 69208us 	 Our Decoding time: 10995us
+Results: Encoding time: 141649us 	 ECCV Decoding time: 68815us 	 Our Decoding time: 10969us
+Results: Encoding time: 142719us 	 ECCV Decoding time: 69294us 	 Our Decoding time: 10986us
+Results: Encoding time: 142612us 	 ECCV Decoding time: 69241us 	 Our Decoding time: 10978us
+Results: Encoding time: 142033us 	 ECCV Decoding time: 68841us 	 Our Decoding time: 10968us
+Results: Encoding time: 142190us 	 ECCV Decoding time: 69042us 	 Our Decoding time: 10980us
+Results: Encoding time: 142340us 	 ECCV Decoding time: 69123us 	 Our Decoding time: 11090us
+Results: Encoding time: 141616us 	 ECCV Decoding time: 68805us 	 Our Decoding time: 10967us
+Results: Encoding time: 142502us 	 ECCV Decoding time: 69032us 	 Our Decoding time: 10929us
+Results: Encoding time: 142446us 	 ECCV Decoding time: 69070us 	 Our Decoding time: 10974us
+Results: Encoding time: 142188us 	 ECCV Decoding time: 69022us 	 Our Decoding time: 11093us
+Results: Encoding time: 142995us 	 ECCV Decoding time: 69205us 	 Our Decoding time: 10995us
+Results: Encoding time: 142579us 	 ECCV Decoding time: 69120us 	 Our Decoding time: 10999us
+Results: Encoding time: 142591us 	 ECCV Decoding time: 69446us 	 Our Decoding time: 11032us
+Results: Encoding time: 142546us 	 ECCV Decoding time: 69200us 	 Our Decoding time: 10975us
+Results: Encoding time: 142909us 	 ECCV Decoding time: 69251us 	 Our Decoding time: 10972us
+Results: Encoding time: 142333us 	 ECCV Decoding time: 69216us 	 Our Decoding time: 11035us
+Results: Encoding time: 142077us 	 ECCV Decoding time: 69027us 	 Our Decoding time: 10922us
+Results: Encoding time: 142821us 	 ECCV Decoding time: 69287us 	 Our Decoding time: 10987us
+Results: Encoding time: 142703us 	 ECCV Decoding time: 69329us 	 Our Decoding time: 10965us
+Results: Encoding time: 142577us 	 ECCV Decoding time: 69225us 	 Our Decoding time: 11019us
+Results: Encoding time: 142810us 	 ECCV Decoding time: 69388us 	 Our Decoding time: 10967us
+Results: Encoding time: 142945us 	 ECCV Decoding time: 69510us 	 Our Decoding time: 10978us
+Results: Encoding time: 141615us 	 ECCV Decoding time: 68832us 	 Our Decoding time: 10983us
+Results: Encoding time: 142194us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 10936us
+Results: Encoding time: 143308us 	 ECCV Decoding time: 69473us 	 Our Decoding time: 10976us
+Results: Encoding time: 142534us 	 ECCV Decoding time: 69142us 	 Our Decoding time: 10986us
+Results: Encoding time: 142712us 	 ECCV Decoding time: 69296us 	 Our Decoding time: 10976us
+Results: Encoding time: 141870us 	 ECCV Decoding time: 69138us 	 Our Decoding time: 11051us
+Results: Encoding time: 142183us 	 ECCV Decoding time: 69040us 	 Our Decoding time: 10977us
+Results: Encoding time: 142442us 	 ECCV Decoding time: 69407us 	 Our Decoding time: 10986us
+Results: Encoding time: 141554us 	 ECCV Decoding time: 68696us 	 Our Decoding time: 10964us
+Results: Encoding time: 142974us 	 ECCV Decoding time: 69247us 	 Our Decoding time: 10968us
+Results: Encoding time: 141528us 	 ECCV Decoding time: 68775us 	 Our Decoding time: 10972us
+Results: Encoding time: 142690us 	 ECCV Decoding time: 69218us 	 Our Decoding time: 10963us
+Results: Encoding time: 142396us 	 ECCV Decoding time: 69183us 	 Our Decoding time: 11038us
+Results: Encoding time: 142135us 	 ECCV Decoding time: 68977us 	 Our Decoding time: 11079us
+Results: Encoding time: 141985us 	 ECCV Decoding time: 68944us 	 Our Decoding time: 10939us
+Results: Encoding time: 142891us 	 ECCV Decoding time: 69326us 	 Our Decoding time: 10970us
+Results: Encoding time: 142562us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 11024us
+Results: Encoding time: 142980us 	 ECCV Decoding time: 69323us 	 Our Decoding time: 10963us
+Results: Encoding time: 143074us 	 ECCV Decoding time: 69304us 	 Our Decoding time: 10972us
+Results: Encoding time: 142079us 	 ECCV Decoding time: 68785us 	 Our Decoding time: 10971us
+Results: Encoding time: 142535us 	 ECCV Decoding time: 68953us 	 Our Decoding time: 10917us
+Results: Encoding time: 142668us 	 ECCV Decoding time: 69290us 	 Our Decoding time: 10966us
+Results: Encoding time: 142520us 	 ECCV Decoding time: 69316us 	 Our Decoding time: 11005us
+Results: Encoding time: 141966us 	 ECCV Decoding time: 68775us 	 Our Decoding time: 10982us
+Results: Encoding time: 143088us 	 ECCV Decoding time: 69143us 	 Our Decoding time: 10973us
+Results: Encoding time: 142871us 	 ECCV Decoding time: 69319us 	 Our Decoding time: 10923us
+Results: Encoding time: 142255us 	 ECCV Decoding time: 69191us 	 Our Decoding time: 11018us
+Results: Encoding time: 142605us 	 ECCV Decoding time: 69385us 	 Our Decoding time: 10989us
+Results: Encoding time: 142050us 	 ECCV Decoding time: 68896us 	 Our Decoding time: 10985us
+Results: Encoding time: 141997us 	 ECCV Decoding time: 69251us 	 Our Decoding time: 11029us
+Results: Encoding time: 141902us 	 ECCV Decoding time: 68898us 	 Our Decoding time: 10943us
+Results: Encoding time: 142857us 	 ECCV Decoding time: 69347us 	 Our Decoding time: 10982us
+Results: Encoding time: 141927us 	 ECCV Decoding time: 68666us 	 Our Decoding time: 10984us
+Results: Encoding time: 142760us 	 ECCV Decoding time: 69248us 	 Our Decoding time: 10967us
+Results: Encoding time: 141721us 	 ECCV Decoding time: 68713us 	 Our Decoding time: 10988us
+Results: Encoding time: 142403us 	 ECCV Decoding time: 69301us 	 Our Decoding time: 10971us
+Results: Encoding time: 142053us 	 ECCV Decoding time: 68948us 	 Our Decoding time: 10933us
+Results: Encoding time: 142013us 	 ECCV Decoding time: 69141us 	 Our Decoding time: 11003us
+Results: Encoding time: 142292us 	 ECCV Decoding time: 68826us 	 Our Decoding time: 10971us
+Results: Encoding time: 142393us 	 ECCV Decoding time: 69023us 	 Our Decoding time: 10925us
+Results: Encoding time: 142001us 	 ECCV Decoding time: 68892us 	 Our Decoding time: 10977us
+Results: Encoding time: 141773us 	 ECCV Decoding time: 68787us 	 Our Decoding time: 10968us
+Results: Encoding time: 142320us 	 ECCV Decoding time: 68904us 	 Our Decoding time: 10953us
+Results: Encoding time: 142992us 	 ECCV Decoding time: 69451us 	 Our Decoding time: 10931us
+Results: Encoding time: 141403us 	 ECCV Decoding time: 68656us 	 Our Decoding time: 10963us
+Results: Encoding time: 142737us 	 ECCV Decoding time: 69218us 	 Our Decoding time: 10977us
+Results: Encoding time: 142180us 	 ECCV Decoding time: 69246us 	 Our Decoding time: 10987us
+Results: Encoding time: 141613us 	 ECCV Decoding time: 68796us 	 Our Decoding time: 10992us
+Results: Encoding time: 142336us 	 ECCV Decoding time: 69193us 	 Our Decoding time: 10978us
+Results: Encoding time: 142673us 	 ECCV Decoding time: 69241us 	 Our Decoding time: 11071us
+Results: Encoding time: 141899us 	 ECCV Decoding time: 68802us 	 Our Decoding time: 10972us
+Results: Encoding time: 142923us 	 ECCV Decoding time: 69430us 	 Our Decoding time: 10965us
+Results: Encoding time: 141995us 	 ECCV Decoding time: 69100us 	 Our Decoding time: 11053us
+Results: Encoding time: 142395us 	 ECCV Decoding time: 69010us 	 Our Decoding time: 10946us
+Results: Encoding time: 141999us 	 ECCV Decoding time: 69153us 	 Our Decoding time: 11001us
+Results: Encoding time: 142218us 	 ECCV Decoding time: 69158us 	 Our Decoding time: 10958us
+Results: Encoding time: 142274us 	 ECCV Decoding time: 69186us 	 Our Decoding time: 10990us
+Results: Encoding time: 142062us 	 ECCV Decoding time: 68910us 	 Our Decoding time: 10945us
+Results: Encoding time: 141768us 	 ECCV Decoding time: 68987us 	 Our Decoding time: 10931us
+Results: Encoding time: 142538us 	 ECCV Decoding time: 69041us 	 Our Decoding time: 10939us
+Results: Encoding time: 142238us 	 ECCV Decoding time: 68854us 	 Our Decoding time: 10973us
+Results: Encoding time: 142026us 	 ECCV Decoding time: 69121us 	 Our Decoding time: 11049us
+Results: Encoding time: 142577us 	 ECCV Decoding time: 69254us 	 Our Decoding time: 10970us
+Results: Encoding time: 142073us 	 ECCV Decoding time: 69239us 	 Our Decoding time: 11018us
+Results: Encoding time: 141332us 	 ECCV Decoding time: 68724us 	 Our Decoding time: 10971us
+Results: Encoding time: 141718us 	 ECCV Decoding time: 68920us 	 Our Decoding time: 10978us
+Results: Encoding time: 141707us 	 ECCV Decoding time: 68889us 	 Our Decoding time: 10962us
+Results: Encoding time: 143098us 	 ECCV Decoding time: 69281us 	 Our Decoding time: 10982us
+Results: Encoding time: 141710us 	 ECCV Decoding time: 68726us 	 Our Decoding time: 10970us
+Results: Encoding time: 142793us 	 ECCV Decoding time: 69390us 	 Our Decoding time: 10978us
+Results: Encoding time: 142633us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 10993us
+Results: Encoding time: 141815us 	 ECCV Decoding time: 68744us 	 Our Decoding time: 10986us
+Results: Encoding time: 142818us 	 ECCV Decoding time: 69289us 	 Our Decoding time: 10968us
+Results: Encoding time: 142671us 	 ECCV Decoding time: 69245us 	 Our Decoding time: 11022us
+Results: Encoding time: 142206us 	 ECCV Decoding time: 68925us 	 Our Decoding time: 10930us
+Results: Encoding time: 142738us 	 ECCV Decoding time: 69184us 	 Our Decoding time: 10961us
+Results: Encoding time: 141758us 	 ECCV Decoding time: 68751us 	 Our Decoding time: 10965us
+Results: Encoding time: 142731us 	 ECCV Decoding time: 69120us 	 Our Decoding time: 10982us
+Results: Encoding time: 141467us 	 ECCV Decoding time: 68730us 	 Our Decoding time: 10976us
+Results: Encoding time: 142489us 	 ECCV Decoding time: 69120us 	 Our Decoding time: 10977us
+Results: Encoding time: 141952us 	 ECCV Decoding time: 68891us 	 Our Decoding time: 10886us
+Results: Encoding time: 141271us 	 ECCV Decoding time: 68648us 	 Our Decoding time: 10970us
+Results: Encoding time: 141785us 	 ECCV Decoding time: 68901us 	 Our Decoding time: 10974us
+Results: Encoding time: 142486us 	 ECCV Decoding time: 69285us 	 Our Decoding time: 10958us
+Results: Encoding time: 142761us 	 ECCV Decoding time: 69393us 	 Our Decoding time: 10985us
+Results: Encoding time: 141664us 	 ECCV Decoding time: 69004us 	 Our Decoding time: 10944us
+Results: Encoding time: 142695us 	 ECCV Decoding time: 69266us 	 Our Decoding time: 10979us
+Results: Encoding time: 142167us 	 ECCV Decoding time: 69041us 	 Our Decoding time: 11005us
+Results: Encoding time: 142018us 	 ECCV Decoding time: 68975us 	 Our Decoding time: 10942us
+Results: Encoding time: 142391us 	 ECCV Decoding time: 69275us 	 Our Decoding time: 10993us
+Results: Encoding time: 141418us 	 ECCV Decoding time: 68728us 	 Our Decoding time: 10969us
+Results: Encoding time: 142551us 	 ECCV Decoding time: 69243us 	 Our Decoding time: 10968us
+Results: Encoding time: 142568us 	 ECCV Decoding time: 69211us 	 Our Decoding time: 10987us
+Results: Encoding time: 141858us 	 ECCV Decoding time: 68929us 	 Our Decoding time: 10962us
+Results: Encoding time: 143180us 	 ECCV Decoding time: 69400us 	 Our Decoding time: 10973us
+Results: Encoding time: 141662us 	 ECCV Decoding time: 68895us 	 Our Decoding time: 10926us
+Results: Encoding time: 141879us 	 ECCV Decoding time: 68912us 	 Our Decoding time: 10945us
+Results: Encoding time: 142154us 	 ECCV Decoding time: 69129us 	 Our Decoding time: 10986us
+Results: Encoding time: 142015us 	 ECCV Decoding time: 68970us 	 Our Decoding time: 10978us
+Results: Encoding time: 141166us 	 ECCV Decoding time: 68852us 	 Our Decoding time: 10983us
+Results: Encoding time: 141951us 	 ECCV Decoding time: 68911us 	 Our Decoding time: 10980us
+Results: Encoding time: 141936us 	 ECCV Decoding time: 69075us 	 Our Decoding time: 11057us
+Results: Encoding time: 142612us 	 ECCV Decoding time: 69340us 	 Our Decoding time: 10984us
+Results: Encoding time: 142400us 	 ECCV Decoding time: 69302us 	 Our Decoding time: 11026us
+Results: Encoding time: 141651us 	 ECCV Decoding time: 68681us 	 Our Decoding time: 10968us
+Results: Encoding time: 142498us 	 ECCV Decoding time: 69344us 	 Our Decoding time: 10977us
+Results: Encoding time: 142032us 	 ECCV Decoding time: 69128us 	 Our Decoding time: 11039us
+Results: Encoding time: 142478us 	 ECCV Decoding time: 69108us 	 Our Decoding time: 10940us
+Results: Encoding time: 142390us 	 ECCV Decoding time: 68961us 	 Our Decoding time: 10981us
+Results: Encoding time: 141823us 	 ECCV Decoding time: 69197us 	 Our Decoding time: 11057us
+Results: Encoding time: 142159us 	 ECCV Decoding time: 69057us 	 Our Decoding time: 10979us
+Results: Encoding time: 142219us 	 ECCV Decoding time: 68958us 	 Our Decoding time: 10970us
+Results: Encoding time: 142136us 	 ECCV Decoding time: 68994us 	 Our Decoding time: 10928us
+Results: Encoding time: 142443us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 10987us
+Results: Encoding time: 141667us 	 ECCV Decoding time: 68849us 	 Our Decoding time: 10990us
+Results: Encoding time: 142600us 	 ECCV Decoding time: 69233us 	 Our Decoding time: 10972us
+Results: Encoding time: 141973us 	 ECCV Decoding time: 69029us 	 Our Decoding time: 11058us
+Results: Encoding time: 142748us 	 ECCV Decoding time: 69295us 	 Our Decoding time: 10981us
+Results: Encoding time: 141707us 	 ECCV Decoding time: 68710us 	 Our Decoding time: 10968us
+Results: Encoding time: 141845us 	 ECCV Decoding time: 68868us 	 Our Decoding time: 10923us
+Results: Encoding time: 142454us 	 ECCV Decoding time: 69313us 	 Our Decoding time: 11003us
+Results: Encoding time: 141710us 	 ECCV Decoding time: 68722us 	 Our Decoding time: 10963us
+Results: Encoding time: 142999us 	 ECCV Decoding time: 69262us 	 Our Decoding time: 10969us
+Results: Encoding time: 141797us 	 ECCV Decoding time: 68898us 	 Our Decoding time: 10953us
+Results: Encoding time: 142894us 	 ECCV Decoding time: 69196us 	 Our Decoding time: 10977us
+Results: Encoding time: 143040us 	 ECCV Decoding time: 69247us 	 Our Decoding time: 10980us
+Results: Encoding time: 141875us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 11076us
+Results: Encoding time: 142711us 	 ECCV Decoding time: 69419us 	 Our Decoding time: 10955us
+Results: Encoding time: 142491us 	 ECCV Decoding time: 69212us 	 Our Decoding time: 10976us
+Results: Encoding time: 141937us 	 ECCV Decoding time: 68876us 	 Our Decoding time: 10961us
+Results: Encoding time: 142749us 	 ECCV Decoding time: 69382us 	 Our Decoding time: 10983us
+Results: Encoding time: 142081us 	 ECCV Decoding time: 68992us 	 Our Decoding time: 10983us
+Results: Encoding time: 141755us 	 ECCV Decoding time: 69054us 	 Our Decoding time: 11057us
+Results: Encoding time: 142853us 	 ECCV Decoding time: 69034us 	 Our Decoding time: 10932us
+Results: Encoding time: 142525us 	 ECCV Decoding time: 69269us 	 Our Decoding time: 10979us
+Results: Encoding time: 141838us 	 ECCV Decoding time: 68932us 	 Our Decoding time: 10980us
+Results: Encoding time: 143005us 	 ECCV Decoding time: 69318us 	 Our Decoding time: 10984us
+Results: Encoding time: 141949us 	 ECCV Decoding time: 69060us 	 Our Decoding time: 10994us
+Results: Encoding time: 142449us 	 ECCV Decoding time: 69030us 	 Our Decoding time: 10940us
+Results: Encoding time: 142076us 	 ECCV Decoding time: 69047us 	 Our Decoding time: 10929us
+Results: Encoding time: 142022us 	 ECCV Decoding time: 69224us 	 Our Decoding time: 11040us
+Results: Encoding time: 142324us 	 ECCV Decoding time: 69066us 	 Our Decoding time: 10932us
+Results: Encoding time: 142114us 	 ECCV Decoding time: 69226us 	 Our Decoding time: 11044us
+Results: Encoding time: 141905us 	 ECCV Decoding time: 68802us 	 Our Decoding time: 10978us
+Results: Encoding time: 142758us 	 ECCV Decoding time: 69396us 	 Our Decoding time: 10969us
+Results: Encoding time: 142037us 	 ECCV Decoding time: 69232us 	 Our Decoding time: 11014us
+Results: Encoding time: 141811us 	 ECCV Decoding time: 68844us 	 Our Decoding time: 10982us
+Results: Encoding time: 142357us 	 ECCV Decoding time: 69196us 	 Our Decoding time: 10980us
+Results: Encoding time: 141503us 	 ECCV Decoding time: 68771us 	 Our Decoding time: 10982us
+Results: Encoding time: 142575us 	 ECCV Decoding time: 69289us 	 Our Decoding time: 10974us
+Results: Encoding time: 141921us 	 ECCV Decoding time: 68975us 	 Our Decoding time: 10937us
+Results: Encoding time: 141746us 	 ECCV Decoding time: 68949us 	 Our Decoding time: 10981us
+Results: Encoding time: 141995us 	 ECCV Decoding time: 69084us 	 Our Decoding time: 11065us
+Results: Encoding time: 142822us 	 ECCV Decoding time: 69221us 	 Our Decoding time: 10980us
+Results: Encoding time: 141967us 	 ECCV Decoding time: 69077us 	 Our Decoding time: 11039us
+Results: Encoding time: 142811us 	 ECCV Decoding time: 69281us 	 Our Decoding time: 10975us
+Results: Encoding time: 142076us 	 ECCV Decoding time: 69281us 	 Our Decoding time: 11032us
+Results: Encoding time: 141759us 	 ECCV Decoding time: 68663us 	 Our Decoding time: 10979us
+Results: Encoding time: 142240us 	 ECCV Decoding time: 69028us 	 Our Decoding time: 10917us
+Results: Encoding time: 142158us 	 ECCV Decoding time: 69230us 	 Our Decoding time: 11040us
+Results: Encoding time: 143206us 	 ECCV Decoding time: 69507us 	 Our Decoding time: 10987us
+Results: Encoding time: 141790us 	 ECCV Decoding time: 68916us 	 Our Decoding time: 10977us
+Results: Encoding time: 141553us 	 ECCV Decoding time: 68882us 	 Our Decoding time: 10976us
+Results: Encoding time: 142301us 	 ECCV Decoding time: 68940us 	 Our Decoding time: 10923us
+Results: Encoding time: 142329us 	 ECCV Decoding time: 69257us 	 Our Decoding time: 11039us
+Results: Encoding time: 142661us 	 ECCV Decoding time: 69247us 	 Our Decoding time: 10985us
+Results: Encoding time: 142297us 	 ECCV Decoding time: 69133us 	 Our Decoding time: 10978us
+Results: Encoding time: 141708us 	 ECCV Decoding time: 68718us 	 Our Decoding time: 10970us
+Results: Encoding time: 141918us 	 ECCV Decoding time: 68736us 	 Our Decoding time: 10972us
+Results: Encoding time: 142801us 	 ECCV Decoding time: 69215us 	 Our Decoding time: 10985us
+Results: Encoding time: 142170us 	 ECCV Decoding time: 69279us 	 Our Decoding time: 11038us
+Results: Encoding time: 141813us 	 ECCV Decoding time: 68784us 	 Our Decoding time: 10978us
+Results: Encoding time: 142563us 	 ECCV Decoding time: 69234us 	 Our Decoding time: 10980us
+Results: Encoding time: 142261us 	 ECCV Decoding time: 69243us 	 Our Decoding time: 11037us
+Results: Encoding time: 142045us 	 ECCV Decoding time: 68882us 	 Our Decoding time: 10917us
+Results: Encoding time: 142264us 	 ECCV Decoding time: 69221us 	 Our Decoding time: 10981us
+Results: Encoding time: 143059us 	 ECCV Decoding time: 69483us 	 Our Decoding time: 10981us
+Results: Encoding time: 142415us 	 ECCV Decoding time: 69242us 	 Our Decoding time: 10986us
+Results: Encoding time: 142531us 	 ECCV Decoding time: 69245us 	 Our Decoding time: 10967us
+Results: Encoding time: 142336us 	 ECCV Decoding time: 69228us 	 Our Decoding time: 11019us
+Results: Encoding time: 141802us 	 ECCV Decoding time: 69039us 	 Our Decoding time: 10984us
+Results: Encoding time: 142732us 	 ECCV Decoding time: 69224us 	 Our Decoding time: 10974us
+Results: Encoding time: 142661us 	 ECCV Decoding time: 69206us 	 Our Decoding time: 10994us
+Results: Encoding time: 142182us 	 ECCV Decoding time: 68910us 	 Our Decoding time: 10921us
+Results: Encoding time: 142576us 	 ECCV Decoding time: 69160us 	 Our Decoding time: 11034us
+Results: Encoding time: 142616us 	 ECCV Decoding time: 69267us 	 Our Decoding time: 10971us
+Results: Encoding time: 142512us 	 ECCV Decoding time: 69227us 	 Our Decoding time: 11076us
+Results: Encoding time: 142850us 	 ECCV Decoding time: 69006us 	 Our Decoding time: 10969us
+Results: Encoding time: 142428us 	 ECCV Decoding time: 69220us 	 Our Decoding time: 10976us
+Results: Encoding time: 141776us 	 ECCV Decoding time: 69002us 	 Our Decoding time: 11077us
+Results: Encoding time: 142326us 	 ECCV Decoding time: 68978us 	 Our Decoding time: 10985us
+Results: Encoding time: 141993us 	 ECCV Decoding time: 68702us 	 Our Decoding time: 10963us
+Results: Encoding time: 143205us 	 ECCV Decoding time: 69328us 	 Our Decoding time: 10970us
+Results: Encoding time: 142412us 	 ECCV Decoding time: 69198us 	 Our Decoding time: 11053us
+Results: Encoding time: 142291us 	 ECCV Decoding time: 69176us 	 Our Decoding time: 10967us
+Results: Encoding time: 142063us 	 ECCV Decoding time: 68973us 	 Our Decoding time: 10979us
+Results: Encoding time: 142689us 	 ECCV Decoding time: 69043us 	 Our Decoding time: 10976us
+Results: Encoding time: 141898us 	 ECCV Decoding time: 69034us 	 Our Decoding time: 10971us
+Results: Encoding time: 143046us 	 ECCV Decoding time: 69318us 	 Our Decoding time: 10996us
+Results: Encoding time: 141802us 	 ECCV Decoding time: 68863us 	 Our Decoding time: 10978us
+Results: Encoding time: 142901us 	 ECCV Decoding time: 69320us 	 Our Decoding time: 10974us
+Results: Encoding time: 141336us 	 ECCV Decoding time: 68751us 	 Our Decoding time: 10982us
+Results: Encoding time: 142522us 	 ECCV Decoding time: 69024us 	 Our Decoding time: 10935us
+Results: Encoding time: 142199us 	 ECCV Decoding time: 69091us 	 Our Decoding time: 11056us
+Results: Encoding time: 142535us 	 ECCV Decoding time: 68991us 	 Our Decoding time: 10942us
+Results: Encoding time: 143346us 	 ECCV Decoding time: 69293us 	 Our Decoding time: 10977us
+Results: Encoding time: 141094us 	 ECCV Decoding time: 68709us 	 Our Decoding time: 10973us
+Results: Encoding time: 143441us 	 ECCV Decoding time: 69210us 	 Our Decoding time: 10979us
+Results: Encoding time: 141550us 	 ECCV Decoding time: 68978us 	 Our Decoding time: 10963us
+Results: Encoding time: 142585us 	 ECCV Decoding time: 69111us 	 Our Decoding time: 10983us
+Results: Encoding time: 142478us 	 ECCV Decoding time: 69246us 	 Our Decoding time: 10978us
+Results: Encoding time: 141595us 	 ECCV Decoding time: 68939us 	 Our Decoding time: 10977us
+Results: Encoding time: 142034us 	 ECCV Decoding time: 69136us 	 Our Decoding time: 11007us
+Results: Encoding time: 141460us 	 ECCV Decoding time: 68822us 	 Our Decoding time: 10978us
+Results: Encoding time: 141870us 	 ECCV Decoding time: 69211us 	 Our Decoding time: 11021us
+Results: Encoding time: 141684us 	 ECCV Decoding time: 68832us 	 Our Decoding time: 10970us
+Results: Encoding time: 143022us 	 ECCV Decoding time: 69309us 	 Our Decoding time: 10984us
+Results: Encoding time: 141964us 	 ECCV Decoding time: 69020us 	 Our Decoding time: 10926us
+Results: Encoding time: 142543us 	 ECCV Decoding time: 69248us 	 Our Decoding time: 10984us
+Results: Encoding time: 141504us 	 ECCV Decoding time: 69117us 	 Our Decoding time: 11038us
+Results: Encoding time: 142452us 	 ECCV Decoding time: 68963us 	 Our Decoding time: 10933us
+Results: Encoding time: 142082us 	 ECCV Decoding time: 68949us 	 Our Decoding time: 10964us
+Results: Encoding time: 142230us 	 ECCV Decoding time: 69151us 	 Our Decoding time: 11025us
+Results: Encoding time: 141670us 	 ECCV Decoding time: 69007us 	 Our Decoding time: 10918us
+Results: Encoding time: 142470us 	 ECCV Decoding time: 68916us 	 Our Decoding time: 10939us
+Results: Encoding time: 141420us 	 ECCV Decoding time: 68804us 	 Our Decoding time: 10959us
+Results: Encoding time: 142482us 	 ECCV Decoding time: 69078us 	 Our Decoding time: 10945us
+Results: Encoding time: 142145us 	 ECCV Decoding time: 69236us 	 Our Decoding time: 11029us
+Results: Encoding time: 142361us 	 ECCV Decoding time: 68996us 	 Our Decoding time: 10980us
+Results: Encoding time: 143095us 	 ECCV Decoding time: 69197us 	 Our Decoding time: 10979us
+Results: Encoding time: 142291us 	 ECCV Decoding time: 69109us 	 Our Decoding time: 11043us
+Results: Encoding time: 142384us 	 ECCV Decoding time: 69067us 	 Our Decoding time: 10926us
+Results: Encoding time: 142094us 	 ECCV Decoding time: 69200us 	 Our Decoding time: 11029us
+Results: Encoding time: 142026us 	 ECCV Decoding time: 68873us 	 Our Decoding time: 10940us
+Results: Encoding time: 142258us 	 ECCV Decoding time: 69075us 	 Our Decoding time: 10923us
+Results: Encoding time: 142244us 	 ECCV Decoding time: 69228us 	 Our Decoding time: 10984us
+Results: Encoding time: 141793us 	 ECCV Decoding time: 68852us 	 Our Decoding time: 10959us
+Results: Encoding time: 141399us 	 ECCV Decoding time: 68591us 	 Our Decoding time: 10972us
+Results: Encoding time: 143218us 	 ECCV Decoding time: 69226us 	 Our Decoding time: 10970us
+Results: Encoding time: 137182us 	 ECCV Decoding time: 68648us 	 Our Decoding time: 10901us
+Results: Encoding time: 138285us 	 ECCV Decoding time: 69221us 	 Our Decoding time: 10900us
+Results: Encoding time: 137012us 	 ECCV Decoding time: 68721us 	 Our Decoding time: 10880us
+Results: Encoding time: 138069us 	 ECCV Decoding time: 69085us 	 Our Decoding time: 10907us
+Training done.

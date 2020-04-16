@@ -15,7 +15,6 @@ from dataset import get_loader
 
 
 def save_codes(name, codes):
-  print(codes)
   codes = (codes.astype(np.int8) + 1) // 2
   export = np.packbits(codes.reshape(-1))
   np.savez_compressed(
@@ -31,9 +30,15 @@ def save_output_images(name, ex_imgs):
       img
     )
 
+def save_eccv_output_images(name, ex_imgs):
+  for i, img in enumerate(ex_imgs):
+    save_numpy_array_as_image(
+      '%s_eccv_iter%02d.png' % (name, i + 1), 
+      img
+    )
 
 def finish_batch(args, filenames, original, out_imgs,
-                 losses, code_batch, output_suffix):
+                 losses, code_batch, output_suffix, eccv_out_imgs):
 
   all_losses, all_msssim, all_psnr = [], [], []
   for ex_idx, filename in enumerate(filenames):
@@ -48,6 +53,10 @@ def finish_batch(args, filenames, original, out_imgs,
         save_output_images(
           os.path.join(args.out_dir, output_suffix, 'images', filename),
           out_imgs[:, ex_idx, :, :, :]
+        )
+        save_eccv_output_images(
+          os.path.join(args.out_dir, output_suffix, 'images', filename),
+          eccv_out_imgs[:, ex_idx, :, :, :]
         )
 
       msssim, psnr = evaluate(
@@ -77,20 +86,20 @@ def run_eval(model, eval_loader, args, output_suffix=''):
       with torch.no_grad():
           batch = batch.cuda()
           
-          original, out_imgs, losses, code_batch = eval_forward(
+          original, out_imgs, losses, code_batch, eccv_out_imgs = eval_forward(
                   model, (batch, ctx_frames), args)
           
           losses, msssim, psnr = finish_batch(
                   args, filenames, original, out_imgs, 
-                  losses, code_batch, output_suffix)
+                  losses, code_batch, output_suffix, eccv_out_imgs)
           
           all_losses += losses
           all_msssim += msssim
           all_psnr += psnr
 
-      if i % 10 == 0:
-        print('\tevaluating iter %d (%f seconds)...' % (
-          i, time.time() - start_time))
+      #if i % 10 == 0:
+      #  print('\tevaluating iter %d (%f seconds)...' % (
+      #    i, time.time() - start_time))
 
   return (np.array(all_losses).mean(axis=0),
           np.array(all_msssim).mean(axis=0),
