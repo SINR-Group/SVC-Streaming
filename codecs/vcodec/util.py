@@ -286,15 +286,16 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
             dec_unet_output1, dec_unet_output2)
 
         torch.cuda.synchronize()
-        eccv_dec_end = datetime.datetime.now()
-        eccv_dec_time += (eccv_dec_end - eccv_dec_start).microseconds
-        eccv_dec_times.append(eccv_dec_time)
-
-        #print("ECCV Decoding time: {}us @ iter{}".format(eccv_dec_time, itr))
 
         res = res - eccv_output
         eccv_out_img = eccv_out_img + eccv_output.data.cpu()
         eccv_out_img_np = eccv_out_img.numpy().clip(0, 1)
+
+        eccv_dec_end = datetime.datetime.now()
+        eccv_dec_time += (eccv_dec_end - eccv_dec_start).microseconds
+        eccv_dec_times.append(eccv_dec_time)
+        #print("ECCV Decoding time: {}us @ iter{}".format(eccv_dec_time, itr))
+
         eccv_out_imgs.append(eccv_out_img_np)
         #losses.append(float(res.abs().mean().data.cpu().numpy()))
 
