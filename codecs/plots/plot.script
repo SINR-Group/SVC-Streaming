@@ -1,0 +1,14 @@
+set terminal postscript  enhanced font ",30"
+set output 'tpt.eps'
+set ylabel 'Latency (ms)'
+set xlabel 'Number of Layers'
+c1 = "#8fbc8f"; c2 = "#4671d5"; c3 = "#e9967a";
+#set auto x
+set key top left
+set yrange [0:500]
+set style data histogram
+set style histogram cluster gap 2
+set style fill solid border lt -1
+set boxwidth 0.99
+set grid ytics lc rgb "#bbbbbb" lw 1 lt 0
+plot 'results.txt' using 2:xtic(1) ti col fc rgb c1, '' u 3 ti col fc rgb c2 fill solid, '' u 4 ti col fc rgb c3

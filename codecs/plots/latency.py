@@ -33,6 +33,7 @@ print (total_dec2_time)
 
 tf = open('results.txt', 'w')
 
-for itr in itrs:
-    tf.write('{}\t{}\t{}\n'.format(total_enc_time[itr], total_dec1_time[itr], total_dec2_time[itr]))
+tf.write('Title\tEncoding\tECCV-Decoding\tOur-Decoding\n')
+for itr in itrs[:6]:
+    tf.write('{}\t{}\t{}\t{}\n'.format(itr, total_enc_time[itr], total_dec1_time[itr], total_dec2_time[itr]))
 tf.close()
