@@ -3,6 +3,7 @@ from scipy.misc import imsave
 import cv2
 import numpy as np
 import time
+import os
 
 import torch
 from torch.autograd import Variable
@@ -125,7 +126,7 @@ def set_train(models):
             m.train()
 
 
-def eval_forward(model, batch, args):
+def eval_forward(model, batch, args, fnames, osuffix):
     batch, ctx_frames = batch
     cooked_batch = prepare_batch(
         batch, args.v_compress, args.warp)
@@ -139,7 +140,7 @@ def eval_forward(model, batch, args):
         v_compress=args.v_compress,
         iterations=args.iterations,
         encoder_fuse_level=args.encoder_fuse_level,
-        decoder_fuse_level=args.decoder_fuse_level)
+        decoder_fuse_level=args.decoder_fuse_level, fnames=fnames, osuffix=osuffix)
 
 
 def prepare_unet_output(unet, unet_input, flows, warp):
@@ -202,9 +203,23 @@ def forward_ctx(unet, ctx_frames):
 
     return unet_output1, unet_output2
 
+def get_codes(filenames, args, output_suffix, eccv):
+    for ex_idx, filename in enumerate(filenames):
+        filename = filename.split('/')[-1]
+        cname = os.path.join(args.out_dir, output_suffix, 'codes', filename)
+        if eccv == 1:
+            content = np.load(cname+'.eccv.codes.npz')
+        else:
+            content = np.load(cname+'.codes.npz')
+        codes = np.unpackbits(content['codes'])
+        codes = np.reshape(codes, content['shape']).astype(np.float32) * 2 - 1
+        codes = torch.from_numpy(codes)
+        codes = Variable(codes, volatile=True)
+        codes = codes.cuda()
+    return codes
 
 def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
-                  iterations, encoder_fuse_level, decoder_fuse_level):
+                  iterations, encoder_fuse_level, decoder_fuse_level, fnames, osuffix):
     encoder, binarizer, decoder, d2, unet = model
     res, _, _, flows = cooked_batch
     in_img = res
@@ -255,30 +270,30 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
             dec_unet_output1[jj] = None
             dec_unet_output2[jj] = None
 
-    codes = []
     prev_psnr = 0.0
     code_arr=[]
     eccv_dec_time = 0
     eccv_dec_times = []
+    eccv_codes = get_codes(fnames, args, osuffix, 1)
+
     for itr in range(iterations):
+        code = eccv_codes[itr]
+        code = code.unsqueeze(0)
 
-        if args.v_compress and args.stack:
-            encoder_input = torch.cat([frame1, res, frame2], dim=1)
-        else:
-            encoder_input = res
+        #if args.v_compress and args.stack:
+        #    encoder_input = torch.cat([frame1, res, frame2], dim=1)
+        #else:
+        #    encoder_input = res
 
-        # Encode.
-        encoded, encoder_h_1, encoder_h_2, encoder_h_3 = encoder(
-            encoder_input, encoder_h_1, encoder_h_2, encoder_h_3,
-            enc_unet_output1, enc_unet_output2)
+        ## Encode.
+        #encoded, encoder_h_1, encoder_h_2, encoder_h_3 = encoder(
+        #    encoder_input, encoder_h_1, encoder_h_2, encoder_h_3,
+        #    enc_unet_output1, enc_unet_output2)
 
-        # Binarize.
-        code = binarizer(encoded)
-        code_arr.append(code)
-        #if args.save_codes:
-        #    codes.append(code.data.cpu().numpy())
+        ## Binarize.
+        #code = binarizer(encoded)
+        #print (code1.shape, code.shape)
 
-        torch.cuda.synchronize()
         eccv_dec_start = datetime.datetime.now()
 
         eccv_output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
@@ -301,16 +316,15 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
 
     dec_start = datetime.datetime.now()
 
+    code = get_codes(fnames, args, osuffix, 0)
     b,d,h,w= code.shape
-    code = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
+    #code = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
+
     (output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
             code, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
             dec_unet_output1, dec_unet_output2)
 
     torch.cuda.synchronize()
-
-    if args.save_codes:
-        codes.append(code.data.cpu().numpy())
 
     out_img = out_img + output.data.cpu()
     out_img_np = out_img.numpy().clip(0, 1)
@@ -323,7 +337,7 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
     out_imgs.append(out_img_np)
     losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))
 
-    return original, np.array(out_imgs), np.array(losses), np.array(codes), np.array(eccv_out_imgs)
+    return original, np.array(out_imgs), np.array(losses), np.array(eccv_out_imgs)
 
 
 def save_numpy_array_as_image(filename, arr):
