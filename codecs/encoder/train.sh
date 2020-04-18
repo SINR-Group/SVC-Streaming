@@ -64,5 +64,4 @@ python3 -u train.py \
   --load-model-name "demo" \
   --load-iter 20000 \
   --out-dir ${outdir} \
-  --save-out-img \
   --save-codes \

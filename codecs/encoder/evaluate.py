@@ -62,15 +62,15 @@ def finish_batch(args, filenames, original, out_imgs,
           eccv_codes[:, ex_idx, :, :, :]
         )
 
-      if args.save_out_img:
-        save_output_images(
-          os.path.join(args.out_dir, output_suffix, 'images', filename),
-          out_imgs[:, ex_idx, :, :, :]
-        )
-        save_eccv_output_images(
-          os.path.join(args.out_dir, output_suffix, 'images', filename),
-          eccv_out_imgs[:, ex_idx, :, :, :]
-        )
+      #if args.save_out_img:
+      #  save_output_images(
+      #    os.path.join(args.out_dir, output_suffix, 'images', filename),
+      #    out_imgs[:, ex_idx, :, :, :]
+      #  )
+      #  save_eccv_output_images(
+      #    os.path.join(args.out_dir, output_suffix, 'images', filename),
+      #    eccv_out_imgs[:, ex_idx, :, :, :]
+      #  )
 
       msssim, psnr = evaluate(
         original[None, ex_idx], 

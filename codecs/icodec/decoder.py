@@ -73,6 +73,6 @@ for iters in range(min(args.iterations, codes.size(0))):
     image = image + output.data.cpu()
 
     imsave(
-        os.path.join(args.output, '{:02d}.png'.format(iters)),
+        args.output,
         np.squeeze(image.numpy().clip(0, 1) * 255.0).astype(np.uint8)
         .transpose(1, 2, 0))
