@@ -1,0 +1,993 @@
+Namespace(batch_size=2, bits=16, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=5, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='../vcodec/h1/model_iters_5', num_crops=2, out_dir='vtl_output/hrch_1_itr5', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/dhf1k/train...
+9600 images loaded.
+	distance=3/3
+Loader for 9600 images (4800 batches) created.
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(80, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 20000
+Loading encoder from ../vcodec/h1/model_iters_5/demo_encoder_00020000.pth...
+Loading binarizer from ../vcodec/h1/model_iters_5/demo_binarizer_00020000.pth...
+Loading decoder from ../vcodec/h1/model_iters_5/demo_decoder_00020000.pth...
+Loading unet from ../vcodec/h1/model_iters_5/demo_unet_00020000.pth...
+Loading d2 from ../vcodec/h1/model_iters_5/demo_d2_00020000.pth...
+[TRAIN] Iter[20001]; LR: 0.00025; Rec1 Loss: 0.045156; Rec2 Loss: 0.042090; Backprop: 0.0302 sec; Batch: 0.3866 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+272 images loaded.
+	distance=3/3
+Loader for 272 images (272 batches) created.
+Creating directory vtl_output/hrch_1_itr5/iter20001/codes.
+Creating directory vtl_output/hrch_1_itr5/iter20001/images.
+Encoding time:62647
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61897
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61591
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62000
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62207
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62329
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61836
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61547
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61963
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62538
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62298
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61966
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61823
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62120
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62562
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62139
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61912
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61708
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62215
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62475
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62151
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61722
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61851
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62333
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62351
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62117
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61761
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61709
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62307
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62345
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61887
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61788
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61809
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62557
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62293
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61928
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61727
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61919
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62354
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62626
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62162
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61840
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61696
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61933
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62457
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62114
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61951
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61583
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62050
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62680
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62473
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62011
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61810
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62267
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62173
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62591
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62320
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61841
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61748
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62083
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62672
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62147
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61844
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61742
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61972
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62332
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62276
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62011
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61885
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61964
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62300
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62171
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61775
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61736
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62373
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62099
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61831
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61908
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62572
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62219
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61832
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61653
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62232
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62316
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61813
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61864
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62334
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62577
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61892
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61543
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62119
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62388
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61862
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61634
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62287
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62211
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61983
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61619
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62311
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62359
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61954
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61850
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62194
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62304
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62029
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61588
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62398
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62250
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61799
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61726
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62429
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62220
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61823
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62037
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62263
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62258
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61881
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62001
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62498
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62433
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61850
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61822
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62476
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62338
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61740
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61903
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62593
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62078
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61947
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61899
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62284
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62269
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61937
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61786
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62397
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62182
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61775
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61891
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62532
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62276
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61931
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61902
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62565
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62160
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61905
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61932
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62704
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62223
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61698
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61886
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62389
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62151
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61863
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62011
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62494
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62088
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61899
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61949
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62487
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61953
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61799
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61881
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62633
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62165
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61924
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61931
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62431
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62153
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61779
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62398
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62653
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62166
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61861
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61880
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62536
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62173
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61937
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61787
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62482
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62264
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61917
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61835
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62556
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62064
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61797
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61748
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62424
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62158
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61702
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61924
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62583
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62324
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62074
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61847
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62615
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62100
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61807
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61918
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62386
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62321
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61807
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61855
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62380
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62294
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61816
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61808
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62333
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62381
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61853
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62002
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62235
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62305
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61725
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62024
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62410
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62346
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61830
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61987
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62612
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62457
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61993
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61874
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62796
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62262
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61739
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61880
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62558
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62130
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61932
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61957
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62483
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62125
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61830
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61860
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62354
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62509
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62197
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61540
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62309
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62651
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62102
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61622
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62136
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62684
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61986
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61662
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62150
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62516
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62217
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61832
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62095
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62397
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62144
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61740
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62212
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62534
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62337
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61967
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61852
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62401
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62750
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62047
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61833
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62227
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62469
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61988
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61893
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62280
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61806
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61974
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:61826
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Encoding time:62021
+(1, 80, 18, 22)
+(5, 16, 18, 22)
+Evaluation @iter 20001 done in 64 secs
+TVL Loss   : 0.04549
+TVL MS-SSIM: 0.91026
+TVL PSNR   : 30.43038
+Training done.

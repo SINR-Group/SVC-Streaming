@@ -339,6 +339,7 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
 
     #print('ECCV Decoding Times: ' % '\t'.join(['%.5f' % el for el in eccv_dec_times.tolist()]))
     #print ("Results: Encoding time: {}us \t ECCV Decoding time: {}us \t Our Decoding time: {}us".format((dec_start-enc_start).microseconds, eccv_dec_time, (dec_end-dec_start).microseconds, eccv_dec_time))
+    print ("Encoding time:{}".format(eccv_dec_time))
 
     out_imgs.append(out_img_np)
     losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))

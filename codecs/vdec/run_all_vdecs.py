@@ -9,7 +9,6 @@ for itr in iters:
         os.makedirs('vtl/output_'+str(itr)+'/codes')
         os.makedirs('vtl/output_'+str(itr)+'/images')
     for h in hrch:
-        os.system('bash train.sh '+str(h)+' ../vcodec/h'+str(h)+'/model_iters_'+str(itr)+' '+str(itr)+' input output')
+        os.system('bash train.sh '+str(h)+' ../vcodec/h'+str(h)+'/model_iters_'+str(itr)+' '+str(itr)+' input output >> vtl/output_'+str(itr)+'/results.txt')
         os.system('cp -r ../vcodec/vtl_output/hrch_'+str(h)+'_itr'+str(itr)+'/iter20001/codes/* vtl/output_'+str(itr)+'/codes/')
     os.system('cp -r input/cframes/* vtl/output_'+str(itr)+'/images/')
-    break

@@ -1,0 +1,3441 @@
+Namespace(batch_size=2, bits=8, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=9, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='../vcodec/h2/model_iters_9', num_crops=2, out_dir='vtl_output/hrch_2_itr9', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/dhf1k/train...
+38400 images loaded.
+	distance=1/2
+Loader for 38400 images (19200 batches) created.
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(72, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 20000
+Loading encoder from ../vcodec/h2/model_iters_9/demo_encoder_00020000.pth...
+Loading binarizer from ../vcodec/h2/model_iters_9/demo_binarizer_00020000.pth...
+Loading decoder from ../vcodec/h2/model_iters_9/demo_decoder_00020000.pth...
+Loading unet from ../vcodec/h2/model_iters_9/demo_unet_00020000.pth...
+Loading d2 from ../vcodec/h2/model_iters_9/demo_d2_00020000.pth...
+[TRAIN] Iter[20001]; LR: 0.00025; Rec1 Loss: 0.023065; Rec2 Loss: 0.020053; Backprop: 0.0444 sec; Batch: 0.4701 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Creating directory vtl_output/hrch_2_itr9/iter20001/codes.
+Creating directory vtl_output/hrch_2_itr9/iter20001/images.
+Encoding time:95490
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94758
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94904
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95091
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95176
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94512
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94927
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94938
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95195
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94865
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94843
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94925
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95551
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95081
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94667
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95195
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95203
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94486
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94732
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95347
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95295
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95065
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94953
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94954
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95063
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95018
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94949
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94810
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94932
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94878
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95039
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94831
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95202
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94851
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95121
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94888
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94886
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94937
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95351
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94843
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95119
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94777
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95183
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94892
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94815
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95129
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95603
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94766
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94848
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94774
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94760
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95161
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94537
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94909
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94946
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94844
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94927
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95190
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95208
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94993
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94896
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95187
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95456
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95016
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95276
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95328
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94739
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94810
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95059
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95331
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94970
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94842
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95576
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95504
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94631
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94937
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95243
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95251
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95034
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95327
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95113
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95160
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94868
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95089
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95109
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95079
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94913
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94866
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95132
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94910
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94808
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95057
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95223
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94661
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95191
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94897
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94728
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94689
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95145
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95397
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94723
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95269
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95271
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94665
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94862
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95052
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94943
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95389
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94754
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95304
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95252
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94830
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94977
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95433
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95286
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94655
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94956
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95209
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95481
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94818
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94993
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95127
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95061
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95070
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94896
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95238
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95007
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94893
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94872
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94968
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:96485
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94991
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95140
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95347
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95419
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95073
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94931
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95102
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94976
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94918
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95136
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95341
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94912
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94983
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94790
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95033
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94815
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94739
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94847
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95663
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94870
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95153
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95182
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94942
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94904
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94967
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95766
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94943
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94839
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95115
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95578
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94924
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95050
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95054
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95376
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94862
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94677
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94867
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95541
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95101
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95103
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94874
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95232
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95023
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94869
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95209
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95102
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95013
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94806
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94852
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95567
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95071
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94772
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95260
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95004
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95051
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94852
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95681
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95000
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94664
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95187
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95158
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94920
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94592
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95002
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95508
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95285
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94986
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94701
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94942
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95115
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94802
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94914
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95296
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95217
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94940
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94726
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94965
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95176
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95622
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94992
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95067
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95046
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94890
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94836
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95077
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95094
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95181
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94675
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95211
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95438
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95490
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94983
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95544
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94851
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95195
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94977
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94913
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95278
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95353
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95263
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95433
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95310
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95898
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95108
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94978
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95195
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95274
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94993
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95387
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94919
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95104
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95030
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95295
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95405
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95209
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95346
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95196
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94754
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95098
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95660
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95046
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95004
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95269
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95074
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95043
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94940
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95451
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94788
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95097
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95320
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95796
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94852
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95208
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95342
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95365
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94897
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95024
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95415
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95079
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94842
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95069
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95615
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94918
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95206
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95036
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95411
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94831
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94877
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95232
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95359
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94884
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94910
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95085
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95345
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94962
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94910
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95361
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94948
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95111
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95095
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95180
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95249
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95129
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94946
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95283
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95099
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94931
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95152
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95516
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94865
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95351
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95433
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95257
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95031
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94818
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94911
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95555
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95068
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94894
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95284
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95465
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95034
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95031
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95087
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95207
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95017
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94989
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95073
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95681
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95131
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94858
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95112
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94872
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94726
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95271
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95145
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95189
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95118
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95122
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95200
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94888
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95080
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95035
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95213
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94972
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94877
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95002
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95131
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95264
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94889
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95067
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95148
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95034
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94821
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95080
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95430
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94932
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94826
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95258
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95371
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94861
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95273
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95247
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95521
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94749
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95213
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95211
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95121
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94991
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95109
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95337
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95014
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95092
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95443
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95474
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95042
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94769
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95275
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95400
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95188
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95089
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95198
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95419
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95126
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94965
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95017
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95420
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95083
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95024
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95171
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95392
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94936
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94965
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95119
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95270
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95339
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94960
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95424
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95509
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95346
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94863
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95005
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95448
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95216
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95120
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95171
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95326
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94918
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95042
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95444
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95253
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94716
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95262
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95181
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94857
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94803
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95143
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95598
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95111
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95481
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95340
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95393
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95020
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95165
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95248
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95065
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94947
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95128
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95361
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95437
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94755
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95118
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95408
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94838
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94823
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95145
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95296
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95035
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95038
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94972
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95272
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95295
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95074
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95278
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95297
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94895
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95186
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95337
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95060
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94992
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95043
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95823
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95247
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94965
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95181
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95435
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95455
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95055
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95208
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95456
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95000
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94997
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95533
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95033
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95059
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95089
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95403
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95175
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94887
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95084
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95408
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95076
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94807
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94968
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95056
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94878
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94797
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94893
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95545
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95000
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94854
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95222
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95170
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95039
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94866
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95037
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95868
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95108
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95511
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95280
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94911
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94971
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95055
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95461
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95116
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94926
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95021
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95370
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95062
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95004
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95392
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95476
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95262
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94628
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95434
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95456
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95024
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95046
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95346
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95289
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94843
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94997
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95555
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94944
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94814
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95336
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95477
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94891
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94887
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95656
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95435
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95056
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95515
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95121
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95627
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94901
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95229
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95475
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95579
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95066
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95060
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95561
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95515
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95002
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95103
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95212
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95405
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94827
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94889
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95340
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95655
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94855
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94932
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95538
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95123
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95031
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94805
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95085
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95558
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95296
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94968
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95086
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95366
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95100
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95116
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95651
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95326
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95394
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94848
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94913
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95313
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95196
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95475
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95091
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95310
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95079
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94782
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94948
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95265
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95088
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95142
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95054
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95124
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95042
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95375
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95161
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95101
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95198
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95187
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95036
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94945
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95145
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95240
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94838
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95030
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95110
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95368
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95018
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94990
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95500
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95152
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94925
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95422
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95300
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94917
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94995
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95262
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95094
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95049
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95228
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95154
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94847
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94986
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94958
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94988
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95028
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95088
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95292
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94895
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94905
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95055
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95777
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95238
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94844
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95158
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95493
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95051
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95112
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95509
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95004
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95102
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94990
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95489
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94955
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94936
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95403
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95322
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95076
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95470
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95410
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94877
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94951
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95155
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95244
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94815
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94999
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94897
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95178
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94996
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94910
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95390
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95259
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95093
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94923
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95201
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95002
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94699
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95125
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95232
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95030
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95103
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95542
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95670
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94946
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95189
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95256
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95026
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94685
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94870
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95309
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94695
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95010
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95263
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95423
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95100
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95368
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95388
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94928
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94969
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95208
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95242
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94862
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95309
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94825
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94871
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95813
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95551
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94933
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94981
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95397
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95528
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94883
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95487
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95027
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95253
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94694
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95027
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95516
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94893
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94967
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95394
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95424
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95154
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95126
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94697
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95047
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95145
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95158
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95022
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95045
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95291
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94811
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95060
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94832
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95201
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95025
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94997
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95438
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95077
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94950
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95318
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95255
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95240
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95230
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95413
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95352
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94952
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95254
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95458
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94752
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95048
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95439
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94884
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94972
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95232
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95205
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94951
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95241
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95341
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95235
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94836
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94966
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95196
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95581
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95240
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95093
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95479
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94925
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94844
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95265
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95144
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95097
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94840
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94975
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95302
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94817
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95007
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95374
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95172
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94868
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95047
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95396
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95045
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94786
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95379
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95466
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94892
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95315
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95146
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95182
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95182
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95040
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95275
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95242
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94777
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95135
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95573
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94918
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94890
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95034
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95958
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95140
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94806
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95440
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94886
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95005
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95406
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95082
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95373
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94890
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95420
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95396
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94875
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95208
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95020
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95190
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95193
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95079
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95218
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95382
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95050
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95075
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95362
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95280
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94895
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95214
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95559
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95422
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94987
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94983
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94857
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94918
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95406
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95480
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94711
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95437
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95086
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95230
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94986
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95276
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95288
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94916
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94962
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95051
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95165
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95151
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94947
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95301
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95582
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95059
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95043
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95188
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95209
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94812
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94962
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95501
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95237
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95018
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95430
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95244
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94974
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95141
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95320
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94757
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94829
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95310
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95330
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95105
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94897
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94949
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95201
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94956
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95678
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95377
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94803
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94944
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95094
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95647
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94932
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95239
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94991
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94990
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94869
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94965
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95279
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95249
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95018
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95083
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95335
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95450
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94877
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95013
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95362
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94591
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95021
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95081
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95504
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94993
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94947
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95078
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95312
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95063
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94597
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94983
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95612
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94844
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94955
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94970
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95498
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94925
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94685
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95198
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95306
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94895
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94924
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95320
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95039
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94821
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95211
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94889
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94934
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95161
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95609
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94924
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94884
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95035
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95259
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94955
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94717
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95222
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95363
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94839
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94927
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95415
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95110
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94975
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95199
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94851
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95178
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95176
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95053
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95130
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94667
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95473
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95180
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94845
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95605
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94988
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95080
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95014
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95097
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95070
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94996
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95216
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94996
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94855
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95012
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:96049
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94746
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94680
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95161
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95009
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94930
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95083
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95261
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94804
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94868
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94981
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95149
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94852
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94867
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95503
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95023
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94875
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94885
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95323
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94689
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94701
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95044
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95217
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94983
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95432
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95367
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94858
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94973
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95368
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94818
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94878
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95042
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95489
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94998
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94909
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95470
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94954
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94854
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94977
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95211
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95418
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94957
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95651
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95399
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95152
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95071
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94993
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95228
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95254
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95143
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94970
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95411
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94895
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94921
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94947
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95332
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95203
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94902
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95285
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95652
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94956
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95008
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95026
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95219
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95355
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94870
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95080
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95198
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94963
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95005
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95119
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95163
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94977
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94887
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95298
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95251
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95241
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94849
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94810
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95467
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95005
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94875
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95907
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95510
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95009
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94951
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94997
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95364
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95215
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95447
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94992
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95757
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94757
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94909
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95400
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95125
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95373
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95162
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95341
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95138
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94718
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94968
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95299
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95341
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95313
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94844
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95173
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94995
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95055
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95401
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94752
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94949
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95242
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95009
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94863
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95161
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95348
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95371
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95086
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95560
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95041
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94787
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95367
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94884
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94987
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94902
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95047
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95125
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94890
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94996
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95013
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95388
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95169
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94910
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95348
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94905
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94826
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95341
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95372
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95330
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95212
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95353
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95403
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95011
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95151
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95053
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95017
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:94949
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Encoding time:95167
+(1, 72, 18, 22)
+(9, 8, 18, 22)
+Evaluation @iter 20001 done in 313 secs
+TVL Loss   : 0.04195
+TVL MS-SSIM: 0.93618
+TVL PSNR   : 30.20152
+Training done.
