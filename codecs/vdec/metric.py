@@ -222,9 +222,10 @@ def psnr(original, compared):
 
 def main():
     if args.metric != 'psnr':
-        print(msssim(args.original_image, args.compared_image), end='')
+        s = msssim(args.original_image, args.compared_image)
     if args.metric != 'ssim':
-        print(psnr(args.original_image, args.compared_image), end='')
+        p = psnr(args.original_image, args.compared_image)
+    print(p, s)
 
 
 if __name__ == '__main__':
