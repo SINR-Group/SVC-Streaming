@@ -46,7 +46,8 @@ def finish_batch(args, filenames, original, out_imgs,
       filename = filename.split('/')[-1]
       #if args.save_codes:
       #  save_codes(
-      #    os.path.join(args.out_dir, output_suffix, 'codes', filename),
+      #    os.path.join(args.in_dir, 'codes', filename),
+      #    #os.path.join(args.out_dir, output_suffix, 'codes', filename),
       #    code_batch[:, ex_idx, :, :, :]
       #  )
 
