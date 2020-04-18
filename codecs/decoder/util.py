@@ -206,7 +206,7 @@ def forward_ctx(unet, ctx_frames):
 def get_codes(filenames, args, output_suffix, eccv):
     for ex_idx, filename in enumerate(filenames):
         filename = filename.split('/')[-1]
-        cname = os.path.join(args.out_dir, output_suffix, 'codes', filename)
+        cname = os.path.join(args.in_dir, 'vcodes', filename)
         if eccv == 1:
             content = np.load(cname+'.eccv.codes.npz')
         else:

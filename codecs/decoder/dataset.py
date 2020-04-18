@@ -34,6 +34,7 @@ def get_loader(is_train, root, mv_dir, args):
 
 
 def default_loader(path):
+    #print(path)
     cv2_img = cv2.imread(path)
     if cv2_img is None:
         print (path, cv2_img)
@@ -118,7 +119,7 @@ def flip_cv2(img, patch):
 
 
 # (Close, far)
-def get_group_filenames(filename, img_idx, distance1, distance2):
+def get_group_filenames(filename, img_idx, distance1, distance2, args):
     dtype = filename[-3:]
     assert filename[-4] == '.'
     code = filename[:-4].split('_')[-1]
@@ -131,9 +132,17 @@ def get_group_filenames(filename, img_idx, distance1, distance2):
         delta_close = distance1 * (-1)
         delta_far = distance2
 
-    filenames = [filename[:-4 - len(code)] + str(img_idx + delta_close).zfill(len(code)) + '.%s' % dtype,
+    recpath = os.path.join(args.in_dir, 'cframes/')
+
+    filenames = [recpath+filename[len(args.eval)+1:-4 - len(code)] + str(img_idx + delta_close).zfill(len(code)) + '.%s' % dtype,
                  filename[:-4 - len(code)] + str(img_idx).zfill(len(code)) + '.%s' % dtype,
-                 filename[:-4 - len(code)] + str(img_idx + delta_far).zfill(len(code)) + '.%s' % dtype]
+                 recpath+filename[len(args.eval)+1:-4 - len(code)] + str(img_idx + delta_far).zfill(len(code)) + '.%s' % dtype]
+    #filenames = [filename[:-4 - len(code)] + str(img_idx + delta_close).zfill(len(code)) + '.%s' % dtype,
+    #             filename[:-4 - len(code)] + str(img_idx).zfill(len(code)) + '.%s' % dtype,
+    #             filename[:-4 - len(code)] + str(img_idx + delta_far).zfill(len(code)) + '.%s' % dtype]
+
+    #print (filename[len(args.eval)+1:-4 - len(code)], filename[:-4 - len(code)], filenames[0], recpath+filename[len(args.eval)+1:-4 - len(code)])
+    #print (filenames)
 
     return filenames
 
@@ -209,7 +218,7 @@ class ImageFolder(data.Dataset):
                     continue
                 if all(os.path.isfile(fn) for fn in
                        get_group_filenames(
-                            filename, img_idx, dist1, dist2)):
+                            filename, img_idx, dist1, dist2, self.args)):
 
                     self.imgs.append(filename)
             else:
@@ -226,7 +235,7 @@ class ImageFolder(data.Dataset):
         filenames = get_group_filenames(
             filename, img_idx, 
             self.args.distance1,
-            self.args.distance2)
+            self.args.distance2, self.args)
         assert all(os.path.isfile(fn) for fn in filenames), filenames
         assert len(filenames) == 3
 

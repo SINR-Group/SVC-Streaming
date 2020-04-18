@@ -1,12 +1,13 @@
-if (( $# != 4 )); then
-    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2 model_dir iterations out_dir"
+if (( $# != 5 )); then
+    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2 model_dir iterations in_dir out_dir"
     exit
 fi
 hier=$1
 
 modeldir=$2
 iters=$3
-outdir=$4
+indir=$4
+outdir=$5
 
 train="/home/mallesh/deepvideo/data/dhf1k/train"
 eval="/home/mallesh/deepvideo/data/vtl/test"
@@ -63,6 +64,7 @@ python3 -u train.py \
   --iterations ${iters} \
   --load-model-name "demo" \
   --load-iter 20000 \
+  --in-dir ${indir} \
   --out-dir ${outdir} \
   --save-out-img \
   --save-codes \

@@ -27,14 +27,14 @@ def save_codes(name, codes):
 def save_output_images(name, ex_imgs):
   for i, img in enumerate(ex_imgs):
     save_numpy_array_as_image(
-      '%s_iter%02d.png' % (name, i + 1), 
+      '%s' % name, 
       img
     )
 
 def save_eccv_output_images(name, ex_imgs):
   for i, img in enumerate(ex_imgs):
     save_numpy_array_as_image(
-      '%s_eccv_iter%02d.png' % (name, i + 1), 
+      '%s' % name, 
       img
     )
 
@@ -52,13 +52,14 @@ def finish_batch(args, filenames, original, out_imgs,
 
       if args.save_out_img:
         save_output_images(
-          os.path.join(args.out_dir, output_suffix, 'images', filename),
+          os.path.join(args.in_dir, 'cframes', filename),
+          #os.path.join(args.out_dir, output_suffix, 'ours', filename),
           out_imgs[:, ex_idx, :, :, :]
         )
-        save_eccv_output_images(
-          os.path.join(args.out_dir, output_suffix, 'images', filename),
-          eccv_out_imgs[:, ex_idx, :, :, :]
-        )
+        #save_eccv_output_images(
+        #  os.path.join(args.out_dir, output_suffix, 'eccv', filename),
+        #  eccv_out_imgs[:, ex_idx, :, :, :]
+        #)
 
       msssim, psnr = evaluate(
         original[None, ex_idx], 
@@ -73,7 +74,7 @@ def finish_batch(args, filenames, original, out_imgs,
 
 def run_eval(model, eval_loader, args, output_suffix=''):
 
-  for sub_dir in ['codes', 'images']:
+  for sub_dir in ['eccv', 'ours']:
     cur_eval_dir = os.path.join(args.out_dir, output_suffix, sub_dir)
     if not os.path.exists(cur_eval_dir):
       print("Creating directory %s." % cur_eval_dir)
@@ -83,7 +84,7 @@ def run_eval(model, eval_loader, args, output_suffix=''):
 
   start_time = time.time()
   for i, (batch, ctx_frames, filenames) in enumerate(eval_loader):
-      print (ctx_frames.shape, filenames)
+      #print (ctx_frames.shape, filenames)
       with torch.no_grad():
           batch = batch.cuda()
           

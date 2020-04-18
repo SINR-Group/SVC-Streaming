@@ -70,6 +70,8 @@ parser.add_argument('--gpus', default='0', type=str,
                     help='GPU indices separated by comma, e.g. \"0,1\".')
 
 ######## Experiment ########
+parser.add_argument('--in-dir', type=str, default='input',
+                    help='Input directory (for compressed codes & context images).')
 parser.add_argument('--out-dir', type=str, default='output',
                     help='Output directory (for compressed codes & output images).')
 parser.add_argument('--model-dir', type=str, default='model',
