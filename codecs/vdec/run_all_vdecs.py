@@ -1,6 +1,6 @@
 import os
 
-iters = [i for i in range(2, 11)]
+iters = [i for i in range(1, 2)]
 hrch = [i for i in range(3)]
 
 for itr in iters:
