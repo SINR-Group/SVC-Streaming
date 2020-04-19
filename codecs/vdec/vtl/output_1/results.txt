@@ -161,146 +161,146 @@ Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 136 images loaded.
 	distance=6/6
 Loader for 136 images (136 batches) created.
-Decoding time:15305
-Decoding time:15630
-Decoding time:16516
-Decoding time:15505
-Decoding time:15552
-Decoding time:16520
-Decoding time:16582
-Decoding time:16501
-Decoding time:16564
-Decoding time:16524
-Decoding time:16539
-Decoding time:16494
-Decoding time:16522
-Decoding time:16517
-Decoding time:16518
-Decoding time:16531
-Decoding time:16479
-Decoding time:16530
-Decoding time:16527
-Decoding time:16550
-Decoding time:16526
-Decoding time:16516
-Decoding time:16577
-Decoding time:16536
-Decoding time:16560
-Decoding time:16509
-Decoding time:16509
-Decoding time:16524
-Decoding time:16525
-Decoding time:16544
-Decoding time:16512
-Decoding time:16512
-Decoding time:16486
-Decoding time:16519
-Decoding time:16481
-Decoding time:16548
-Decoding time:15824
-Decoding time:15613
-Decoding time:16557
-Decoding time:16521
-Decoding time:16464
-Decoding time:16514
-Decoding time:16498
-Decoding time:16504
-Decoding time:16499
-Decoding time:16465
-Decoding time:16504
-Decoding time:16542
-Decoding time:16472
-Decoding time:16499
-Decoding time:16515
-Decoding time:16525
-Decoding time:16486
-Decoding time:16489
-Decoding time:16494
-Decoding time:16518
-Decoding time:16511
-Decoding time:16517
-Decoding time:16522
-Decoding time:16537
-Decoding time:16517
-Decoding time:16568
-Decoding time:16484
-Decoding time:16537
-Decoding time:16472
-Decoding time:16511
-Decoding time:16522
-Decoding time:16490
-Decoding time:16478
-Decoding time:16546
-Decoding time:16466
-Decoding time:16516
-Decoding time:16539
-Decoding time:16496
-Decoding time:16646
-Decoding time:16657
-Decoding time:16712
-Decoding time:16622
-Decoding time:16668
-Decoding time:16681
-Decoding time:16717
-Decoding time:16704
-Decoding time:16664
-Decoding time:16699
-Decoding time:16628
-Decoding time:15540
-Decoding time:16673
-Decoding time:16652
-Decoding time:16690
-Decoding time:16698
-Decoding time:16733
-Decoding time:16677
-Decoding time:16714
-Decoding time:16681
-Decoding time:16693
-Decoding time:16590
-Decoding time:16675
-Decoding time:16674
-Decoding time:16717
-Decoding time:16688
-Decoding time:16676
-Decoding time:16691
-Decoding time:16737
-Decoding time:16701
-Decoding time:16682
-Decoding time:16689
-Decoding time:16725
-Decoding time:16707
-Decoding time:16685
-Decoding time:16688
-Decoding time:16736
-Decoding time:16711
-Decoding time:16737
-Decoding time:16719
-Decoding time:16670
-Decoding time:16704
-Decoding time:16719
-Decoding time:16691
-Decoding time:16688
-Decoding time:16698
-Decoding time:16674
-Decoding time:16684
-Decoding time:16671
-Decoding time:16724
-Decoding time:16692
-Decoding time:16675
-Decoding time:16687
-Decoding time:16728
-Decoding time:16673
-Decoding time:16702
-Decoding time:16711
-Decoding time:16659
-Decoding time:16555
-Decoding time:16563
-Decoding time:16538
-Decoding time:16591
-Evaluation @iter 20000 done in 24 secs
-TVL Loss   : 0.05463
-TVL MS-SSIM: 0.85187
-TVL PSNR   : 29.86589
+ECCV Decoding time:12308
+ECCV Decoding time:11962
+ECCV Decoding time:11942
+ECCV Decoding time:11963
+ECCV Decoding time:11974
+ECCV Decoding time:11947
+ECCV Decoding time:12097
+ECCV Decoding time:11952
+ECCV Decoding time:11913
+ECCV Decoding time:11880
+ECCV Decoding time:11894
+ECCV Decoding time:12044
+ECCV Decoding time:11920
+ECCV Decoding time:11836
+ECCV Decoding time:11971
+ECCV Decoding time:11641
+ECCV Decoding time:11425
+ECCV Decoding time:11441
+ECCV Decoding time:11534
+ECCV Decoding time:11398
+ECCV Decoding time:11031
+ECCV Decoding time:10907
+ECCV Decoding time:10883
+ECCV Decoding time:10878
+ECCV Decoding time:10895
+ECCV Decoding time:10917
+ECCV Decoding time:10856
+ECCV Decoding time:10834
+ECCV Decoding time:10569
+ECCV Decoding time:10487
+ECCV Decoding time:10722
+ECCV Decoding time:10498
+ECCV Decoding time:10509
+ECCV Decoding time:9791
+ECCV Decoding time:9755
+ECCV Decoding time:9747
+ECCV Decoding time:9764
+ECCV Decoding time:9768
+ECCV Decoding time:9785
+ECCV Decoding time:9864
+ECCV Decoding time:9864
+ECCV Decoding time:9711
+ECCV Decoding time:9879
+ECCV Decoding time:9826
+ECCV Decoding time:9866
+ECCV Decoding time:9823
+ECCV Decoding time:9927
+ECCV Decoding time:9780
+ECCV Decoding time:9858
+ECCV Decoding time:9814
+ECCV Decoding time:9883
+ECCV Decoding time:9829
+ECCV Decoding time:9862
+ECCV Decoding time:9821
+ECCV Decoding time:9828
+ECCV Decoding time:9816
+ECCV Decoding time:9856
+ECCV Decoding time:9780
+ECCV Decoding time:9825
+ECCV Decoding time:9835
+ECCV Decoding time:9873
+ECCV Decoding time:9877
+ECCV Decoding time:9832
+ECCV Decoding time:9835
+ECCV Decoding time:9807
+ECCV Decoding time:9830
+ECCV Decoding time:9818
+ECCV Decoding time:9833
+ECCV Decoding time:9830
+ECCV Decoding time:9886
+ECCV Decoding time:9861
+ECCV Decoding time:9823
+ECCV Decoding time:9886
+ECCV Decoding time:9882
+ECCV Decoding time:9803
+ECCV Decoding time:9849
+ECCV Decoding time:9796
+ECCV Decoding time:9867
+ECCV Decoding time:9855
+ECCV Decoding time:10018
+ECCV Decoding time:9830
+ECCV Decoding time:9804
+ECCV Decoding time:9823
+ECCV Decoding time:9855
+ECCV Decoding time:9874
+ECCV Decoding time:9878
+ECCV Decoding time:9883
+ECCV Decoding time:9952
+ECCV Decoding time:9858
+ECCV Decoding time:9833
+ECCV Decoding time:9871
+ECCV Decoding time:9846
+ECCV Decoding time:9824
+ECCV Decoding time:9848
+ECCV Decoding time:9810
+ECCV Decoding time:9857
+ECCV Decoding time:9923
+ECCV Decoding time:9920
+ECCV Decoding time:9920
+ECCV Decoding time:9921
+ECCV Decoding time:9834
+ECCV Decoding time:9883
+ECCV Decoding time:9898
+ECCV Decoding time:9833
+ECCV Decoding time:9840
+ECCV Decoding time:9836
+ECCV Decoding time:9891
+ECCV Decoding time:9857
+ECCV Decoding time:9846
+ECCV Decoding time:9835
+ECCV Decoding time:9918
+ECCV Decoding time:9821
+ECCV Decoding time:9871
+ECCV Decoding time:9831
+ECCV Decoding time:9819
+ECCV Decoding time:9861
+ECCV Decoding time:9858
+ECCV Decoding time:9843
+ECCV Decoding time:9887
+ECCV Decoding time:9869
+ECCV Decoding time:9901
+ECCV Decoding time:9847
+ECCV Decoding time:9878
+ECCV Decoding time:9863
+ECCV Decoding time:9878
+ECCV Decoding time:9786
+ECCV Decoding time:9889
+ECCV Decoding time:9863
+ECCV Decoding time:9851
+ECCV Decoding time:9997
+ECCV Decoding time:9845
+ECCV Decoding time:9730
+ECCV Decoding time:9683
+ECCV Decoding time:9704
+ECCV Decoding time:9726
+ECCV Decoding time:9679
+Evaluation @iter 20000 done in 11 secs
+TVL Loss   : 0.05446
+TVL MS-SSIM: 
+TVL PSNR   : 
 Namespace(batch_size=2, bits=16, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=1, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='../vcodec/h1/model_iters_1', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
 	Encoder fuse level: 2
 	Decoder fuse level: 3
@@ -464,282 +464,282 @@ Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 272 images loaded.
 	distance=3/3
 Loader for 272 images (272 batches) created.
-Decoding time:17399
-Decoding time:18843
-Decoding time:18820
-Decoding time:18915
-Decoding time:18802
-Decoding time:18770
-Decoding time:18819
-Decoding time:18863
-Decoding time:18858
-Decoding time:18850
-Decoding time:18858
-Decoding time:18899
-Decoding time:18900
-Decoding time:18866
-Decoding time:18853
-Decoding time:18876
-Decoding time:18828
-Decoding time:18860
-Decoding time:18858
-Decoding time:18875
-Decoding time:18837
-Decoding time:18879
-Decoding time:18865
-Decoding time:18892
-Decoding time:18861
-Decoding time:17959
-Decoding time:18810
-Decoding time:18787
-Decoding time:18822
-Decoding time:18863
-Decoding time:18884
-Decoding time:18887
-Decoding time:18855
-Decoding time:18869
-Decoding time:18881
-Decoding time:18884
-Decoding time:19190
-Decoding time:18890
-Decoding time:18869
-Decoding time:18906
-Decoding time:18851
-Decoding time:18851
-Decoding time:18873
-Decoding time:18903
-Decoding time:18880
-Decoding time:18884
-Decoding time:18862
-Decoding time:20294
-Decoding time:18873
-Decoding time:18848
-Decoding time:18850
-Decoding time:18883
-Decoding time:18856
-Decoding time:17944
-Decoding time:18848
-Decoding time:18884
-Decoding time:18853
-Decoding time:18874
-Decoding time:18889
-Decoding time:18883
-Decoding time:19236
-Decoding time:18927
-Decoding time:18874
-Decoding time:18787
-Decoding time:18827
-Decoding time:18901
-Decoding time:18900
-Decoding time:18837
-Decoding time:18833
-Decoding time:18746
-Decoding time:18865
-Decoding time:18828
-Decoding time:18853
-Decoding time:18758
-Decoding time:18863
-Decoding time:18845
-Decoding time:18884
-Decoding time:18754
-Decoding time:18904
-Decoding time:18841
-Decoding time:18861
-Decoding time:18754
-Decoding time:18912
-Decoding time:18732
-Decoding time:18918
-Decoding time:18821
-Decoding time:18869
-Decoding time:18904
-Decoding time:18862
-Decoding time:18929
-Decoding time:18872
-Decoding time:18855
-Decoding time:18896
-Decoding time:18870
-Decoding time:18865
-Decoding time:18860
-Decoding time:18886
-Decoding time:18893
-Decoding time:18890
-Decoding time:18891
-Decoding time:18909
-Decoding time:18879
-Decoding time:18870
-Decoding time:18876
-Decoding time:18866
-Decoding time:18848
-Decoding time:18890
-Decoding time:17926
-Decoding time:18852
-Decoding time:18888
-Decoding time:18840
-Decoding time:18865
-Decoding time:17776
-Decoding time:18920
-Decoding time:18850
-Decoding time:18782
-Decoding time:18860
-Decoding time:18864
-Decoding time:18902
-Decoding time:18923
-Decoding time:19281
-Decoding time:18819
-Decoding time:18860
-Decoding time:18532
-Decoding time:17767
-Decoding time:18892
-Decoding time:18846
-Decoding time:18899
-Decoding time:18768
-Decoding time:18891
-Decoding time:18873
-Decoding time:18910
-Decoding time:18903
-Decoding time:18916
-Decoding time:18871
-Decoding time:18860
-Decoding time:18881
-Decoding time:18891
-Decoding time:18873
-Decoding time:18816
-Decoding time:18887
-Decoding time:18895
-Decoding time:18839
-Decoding time:18868
-Decoding time:18818
-Decoding time:18887
-Decoding time:18826
-Decoding time:18907
-Decoding time:18849
-Decoding time:18817
-Decoding time:18860
-Decoding time:18893
-Decoding time:18870
-Decoding time:18896
-Decoding time:18869
-Decoding time:18872
-Decoding time:18879
-Decoding time:18849
-Decoding time:18792
-Decoding time:18880
-Decoding time:18874
-Decoding time:18938
-Decoding time:18825
-Decoding time:18899
-Decoding time:18898
-Decoding time:18888
-Decoding time:18826
-Decoding time:18912
-Decoding time:18794
-Decoding time:18909
-Decoding time:18884
-Decoding time:18845
-Decoding time:18891
-Decoding time:18880
-Decoding time:18903
-Decoding time:18837
-Decoding time:18884
-Decoding time:18895
-Decoding time:18835
-Decoding time:18896
-Decoding time:18855
-Decoding time:18901
-Decoding time:18901
-Decoding time:18936
-Decoding time:18887
-Decoding time:18892
-Decoding time:18870
-Decoding time:18902
-Decoding time:18916
-Decoding time:18909
-Decoding time:18882
-Decoding time:18883
-Decoding time:18842
-Decoding time:18897
-Decoding time:18821
-Decoding time:18817
-Decoding time:18833
-Decoding time:18904
-Decoding time:18832
-Decoding time:18904
-Decoding time:18872
-Decoding time:18894
-Decoding time:20360
-Decoding time:18227
-Decoding time:18836
-Decoding time:17936
-Decoding time:18858
-Decoding time:18797
-Decoding time:18899
-Decoding time:18837
-Decoding time:18913
-Decoding time:18879
-Decoding time:18843
-Decoding time:18877
-Decoding time:18868
-Decoding time:18864
-Decoding time:18869
-Decoding time:18858
-Decoding time:18853
-Decoding time:18866
-Decoding time:18815
-Decoding time:18855
-Decoding time:18838
-Decoding time:18861
-Decoding time:18851
-Decoding time:18870
-Decoding time:18816
-Decoding time:18848
-Decoding time:18882
-Decoding time:18919
-Decoding time:18898
-Decoding time:18864
-Decoding time:18862
-Decoding time:18898
-Decoding time:18889
-Decoding time:18883
-Decoding time:18872
-Decoding time:18910
-Decoding time:18877
-Decoding time:18872
-Decoding time:18888
-Decoding time:18870
-Decoding time:18889
-Decoding time:18897
-Decoding time:18863
-Decoding time:18876
-Decoding time:20252
-Decoding time:18875
-Decoding time:18874
-Decoding time:18907
-Decoding time:18870
-Decoding time:18861
-Decoding time:18885
-Decoding time:18870
-Decoding time:18871
-Decoding time:18865
-Decoding time:18876
-Decoding time:18883
-Decoding time:18863
-Decoding time:18906
-Decoding time:18854
-Decoding time:18877
-Decoding time:18858
-Decoding time:18862
-Decoding time:18853
-Decoding time:18909
-Decoding time:18798
-Decoding time:18927
-Decoding time:18774
-Decoding time:18733
-Decoding time:18765
-Decoding time:18748
-Evaluation @iter 20000 done in 46 secs
-TVL Loss   : 0.05158
-TVL MS-SSIM: 0.85668
-TVL PSNR   : 30.28438
+ECCV Decoding time:14509
+ECCV Decoding time:14136
+ECCV Decoding time:14209
+ECCV Decoding time:14284
+ECCV Decoding time:14203
+ECCV Decoding time:14262
+ECCV Decoding time:14192
+ECCV Decoding time:13958
+ECCV Decoding time:12840
+ECCV Decoding time:12681
+ECCV Decoding time:12659
+ECCV Decoding time:12657
+ECCV Decoding time:12661
+ECCV Decoding time:12293
+ECCV Decoding time:12117
+ECCV Decoding time:12153
+ECCV Decoding time:12131
+ECCV Decoding time:12121
+ECCV Decoding time:12118
+ECCV Decoding time:12060
+ECCV Decoding time:12104
+ECCV Decoding time:11690
+ECCV Decoding time:11643
+ECCV Decoding time:11656
+ECCV Decoding time:11685
+ECCV Decoding time:11724
+ECCV Decoding time:11652
+ECCV Decoding time:11708
+ECCV Decoding time:11637
+ECCV Decoding time:11530
+ECCV Decoding time:11665
+ECCV Decoding time:11668
+ECCV Decoding time:11638
+ECCV Decoding time:11696
+ECCV Decoding time:11718
+ECCV Decoding time:11715
+ECCV Decoding time:11732
+ECCV Decoding time:11696
+ECCV Decoding time:11742
+ECCV Decoding time:11674
+ECCV Decoding time:11650
+ECCV Decoding time:11671
+ECCV Decoding time:11711
+ECCV Decoding time:11727
+ECCV Decoding time:11636
+ECCV Decoding time:11666
+ECCV Decoding time:11638
+ECCV Decoding time:11663
+ECCV Decoding time:11688
+ECCV Decoding time:11728
+ECCV Decoding time:11734
+ECCV Decoding time:11741
+ECCV Decoding time:11778
+ECCV Decoding time:11635
+ECCV Decoding time:11763
+ECCV Decoding time:11838
+ECCV Decoding time:11711
+ECCV Decoding time:11780
+ECCV Decoding time:11685
+ECCV Decoding time:11698
+ECCV Decoding time:11687
+ECCV Decoding time:11667
+ECCV Decoding time:11671
+ECCV Decoding time:11648
+ECCV Decoding time:11749
+ECCV Decoding time:11667
+ECCV Decoding time:11678
+ECCV Decoding time:11664
+ECCV Decoding time:11726
+ECCV Decoding time:11670
+ECCV Decoding time:11664
+ECCV Decoding time:11700
+ECCV Decoding time:11709
+ECCV Decoding time:11681
+ECCV Decoding time:11669
+ECCV Decoding time:11685
+ECCV Decoding time:11688
+ECCV Decoding time:11681
+ECCV Decoding time:11649
+ECCV Decoding time:11683
+ECCV Decoding time:11680
+ECCV Decoding time:11688
+ECCV Decoding time:11679
+ECCV Decoding time:11697
+ECCV Decoding time:11653
+ECCV Decoding time:11720
+ECCV Decoding time:11666
+ECCV Decoding time:11672
+ECCV Decoding time:11669
+ECCV Decoding time:11663
+ECCV Decoding time:11669
+ECCV Decoding time:11695
+ECCV Decoding time:11679
+ECCV Decoding time:11689
+ECCV Decoding time:11687
+ECCV Decoding time:11641
+ECCV Decoding time:11661
+ECCV Decoding time:11743
+ECCV Decoding time:11953
+ECCV Decoding time:11999
+ECCV Decoding time:11992
+ECCV Decoding time:11914
+ECCV Decoding time:11762
+ECCV Decoding time:11788
+ECCV Decoding time:11746
+ECCV Decoding time:11768
+ECCV Decoding time:11742
+ECCV Decoding time:11759
+ECCV Decoding time:11763
+ECCV Decoding time:11792
+ECCV Decoding time:11794
+ECCV Decoding time:11754
+ECCV Decoding time:11738
+ECCV Decoding time:11737
+ECCV Decoding time:11684
+ECCV Decoding time:11821
+ECCV Decoding time:11745
+ECCV Decoding time:11768
+ECCV Decoding time:11715
+ECCV Decoding time:11709
+ECCV Decoding time:11734
+ECCV Decoding time:11679
+ECCV Decoding time:11698
+ECCV Decoding time:11728
+ECCV Decoding time:11726
+ECCV Decoding time:11712
+ECCV Decoding time:11681
+ECCV Decoding time:11720
+ECCV Decoding time:11696
+ECCV Decoding time:11695
+ECCV Decoding time:11680
+ECCV Decoding time:11737
+ECCV Decoding time:11658
+ECCV Decoding time:11635
+ECCV Decoding time:11724
+ECCV Decoding time:11796
+ECCV Decoding time:11796
+ECCV Decoding time:11731
+ECCV Decoding time:11709
+ECCV Decoding time:11721
+ECCV Decoding time:11694
+ECCV Decoding time:11726
+ECCV Decoding time:11713
+ECCV Decoding time:11751
+ECCV Decoding time:11687
+ECCV Decoding time:11720
+ECCV Decoding time:11726
+ECCV Decoding time:11707
+ECCV Decoding time:11547
+ECCV Decoding time:11584
+ECCV Decoding time:11590
+ECCV Decoding time:11873
+ECCV Decoding time:11959
+ECCV Decoding time:15802
+ECCV Decoding time:12013
+ECCV Decoding time:11964
+ECCV Decoding time:11767
+ECCV Decoding time:11827
+ECCV Decoding time:11765
+ECCV Decoding time:11833
+ECCV Decoding time:11759
+ECCV Decoding time:11770
+ECCV Decoding time:11748
+ECCV Decoding time:11783
+ECCV Decoding time:11777
+ECCV Decoding time:11768
+ECCV Decoding time:11745
+ECCV Decoding time:11737
+ECCV Decoding time:11673
+ECCV Decoding time:11745
+ECCV Decoding time:11754
+ECCV Decoding time:11793
+ECCV Decoding time:11777
+ECCV Decoding time:11707
+ECCV Decoding time:11775
+ECCV Decoding time:11731
+ECCV Decoding time:11706
+ECCV Decoding time:11692
+ECCV Decoding time:11678
+ECCV Decoding time:11685
+ECCV Decoding time:11682
+ECCV Decoding time:11726
+ECCV Decoding time:11669
+ECCV Decoding time:11650
+ECCV Decoding time:11663
+ECCV Decoding time:11678
+ECCV Decoding time:11664
+ECCV Decoding time:11653
+ECCV Decoding time:11700
+ECCV Decoding time:11650
+ECCV Decoding time:11684
+ECCV Decoding time:11673
+ECCV Decoding time:11662
+ECCV Decoding time:11640
+ECCV Decoding time:11667
+ECCV Decoding time:11675
+ECCV Decoding time:11682
+ECCV Decoding time:11660
+ECCV Decoding time:11682
+ECCV Decoding time:11667
+ECCV Decoding time:11630
+ECCV Decoding time:11650
+ECCV Decoding time:11667
+ECCV Decoding time:11674
+ECCV Decoding time:11705
+ECCV Decoding time:11669
+ECCV Decoding time:11660
+ECCV Decoding time:11697
+ECCV Decoding time:11690
+ECCV Decoding time:11650
+ECCV Decoding time:11686
+ECCV Decoding time:11688
+ECCV Decoding time:11683
+ECCV Decoding time:11674
+ECCV Decoding time:11702
+ECCV Decoding time:11791
+ECCV Decoding time:11677
+ECCV Decoding time:11659
+ECCV Decoding time:11500
+ECCV Decoding time:11814
+ECCV Decoding time:11578
+ECCV Decoding time:11538
+ECCV Decoding time:11576
+ECCV Decoding time:11573
+ECCV Decoding time:11624
+ECCV Decoding time:11656
+ECCV Decoding time:11691
+ECCV Decoding time:11690
+ECCV Decoding time:11686
+ECCV Decoding time:11707
+ECCV Decoding time:11712
+ECCV Decoding time:11662
+ECCV Decoding time:11646
+ECCV Decoding time:11687
+ECCV Decoding time:11727
+ECCV Decoding time:11730
+ECCV Decoding time:11716
+ECCV Decoding time:11717
+ECCV Decoding time:11694
+ECCV Decoding time:11685
+ECCV Decoding time:11742
+ECCV Decoding time:11731
+ECCV Decoding time:11753
+ECCV Decoding time:11759
+ECCV Decoding time:11743
+ECCV Decoding time:11760
+ECCV Decoding time:11668
+ECCV Decoding time:11738
+ECCV Decoding time:11750
+ECCV Decoding time:11718
+ECCV Decoding time:11687
+ECCV Decoding time:11719
+ECCV Decoding time:11692
+ECCV Decoding time:11721
+ECCV Decoding time:11749
+ECCV Decoding time:11814
+ECCV Decoding time:11735
+ECCV Decoding time:11697
+ECCV Decoding time:11765
+ECCV Decoding time:11772
+ECCV Decoding time:11706
+ECCV Decoding time:11675
+ECCV Decoding time:11666
+ECCV Decoding time:11731
+ECCV Decoding time:11706
+ECCV Decoding time:11683
+ECCV Decoding time:11710
+ECCV Decoding time:11724
+ECCV Decoding time:11548
+ECCV Decoding time:11569
+ECCV Decoding time:11553
+ECCV Decoding time:11593
+Evaluation @iter 20000 done in 21 secs
+TVL Loss   : 0.05146
+TVL MS-SSIM: 
+TVL PSNR   : 
 Namespace(batch_size=2, bits=8, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=1, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='../vcodec/h2/model_iters_1', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
 	Encoder fuse level: 1
 	Decoder fuse level: 1
@@ -903,1095 +903,1079 @@ Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 1088 images loaded.
 	distance=1/2
 Loader for 1088 images (1088 batches) created.
-Decoding time:15768
-Decoding time:16664
-Decoding time:16657
-Decoding time:16732
-Decoding time:16664
-Decoding time:16646
-Decoding time:16690
-Decoding time:16682
-Decoding time:16698
-Decoding time:16718
-Decoding time:16704
-Decoding time:16699
-Decoding time:16717
-Decoding time:16723
-Decoding time:16707
-Decoding time:16688
-Decoding time:16726
-Decoding time:16711
-Decoding time:16636
-Decoding time:16671
-Decoding time:16654
-Decoding time:16692
-Decoding time:16681
-Decoding time:16673
-Decoding time:16636
-Decoding time:16726
-Decoding time:16680
-Decoding time:16725
-Decoding time:16699
-Decoding time:16685
-Decoding time:16692
-Decoding time:16721
-Decoding time:16677
-Decoding time:16686
-Decoding time:16729
-Decoding time:16695
-Decoding time:16666
-Decoding time:16710
-Decoding time:16646
-Decoding time:16707
-Decoding time:16672
-Decoding time:16698
-Decoding time:16688
-Decoding time:16645
-Decoding time:16702
-Decoding time:16628
-Decoding time:16642
-Decoding time:16656
-Decoding time:16703
-Decoding time:16637
-Decoding time:16693
-Decoding time:16675
-Decoding time:16651
-Decoding time:16650
-Decoding time:16630
-Decoding time:16683
-Decoding time:16632
-Decoding time:16635
-Decoding time:16656
-Decoding time:17062
-Decoding time:16709
-Decoding time:16652
-Decoding time:16711
-Decoding time:16691
-Decoding time:16717
-Decoding time:16643
-Decoding time:16687
-Decoding time:16717
-Decoding time:16694
-Decoding time:16742
-Decoding time:16712
-Decoding time:16753
-Decoding time:16701
-Decoding time:16709
-Decoding time:16702
-Decoding time:16680
-Decoding time:16707
-Decoding time:16698
-Decoding time:16701
-Decoding time:16736
-Decoding time:16703
-Decoding time:16776
-Decoding time:16734
-Decoding time:16721
-Decoding time:16758
-Decoding time:16701
-Decoding time:16729
-Decoding time:16616
-Decoding time:16686
-Decoding time:16666
-Decoding time:15873
-Decoding time:16741
-Decoding time:15835
-Decoding time:18485
-Decoding time:15708
-Decoding time:16683
-Decoding time:15895
-Decoding time:16723
-Decoding time:16706
-Decoding time:16756
-Decoding time:16747
-Decoding time:16697
-Decoding time:16790
-Decoding time:16690
-Decoding time:15644
-Decoding time:16751
-Decoding time:15916
-Decoding time:16733
-Decoding time:15726
-Decoding time:16674
-Decoding time:15865
-Decoding time:15983
-Decoding time:16669
-Decoding time:16652
-Decoding time:15765
-Decoding time:16762
-Decoding time:15695
-Decoding time:16784
-Decoding time:15856
-Decoding time:15845
-Decoding time:15652
-Decoding time:15743
-Decoding time:15648
-Decoding time:15827
-Decoding time:15952
-Decoding time:15982
-Decoding time:15675
-Decoding time:15858
-Decoding time:15919
-Decoding time:15901
-Decoding time:15955
-Decoding time:15907
-Decoding time:16676
-Decoding time:15905
-Decoding time:16800
-Decoding time:16801
-Decoding time:16781
-Decoding time:16723
-Decoding time:16825
-Decoding time:16726
-Decoding time:16781
-Decoding time:16773
-Decoding time:16732
-Decoding time:16783
-Decoding time:16810
-Decoding time:16722
-Decoding time:16944
-Decoding time:16832
-Decoding time:16838
-Decoding time:16765
-Decoding time:16829
-Decoding time:16829
-Decoding time:16789
-Decoding time:16851
-Decoding time:16812
-Decoding time:16834
-Decoding time:16693
-Decoding time:16804
-Decoding time:16813
-Decoding time:16776
-Decoding time:16836
-Decoding time:16778
-Decoding time:16836
-Decoding time:16709
-Decoding time:16721
-Decoding time:16744
-Decoding time:16841
-Decoding time:16775
-Decoding time:16759
-Decoding time:16752
-Decoding time:16828
-Decoding time:16840
-Decoding time:16817
-Decoding time:16786
-Decoding time:16793
-Decoding time:16826
-Decoding time:16840
-Decoding time:16739
-Decoding time:16732
-Decoding time:16755
-Decoding time:16801
-Decoding time:16868
-Decoding time:16731
-Decoding time:16836
-Decoding time:16748
-Decoding time:16763
-Decoding time:16733
-Decoding time:16759
-Decoding time:16803
-Decoding time:16820
-Decoding time:16824
-Decoding time:16814
-Decoding time:16736
-Decoding time:16766
-Decoding time:16724
-Decoding time:16863
-Decoding time:16781
-Decoding time:16791
-Decoding time:16814
-Decoding time:16758
-Decoding time:16778
-Decoding time:16744
-Decoding time:15891
-Decoding time:16804
-Decoding time:15931
-Decoding time:16794
-Decoding time:16804
-Decoding time:16828
-Decoding time:16838
-Decoding time:15842
-Decoding time:16782
-Decoding time:16785
-Decoding time:16817
-Decoding time:16801
-Decoding time:16728
-Decoding time:16772
-Decoding time:16748
-Decoding time:16750
-Decoding time:16820
-Decoding time:16738
-Decoding time:16738
-Decoding time:16778
-Decoding time:16710
-Decoding time:16703
-Decoding time:16762
-Decoding time:16728
-Decoding time:16736
-Decoding time:16839
-Decoding time:16790
-Decoding time:16742
-Decoding time:16719
-Decoding time:16801
-Decoding time:16759
-Decoding time:16718
-Decoding time:16790
-Decoding time:16784
-Decoding time:16788
-Decoding time:16710
-Decoding time:16783
-Decoding time:16742
-Decoding time:16810
-Decoding time:16783
-Decoding time:16813
-Decoding time:16811
-Decoding time:16813
-Decoding time:16761
-Decoding time:16802
-Decoding time:16784
-Decoding time:16740
-Decoding time:16808
-Decoding time:16794
-Decoding time:16783
-Decoding time:16777
-Decoding time:16743
-Decoding time:16756
-Decoding time:16757
-Decoding time:16746
-Decoding time:16821
-Decoding time:16822
-Decoding time:16833
-Decoding time:16794
-Decoding time:16819
-Decoding time:16703
-Decoding time:16790
-Decoding time:16830
-Decoding time:16816
-Decoding time:16822
-Decoding time:16831
-Decoding time:16756
-Decoding time:16798
-Decoding time:16813
-Decoding time:16803
-Decoding time:16743
-Decoding time:16769
-Decoding time:16838
-Decoding time:16838
-Decoding time:16850
-Decoding time:16723
-Decoding time:16786
-Decoding time:16264
-Decoding time:16808
-Decoding time:16752
-Decoding time:16740
-Decoding time:15978
-Decoding time:16764
-Decoding time:16821
-Decoding time:16638
-Decoding time:16750
-Decoding time:16830
-Decoding time:16785
-Decoding time:16720
-Decoding time:16789
-Decoding time:16809
-Decoding time:16837
-Decoding time:16841
-Decoding time:16824
-Decoding time:16799
-Decoding time:16825
-Decoding time:16830
-Decoding time:16823
-Decoding time:16795
-Decoding time:16697
-Decoding time:16797
-Decoding time:16743
-Decoding time:16828
-Decoding time:16733
-Decoding time:16791
-Decoding time:16797
-Decoding time:16811
-Decoding time:16724
-Decoding time:16808
-Decoding time:16774
-Decoding time:16777
-Decoding time:16817
-Decoding time:16814
-Decoding time:16723
-Decoding time:16771
-Decoding time:16821
-Decoding time:16819
-Decoding time:16805
-Decoding time:16808
-Decoding time:16777
-Decoding time:16798
-Decoding time:16820
-Decoding time:16790
-Decoding time:16793
-Decoding time:16726
-Decoding time:16740
-Decoding time:16800
-Decoding time:16739
-Decoding time:16803
-Decoding time:16815
-Decoding time:16733
-Decoding time:16741
-Decoding time:16795
-Decoding time:16772
-Decoding time:16708
-Decoding time:16760
-Decoding time:16807
-Decoding time:16810
-Decoding time:16738
-Decoding time:16814
-Decoding time:16723
-Decoding time:16734
-Decoding time:16785
-Decoding time:16806
-Decoding time:16741
-Decoding time:16790
-Decoding time:16801
-Decoding time:16687
-Decoding time:16705
-Decoding time:16746
-Decoding time:16741
-Decoding time:16826
-Decoding time:16776
-Decoding time:16824
-Decoding time:16845
-Decoding time:16814
-Decoding time:16812
-Decoding time:16821
-Decoding time:16788
-Decoding time:16722
-Decoding time:16857
-Decoding time:16761
-Decoding time:16380
-Decoding time:16810
-Decoding time:16844
-Decoding time:16738
-Decoding time:16782
-Decoding time:16721
-Decoding time:16641
-Decoding time:15682
-Decoding time:16693
-Decoding time:16782
-Decoding time:16753
-Decoding time:16650
-Decoding time:16667
-Decoding time:16749
-Decoding time:16670
-Decoding time:16688
-Decoding time:16786
-Decoding time:16793
-Decoding time:16659
-Decoding time:16673
-Decoding time:16661
-Decoding time:16789
-Decoding time:16770
-Decoding time:16647
-Decoding time:16634
-Decoding time:16722
-Decoding time:16690
-Decoding time:16762
-Decoding time:16665
-Decoding time:16662
-Decoding time:16741
-Decoding time:16725
-Decoding time:16694
-Decoding time:16672
-Decoding time:16706
-Decoding time:16756
-Decoding time:16674
-Decoding time:16757
-Decoding time:16674
-Decoding time:16675
-Decoding time:16770
-Decoding time:16778
-Decoding time:16809
-Decoding time:16794
-Decoding time:16697
-Decoding time:16682
-Decoding time:16679
-Decoding time:16791
-Decoding time:16770
-Decoding time:16679
-Decoding time:16695
-Decoding time:16811
-Decoding time:16841
-Decoding time:16697
-Decoding time:16776
-Decoding time:16656
-Decoding time:16774
-Decoding time:15821
-Decoding time:16675
-Decoding time:15924
-Decoding time:16792
-Decoding time:16726
-Decoding time:16729
-Decoding time:16749
-Decoding time:16692
-Decoding time:15741
-Decoding time:15782
-Decoding time:15902
-Decoding time:15798
-Decoding time:15929
-Decoding time:15646
-Decoding time:15790
-Decoding time:15700
-Decoding time:15840
-Decoding time:15816
-Decoding time:15832
-Decoding time:15778
-Decoding time:15861
-Decoding time:15743
-Decoding time:15876
-Decoding time:15785
-Decoding time:15751
-Decoding time:15908
-Decoding time:15937
-Decoding time:15811
-Decoding time:15812
-Decoding time:15647
-Decoding time:15907
-Decoding time:15694
-Decoding time:15971
-Decoding time:15766
-Decoding time:15730
-Decoding time:15836
-Decoding time:15836
-Decoding time:15746
-Decoding time:15874
-Decoding time:15643
-Decoding time:15916
-Decoding time:15789
-Decoding time:15761
-Decoding time:15745
-Decoding time:15791
-Decoding time:15743
-Decoding time:15795
-Decoding time:15812
-Decoding time:15873
-Decoding time:15832
-Decoding time:15838
-Decoding time:15753
-Decoding time:15822
-Decoding time:15837
-Decoding time:15852
-Decoding time:15780
-Decoding time:15838
-Decoding time:15840
-Decoding time:15811
-Decoding time:15837
-Decoding time:15684
-Decoding time:15847
-Decoding time:15936
-Decoding time:15641
-Decoding time:15884
-Decoding time:15750
-Decoding time:15886
-Decoding time:15652
-Decoding time:15920
-Decoding time:15909
-Decoding time:15856
-Decoding time:15798
-Decoding time:15784
-Decoding time:15865
-Decoding time:15653
-Decoding time:15714
-Decoding time:15916
-Decoding time:15782
-Decoding time:15820
-Decoding time:15820
-Decoding time:15646
-Decoding time:15811
-Decoding time:15769
-Decoding time:15827
-Decoding time:15806
-Decoding time:15816
-Decoding time:15931
-Decoding time:15900
-Decoding time:15852
-Decoding time:15784
-Decoding time:16690
-Decoding time:16795
-Decoding time:16815
-Decoding time:16649
-Decoding time:16729
-Decoding time:15805
-Decoding time:16689
-Decoding time:16664
-Decoding time:16767
-Decoding time:16758
-Decoding time:16749
-Decoding time:16759
-Decoding time:16760
-Decoding time:16767
-Decoding time:16752
-Decoding time:16721
-Decoding time:16741
-Decoding time:16749
-Decoding time:16720
-Decoding time:16742
-Decoding time:16742
-Decoding time:16749
-Decoding time:16769
-Decoding time:16752
-Decoding time:16779
-Decoding time:16765
-Decoding time:16715
-Decoding time:16786
-Decoding time:16768
-Decoding time:16772
-Decoding time:16776
-Decoding time:16735
-Decoding time:16817
-Decoding time:16815
-Decoding time:16622
-Decoding time:16781
-Decoding time:16747
-Decoding time:16707
-Decoding time:16713
-Decoding time:16786
-Decoding time:16773
-Decoding time:16819
-Decoding time:16682
-Decoding time:16686
-Decoding time:16806
-Decoding time:16716
-Decoding time:16784
-Decoding time:16811
-Decoding time:16808
-Decoding time:16758
-Decoding time:16806
-Decoding time:16662
-Decoding time:16814
-Decoding time:16770
-Decoding time:16750
-Decoding time:16799
-Decoding time:16788
-Decoding time:16798
-Decoding time:16705
-Decoding time:16682
-Decoding time:16770
-Decoding time:16764
-Decoding time:16752
-Decoding time:16828
-Decoding time:16746
-Decoding time:16680
-Decoding time:16712
-Decoding time:16795
-Decoding time:16806
-Decoding time:16723
-Decoding time:16795
-Decoding time:16809
-Decoding time:16678
-Decoding time:16707
-Decoding time:16689
-Decoding time:16691
-Decoding time:16720
-Decoding time:16769
-Decoding time:16718
-Decoding time:16733
-Decoding time:16827
-Decoding time:16849
-Decoding time:16833
-Decoding time:16783
-Decoding time:16797
-Decoding time:16844
-Decoding time:16777
-Decoding time:16685
-Decoding time:16786
-Decoding time:16681
-Decoding time:16671
-Decoding time:16742
-Decoding time:16809
-Decoding time:16682
-Decoding time:16685
-Decoding time:16715
-Decoding time:16811
-Decoding time:16733
-Decoding time:16677
-Decoding time:16701
-Decoding time:16660
-Decoding time:16807
-Decoding time:16676
-Decoding time:16779
-Decoding time:16790
-Decoding time:16813
-Decoding time:16714
-Decoding time:16785
-Decoding time:16730
-Decoding time:16680
-Decoding time:16698
-Decoding time:16813
-Decoding time:16606
-Decoding time:16710
-Decoding time:16753
-Decoding time:16765
-Decoding time:16807
-Decoding time:16745
-Decoding time:15947
-Decoding time:16763
-Decoding time:15890
-Decoding time:16783
-Decoding time:16702
-Decoding time:16816
-Decoding time:16739
-Decoding time:16772
-Decoding time:15873
-Decoding time:16748
-Decoding time:15946
-Decoding time:16776
-Decoding time:15748
-Decoding time:16766
-Decoding time:16811
-Decoding time:16748
-Decoding time:16682
-Decoding time:16772
-Decoding time:16732
-Decoding time:16743
-Decoding time:16777
-Decoding time:16733
-Decoding time:16686
-Decoding time:16754
-Decoding time:16759
-Decoding time:16764
-Decoding time:16773
-Decoding time:16750
-Decoding time:16734
-Decoding time:16741
-Decoding time:16755
-Decoding time:16722
-Decoding time:16724
-Decoding time:16739
-Decoding time:16756
-Decoding time:16667
-Decoding time:16805
-Decoding time:16671
-Decoding time:16737
-Decoding time:16718
-Decoding time:16726
-Decoding time:16713
-Decoding time:16780
-Decoding time:16707
-Decoding time:16752
-Decoding time:16690
-Decoding time:16692
-Decoding time:16762
-Decoding time:16775
-Decoding time:16794
-Decoding time:16728
-Decoding time:16754
-Decoding time:16697
-Decoding time:16738
-Decoding time:16710
-Decoding time:16678
-Decoding time:16758
-Decoding time:16759
-Decoding time:16704
-Decoding time:16677
-Decoding time:16739
-Decoding time:16759
-Decoding time:16712
-Decoding time:16700
-Decoding time:16798
-Decoding time:16768
-Decoding time:16656
-Decoding time:16761
-Decoding time:16757
-Decoding time:16744
-Decoding time:16704
-Decoding time:16766
-Decoding time:16700
-Decoding time:16703
-Decoding time:16691
-Decoding time:16680
-Decoding time:16800
-Decoding time:16762
-Decoding time:16763
-Decoding time:16777
-Decoding time:16801
-Decoding time:16675
-Decoding time:16683
-Decoding time:16696
-Decoding time:16689
-Decoding time:16717
-Decoding time:16778
-Decoding time:16696
-Decoding time:16764
-Decoding time:16807
-Decoding time:16723
-Decoding time:16778
-Decoding time:16668
-Decoding time:16677
-Decoding time:16702
-Decoding time:16680
-Decoding time:16766
-Decoding time:16711
-Decoding time:16808
-Decoding time:16768
-Decoding time:16698
-Decoding time:16739
-Decoding time:17079
-Decoding time:15717
-Decoding time:15697
-Decoding time:16613
-Decoding time:15618
-Decoding time:16653
-Decoding time:15709
-Decoding time:16700
-Decoding time:15811
-Decoding time:16706
-Decoding time:16611
-Decoding time:16711
-Decoding time:16643
-Decoding time:16647
-Decoding time:16685
-Decoding time:16706
-Decoding time:16699
-Decoding time:16695
-Decoding time:16736
-Decoding time:16673
-Decoding time:16604
-Decoding time:16640
-Decoding time:16682
-Decoding time:16689
-Decoding time:16653
-Decoding time:16686
-Decoding time:16729
-Decoding time:16686
-Decoding time:16645
-Decoding time:16657
-Decoding time:16607
-Decoding time:16719
-Decoding time:16647
-Decoding time:15873
-Decoding time:16606
-Decoding time:16642
-Decoding time:16739
-Decoding time:16683
-Decoding time:16700
-Decoding time:16656
-Decoding time:15830
-Decoding time:15855
-Decoding time:15859
-Decoding time:15603
-Decoding time:15919
-Decoding time:15866
-Decoding time:15676
-Decoding time:15773
-Decoding time:15774
-Decoding time:15622
-Decoding time:15910
-Decoding time:15792
-Decoding time:15841
-Decoding time:15595
-Decoding time:15734
-Decoding time:15618
-Decoding time:15732
-Decoding time:15783
-Decoding time:15671
-Decoding time:15733
-Decoding time:15746
-Decoding time:16619
-Decoding time:16644
-Decoding time:16718
-Decoding time:16750
-Decoding time:16700
-Decoding time:16622
-Decoding time:16759
-Decoding time:16654
-Decoding time:16637
-Decoding time:16621
-Decoding time:16706
-Decoding time:16641
-Decoding time:16619
-Decoding time:16660
-Decoding time:16605
-Decoding time:16684
-Decoding time:16608
-Decoding time:16680
-Decoding time:16687
-Decoding time:16734
-Decoding time:16709
-Decoding time:16619
-Decoding time:16712
-Decoding time:16708
-Decoding time:16723
-Decoding time:16731
-Decoding time:16706
-Decoding time:16684
-Decoding time:16693
-Decoding time:16751
-Decoding time:16664
-Decoding time:16697
-Decoding time:16712
-Decoding time:16677
-Decoding time:16643
-Decoding time:16669
-Decoding time:16696
-Decoding time:15666
-Decoding time:16653
-Decoding time:15789
-Decoding time:16741
-Decoding time:15673
-Decoding time:16725
-Decoding time:15751
-Decoding time:16643
-Decoding time:16638
-Decoding time:16627
-Decoding time:15606
-Decoding time:16695
-Decoding time:16667
-Decoding time:16728
-Decoding time:16703
-Decoding time:16745
-Decoding time:16679
-Decoding time:16644
-Decoding time:16698
-Decoding time:16647
-Decoding time:16760
-Decoding time:16654
-Decoding time:16699
-Decoding time:16713
-Decoding time:16669
-Decoding time:16659
-Decoding time:16693
-Decoding time:16754
-Decoding time:16728
-Decoding time:16670
-Decoding time:16665
-Decoding time:16686
-Decoding time:16717
-Decoding time:16534
-Decoding time:16677
-Decoding time:16733
-Decoding time:16709
-Decoding time:16634
-Decoding time:16661
-Decoding time:16732
-Decoding time:16667
-Decoding time:16715
-Decoding time:16658
-Decoding time:16646
-Decoding time:16710
-Decoding time:16614
-Decoding time:16668
-Decoding time:16626
-Decoding time:16681
-Decoding time:16709
-Decoding time:16769
-Decoding time:16605
-Decoding time:16694
-Decoding time:16667
-Decoding time:16725
-Decoding time:16683
-Decoding time:16718
-Decoding time:16617
-Decoding time:16726
-Decoding time:16622
-Decoding time:16706
-Decoding time:16655
-Decoding time:16628
-Decoding time:16641
-Decoding time:16634
-Decoding time:16708
-Decoding time:16716
-Decoding time:16622
-Decoding time:16703
-Decoding time:16747
-Decoding time:16580
-Decoding time:16613
-Decoding time:16637
-Decoding time:16690
-Decoding time:16681
-Decoding time:16694
-Decoding time:16711
-Decoding time:16749
-Decoding time:16594
-Decoding time:16673
-Decoding time:16633
-Decoding time:16637
-Decoding time:16690
-Decoding time:16578
-Decoding time:16727
-Decoding time:16665
-Decoding time:16691
-Decoding time:16566
-Decoding time:15764
-Decoding time:16691
-Decoding time:15905
-Decoding time:15678
-Decoding time:15828
-Decoding time:15561
-Decoding time:15656
-Decoding time:15749
-Decoding time:15806
-Decoding time:15754
-Decoding time:15664
-Decoding time:15733
-Decoding time:15835
-Decoding time:15780
-Decoding time:15785
-Decoding time:15752
-Decoding time:15639
-Decoding time:15715
-Decoding time:15734
-Decoding time:15716
-Decoding time:15815
-Decoding time:15726
-Decoding time:15773
-Decoding time:15817
-Decoding time:15717
-Decoding time:15810
-Decoding time:15850
-Decoding time:15820
-Decoding time:15786
-Decoding time:15820
-Decoding time:15750
-Decoding time:15681
-Decoding time:15746
-Decoding time:15699
-Decoding time:15770
-Decoding time:15653
-Decoding time:15729
-Decoding time:15837
-Decoding time:15755
-Decoding time:15619
-Decoding time:16643
-Decoding time:16620
-Decoding time:16629
-Decoding time:16629
-Decoding time:16724
-Decoding time:16639
-Decoding time:16703
-Decoding time:16649
-Decoding time:16669
-Decoding time:16753
-Decoding time:16695
-Decoding time:16718
-Decoding time:16691
-Decoding time:16700
-Decoding time:16678
-Decoding time:16721
-Decoding time:16698
-Decoding time:16685
-Decoding time:16699
-Decoding time:16717
-Decoding time:16722
-Decoding time:16683
-Decoding time:16695
-Decoding time:16606
-Decoding time:16678
-Decoding time:16589
-Decoding time:16685
-Decoding time:16612
-Decoding time:16698
-Decoding time:16622
-Decoding time:16687
-Decoding time:16712
-Decoding time:16723
-Decoding time:16609
-Decoding time:16580
-Decoding time:16627
-Decoding time:16696
-Decoding time:16636
-Decoding time:16731
-Decoding time:16633
-Decoding time:16740
-Decoding time:16724
-Decoding time:16676
-Decoding time:16694
-Decoding time:16624
-Decoding time:16674
-Decoding time:16630
-Decoding time:16708
-Decoding time:16677
-Decoding time:16612
-Decoding time:16604
-Decoding time:16721
-Decoding time:16759
-Decoding time:16700
-Decoding time:16619
-Decoding time:16705
-Decoding time:16707
-Decoding time:16702
-Decoding time:18208
-Decoding time:16701
-Decoding time:16624
-Decoding time:16704
-Decoding time:16708
-Decoding time:16642
-Decoding time:16719
-Decoding time:16691
-Decoding time:16617
-Decoding time:16742
-Decoding time:16632
-Decoding time:16676
-Decoding time:16683
-Decoding time:16701
-Decoding time:16638
-Decoding time:16712
-Decoding time:16613
-Decoding time:16711
-Decoding time:16635
-Decoding time:16605
-Decoding time:16614
-Decoding time:16683
-Decoding time:16716
-Decoding time:16699
-Decoding time:16652
-Decoding time:16627
-Decoding time:16604
-Decoding time:16632
-Decoding time:16633
-Decoding time:16615
-Decoding time:16683
-Decoding time:16708
-Decoding time:16685
-Decoding time:16735
-Decoding time:16719
-Decoding time:16686
-Decoding time:16723
-Decoding time:16665
-Decoding time:16619
-Decoding time:16671
-Decoding time:16652
-Decoding time:16683
-Decoding time:16650
-Decoding time:16727
-Decoding time:16640
-Decoding time:16711
-Decoding time:16711
-Decoding time:16611
-Decoding time:16674
-Decoding time:16617
-Decoding time:16749
-Decoding time:16618
-Decoding time:16702
-Decoding time:16702
-Decoding time:16735
-Decoding time:16665
-Decoding time:16626
-Decoding time:16657
-Decoding time:16683
-Decoding time:16677
-Decoding time:16630
-Decoding time:16719
-Decoding time:16708
-Decoding time:16696
-Decoding time:15741
-Decoding time:16659
-Decoding time:15700
-Decoding time:16701
-Decoding time:15773
-Decoding time:16591
-Decoding time:16562
-Decoding time:16577
-Decoding time:16637
-Evaluation @iter 20000 done in 185 secs
-TVL Loss   : 0.05523
-TVL MS-SSIM: 0.85523
-TVL PSNR   : 29.85886
+ECCV Decoding time:12317
+ECCV Decoding time:12019
+ECCV Decoding time:12040
+ECCV Decoding time:12001
+ECCV Decoding time:11994
+ECCV Decoding time:10865
+ECCV Decoding time:10747
+ECCV Decoding time:10746
+ECCV Decoding time:10725
+ECCV Decoding time:10724
+ECCV Decoding time:10471
+ECCV Decoding time:10397
+ECCV Decoding time:10415
+ECCV Decoding time:10430
+ECCV Decoding time:10371
+ECCV Decoding time:10337
+ECCV Decoding time:10339
+ECCV Decoding time:10311
+ECCV Decoding time:10359
+ECCV Decoding time:10352
+ECCV Decoding time:10352
+ECCV Decoding time:10372
+ECCV Decoding time:10323
+ECCV Decoding time:10355
+ECCV Decoding time:10340
+ECCV Decoding time:10307
+ECCV Decoding time:10129
+ECCV Decoding time:10128
+ECCV Decoding time:10082
+ECCV Decoding time:10137
+ECCV Decoding time:10075
+ECCV Decoding time:10143
+ECCV Decoding time:10113
+ECCV Decoding time:10078
+ECCV Decoding time:10023
+ECCV Decoding time:9985
+ECCV Decoding time:9993
+ECCV Decoding time:9985
+ECCV Decoding time:9995
+ECCV Decoding time:10008
+ECCV Decoding time:10012
+ECCV Decoding time:10004
+ECCV Decoding time:9943
+ECCV Decoding time:10003
+ECCV Decoding time:9961
+ECCV Decoding time:10039
+ECCV Decoding time:10020
+ECCV Decoding time:10043
+ECCV Decoding time:10019
+ECCV Decoding time:9983
+ECCV Decoding time:9969
+ECCV Decoding time:9986
+ECCV Decoding time:10032
+ECCV Decoding time:9996
+ECCV Decoding time:9994
+ECCV Decoding time:9983
+ECCV Decoding time:9976
+ECCV Decoding time:9986
+ECCV Decoding time:10009
+ECCV Decoding time:9974
+ECCV Decoding time:9992
+ECCV Decoding time:9965
+ECCV Decoding time:9968
+ECCV Decoding time:10006
+ECCV Decoding time:9985
+ECCV Decoding time:9994
+ECCV Decoding time:10020
+ECCV Decoding time:10031
+ECCV Decoding time:9957
+ECCV Decoding time:9957
+ECCV Decoding time:10006
+ECCV Decoding time:9968
+ECCV Decoding time:9932
+ECCV Decoding time:9945
+ECCV Decoding time:9954
+ECCV Decoding time:9966
+ECCV Decoding time:9979
+ECCV Decoding time:10019
+ECCV Decoding time:9941
+ECCV Decoding time:9955
+ECCV Decoding time:10036
+ECCV Decoding time:9960
+ECCV Decoding time:10072
+ECCV Decoding time:9974
+ECCV Decoding time:10006
+ECCV Decoding time:9990
+ECCV Decoding time:9995
+ECCV Decoding time:9980
+ECCV Decoding time:9982
+ECCV Decoding time:9972
+ECCV Decoding time:9968
+ECCV Decoding time:9953
+ECCV Decoding time:10102
+ECCV Decoding time:10005
+ECCV Decoding time:10004
+ECCV Decoding time:9977
+ECCV Decoding time:9954
+ECCV Decoding time:10000
+ECCV Decoding time:10009
+ECCV Decoding time:9981
+ECCV Decoding time:10014
+ECCV Decoding time:10015
+ECCV Decoding time:9956
+ECCV Decoding time:9995
+ECCV Decoding time:10044
+ECCV Decoding time:9979
+ECCV Decoding time:11712
+ECCV Decoding time:10043
+ECCV Decoding time:9987
+ECCV Decoding time:9954
+ECCV Decoding time:9953
+ECCV Decoding time:10036
+ECCV Decoding time:9996
+ECCV Decoding time:10022
+ECCV Decoding time:9969
+ECCV Decoding time:9969
+ECCV Decoding time:10009
+ECCV Decoding time:9974
+ECCV Decoding time:10000
+ECCV Decoding time:9966
+ECCV Decoding time:10004
+ECCV Decoding time:9959
+ECCV Decoding time:9998
+ECCV Decoding time:9947
+ECCV Decoding time:10049
+ECCV Decoding time:10031
+ECCV Decoding time:10042
+ECCV Decoding time:10062
+ECCV Decoding time:10033
+ECCV Decoding time:10020
+ECCV Decoding time:10007
+ECCV Decoding time:10016
+ECCV Decoding time:9973
+ECCV Decoding time:10008
+ECCV Decoding time:10005
+ECCV Decoding time:9989
+ECCV Decoding time:9974
+ECCV Decoding time:10019
+ECCV Decoding time:10144
+ECCV Decoding time:10078
+ECCV Decoding time:10323
+ECCV Decoding time:10111
+ECCV Decoding time:10117
+ECCV Decoding time:10097
+ECCV Decoding time:10070
+ECCV Decoding time:10106
+ECCV Decoding time:10058
+ECCV Decoding time:10064
+ECCV Decoding time:10068
+ECCV Decoding time:10091
+ECCV Decoding time:10078
+ECCV Decoding time:10044
+ECCV Decoding time:10065
+ECCV Decoding time:10054
+ECCV Decoding time:10042
+ECCV Decoding time:9963
+ECCV Decoding time:9948
+ECCV Decoding time:9989
+ECCV Decoding time:9977
+ECCV Decoding time:9936
+ECCV Decoding time:9965
+ECCV Decoding time:9992
+ECCV Decoding time:9980
+ECCV Decoding time:9983
+ECCV Decoding time:9993
+ECCV Decoding time:9992
+ECCV Decoding time:9972
+ECCV Decoding time:9972
+ECCV Decoding time:9962
+ECCV Decoding time:9991
+ECCV Decoding time:9990
+ECCV Decoding time:10026
+ECCV Decoding time:10021
+ECCV Decoding time:10003
+ECCV Decoding time:9999
+ECCV Decoding time:9934
+ECCV Decoding time:9933
+ECCV Decoding time:9978
+ECCV Decoding time:9964
+ECCV Decoding time:9987
+ECCV Decoding time:9961
+ECCV Decoding time:9942
+ECCV Decoding time:9970
+ECCV Decoding time:9979
+ECCV Decoding time:9962
+ECCV Decoding time:9985
+ECCV Decoding time:10018
+ECCV Decoding time:10008
+ECCV Decoding time:9961
+ECCV Decoding time:9959
+ECCV Decoding time:9954
+ECCV Decoding time:9961
+ECCV Decoding time:9981
+ECCV Decoding time:9979
+ECCV Decoding time:9991
+ECCV Decoding time:9957
+ECCV Decoding time:9986
+ECCV Decoding time:9999
+ECCV Decoding time:9963
+ECCV Decoding time:9986
+ECCV Decoding time:9958
+ECCV Decoding time:9981
+ECCV Decoding time:9940
+ECCV Decoding time:9959
+ECCV Decoding time:9981
+ECCV Decoding time:10039
+ECCV Decoding time:10039
+ECCV Decoding time:10011
+ECCV Decoding time:10017
+ECCV Decoding time:10024
+ECCV Decoding time:10034
+ECCV Decoding time:10030
+ECCV Decoding time:10036
+ECCV Decoding time:10028
+ECCV Decoding time:9991
+ECCV Decoding time:10064
+ECCV Decoding time:9899
+ECCV Decoding time:9974
+ECCV Decoding time:9992
+ECCV Decoding time:10011
+ECCV Decoding time:10002
+ECCV Decoding time:9969
+ECCV Decoding time:9979
+ECCV Decoding time:9991
+ECCV Decoding time:11926
+ECCV Decoding time:9976
+ECCV Decoding time:9976
+ECCV Decoding time:9953
+ECCV Decoding time:9935
+ECCV Decoding time:9982
+ECCV Decoding time:9973
+ECCV Decoding time:9982
+ECCV Decoding time:9974
+ECCV Decoding time:9937
+ECCV Decoding time:9987
+ECCV Decoding time:9982
+ECCV Decoding time:9933
+ECCV Decoding time:10007
+ECCV Decoding time:9979
+ECCV Decoding time:9982
+ECCV Decoding time:9919
+ECCV Decoding time:9917
+ECCV Decoding time:9974
+ECCV Decoding time:10010
+ECCV Decoding time:9942
+ECCV Decoding time:9965
+ECCV Decoding time:9944
+ECCV Decoding time:9965
+ECCV Decoding time:9988
+ECCV Decoding time:9934
+ECCV Decoding time:10024
+ECCV Decoding time:9999
+ECCV Decoding time:10012
+ECCV Decoding time:10098
+ECCV Decoding time:10057
+ECCV Decoding time:10051
+ECCV Decoding time:10039
+ECCV Decoding time:10016
+ECCV Decoding time:10082
+ECCV Decoding time:10053
+ECCV Decoding time:10032
+ECCV Decoding time:10006
+ECCV Decoding time:10031
+ECCV Decoding time:10031
+ECCV Decoding time:10032
+ECCV Decoding time:10009
+ECCV Decoding time:9993
+ECCV Decoding time:10008
+ECCV Decoding time:10035
+ECCV Decoding time:9985
+ECCV Decoding time:9988
+ECCV Decoding time:10038
+ECCV Decoding time:9985
+ECCV Decoding time:9997
+ECCV Decoding time:9977
+ECCV Decoding time:9985
+ECCV Decoding time:10072
+ECCV Decoding time:10070
+ECCV Decoding time:10020
+ECCV Decoding time:10003
+ECCV Decoding time:9978
+ECCV Decoding time:10004
+ECCV Decoding time:10015
+ECCV Decoding time:9987
+ECCV Decoding time:10016
+ECCV Decoding time:9981
+ECCV Decoding time:9967
+ECCV Decoding time:10027
+ECCV Decoding time:9986
+ECCV Decoding time:10109
+ECCV Decoding time:9989
+ECCV Decoding time:10010
+ECCV Decoding time:9990
+ECCV Decoding time:10008
+ECCV Decoding time:9980
+ECCV Decoding time:9981
+ECCV Decoding time:9995
+ECCV Decoding time:9992
+ECCV Decoding time:9976
+ECCV Decoding time:9997
+ECCV Decoding time:9972
+ECCV Decoding time:10023
+ECCV Decoding time:9986
+ECCV Decoding time:10029
+ECCV Decoding time:10029
+ECCV Decoding time:10027
+ECCV Decoding time:10013
+ECCV Decoding time:9992
+ECCV Decoding time:10065
+ECCV Decoding time:10006
+ECCV Decoding time:9998
+ECCV Decoding time:10045
+ECCV Decoding time:9994
+ECCV Decoding time:10016
+ECCV Decoding time:10001
+ECCV Decoding time:10038
+ECCV Decoding time:10025
+ECCV Decoding time:10002
+ECCV Decoding time:9971
+ECCV Decoding time:9999
+ECCV Decoding time:9979
+ECCV Decoding time:10041
+ECCV Decoding time:9990
+ECCV Decoding time:10015
+ECCV Decoding time:9983
+ECCV Decoding time:10035
+ECCV Decoding time:9977
+ECCV Decoding time:10012
+ECCV Decoding time:10014
+ECCV Decoding time:9987
+ECCV Decoding time:10008
+ECCV Decoding time:10006
+ECCV Decoding time:10017
+ECCV Decoding time:10026
+ECCV Decoding time:9973
+ECCV Decoding time:10048
+ECCV Decoding time:9982
+ECCV Decoding time:10019
+ECCV Decoding time:10042
+ECCV Decoding time:10006
+ECCV Decoding time:10016
+ECCV Decoding time:9988
+ECCV Decoding time:10010
+ECCV Decoding time:10033
+ECCV Decoding time:9974
+ECCV Decoding time:9999
+ECCV Decoding time:10016
+ECCV Decoding time:9988
+ECCV Decoding time:9976
+ECCV Decoding time:10055
+ECCV Decoding time:10018
+ECCV Decoding time:10041
+ECCV Decoding time:10030
+ECCV Decoding time:9992
+ECCV Decoding time:9971
+ECCV Decoding time:10007
+ECCV Decoding time:9977
+ECCV Decoding time:10019
+ECCV Decoding time:9989
+ECCV Decoding time:10059
+ECCV Decoding time:10065
+ECCV Decoding time:10056
+ECCV Decoding time:9985
+ECCV Decoding time:10011
+ECCV Decoding time:9964
+ECCV Decoding time:9987
+ECCV Decoding time:10020
+ECCV Decoding time:9985
+ECCV Decoding time:10026
+ECCV Decoding time:10039
+ECCV Decoding time:10021
+ECCV Decoding time:9980
+ECCV Decoding time:10026
+ECCV Decoding time:10006
+ECCV Decoding time:10026
+ECCV Decoding time:9988
+ECCV Decoding time:10041
+ECCV Decoding time:9991
+ECCV Decoding time:10016
+ECCV Decoding time:10014
+ECCV Decoding time:9973
+ECCV Decoding time:10026
+ECCV Decoding time:10115
+ECCV Decoding time:10083
+ECCV Decoding time:10320
+ECCV Decoding time:10324
+ECCV Decoding time:10294
+ECCV Decoding time:10336
+ECCV Decoding time:10285
+ECCV Decoding time:10053
+ECCV Decoding time:10114
+ECCV Decoding time:10105
+ECCV Decoding time:10114
+ECCV Decoding time:10119
+ECCV Decoding time:10057
+ECCV Decoding time:10079
+ECCV Decoding time:10110
+ECCV Decoding time:10068
+ECCV Decoding time:10107
+ECCV Decoding time:10064
+ECCV Decoding time:10090
+ECCV Decoding time:10043
+ECCV Decoding time:10012
+ECCV Decoding time:10046
+ECCV Decoding time:10007
+ECCV Decoding time:9979
+ECCV Decoding time:10072
+ECCV Decoding time:9977
+ECCV Decoding time:10031
+ECCV Decoding time:10011
+ECCV Decoding time:9982
+ECCV Decoding time:9980
+ECCV Decoding time:9983
+ECCV Decoding time:10009
+ECCV Decoding time:9993
+ECCV Decoding time:10011
+ECCV Decoding time:10040
+ECCV Decoding time:10054
+ECCV Decoding time:9967
+ECCV Decoding time:10005
+ECCV Decoding time:9993
+ECCV Decoding time:10015
+ECCV Decoding time:10019
+ECCV Decoding time:9978
+ECCV Decoding time:9982
+ECCV Decoding time:9997
+ECCV Decoding time:10034
+ECCV Decoding time:10037
+ECCV Decoding time:10046
+ECCV Decoding time:10007
+ECCV Decoding time:9954
+ECCV Decoding time:10043
+ECCV Decoding time:10054
+ECCV Decoding time:10030
+ECCV Decoding time:9979
+ECCV Decoding time:10038
+ECCV Decoding time:10043
+ECCV Decoding time:10048
+ECCV Decoding time:10006
+ECCV Decoding time:9991
+ECCV Decoding time:9986
+ECCV Decoding time:9992
+ECCV Decoding time:10010
+ECCV Decoding time:10046
+ECCV Decoding time:10021
+ECCV Decoding time:10011
+ECCV Decoding time:10015
+ECCV Decoding time:9986
+ECCV Decoding time:10012
+ECCV Decoding time:10022
+ECCV Decoding time:9997
+ECCV Decoding time:9980
+ECCV Decoding time:9985
+ECCV Decoding time:9997
+ECCV Decoding time:10006
+ECCV Decoding time:9993
+ECCV Decoding time:10062
+ECCV Decoding time:10002
+ECCV Decoding time:10018
+ECCV Decoding time:9999
+ECCV Decoding time:10095
+ECCV Decoding time:10078
+ECCV Decoding time:10071
+ECCV Decoding time:10066
+ECCV Decoding time:10033
+ECCV Decoding time:10036
+ECCV Decoding time:10037
+ECCV Decoding time:9985
+ECCV Decoding time:10002
+ECCV Decoding time:10078
+ECCV Decoding time:10105
+ECCV Decoding time:10059
+ECCV Decoding time:10051
+ECCV Decoding time:10133
+ECCV Decoding time:10057
+ECCV Decoding time:9999
+ECCV Decoding time:9981
+ECCV Decoding time:9977
+ECCV Decoding time:10270
+ECCV Decoding time:10110
+ECCV Decoding time:10054
+ECCV Decoding time:10077
+ECCV Decoding time:10053
+ECCV Decoding time:10034
+ECCV Decoding time:10037
+ECCV Decoding time:10092
+ECCV Decoding time:10057
+ECCV Decoding time:10061
+ECCV Decoding time:10106
+ECCV Decoding time:10096
+ECCV Decoding time:10128
+ECCV Decoding time:10130
+ECCV Decoding time:10139
+ECCV Decoding time:10090
+ECCV Decoding time:10075
+ECCV Decoding time:10049
+ECCV Decoding time:9998
+ECCV Decoding time:10006
+ECCV Decoding time:10009
+ECCV Decoding time:9982
+ECCV Decoding time:10042
+ECCV Decoding time:10000
+ECCV Decoding time:10189
+ECCV Decoding time:10204
+ECCV Decoding time:10157
+ECCV Decoding time:10158
+ECCV Decoding time:10106
+ECCV Decoding time:10158
+ECCV Decoding time:10078
+ECCV Decoding time:9987
+ECCV Decoding time:9998
+ECCV Decoding time:10058
+ECCV Decoding time:10012
+ECCV Decoding time:10045
+ECCV Decoding time:9992
+ECCV Decoding time:10050
+ECCV Decoding time:10046
+ECCV Decoding time:10002
+ECCV Decoding time:10022
+ECCV Decoding time:9978
+ECCV Decoding time:10021
+ECCV Decoding time:9956
+ECCV Decoding time:10008
+ECCV Decoding time:10022
+ECCV Decoding time:9993
+ECCV Decoding time:10016
+ECCV Decoding time:10118
+ECCV Decoding time:10111
+ECCV Decoding time:10076
+ECCV Decoding time:9977
+ECCV Decoding time:10024
+ECCV Decoding time:9984
+ECCV Decoding time:9985
+ECCV Decoding time:9984
+ECCV Decoding time:9970
+ECCV Decoding time:10039
+ECCV Decoding time:10001
+ECCV Decoding time:10034
+ECCV Decoding time:10030
+ECCV Decoding time:9968
+ECCV Decoding time:10048
+ECCV Decoding time:10033
+ECCV Decoding time:9983
+ECCV Decoding time:10022
+ECCV Decoding time:9997
+ECCV Decoding time:10036
+ECCV Decoding time:10007
+ECCV Decoding time:9989
+ECCV Decoding time:10008
+ECCV Decoding time:10065
+ECCV Decoding time:10068
+ECCV Decoding time:10045
+ECCV Decoding time:10043
+ECCV Decoding time:10000
+ECCV Decoding time:9995
+ECCV Decoding time:9980
+ECCV Decoding time:10010
+ECCV Decoding time:10087
+ECCV Decoding time:10010
+ECCV Decoding time:10080
+ECCV Decoding time:10034
+ECCV Decoding time:10059
+ECCV Decoding time:10015
+ECCV Decoding time:9983
+ECCV Decoding time:10007
+ECCV Decoding time:9987
+ECCV Decoding time:10025
+ECCV Decoding time:10090
+ECCV Decoding time:10105
+ECCV Decoding time:10075
+ECCV Decoding time:10052
+ECCV Decoding time:10046
+ECCV Decoding time:10051
+ECCV Decoding time:10007
+ECCV Decoding time:10035
+ECCV Decoding time:10006
+ECCV Decoding time:10095
+ECCV Decoding time:10055
+ECCV Decoding time:10027
+ECCV Decoding time:10029
+ECCV Decoding time:10045
+ECCV Decoding time:10039
+ECCV Decoding time:10064
+ECCV Decoding time:10021
+ECCV Decoding time:9992
+ECCV Decoding time:9996
+ECCV Decoding time:10002
+ECCV Decoding time:9986
+ECCV Decoding time:10052
+ECCV Decoding time:9991
+ECCV Decoding time:9878
+ECCV Decoding time:9985
+ECCV Decoding time:10069
+ECCV Decoding time:10031
+ECCV Decoding time:9954
+ECCV Decoding time:9984
+ECCV Decoding time:9965
+ECCV Decoding time:9967
+ECCV Decoding time:10012
+ECCV Decoding time:9963
+ECCV Decoding time:9988
+ECCV Decoding time:10008
+ECCV Decoding time:9963
+ECCV Decoding time:9994
+ECCV Decoding time:10005
+ECCV Decoding time:10034
+ECCV Decoding time:9977
+ECCV Decoding time:10005
+ECCV Decoding time:9979
+ECCV Decoding time:9971
+ECCV Decoding time:10022
+ECCV Decoding time:10006
+ECCV Decoding time:9989
+ECCV Decoding time:10036
+ECCV Decoding time:9970
+ECCV Decoding time:10047
+ECCV Decoding time:10010
+ECCV Decoding time:10056
+ECCV Decoding time:10011
+ECCV Decoding time:9998
+ECCV Decoding time:10019
+ECCV Decoding time:10015
+ECCV Decoding time:10038
+ECCV Decoding time:10003
+ECCV Decoding time:9997
+ECCV Decoding time:9997
+ECCV Decoding time:10035
+ECCV Decoding time:10008
+ECCV Decoding time:10014
+ECCV Decoding time:9965
+ECCV Decoding time:10004
+ECCV Decoding time:9983
+ECCV Decoding time:10038
+ECCV Decoding time:10034
+ECCV Decoding time:10032
+ECCV Decoding time:10030
+ECCV Decoding time:10039
+ECCV Decoding time:9987
+ECCV Decoding time:9997
+ECCV Decoding time:9999
+ECCV Decoding time:9960
+ECCV Decoding time:9982
+ECCV Decoding time:10032
+ECCV Decoding time:10042
+ECCV Decoding time:10019
+ECCV Decoding time:10008
+ECCV Decoding time:10045
+ECCV Decoding time:9995
+ECCV Decoding time:10042
+ECCV Decoding time:9973
+ECCV Decoding time:10036
+ECCV Decoding time:10056
+ECCV Decoding time:9981
+ECCV Decoding time:10029
+ECCV Decoding time:10289
+ECCV Decoding time:10010
+ECCV Decoding time:9986
+ECCV Decoding time:10013
+ECCV Decoding time:9983
+ECCV Decoding time:10070
+ECCV Decoding time:10006
+ECCV Decoding time:10071
+ECCV Decoding time:9999
+ECCV Decoding time:10024
+ECCV Decoding time:10017
+ECCV Decoding time:10046
+ECCV Decoding time:10026
+ECCV Decoding time:9981
+ECCV Decoding time:9998
+ECCV Decoding time:10018
+ECCV Decoding time:10002
+ECCV Decoding time:10021
+ECCV Decoding time:10016
+ECCV Decoding time:9990
+ECCV Decoding time:10039
+ECCV Decoding time:10050
+ECCV Decoding time:10030
+ECCV Decoding time:10003
+ECCV Decoding time:10032
+ECCV Decoding time:9981
+ECCV Decoding time:10003
+ECCV Decoding time:9992
+ECCV Decoding time:10040
+ECCV Decoding time:10001
+ECCV Decoding time:10034
+ECCV Decoding time:9995
+ECCV Decoding time:10043
+ECCV Decoding time:9980
+ECCV Decoding time:10007
+ECCV Decoding time:10004
+ECCV Decoding time:10004
+ECCV Decoding time:10081
+ECCV Decoding time:10043
+ECCV Decoding time:10020
+ECCV Decoding time:10052
+ECCV Decoding time:10034
+ECCV Decoding time:9970
+ECCV Decoding time:9966
+ECCV Decoding time:10033
+ECCV Decoding time:10005
+ECCV Decoding time:9984
+ECCV Decoding time:10039
+ECCV Decoding time:10005
+ECCV Decoding time:10021
+ECCV Decoding time:9997
+ECCV Decoding time:9999
+ECCV Decoding time:9984
+ECCV Decoding time:9984
+ECCV Decoding time:10004
+ECCV Decoding time:10011
+ECCV Decoding time:10022
+ECCV Decoding time:9976
+ECCV Decoding time:9981
+ECCV Decoding time:10010
+ECCV Decoding time:9980
+ECCV Decoding time:9993
+ECCV Decoding time:10017
+ECCV Decoding time:9987
+ECCV Decoding time:9987
+ECCV Decoding time:10016
+ECCV Decoding time:10020
+ECCV Decoding time:10013
+ECCV Decoding time:10008
+ECCV Decoding time:9977
+ECCV Decoding time:10017
+ECCV Decoding time:9982
+ECCV Decoding time:10017
+ECCV Decoding time:9975
+ECCV Decoding time:9993
+ECCV Decoding time:10033
+ECCV Decoding time:10025
+ECCV Decoding time:9990
+ECCV Decoding time:10038
+ECCV Decoding time:10006
+ECCV Decoding time:10015
+ECCV Decoding time:10040
+ECCV Decoding time:10078
+ECCV Decoding time:10050
+ECCV Decoding time:9979
+ECCV Decoding time:10029
+ECCV Decoding time:10033
+ECCV Decoding time:9995
+ECCV Decoding time:9980
+ECCV Decoding time:9997
+ECCV Decoding time:10021
+ECCV Decoding time:9992
+ECCV Decoding time:10049
+ECCV Decoding time:9998
+ECCV Decoding time:9982
+ECCV Decoding time:9975
+ECCV Decoding time:9980
+ECCV Decoding time:10015
+ECCV Decoding time:10003
+ECCV Decoding time:9971
+ECCV Decoding time:9982
+ECCV Decoding time:10052
+ECCV Decoding time:10071
+ECCV Decoding time:10064
+ECCV Decoding time:9989
+ECCV Decoding time:9992
+ECCV Decoding time:9980
+ECCV Decoding time:10028
+ECCV Decoding time:9982
+ECCV Decoding time:10013
+ECCV Decoding time:10031
+ECCV Decoding time:9973
+ECCV Decoding time:9999
+ECCV Decoding time:9990
+ECCV Decoding time:9976
+ECCV Decoding time:9963
+ECCV Decoding time:10029
+ECCV Decoding time:9976
+ECCV Decoding time:10001
+ECCV Decoding time:10003
+ECCV Decoding time:10017
+ECCV Decoding time:10047
+ECCV Decoding time:9984
+ECCV Decoding time:10049
+ECCV Decoding time:10051
+ECCV Decoding time:9987
+ECCV Decoding time:10016
+ECCV Decoding time:10042
+ECCV Decoding time:10005
+ECCV Decoding time:10037
+ECCV Decoding time:9985
+ECCV Decoding time:9992
+ECCV Decoding time:10006
+ECCV Decoding time:10007
+ECCV Decoding time:10038
+ECCV Decoding time:10035
+ECCV Decoding time:10033
+ECCV Decoding time:10019
+ECCV Decoding time:9984
+ECCV Decoding time:9995
+ECCV Decoding time:9993
+ECCV Decoding time:9998
+ECCV Decoding time:9991
+ECCV Decoding time:9997
+ECCV Decoding time:10013
+ECCV Decoding time:9922
+ECCV Decoding time:10102
+ECCV Decoding time:10046
+ECCV Decoding time:9965
+ECCV Decoding time:9990
+ECCV Decoding time:10021
+ECCV Decoding time:10013
+ECCV Decoding time:10033
+ECCV Decoding time:10007
+ECCV Decoding time:9990
+ECCV Decoding time:10033
+ECCV Decoding time:10016
+ECCV Decoding time:10002
+ECCV Decoding time:9992
+ECCV Decoding time:9979
+ECCV Decoding time:10056
+ECCV Decoding time:10018
+ECCV Decoding time:10029
+ECCV Decoding time:10005
+ECCV Decoding time:10004
+ECCV Decoding time:10050
+ECCV Decoding time:9996
+ECCV Decoding time:10010
+ECCV Decoding time:9983
+ECCV Decoding time:9980
+ECCV Decoding time:10033
+ECCV Decoding time:10003
+ECCV Decoding time:9977
+ECCV Decoding time:10002
+ECCV Decoding time:9972
+ECCV Decoding time:10010
+ECCV Decoding time:9994
+ECCV Decoding time:10012
+ECCV Decoding time:10000
+ECCV Decoding time:9985
+ECCV Decoding time:9989
+ECCV Decoding time:9983
+ECCV Decoding time:9992
+ECCV Decoding time:9993
+ECCV Decoding time:10006
+ECCV Decoding time:10039
+ECCV Decoding time:10027
+ECCV Decoding time:9998
+ECCV Decoding time:9989
+ECCV Decoding time:9971
+ECCV Decoding time:9979
+ECCV Decoding time:10014
+ECCV Decoding time:10009
+ECCV Decoding time:10014
+ECCV Decoding time:10058
+ECCV Decoding time:10096
+ECCV Decoding time:10055
+ECCV Decoding time:10016
+ECCV Decoding time:9985
+ECCV Decoding time:9987
+ECCV Decoding time:9995
+ECCV Decoding time:10004
+ECCV Decoding time:9982
+ECCV Decoding time:9957
+ECCV Decoding time:9979
+ECCV Decoding time:10006
+ECCV Decoding time:10015
+ECCV Decoding time:9988
+ECCV Decoding time:10050
+ECCV Decoding time:10002
+ECCV Decoding time:9982
+ECCV Decoding time:10009
+ECCV Decoding time:10008
+ECCV Decoding time:9999
+ECCV Decoding time:10058
+ECCV Decoding time:10000
+ECCV Decoding time:10010
+ECCV Decoding time:10082
+ECCV Decoding time:10009
+ECCV Decoding time:10005
+ECCV Decoding time:10026
+ECCV Decoding time:9988
+ECCV Decoding time:9973
+ECCV Decoding time:9957
+ECCV Decoding time:9963
+ECCV Decoding time:9967
+ECCV Decoding time:9982
+ECCV Decoding time:9969
+ECCV Decoding time:9985
+ECCV Decoding time:9977
+ECCV Decoding time:9984
+ECCV Decoding time:10008
+ECCV Decoding time:10027
+ECCV Decoding time:10031
+ECCV Decoding time:10033
+ECCV Decoding time:10079
+ECCV Decoding time:10337
+ECCV Decoding time:10077
+ECCV Decoding time:10100
+ECCV Decoding time:10064
+ECCV Decoding time:10045
+ECCV Decoding time:10091
+ECCV Decoding time:10148
+ECCV Decoding time:10128
+ECCV Decoding time:10104
+ECCV Decoding time:10103
+ECCV Decoding time:10105
+ECCV Decoding time:10121
+ECCV Decoding time:10085
+ECCV Decoding time:10139
+ECCV Decoding time:10098
+ECCV Decoding time:10072
+ECCV Decoding time:10087
+ECCV Decoding time:10082
+ECCV Decoding time:10075
+ECCV Decoding time:9987
+ECCV Decoding time:10096
+ECCV Decoding time:10027
+ECCV Decoding time:9974
+ECCV Decoding time:9998
+ECCV Decoding time:10017
+ECCV Decoding time:9984
+ECCV Decoding time:10032
+ECCV Decoding time:9994
+ECCV Decoding time:10001
+ECCV Decoding time:10001
+ECCV Decoding time:9993
+ECCV Decoding time:10006
+ECCV Decoding time:9998
+ECCV Decoding time:10022
+ECCV Decoding time:9985
+ECCV Decoding time:10017
+ECCV Decoding time:9989
+ECCV Decoding time:10007
+ECCV Decoding time:10023
+ECCV Decoding time:10009
+ECCV Decoding time:10030
+ECCV Decoding time:9981
+ECCV Decoding time:10009
+ECCV Decoding time:10021
+ECCV Decoding time:10031
+ECCV Decoding time:10064
+ECCV Decoding time:10264
+ECCV Decoding time:10039
+ECCV Decoding time:10030
+ECCV Decoding time:10045
+ECCV Decoding time:10025
+ECCV Decoding time:10021
+ECCV Decoding time:10012
+ECCV Decoding time:10018
+ECCV Decoding time:10049
+ECCV Decoding time:10024
+ECCV Decoding time:9995
+ECCV Decoding time:10030
+ECCV Decoding time:10014
+ECCV Decoding time:10019
+ECCV Decoding time:10012
+ECCV Decoding time:10081
+ECCV Decoding time:10058
+ECCV Decoding time:10045
+ECCV Decoding time:10036
+ECCV Decoding time:10027
+ECCV Decoding time:9991
+ECCV Decoding time:10022
+ECCV Decoding time:10040
+ECCV Decoding time:10010
+ECCV Decoding time:10053
+ECCV Decoding time:9996
+ECCV Decoding time:10028
+ECCV Decoding time:10024
+ECCV Decoding time:10041
+ECCV Decoding time:10018
+ECCV Decoding time:10011
+ECCV Decoding time:10006
+ECCV Decoding time:10047
+ECCV Decoding time:10100
+ECCV Decoding time:10040
+ECCV Decoding time:10101
+ECCV Decoding time:10084
+ECCV Decoding time:10067
+ECCV Decoding time:10023
+ECCV Decoding time:10080
+ECCV Decoding time:10050
+ECCV Decoding time:10064
+ECCV Decoding time:10113
+ECCV Decoding time:10081
+ECCV Decoding time:10073
+ECCV Decoding time:10048
+ECCV Decoding time:10038
+ECCV Decoding time:10008
+ECCV Decoding time:10031
+ECCV Decoding time:10007
+ECCV Decoding time:10006
+ECCV Decoding time:10032
+ECCV Decoding time:9997
+ECCV Decoding time:10032
+ECCV Decoding time:10031
+ECCV Decoding time:10009
+ECCV Decoding time:10031
+ECCV Decoding time:10029
+ECCV Decoding time:10094
+ECCV Decoding time:10029
+ECCV Decoding time:10038
+ECCV Decoding time:10059
+ECCV Decoding time:10040
+ECCV Decoding time:10015
+ECCV Decoding time:10020
+ECCV Decoding time:10023
+ECCV Decoding time:10024
+ECCV Decoding time:10004
+ECCV Decoding time:9986
+ECCV Decoding time:9990
+ECCV Decoding time:10123
+ECCV Decoding time:10012
+ECCV Decoding time:10000
+ECCV Decoding time:10006
+ECCV Decoding time:9996
+ECCV Decoding time:9998
+ECCV Decoding time:9997
+ECCV Decoding time:10007
+ECCV Decoding time:10021
+ECCV Decoding time:10059
+ECCV Decoding time:10030
+ECCV Decoding time:10092
+ECCV Decoding time:10109
+ECCV Decoding time:10076
+ECCV Decoding time:10083
+ECCV Decoding time:10027
+ECCV Decoding time:10012
+ECCV Decoding time:10046
+ECCV Decoding time:10025
+ECCV Decoding time:10048
+ECCV Decoding time:10044
+ECCV Decoding time:10099
+ECCV Decoding time:10055
+ECCV Decoding time:10054
+ECCV Decoding time:10006
+ECCV Decoding time:9989
+ECCV Decoding time:10034
+ECCV Decoding time:10044
+ECCV Decoding time:10087
+ECCV Decoding time:10047
+ECCV Decoding time:9984
+ECCV Decoding time:9998
+ECCV Decoding time:10015
+ECCV Decoding time:10037
+ECCV Decoding time:10085
+ECCV Decoding time:10047
+ECCV Decoding time:10064
+ECCV Decoding time:12024
+ECCV Decoding time:10044
+ECCV Decoding time:10024
+ECCV Decoding time:10024
+ECCV Decoding time:10007
+ECCV Decoding time:9993
+ECCV Decoding time:10077
+ECCV Decoding time:10045
+ECCV Decoding time:10028
+ECCV Decoding time:10044
+ECCV Decoding time:10029
+ECCV Decoding time:9992
+ECCV Decoding time:9992
+ECCV Decoding time:9998
+ECCV Decoding time:10018
+ECCV Decoding time:9996
+ECCV Decoding time:10018
+ECCV Decoding time:9989
+ECCV Decoding time:10020
+ECCV Decoding time:10012
+ECCV Decoding time:10165
+ECCV Decoding time:9989
+ECCV Decoding time:10001
+ECCV Decoding time:10043
+ECCV Decoding time:10033
+ECCV Decoding time:9994
+ECCV Decoding time:10004
+ECCV Decoding time:10046
+ECCV Decoding time:10020
+ECCV Decoding time:10092
+ECCV Decoding time:10027
+ECCV Decoding time:10031
+                                                                                                                                                                                                                                                                                                                                                                                                                         

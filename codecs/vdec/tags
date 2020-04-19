@@ -35,33 +35,24 @@ __init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch, bilinear=True):$/
 __len__	dataset.py	/^    def __len__(self):$/;"	m	class:ImageFolder	file:
 __repr__	modules/conv_rnn.py	/^    def __repr__(self):$/;"	m	class:ConvRNNCellBase	file:
 _load_image_list	dataset.py	/^    def _load_image_list(self):$/;"	m	class:ImageFolder
-args	train.py	/^  args=args$/;"	v
+args	metric.py	/^    args = parser.parse_args()$/;"	v
 args	train.py	/^args = parser.parse_args()$/;"	v
 as_img_array	util.py	/^def as_img_array(image):$/;"	f
 backward	functions/sign.py	/^    def backward(ctx, grad_output):$/;"	m	class:Sign
-batch_size	train.py	/^            batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),$/;"	v
-batch_t0	train.py	/^        batch_t0 = time.time()$/;"	v
-batch_t1	train.py	/^        batch_t1 = time.time()$/;"	v
 bits	train.py	/^  bits=args.bits,$/;"	v
-bp_t0	train.py	/^        bp_t0 = time.time()$/;"	v
-bp_t1	train.py	/^        bp_t1 = time.time()$/;"	v
-code_arr	train.py	/^        code_arr=[]$/;"	v
-codes	train.py	/^            codes = binarizer(encoded)$/;"	v
-codes	train.py	/^        codes = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)$/;"	v
 command	testVTL.py	/^        command = '.\/train.sh '+str(h)+' h'+str(h)+'\/model_iters_'+str(itr)+' '+str(itr)+' dhf1k_output\/hrch_'+str(h)+'_itr'+str(itr)$/;"	v
 crop_cv2	dataset.py	/^def crop_cv2(img, patch):$/;"	f
 d2	train.py	/^d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level, itrs=args.iterations).cuda()$/;"	v
+dataset	vtl_ours/get_bpp_quality.py	/^dataset = 'vtl'$/;"	v
 decoder_fuse_level	train.py	/^  decoder_fuse_level=args.decoder_fuse_level)$/;"	v
 default_loader	dataset.py	/^def default_loader(path):$/;"	f
 double_conv	unet_parts.py	/^class double_conv(nn.Module):$/;"	c
 down	unet_parts.py	/^class down(nn.Module):$/;"	c
 down_sample	util.py	/^down_sample = nn.AvgPool2d(2, stride=2)$/;"	v
 encoder_fuse_level	train.py	/^  encoder_fuse_level=args.encoder_fuse_level,$/;"	v
-encoder_input	train.py	/^                encoder_input = res$/;"	v
-encoder_input	train.py	/^                encoder_input = torch.cat([frame1, res, frame2], dim=1)$/;"	v
-eval_begin	train.py	/^                eval_begin = time.time()$/;"	v
-eval_forward	util.py	/^def eval_forward(model, batch, args):$/;"	f
-eval_loaders	train.py	/^            eval_loaders = get_eval_loaders()$/;"	v
+eval_begin	train.py	/^    eval_begin = time.time()$/;"	v
+eval_forward	util.py	/^def eval_forward(model, batch, args, fnames, osuffix):$/;"	f
+eval_loaders	train.py	/^eval_loaders = get_eval_loaders()$/;"	v
 evaluate	util.py	/^def evaluate(original, out_imgs):$/;"	f
 evaluate_all	util.py	/^def evaluate_all(original, out_imgs):$/;"	f
 finish_batch	evaluate.py	/^def finish_batch(args, filenames, original, out_imgs,$/;"	f
@@ -83,11 +74,15 @@ forward_ctx	util.py	/^def forward_ctx(unet, ctx_frames):$/;"	f
 forward_model	util.py	/^def forward_model(model, cooked_batch, ctx_frames, args, v_compress,$/;"	f
 get_bmv	dataset.py	/^def get_bmv(img, fns):$/;"	f
 get_bmv_filenames	dataset.py	/^def get_bmv_filenames(mv_dir, main_fn):$/;"	f
+get_bmv_filenames	vtl_ours/get_bpp_quality.py	/^def get_bmv_filenames(mv_dir, main_fn):$/;"	f
+get_code_size	vtl_ours/get_bpp_quality.py	/^def get_code_size(frame, gop):$/;"	f
+get_codes	util.py	/^def get_codes(filenames, args, output_suffix, eccv):$/;"	f
 get_eval_loaders	train.py	/^def get_eval_loaders():$/;"	f
 get_flows	util.py	/^def get_flows(flow):$/;"	f
+get_flows_size	vtl_ours/get_bpp_quality.py	/^def get_flows_size(frame):$/;"	f
 get_frame_data	dataset.py	/^    def get_frame_data(self, filename):$/;"	m	class:ImageFolder
 get_group_data	dataset.py	/^    def get_group_data(self, filename):$/;"	m	class:ImageFolder
-get_group_filenames	dataset.py	/^def get_group_filenames(filename, img_idx, distance1, distance2):$/;"	f
+get_group_filenames	dataset.py	/^def get_group_filenames(filename, img_idx, distance1, distance2, args):$/;"	f
 get_id_grids	util.py	/^def get_id_grids(size):$/;"	f
 get_identity_grid	dataset.py	/^def get_identity_grid(shape):$/;"	f
 get_identity_grid	util.py	/^def get_identity_grid(size):$/;"	f
@@ -95,6 +90,7 @@ get_large_id_grid	util.py	/^def get_large_id_grid(size):$/;"	f
 get_loader	dataset.py	/^def get_loader(is_train, root, mv_dir, args):$/;"	f
 get_models	util.py	/^def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):$/;"	f
 get_ms_ssim	util.py	/^def get_ms_ssim(original, compared):$/;"	f
+get_number_of_pixels	vtl_ours/get_bpp_quality.py	/^def get_number_of_pixels(dset):$/;"	f
 get_psnr	util.py	/^def get_psnr(original, compared):$/;"	f
 gpus	train.py	/^gpus = [int(gpu) for gpu in args.gpus.split(',')]$/;"	v
 help	train_options.py	/^                    help='# decoder layers to fuse context information into.')$/;"	v
@@ -113,6 +109,7 @@ help	train_options.py	/^                    help='GPU indices separated by comma
 help	train_options.py	/^                    help='Gradient clipping.')$/;"	v
 help	train_options.py	/^                    help='If true, save output images during eval.')$/;"	v
 help	train_options.py	/^                    help='If true, write compressed codes during eval.')$/;"	v
+help	train_options.py	/^                    help='Input directory (for compressed codes & context images).')$/;"	v
 help	train_options.py	/^                    help='Iteraction of checkpoint to load.')$/;"	v
 help	train_options.py	/^                    help='LR decay factor.')$/;"	v
 help	train_options.py	/^                    help='Learning rate.')$/;"	v
@@ -131,46 +128,37 @@ help	train_options.py	/^                    help='True: video compression model.
 help	train_options.py	/^                    help='Whether to fuse context features into encoder.')$/;"	v
 help	train_options.py	/^                    help='Whether to stack context frames as encoder input.')$/;"	v
 help	train_options.py	/^                    help='Whether to use motion information to warp U-net features.')$/;"	v
+hrch	run_all_vdecs.py	/^hrch = [i for i in range(3)]$/;"	v
 hrch	testVTL.py	/^hrch = [i for i in range(3)]$/;"	v
-in_img	train.py	/^        in_img = res$/;"	v
 inconv	unet_parts.py	/^class inconv(nn.Module):$/;"	c
 init_lstm	util.py	/^def init_lstm(batch_size, height, width, args):$/;"	f
-is_train	train.py	/^  is_train=True,$/;"	v
-iters	run_training.py	/^iters = [i for i in range(1, 11)]$/;"	v
-iters	run_training.py	/^iters = [i for i in range(8, 11)]$/;"	v
+iters	run_all_vdecs.py	/^iters = [i for i in range(2, 11)]$/;"	v
+iters	vtl_ours/get_bpp_quality.py	/^iters = [i for i in range(1, 11)]$/;"	v
 itrs	testVTL.py	/^itrs = [i for i in range(1, 11)]$/;"	v
-just_resumed	train.py	/^            just_resumed = False$/;"	v
 just_resumed	train.py	/^    just_resumed = True$/;"	v
 just_resumed	train.py	/^just_resumed = False$/;"	v
-loss	train.py	/^        loss = (rec1_loss+rec2_loss)*0.5$/;"	v
-losses	train.py	/^        losses = []$/;"	v
 lr	train.py	/^    lr=args.lr)$/;"	v
 main	metric.py	/^def main():$/;"	f
 milestones	train.py	/^milestones = [int(s) for s in args.schedule.split(',')]$/;"	v
-modeldir	run_training.py	/^    modeldir = 'h0\/model_iters_'+str(itr)$/;"	v
-modeldir	run_training.py	/^    modeldir = 'h1\/model_iters_'+str(itr)$/;"	v
 msssim	metric.py	/^def msssim(original, compared):$/;"	f
+mv_dir	vtl_ours/get_bpp_quality.py	/^mv_dir = '\/home\/mallesh\/deepvideo\/data\/'+dataset+'\/test_mv'$/;"	v
 net	train.py	/^    net = nn.DataParallel(net, device_ids=gpus)$/;"	v
 nets	train.py	/^nets = [encoder, binarizer, decoder, d2]$/;"	v
 np_to_torch	dataset.py	/^def np_to_torch(img):$/;"	f
-out_img	train.py	/^            out_img = out_img + output.data$/;"	v
-out_img	train.py	/^        out_img = torch.zeros(1, 3, height, width).cuda() + 0.5$/;"	v
+opath	vtl_ours/get_bpp_quality.py	/^opath = '\/home\/mallesh\/deepvideo\/data\/'+dataset+'\/test\/'$/;"	v
 outconv	unet_parts.py	/^class outconv(nn.Module):$/;"	c
-output_suffix	train.py	/^                    output_suffix='iter%d' % train_iter)$/;"	v
+output_suffix	train.py	/^        output_suffix='iter%d' % train_iter)$/;"	v
 params	train.py	/^params = [{'params': net.parameters()} for net in nets]$/;"	v
+parser	metric.py	/^    parser = argparse.ArgumentParser()$/;"	v
 parser	train_options.py	/^parser = argparse.ArgumentParser()$/;"	v
 prepare_batch	util.py	/^def prepare_batch(batch, v_compress, warp):$/;"	f
 prepare_inputs	util.py	/^def prepare_inputs(crops, args, unet_output1, unet_output2):$/;"	f
 prepare_unet_output	util.py	/^def prepare_unet_output(unet, unet_input, flows, warp):$/;"	f
 psnr	metric.py	/^def psnr(original, compared):$/;"	f
 read_bmv	dataset.py	/^def read_bmv(fn):$/;"	f
-rec1_loss	train.py	/^        rec1_loss = sum(losses) \/ args.iterations$/;"	v
-rec2_loss	train.py	/^        rec2_loss = (in_img - output).abs().mean()$/;"	v
-res	train.py	/^            res = res - output$/;"	v
 reset_parameters	modules/conv_rnn.py	/^    def reset_parameters(self):$/;"	m	class:ConvLSTMCell
 resume	train.py	/^def resume(model_name, index):$/;"	f
 run_eval	evaluate.py	/^def run_eval(model, eval_loader, args, output_suffix=''):$/;"	f
-save	train.py	/^def save(index):$/;"	f
 save_codes	evaluate.py	/^def save_codes(name, codes):$/;"	f
 save_eccv_output_images	evaluate.py	/^def save_eccv_output_images(name, ex_imgs):$/;"	f
 save_numpy_array_as_image	util.py	/^def save_numpy_array_as_image(filename, arr):$/;"	f
@@ -182,10 +170,6 @@ set_train	util.py	/^def set_train(models):$/;"	f
 solver	train.py	/^solver = optim.Adam($/;"	v
 train_iter	train.py	/^    train_iter = args.load_iter$/;"	v
 train_iter	train.py	/^train_iter = 0$/;"	v
-train_loader	train.py	/^train_loader = get_loader($/;"	v
 transpose_to_grid	util.py	/^def transpose_to_grid(frame2):$/;"	f
-unet_output1	train.py	/^            unet_output1 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
-unet_output2	train.py	/^            unet_output2 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
 up	unet_parts.py	/^class up(nn.Module):$/;"	c
 warp_unet_outputs	util.py	/^def warp_unet_outputs(flows, unet_output1, unet_output2):$/;"	f
-width	train.py	/^            width=crops[0].size(3), args=args)$/;"	v
