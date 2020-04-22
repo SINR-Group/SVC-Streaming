@@ -14,7 +14,7 @@ from metric import msssim, psnr
 from unet import UNet
 
 
-def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):
+def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level, level):
 
     encoder = network.EncoderCell(
         v_compress=v_compress,
@@ -28,7 +28,7 @@ def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):
     decoder = network.DecoderCell(
         v_compress=v_compress, shrink=args.shrink,
         bits=bits,
-        fuse_level=decoder_fuse_level
+        fuse_level=decoder_fuse_level, level=level
     ).cuda()
 
     if v_compress:
@@ -124,7 +124,7 @@ def set_train(models):
             m.train()
 
 
-def eval_forward(model, batch, args):
+def eval_forward(model, prev_models, batch, args):
     batch, ctx_frames = batch
     cooked_batch = prepare_batch(
         batch, args.v_compress, args.warp)
@@ -132,6 +132,7 @@ def eval_forward(model, batch, args):
 
     return forward_model(
         model=model,
+        prev_models=prev_models,
         cooked_batch=cooked_batch,
         ctx_frames=ctx_frames,
         args=args,
@@ -202,9 +203,10 @@ def forward_ctx(unet, ctx_frames):
     return unet_output1, unet_output2
 
 
-def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
+def forward_model(model, prev_models, cooked_batch, ctx_frames, args, v_compress,
                   iterations, encoder_fuse_level, decoder_fuse_level):
     encoder, binarizer, decoder, unet = model
+    en, bn, un = prev_models
     res, _, _, flows = cooked_batch
 
     ctx_frames = Variable(ctx_frames.cuda()) - 0.5
@@ -219,6 +221,11 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
                                                                       height,
                                                                       width,
                                                                       args)
+    old_encoder_hs = []
+    for level in range(args.prev_levels):
+      (en_h_1, en_h_2, en_h_3, _, _, _, _) = init_rnn(batch_size,height,width,args)
+      old_encoder_hs.append([en_h_1, en_h_2, en_h_3])
+
 
     original = res.data.cpu().numpy() + 0.5
 
@@ -260,13 +267,32 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
         encoder_input, encoder_h_1, encoder_h_2, encoder_h_3,
         enc_unet_output1, enc_unet_output2)
 
+    old_encoded=[]
+    for level in range(args.prev_levels):
+        old_encoder = en[level].cuda()
+        temp_en, en_h_1, en_h_2, en_h_3 = old_encoder(
+            encoder_input, old_encoder_hs[level][0], old_encoder_hs[level][1], old_encoder_hs[level][2], 
+            enc_unet_output1, enc_unet_output2)
+        old_encoder_hs[level][0], old_encoder_hs[level][1], old_encoder_hs[level][2] = en_h_1, en_h_2, en_h_3
+        old_encoded.append(temp_en)
+        en[level] = old_encoder.cpu()
+
     # Binarize.
     code = binarizer(encoded)
+
+    old_codes=[]
+    for level in range(args.prev_levels):
+        old_binarizer = bn[level].cuda()
+        old_codes.append(old_binarizer(old_encoded[level]))
+        bn[level] = old_binarizer.cpu()
+
+    new_codes = torch.cat(old_codes+[code], dim=1)
+
     if args.save_codes:
-        codes.append(code.data.cpu().numpy())
+        codes.append(new_codes.data.cpu().numpy())
 
     output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
-        code, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4,
+        new_codes, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4,
         dec_unet_output1, dec_unet_output2)
 
     res = res - output

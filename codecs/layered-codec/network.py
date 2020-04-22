@@ -90,7 +90,7 @@ class Binarizer(nn.Module):
 
 
 class DecoderCell(nn.Module):
-    def __init__(self, v_compress, shrink, bits, fuse_level):
+    def __init__(self, v_compress, shrink, bits, fuse_level, level):
 
         super(DecoderCell, self).__init__()
 
@@ -101,7 +101,7 @@ class DecoderCell(nn.Module):
 
         # Layers.
         self.conv1 = nn.Conv2d(
-            bits, 512, kernel_size=1, stride=1, padding=0, bias=False)
+            bits*(level+1), 512, kernel_size=1, stride=1, padding=0, bias=False)
 
         self.rnn1 = ConvLSTMCell(
             512,

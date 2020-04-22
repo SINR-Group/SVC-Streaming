@@ -15,7 +15,7 @@ from dataset import get_loader
 
 
 def save_codes(name, codes):
-  print(codes)
+  #print(codes)
   codes = (codes.astype(np.int8) + 1) // 2
   export = np.packbits(codes.reshape(-1))
   np.savez_compressed(
@@ -61,7 +61,7 @@ def finish_batch(args, filenames, original, out_imgs,
   return all_losses, all_msssim, all_psnr
 
 
-def run_eval(model, eval_loader, args, output_suffix=''):
+def run_eval(model, prev_models, eval_loader, args, output_suffix=''):
 
   for sub_dir in ['codes', 'images']:
     cur_eval_dir = os.path.join(args.out_dir, output_suffix, sub_dir)
@@ -77,7 +77,7 @@ def run_eval(model, eval_loader, args, output_suffix=''):
       batch = Variable(batch.cuda(), volatile=True)
 
       original, out_imgs, losses, code_batch = eval_forward(
-          model, (batch, ctx_frames), args)
+          model, prev_models, (batch, ctx_frames), args)
 
       losses, msssim, psnr = finish_batch(
           args, filenames, original, out_imgs, 

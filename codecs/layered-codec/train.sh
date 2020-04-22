@@ -1,8 +1,9 @@
-if (( $# != 1 )); then
-    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2"
+if (( $# != 2 )); then
+    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2 levels"
     exit
 fi
 hier=$1
+level=$2
 
 modeldir=model
 
@@ -53,5 +54,6 @@ python3 -u train.py \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
   --max-train-iters 20000 \
+  --prev-levels ${level} \
   --save-out-img \
   --save-codes \

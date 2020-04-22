@@ -45,6 +45,8 @@ parser.add_argument('--stack', action='store_true',
                     help='Whether to stack context frames as encoder input.')
 
 ######## Learning ########
+parser.add_argument('--prev-levels', type=int, default=0,
+                    help='Previous Levels.')
 parser.add_argument('--max-train-iters', type=int, default=100000,
                     help='Max training iterations.')
 parser.add_argument('--lr', type=float, default=0.00025,
