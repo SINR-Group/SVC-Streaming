@@ -1,11 +1,11 @@
 import os
 import numpy as np
 
-iters = [i for i in range(1, 2)]
+iters = [i for i in range(1, 10)]
 
 dataset = 'vtl'
-opath = '/home/mallesh/deepvideo/data/'+dataset+'/test/'
-mv_dir = '/home/mallesh/deepvideo/data/'+dataset+'/test_mv'
+opath = '/home/nfv/deepvideo/data/'+dataset+'/test/'
+mv_dir = '/home/nfv/deepvideo/data/'+dataset+'/test_mv'
 
 def get_bmv_filenames(mv_dir, main_fn):
 
@@ -64,7 +64,9 @@ for itr in iters:
     psnr = []
     ssim = []
     for line in lines:
-        line = line.strip().split(' ')
-        psnr.append(float(line[0]))
-        ssim.append(float(line[1]))
+        line = line.strip()[1:-1].split(',')
+        a = line[0]
+        b = line[1][1:]
+        psnr.append(float(a))
+        ssim.append(float(b))
     print ('iteration:', itr, '\tbpp:', np.mean(bpp_itr), '\tpsnr:', np.mean(psnr), '\tmsssim:', np.mean(ssim))
