@@ -51,7 +51,7 @@ for itr in iters:
         bpp = size/(get_number_of_pixels(dataset))
         bpp_itr.append(bpp)
 
-        os.system('python ../metric.py -o '+oframe+' -c output_'+str(itr)+'/images/'+rframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
+        #os.system('python ../metric.py -o '+oframe+' -c output_'+str(itr)+'/images/'+rframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
 
     for irframe in irecframes:
         oframe = opath+irframe
@@ -59,7 +59,7 @@ for itr in iters:
         bpp = size/(get_number_of_pixels(dataset))
         bpp_itr.append(bpp)
 
-        os.system('python ../metric.py -o '+oframe+' -c ../../icodec/'+dataset+'/images/'+irframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
+        #os.system('python ../metric.py -o '+oframe+' -c ../../icodec/'+dataset+'/images/'+irframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
     lines = open('output_'+str(itr)+'/quality_'+str(itr)+'.txt', 'r')
     psnr = []
     ssim = []
