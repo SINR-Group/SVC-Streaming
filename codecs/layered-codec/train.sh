@@ -1,19 +1,17 @@
-if (( $# != 5 )); then
-    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2 model_dir iterations in_dir out_dir"
+if (( $# != 2 )); then
+    echo "Usage: ./train.sh [0-2], e.g. ./train.sh 2 levels"
     exit
 fi
 hier=$1
+level=$2
 
-modeldir=$2
-iters=$3
-indir=$4
-outdir=$5
+modeldir=model
 
 train="/home/nfv/deepvideo/data/dhf1k/train"
-eval="/home/nfv/deepvideo/data/vtl/test"
+eval="/home/nfv/deepvideo/data/eval1"
 #eval="/home/nfv/deepvideo/data/dhf1k/eval"
 train_mv="/home/nfv/deepvideo/data/dhf1k/train_mv"
-eval_mv="/home/nfv/deepvideo/data/vtl/test_mv"
+eval_mv="/home/nfv/deepvideo/data/eval1_mv"
 #eval_mv="/home/nfv/deepvideo/data/dhf1k/eval_mv"
 
 if [[ ${hier} == "0" ]]; then
@@ -56,15 +54,6 @@ python3 -u train.py \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
   --max-train-iters 20000 \
-  --checkpoint-iters 5000 \
-  --eval-iters 20000 \
-  --model-dir ${modeldir} \
-  --batch-size 2 \
-  --schedule "10000,12000,14000,16000,18000" \
-  --iterations ${iters} \
-  --load-model-name "demo" \
-  --load-iter 20000 \
-  --in-dir ${indir} \
-  --out-dir ${outdir} \
+  --prev-levels ${level} \
   --save-out-img \
   --save-codes \
