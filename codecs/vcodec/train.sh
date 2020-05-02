@@ -4,7 +4,9 @@ if (( $# != 4 )); then
 fi
 hier=$1
 
-
+modeldir=$2
+iters=$3
+outdir=$4
 
 train="/home/mallesh/deepvideo/data/kinetics/train"
 eval="/home/mallesh/deepvideo/data/eval"
@@ -39,7 +41,7 @@ fi
 # when using a big evaluation dataset.
 # (for the demo data it's okay.)
 
-#  --iterations 1 \
+#  --load-model-name "demo" \
 #  --load-iter 20000 \
 
 python3 -u train.py \
@@ -55,6 +57,8 @@ python3 -u train.py \
   --max-train-iters 100000 \
   --checkpoint-iters 20000 \
   --eval-iters 100000 \
+  --model-dir ${modeldir} \
   --batch-size 2 \
-  --save-out-img \
+  --iterations ${iters} \
+  --out-dir ${outdir} \
   --save-codes \
