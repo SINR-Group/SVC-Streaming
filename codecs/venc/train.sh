@@ -8,10 +8,10 @@ modeldir=$2
 iters=$3
 outdir=$4
 
-train="/home/mallesh/deepvideo/data/dhf1k/train"
+train="/home/mallesh/deepvideo/data/kinetics/train"
 eval="/home/mallesh/deepvideo/data/vtl/test"
 #eval="/home/mallesh/deepvideo/data/dhf1k/eval"
-train_mv="/home/mallesh/deepvideo/data/dhf1k/train_mv"
+train_mv="/home/mallesh/deepvideo/data/kinetics/train_mv"
 eval_mv="/home/mallesh/deepvideo/data/vtl/test_mv"
 #eval_mv="/home/mallesh/deepvideo/data/dhf1k/eval_mv"
 
@@ -43,6 +43,8 @@ fi
 # when using a big evaluation dataset.
 # (for the demo data it's okay.)
 
+#  --load-model-name "demo" \
+#  --load-iter 20000 \
 
 python3 -u train.py \
   --train ${train} \
@@ -61,7 +63,5 @@ python3 -u train.py \
   --batch-size 2 \
   --schedule "10000,12000,14000,16000,18000" \
   --iterations ${iters} \
-  --load-model-name "demo" \
-  --load-iter 20000 \
   --out-dir ${outdir} \
   --save-codes \
