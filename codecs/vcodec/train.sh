@@ -42,7 +42,7 @@ fi
 # (for the demo data it's okay.)
 
 #  --load-model-name "demo" \
-#  --load-iter 20000 \
+#  --load-iter 80000 \
 
 python3 -u train.py \
   --train ${train} \
@@ -55,10 +55,12 @@ python3 -u train.py \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
   --max-train-iters 100000 \
-  --checkpoint-iters 20000 \
+  --checkpoint-iters 10000 \
   --eval-iters 100000 \
   --model-dir ${modeldir} \
   --batch-size 2 \
   --iterations ${iters} \
   --out-dir ${outdir} \
   --save-codes \
+  --load-model-name "demo" \
+  --load-iter 20000 \

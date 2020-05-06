@@ -9,12 +9,12 @@ iters=$3
 indir=$4
 outdir=$5
 
-train="/home/nfv/deepvideo/data/dhf1k/train"
-eval="/home/nfv/deepvideo/data/vtl/test"
-#eval="/home/nfv/deepvideo/data/dhf1k/eval"
-train_mv="/home/nfv/deepvideo/data/dhf1k/train_mv"
-eval_mv="/home/nfv/deepvideo/data/vtl/test_mv"
-#eval_mv="/home/nfv/deepvideo/data/dhf1k/eval_mv"
+train="/home/mallesh/deepvideo/data/dhf1k/train"
+eval="/home/mallesh/deepvideo/data/vtl/test"
+#eval="/home/mallesh/deepvideo/data/dhf1k/eval"
+train_mv="/home/mallesh/deepvideo/data/dhf1k/train_mv"
+eval_mv="/home/mallesh/deepvideo/data/vtl/test_mv"
+#eval_mv="/home/mallesh/deepvideo/data/dhf1k/eval_mv"
 
 if [[ ${hier} == "0" ]]; then
   distance1=6
@@ -55,15 +55,14 @@ python3 -u train.py \
   --v-compress --warp --stack --fuse-encoder \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
-  --max-train-iters 20000 \
-  --checkpoint-iters 5000 \
-  --eval-iters 20000 \
+  --max-train-iters 100000 \
+  --checkpoint-iters 20000 \
+  --eval-iters 100000 \
   --model-dir ${modeldir} \
   --batch-size 2 \
-  --schedule "10000,12000,14000,16000,18000" \
   --iterations ${iters} \
   --load-model-name "demo" \
-  --load-iter 20000 \
+  --load-iter 100000 \
   --in-dir ${indir} \
   --out-dir ${outdir} \
   --save-out-img \

@@ -38,7 +38,7 @@ encoder, binarizer, decoder, unet = get_models(
   encoder_fuse_level=args.encoder_fuse_level,
   decoder_fuse_level=args.decoder_fuse_level)
 
-d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level, itrs=args.iterations)#.cuda()
+d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level, itrs=args.iterations).cuda()
 
 nets = [encoder, binarizer, decoder, d2]
 if unet is not None:

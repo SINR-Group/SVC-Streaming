@@ -1,9 +1,9 @@
-Namespace(batch_size=2, bits=16, checkpoint_iters=5000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=20000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=1, load_iter=20000, load_model_name='demo', lr=0.00025, max_train_iters=20000, model_dir='../vcodec/h0/model_iters_1', num_crops=2, out_dir='vtl_output/hrch_0_itr1', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='10000,12000,14000,16000,18000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=1, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h0/model_iters_1', num_crops=2, out_dir='vtl_output/hrch_0_itr1', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
 
-Creating loader for /home/mallesh/deepvideo/data/dhf1k/train...
-4800 images loaded.
+Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
+188743 images loaded.
 	distance=6/6
-Loader for 4800 images (2400 batches) created.
+Loader for 188743 images (94372 batches) created.
 	Encoder fuse level: 1
 	Decoder fuse level: 1
 	Decoder fuse level: 1
@@ -155,431 +155,157 @@ Loader for 4800 images (2400 batches) created.
     )
   )
 )]
-Loading demo@iter 20000
-Loading encoder from ../vcodec/h0/model_iters_1/demo_encoder_00020000.pth...
-Loading binarizer from ../vcodec/h0/model_iters_1/demo_binarizer_00020000.pth...
-Loading decoder from ../vcodec/h0/model_iters_1/demo_decoder_00020000.pth...
-Loading unet from ../vcodec/h0/model_iters_1/demo_unet_00020000.pth...
-Loading d2 from ../vcodec/h0/model_iters_1/demo_d2_00020000.pth...
-[TRAIN] Iter[20001]; LR: 0.00025; Rec1 Loss: 0.046713; Rec2 Loss: 0.046781; Backprop: 0.0064 sec; Batch: 0.3268 sec
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h0/model_iters_1/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h0/model_iters_1/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h0/model_iters_1/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h0/model_iters_1/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h0/model_iters_1/demo_d2_00100000.pth...
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.041390; Rec2 Loss: 0.041157; Backprop: 0.0065 sec; Batch: 0.2757 sec
 Start evaluation...
 
 Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 136 images loaded.
 	distance=6/6
 Loader for 136 images (136 batches) created.
-Creating directory vtl_output/hrch_0_itr1/iter20001/codes.
-Creating directory vtl_output/hrch_0_itr1/iter20001/images.
-Encoding time:10553
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10109
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10083
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10131
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10073
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10069
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10112
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10066
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10029
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10037
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10152
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10789
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10967
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11078
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11543
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11793
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11849
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11707
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11772
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:12162
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11973
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11967
-(1, 16, 18, 22)
-(1, 16, 18, 22)
+Encoding time:12213
 Encoding time:11975
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11891
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11884
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11866
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11855
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11885
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11853
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11881
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11888
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11885
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11879
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11910
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11527
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11518
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11530
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11514
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11531
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11536
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11511
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11526
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11516
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11540
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11528
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11978
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11981
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11963
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11957
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11977
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11963
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11980
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11962
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11968
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11968
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11711
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11680
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11719
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11686
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11711
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11698
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11700
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11701
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11686
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11692
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11703
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11976
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11971
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11996
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11958
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11978
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:12160
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11984
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11952
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11963
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11956
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11965
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11866
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:12170
-(1, 16, 18, 22)
-(1, 16, 18, 22)
+Encoding time:11990
 Encoding time:11985
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11948
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11937
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11601
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11626
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11591
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11600
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11601
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11619
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11594
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11575
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11599
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11591
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11602
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11940
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11977
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11927
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11908
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11953
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11625
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11577
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11599
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11590
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11635
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11779
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11597
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11583
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11592
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11578
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11578
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11874
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:12165
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11921
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11920
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11955
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11948
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11943
-(1, 16, 18, 22)
-(1, 16, 18, 22)
+Encoding time:12001
+Encoding time:11980
+Encoding time:11988
 Encoding time:11954
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11930
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11946
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11464
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11466
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11459
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11454
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11451
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11206
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11146
-(1, 16, 18, 22)
-(1, 16, 18, 22)
+Encoding time:11632
+Encoding time:11632
+Encoding time:11619
+Encoding time:11633
+Encoding time:11629
+Encoding time:11630
+Encoding time:11628
+Encoding time:11616
+Encoding time:11596
+Encoding time:11605
+Encoding time:11634
+Encoding time:11987
+Encoding time:11989
+Encoding time:11970
+Encoding time:11993
+Encoding time:11967
+Encoding time:11994
+Encoding time:11969
+Encoding time:11953
+Encoding time:11994
+Encoding time:11977
+Encoding time:11641
+Encoding time:11624
+Encoding time:11629
+Encoding time:11618
+Encoding time:11639
+Encoding time:11622
+Encoding time:11629
+Encoding time:11624
+Encoding time:11628
+Encoding time:11628
+Encoding time:11634
+Encoding time:11996
+Encoding time:11969
+Encoding time:12002
+Encoding time:11977
+Encoding time:11994
+Encoding time:12008
+Encoding time:11994
+Encoding time:11968
+Encoding time:11961
+Encoding time:11993
+Encoding time:11800
+Encoding time:11797
+Encoding time:11789
+Encoding time:11798
+Encoding time:11796
+Encoding time:11319
+Encoding time:11316
+Encoding time:11313
+Encoding time:11304
+Encoding time:11311
+Encoding time:11107
+Encoding time:11129
+Encoding time:11103
+Encoding time:11173
+Encoding time:11090
+Encoding time:11112
+Encoding time:11123
+Encoding time:11113
+Encoding time:11111
+Encoding time:11115
+Encoding time:11130
+Encoding time:11768
+Encoding time:12140
+Encoding time:11965
+Encoding time:11948
+Encoding time:11704
+Encoding time:11712
+Encoding time:11706
+Encoding time:11706
+Encoding time:11694
+Encoding time:11394
+Encoding time:11372
+Encoding time:11381
+Encoding time:11394
+Encoding time:11381
+Encoding time:11171
 Encoding time:11163
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11165
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:11148
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10875
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10898
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10882
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10729
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10716
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10697
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Encoding time:10720
-(1, 16, 18, 22)
-(1, 16, 18, 22)
-Evaluation @iter 20001 done in 22 secs
-TVL Loss   : 0.05158
-TVL MS-SSIM: 0.85613
-TVL PSNR   : 30.33749
+Encoding time:11158
+Encoding time:11169
+Encoding time:11168
+Encoding time:10956
+Encoding time:10943
+Encoding time:10942
+Encoding time:10953
+Encoding time:10943
+Encoding time:10962
+Encoding time:10922
+Encoding time:10953
+Encoding time:10957
+Encoding time:10951
+Encoding time:10952
+Encoding time:12071
+Encoding time:12155
+Encoding time:11942
+Encoding time:11965
+Encoding time:11953
+Encoding time:11960
+Encoding time:11941
+Encoding time:11948
+Encoding time:11942
+Encoding time:11469
+Encoding time:11433
+Encoding time:11455
+Encoding time:11451
+Encoding time:11443
+Encoding time:11089
+Encoding time:11073
+Encoding time:11057
+Encoding time:11055
+Encoding time:11044
+Encoding time:10886
+Encoding time:10848
+Encoding time:10878
+Encoding time:10866
+Encoding time:10862
+Encoding time:10848
+Encoding time:10874
+Encoding time:10865
+Encoding time:10871
+Encoding time:10860
+Encoding time:10876
+Encoding time:11944
+Encoding time:11960
+Encoding time:11786
+Encoding time:11798
+Encoding time:11781
+Evaluation @iter 100001 done in 22 secs
+TVL Loss   : 0.04344
+TVL MS-SSIM: 0.88774
+TVL PSNR   : 31.02421
 Training done.

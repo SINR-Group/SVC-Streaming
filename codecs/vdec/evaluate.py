@@ -54,8 +54,8 @@ def finish_batch(args, filenames, original, out_imgs,
       if args.save_out_img:
         save_output_images(
           os.path.join(args.in_dir, 'cframes', filename),
-          #os.path.join(args.out_dir, output_suffix, 'ours', filename),
-          eccv_out_imgs[:, ex_idx, :, :, :]
+          #eccv_out_imgs[:, ex_idx, :, :, :]
+          out_imgs[:, ex_idx, :, :, :]
         )
         #save_eccv_output_images(
         #  os.path.join(args.out_dir, output_suffix, 'eccv', filename),
@@ -85,7 +85,6 @@ def run_eval(model, eval_loader, args, output_suffix=''):
 
   start_time = time.time()
   for i, (batch, ctx_frames, filenames) in enumerate(eval_loader):
-      #print (ctx_frames.shape, filenames)
       with torch.no_grad():
           batch = batch.cuda()
           
