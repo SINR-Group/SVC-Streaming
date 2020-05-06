@@ -1,0 +1,396 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Abr	utils/downloader.py	/^class Abr:$/;"	c
+AdaptationSet	utils/mpdparser.py	/^class AdaptationSet(MpdObject):$/;"	c
+Args	decoder/vcodec/decode.py	/^class Args:$/;"	c
+Binarizer	decoder/icodec/inetwork.py	/^class Binarizer(nn.Module):$/;"	c
+Binarizer	decoder/vcodec/network.py	/^class Binarizer(nn.Module):$/;"	c
+CODES_PATH	decoder/decode.py	/^CODES_PATH = os.path.join(data_root, 'vtl_data\/codes\/codes')$/;"	v
+CODES_PATH	decoder/vcodec/decode.py	/^CODES_PATH = ROOT_PATH + "\/codes\/codes"$/;"	v
+CODES_PATH	video_decoder.py	/^CODES_PATH = os.path.join(data_root, 'vtl_data\/codes\/codes')$/;"	v
+ConvLSTMCell	decoder/icodec/modules/conv_rnn.py	/^class ConvLSTMCell(ConvRNNCellBase):$/;"	c
+ConvLSTMCell	decoder/vcodec/modules/conv_rnn.py	/^class ConvLSTMCell(ConvRNNCellBase):$/;"	c
+ConvRNNCellBase	decoder/icodec/modules/conv_rnn.py	/^class ConvRNNCellBase(nn.Module):$/;"	c
+ConvRNNCellBase	decoder/vcodec/modules/conv_rnn.py	/^class ConvRNNCellBase(nn.Module):$/;"	c
+DEFAULT_MODEL_PATH	decoder/icodec/encoder.py	/^DEFAULT_MODEL_PATH = "\/home\/nfv\/aniket\/SVC-Streaming\/decoder\/icodec\/models\/encoder.pth"$/;"	v
+DecoderCell	decoder/icodec/inetwork.py	/^class DecoderCell(nn.Module):$/;"	c
+DecoderCell	decoder/vcodec/network.py	/^class DecoderCell(nn.Module):$/;"	c
+DecoderCell2	decoder/vcodec/network.py	/^class DecoderCell2(nn.Module):$/;"	c
+EncoderCell	decoder/icodec/inetwork.py	/^class EncoderCell(nn.Module):$/;"	c
+EncoderCell	decoder/vcodec/network.py	/^class EncoderCell(nn.Module):$/;"	c
+IMG_EXTENSIONS	decoder/icodec/dataset.py	/^IMG_EXTENSIONS = [$/;"	v
+IN_DIR	decoder/vcodec/decode.py	/^IN_DIR = ROOT_PATH +"\/images\/"$/;"	v
+ImageFolder	decoder/icodec/dataset.py	/^class ImageFolder(data.Dataset):$/;"	c
+ImageFolder	decoder/vcodec/dataset.py	/^class ImageFolder(data.Dataset):$/;"	c
+MODEL_PATH	decoder/icodec/decoder.py	/^MODEL_PATH = os.path.join(root,'models\/decoder.pth')$/;"	v
+MODEL_PATH	decoder/vcodec/decode.py	/^MODEL_PATH = currentfolder + "\/model"$/;"	v
+MV_PATH	decoder/decode.py	/^MV_PATH = os.path.join(data_root, 'vtl_data\/images\/flows')$/;"	v
+MV_PATH	decoder/vcodec/decode.py	/^MV_PATH = ROOT_PATH + "\/images\/flows"$/;"	v
+MV_PATH	video_decoder.py	/^MV_PATH = os.path.join(data_root, 'vtl_data\/images\/flows')$/;"	v
+ManifestParser	utils/mpdparser.py	/^class ManifestParser(object):$/;"	c
+Mpd	utils/mpdparser.py	/^class Mpd(MpdObject):$/;"	c
+MpdError	utils/mpdparser.py	/^class MpdError(Exception):$/;"	c
+MpdObject	utils/mpdparser.py	/^class MpdObject(object):$/;"	c
+MultiScaleSSIM	decoder/icodec/metric.py	/^def MultiScaleSSIM(img1,$/;"	f
+MultiScaleSSIM	decoder/vcodec/metric.py	/^def MultiScaleSSIM(img1,$/;"	f
+OUTPUT_DIR	decoder/decode.py	/^OUTPUT_DIR = os.path.join(data_root, 'vtl_data\/images\/decoded')$/;"	v
+OUTPUT_DIR	decoder/icodec/decoder.py	/^OUTPUT_DIR = os.path.join(data_root, 'vtl_data\/images\/decoded')$/;"	v
+OUTPUT_DIR	video_decoder.py	/^OUTPUT_DIR = os.path.join(data_root, 'vtl_data\/images\/decoded')$/;"	v
+OUTPUT_PATH	decoder/vcodec/decode.py	/^OUTPUT_PATH = ROOT_PATH + "\/images\/decoded"$/;"	v
+PERIOD	utils/mpdparser.py	/^PERIOD = re.compile(r"PT(?:(?P<hours>\\d+)H)?(?:(?P<minutes>\\d+)M)?(?:(?P<seconds>\\d+)(?:.(?P<fraction>\\d+))?S)?")$/;"	v
+Period	utils/mpdparser.py	/^class Period(MpdObject):$/;"	c
+ROOT_PATH	decoder/vcodec/decode.py	/^ROOT_PATH = "\/home\/nfv\/aniket\/SVC-Streaming\/vtl_data"$/;"	v
+Representation	utils/mpdparser.py	/^class Representation(MpdObject):$/;"	c
+SegmentTemplate	utils/mpdparser.py	/^class SegmentTemplate(MpdObject):$/;"	c
+Sign	decoder/icodec/functions/sign.py	/^class Sign(Function):$/;"	c
+Sign	decoder/icodec/modules/sign.py	/^class Sign(nn.Module):$/;"	c
+Sign	decoder/vcodec/functions/sign.py	/^class Sign(Function):$/;"	c
+Sign	decoder/vcodec/modules/sign.py	/^class Sign(nn.Module):$/;"	c
+UNet	decoder/vcodec/unet.py	/^class UNet(nn.Module):$/;"	c
+_FSpecialGauss	decoder/icodec/metric.py	/^def _FSpecialGauss(size, sigma):$/;"	f
+_FSpecialGauss	decoder/vcodec/metric.py	/^def _FSpecialGauss(size, sigma):$/;"	f
+_SSIMForMultiScale	decoder/icodec/metric.py	/^def _SSIMForMultiScale(img1,$/;"	f
+_SSIMForMultiScale	decoder/vcodec/metric.py	/^def _SSIMForMultiScale(img1,$/;"	f
+__getitem__	decoder/icodec/dataset.py	/^    def __getitem__(self, index):$/;"	m	class:ImageFolder	file:
+__getitem__	decoder/vcodec/dataset.py	/^    def __getitem__(self, index):$/;"	m	class:ImageFolder	file:
+__init__	decoder/icodec/dataset.py	/^    def __init__(self, root, transform=None, loader=default_loader, heirarchy_flag=False):$/;"	m	class:ImageFolder
+__init__	decoder/icodec/functions/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	decoder/icodec/inetwork.py	/^    def __init__(self):$/;"	m	class:Binarizer
+__init__	decoder/icodec/inetwork.py	/^    def __init__(self):$/;"	m	class:DecoderCell
+__init__	decoder/icodec/inetwork.py	/^    def __init__(self):$/;"	m	class:EncoderCell
+__init__	decoder/icodec/modules/conv_rnn.py	/^    def __init__(self,$/;"	m	class:ConvLSTMCell
+__init__	decoder/icodec/modules/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	decoder/vcodec/dataset.py	/^    def __init__(self, is_train, root, mv_dir, args):$/;"	m	class:ImageFolder
+__init__	decoder/vcodec/decode.py	/^    def __init__(self, heirarchy, output_path):    $/;"	m	class:Args
+__init__	decoder/vcodec/functions/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	decoder/vcodec/modules/conv_rnn.py	/^    def __init__(self,$/;"	m	class:ConvLSTMCell
+__init__	decoder/vcodec/modules/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	decoder/vcodec/network.py	/^    def __init__(self, bits):$/;"	m	class:Binarizer
+__init__	decoder/vcodec/network.py	/^    def __init__(self, v_compress, shrink, bits, fuse_level):$/;"	m	class:DecoderCell
+__init__	decoder/vcodec/network.py	/^    def __init__(self, v_compress, shrink, bits, fuse_level, itrs):$/;"	m	class:DecoderCell2
+__init__	decoder/vcodec/network.py	/^    def __init__(self, v_compress, stack, fuse_encoder, fuse_level):$/;"	m	class:EncoderCell
+__init__	decoder/vcodec/unet.py	/^    def __init__(self, n_channels, shrink):$/;"	m	class:UNet
+__init__	decoder/vcodec/unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:double_conv
+__init__	decoder/vcodec/unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:down
+__init__	decoder/vcodec/unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:inconv
+__init__	decoder/vcodec/unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:outconv
+__init__	decoder/vcodec/unet_parts.py	/^    def __init__(self, in_ch, out_ch, bilinear=True):$/;"	m	class:up
+__init__	utils/downloader.py	/^	def __init__(self, manifestData):$/;"	m	class:Abr
+__init__	utils/downloader.py	/^	def __init__(self, url, dest):$/;"	m	class:client
+__init__	utils/mpdparser.py	/^    def __init__(self, manifest_str):$/;"	m	class:ManifestParser
+__init__	utils/mpdparser.py	/^    def __init__(self, node, parent=None):$/;"	m	class:MpdObject
+__len__	decoder/icodec/dataset.py	/^    def __len__(self):$/;"	m	class:ImageFolder	file:
+__len__	decoder/vcodec/dataset.py	/^    def __len__(self):$/;"	m	class:ImageFolder	file:
+__repr__	decoder/icodec/modules/conv_rnn.py	/^    def __repr__(self):$/;"	m	class:ConvRNNCellBase	file:
+__repr__	decoder/vcodec/modules/conv_rnn.py	/^    def __repr__(self):$/;"	m	class:ConvRNNCellBase	file:
+__str__	utils/mpdparser.py	/^    def __str__(self):$/;"	m	class:MpdObject	file:
+_load_image_list	decoder/vcodec/dataset.py	/^    def _load_image_list(self):$/;"	m	class:ImageFolder
+args	decoder/icodec/decoder.py	/^    args = parser.parse_args()$/;"	v
+args	decoder/icodec/encoder.py	/^    args = parser.parse_args()$/;"	v
+args	decoder/icodec/metric.py	/^args = parser.parse_args()$/;"	v
+args	decoder/icodec/train.py	/^args = parser.parse_args()$/;"	v
+args	decoder/vcodec/train.py	/^  args=args$/;"	v
+args	decoder/vcodec/train.py	/^args = parser.parse_args()$/;"	v
+as_img_array	decoder/vcodec/util.py	/^def as_img_array(image):$/;"	f
+backward	decoder/icodec/functions/sign.py	/^    def backward(ctx, grad_output):$/;"	m	class:Sign
+backward	decoder/vcodec/functions/sign.py	/^    def backward(ctx, grad_output):$/;"	m	class:Sign
+batch_size	decoder/vcodec/train.py	/^            batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),$/;"	v
+batch_t0	decoder/icodec/train.py	/^        batch_t0 = time.time()$/;"	v
+batch_t0	decoder/vcodec/train.py	/^        batch_t0 = time.time()$/;"	v
+batch_t1	decoder/icodec/train.py	/^        batch_t1 = time.time()$/;"	v
+batch_t1	decoder/vcodec/train.py	/^        batch_t1 = time.time()$/;"	v
+binarizer	decoder/icodec/train.py	/^binarizer = network.Binarizer().cuda()$/;"	v
+bits	decoder/vcodec/train.py	/^  bits=args.bits,$/;"	v
+bp_t0	decoder/icodec/train.py	/^        bp_t0 = time.time()$/;"	v
+bp_t0	decoder/vcodec/train.py	/^        bp_t0 = time.time()$/;"	v
+bp_t1	decoder/icodec/train.py	/^        bp_t1 = time.time()$/;"	v
+bp_t1	decoder/vcodec/train.py	/^        bp_t1 = time.time()$/;"	v
+client	utils/downloader.py	/^class client:$/;"	c
+code_arr	decoder/vcodec/train.py	/^        code_arr=[]$/;"	v
+codes	decoder/icodec/decoder.py	/^    codes = get_codes_from_file(input_codes)$/;"	v
+codes	decoder/icodec/train.py	/^            codes = binarizer(encoded)$/;"	v
+codes	decoder/vcodec/train.py	/^            codes = binarizer(encoded)$/;"	v
+codes	decoder/vcodec/train.py	/^        codes = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)$/;"	v
+command	decoder/vcodec/testVTL.py	/^        command = '.\/train.sh '+str(h)+' h'+str(h)+'\/model_iters_'+str(itr)+' '+str(itr)+' dhf1k_output\/hrch_'+str(h)+'_itr'+str(itr)$/;"	v
+create_placeholders	decoder/vcodec/decode.py	/^def create_placeholders(heirarchy, args):$/;"	f
+create_single_placeholder	decoder/vcodec/decode.py	/^def create_single_placeholder(output_path, templatefile, filenamepre, filenamepost, index):$/;"	f
+crop_cv2	decoder/vcodec/dataset.py	/^def crop_cv2(img, patch):$/;"	f
+cuda	decoder/icodec/decoder.py	/^    cuda = args.cuda$/;"	v
+cuda	decoder/icodec/encoder.py	/^    cuda = args.cuda$/;"	v
+currDir	dash_client.py	/^currDir = os.getcwd()$/;"	v
+currentfolder	decoder/vcodec/decode.py	/^currentfolder = os.path.dirname(os.path.realpath(__file__))$/;"	v
+d2	decoder/vcodec/train.py	/^d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level, itrs=args.iterations).cuda()$/;"	v
+data_root	decoder/decode.py	/^data_root = '\/'.join(root.split('\/'))$/;"	v
+data_root	decoder/icodec/decoder.py	/^data_root = '\/'.join(root.split('\/')[:-1])$/;"	v
+data_root	video_decoder.py	/^data_root = '.\/decoder\/'$/;"	v
+decode	utils/downloader.py	/^def decode(a):$/;"	f
+decodeThread	utils/downloader.py	/^	def decodeThread(self):$/;"	m	class:client
+decode_frames	decoder/vcodec/decode.py	/^def decode_frames(model, codes, ctx_frames, flows):$/;"	f
+decode_order	decoder/vcodec/decode.py	/^decode_order = [[7], [4,10],[2,3,5,6,8,9,11,12]]$/;"	v
+decoder	decoder/icodec/decoder.py	/^    decoder = decoder_init(model)$/;"	v
+decoder	decoder/icodec/train.py	/^decoder = network.DecoderCell().cuda()$/;"	v
+decoder_deinit	decoder/decode.py	/^def decoder_deinit(model):$/;"	f
+decoder_deinit	video_decoder.py	/^def decoder_deinit(model):$/;"	f
+decoder_fuse_level	decoder/vcodec/train.py	/^  decoder_fuse_level=args.decoder_fuse_level)$/;"	v
+decoder_h_1	decoder/icodec/train.py	/^        decoder_h_1 = (Variable(torch.zeros(data.size(0), 512, 2, 2).cuda()),$/;"	v
+decoder_h_2	decoder/icodec/train.py	/^        decoder_h_2 = (Variable(torch.zeros(data.size(0), 512, 4, 4).cuda()),$/;"	v
+decoder_h_3	decoder/icodec/train.py	/^        decoder_h_3 = (Variable(torch.zeros(data.size(0), 256, 8, 8).cuda()),$/;"	v
+decoder_h_4	decoder/icodec/train.py	/^        decoder_h_4 = (Variable(torch.zeros(data.size(0), 128, 16, 16).cuda()),$/;"	v
+decoder_init	decoder/decode.py	/^def decoder_init(output_path):$/;"	f
+decoder_init	decoder/icodec/decoder.py	/^def decoder_init(model=MODEL_PATH):$/;"	f
+decoder_init	decoder/vcodec/decode.py	/^def decoder_init(model_path=MODEL_PATH, output_path=OUTPUT_PATH):$/;"	f
+decoder_init	video_decoder.py	/^def decoder_init(output_path):$/;"	f
+default_loader	decoder/icodec/dataset.py	/^def default_loader(path):$/;"	f
+default_loader	decoder/vcodec/dataset.py	/^def default_loader(path):$/;"	f
+double_conv	decoder/vcodec/unet_parts.py	/^class double_conv(nn.Module):$/;"	c
+down	decoder/vcodec/unet_parts.py	/^class down(nn.Module):$/;"	c
+down_sample	decoder/vcodec/util.py	/^down_sample = nn.AvgPool2d(2, stride=2)$/;"	v
+downloadFile	utils/downloader.py	/^def downloadFile(url):$/;"	f
+encode	decoder/icodec/encoder.py	/^def encode(input_image, output_file, model=DEFAULT_MODEL_PATH, iterations=16, cuda=True):$/;"	f
+encoder	decoder/icodec/train.py	/^encoder = network.EncoderCell().cuda()$/;"	v
+encoder_fuse_level	decoder/vcodec/train.py	/^  encoder_fuse_level=args.encoder_fuse_level,$/;"	v
+encoder_h_1	decoder/icodec/train.py	/^        encoder_h_1 = (Variable(torch.zeros(data.size(0), 256, 8, 8).cuda()),$/;"	v
+encoder_h_2	decoder/icodec/train.py	/^        encoder_h_2 = (Variable(torch.zeros(data.size(0), 512, 4, 4).cuda()),$/;"	v
+encoder_h_3	decoder/icodec/train.py	/^        encoder_h_3 = (Variable(torch.zeros(data.size(0), 512, 2, 2).cuda()),$/;"	v
+encoder_input	decoder/vcodec/train.py	/^                encoder_input = res$/;"	v
+encoder_input	decoder/vcodec/train.py	/^                encoder_input = torch.cat([frame1, res, frame2], dim=1)$/;"	v
+endTime	dash_client.py	/^endTime = time.time()$/;"	v
+eval_begin	decoder/vcodec/train.py	/^                eval_begin = time.time()$/;"	v
+eval_forward	decoder/vcodec/util.py	/^def eval_forward(model, batch, args):$/;"	f
+eval_loaders	decoder/vcodec/train.py	/^            eval_loaders = get_eval_loaders()$/;"	v
+evaluate	decoder/vcodec/util.py	/^def evaluate(original, out_imgs):$/;"	f
+evaluate_all	decoder/vcodec/util.py	/^def evaluate_all(original, out_imgs):$/;"	f
+extractCodes	utils/downloader.py	/^def extractCodes(segment):$/;"	f
+fetchNextSegment	utils/downloader.py	/^	def fetchNextSegment(self, repId = 0):$/;"	m	class:client
+finish_batch	decoder/vcodec/evaluate.py	/^def finish_batch(args, filenames, original, out_imgs,$/;"	f
+flip_cv2	decoder/vcodec/dataset.py	/^def flip_cv2(img, patch):$/;"	f
+forward	decoder/icodec/functions/sign.py	/^    def forward(ctx, input, is_training=True):$/;"	m	class:Sign
+forward	decoder/icodec/inetwork.py	/^    def forward(self, input):$/;"	m	class:Binarizer
+forward	decoder/icodec/inetwork.py	/^    def forward(self, input, hidden1, hidden2, hidden3):$/;"	m	class:EncoderCell
+forward	decoder/icodec/inetwork.py	/^    def forward(self, input, hidden1, hidden2, hidden3, hidden4):$/;"	m	class:DecoderCell
+forward	decoder/icodec/modules/conv_rnn.py	/^    def forward(self, input, hidden):$/;"	m	class:ConvLSTMCell
+forward	decoder/icodec/modules/sign.py	/^    def forward(self, x):$/;"	m	class:Sign
+forward	decoder/vcodec/functions/sign.py	/^    def forward(ctx, input, is_training=True):$/;"	m	class:Sign
+forward	decoder/vcodec/modules/conv_rnn.py	/^    def forward(self, input, hidden):$/;"	m	class:ConvLSTMCell
+forward	decoder/vcodec/modules/sign.py	/^    def forward(self, x):$/;"	m	class:Sign
+forward	decoder/vcodec/network.py	/^    def forward(self, input):$/;"	m	class:Binarizer
+forward	decoder/vcodec/network.py	/^    def forward(self, input, hidden1, hidden2, hidden3, hidden4,$/;"	m	class:DecoderCell
+forward	decoder/vcodec/network.py	/^    def forward(self, input, hidden1, hidden2, hidden3, hidden4,$/;"	m	class:DecoderCell2
+forward	decoder/vcodec/network.py	/^    def forward(self, input, hidden1, hidden2, hidden3,$/;"	m	class:EncoderCell
+forward	decoder/vcodec/unet.py	/^    def forward(self, x):$/;"	m	class:UNet
+forward	decoder/vcodec/unet_parts.py	/^    def forward(self, x):$/;"	m	class:double_conv
+forward	decoder/vcodec/unet_parts.py	/^    def forward(self, x):$/;"	m	class:down
+forward	decoder/vcodec/unet_parts.py	/^    def forward(self, x):$/;"	m	class:inconv
+forward	decoder/vcodec/unet_parts.py	/^    def forward(self, x):$/;"	m	class:outconv
+forward	decoder/vcodec/unet_parts.py	/^    def forward(self, x1, x2):$/;"	m	class:up
+forward_ctx	decoder/vcodec/util.py	/^def forward_ctx(unet, ctx_frames):$/;"	f
+forward_decoder	decoder/vcodec/util.py	/^def forward_decoder(model, code, flows, ctx_frames, heirarchy):$/;"	f
+forward_model	decoder/vcodec/util.py	/^def forward_model(model, cooked_batch, ctx_frames, args, v_compress,$/;"	f
+fs	decoder/icodec/vtl/decode.py	/^fs = os.listdir('codes\/')$/;"	v
+fs	decoder/icodec/vtl/encode.py	/^fs = glob.glob('\/home\/mallesh\/deepvideo\/data\/vtl\/iframes\/*.png')$/;"	v
+getDuration	utils/downloader.py	/^	def getDuration(self):$/;"	m	class:client
+getTotalSegments	utils/downloader.py	/^	def getTotalSegments(self):$/;"	m	class:client
+get_batches	decoder/vcodec/decode.py	/^def get_batches(args, flows):$/;"	f
+get_batches_from_file	decoder/vcodec/decode.py	/^def get_batches_from_file(args):$/;"	f
+get_bmv	decoder/vcodec/dataset.py	/^def get_bmv(fns):$/;"	f
+get_bmv_filenames	decoder/vcodec/dataset.py	/^def get_bmv_filenames(mv_dir, main_fn):$/;"	f
+get_codes_from_file	decoder/decode.py	/^def get_codes_from_file(code_dir=CODES_PATH):$/;"	f
+get_codes_from_file	decoder/icodec/decoder.py	/^def get_codes_from_file(code_folder):$/;"	f
+get_codes_from_file	video_decoder.py	/^def get_codes_from_file(code_dir=CODES_PATH):$/;"	f
+get_date_attribute	utils/mpdparser.py	/^    def get_date_attribute(self, name):$/;"	m	class:MpdObject
+get_eval_loaders	decoder/vcodec/train.py	/^def get_eval_loaders():$/;"	f
+get_flows	decoder/vcodec/util.py	/^def get_flows(flow):$/;"	f
+get_flows_from_file	decoder/vcodec/decode.py	/^def get_flows_from_file(args):$/;"	f
+get_frame_data	decoder/vcodec/dataset.py	/^    def get_frame_data(self, filename):$/;"	m	class:ImageFolder
+get_group_data	decoder/vcodec/dataset.py	/^    def get_group_data(self, filename):$/;"	m	class:ImageFolder
+get_group_filenames	decoder/vcodec/dataset.py	/^def get_group_filenames(filename, img_idx, distance1, distance2):$/;"	f
+get_id_grids	decoder/vcodec/util.py	/^def get_id_grids(size):$/;"	f
+get_identity_grid	decoder/vcodec/dataset.py	/^def get_identity_grid(shape):$/;"	f
+get_identity_grid	decoder/vcodec/util.py	/^def get_identity_grid(size):$/;"	f
+get_int_attribute	utils/mpdparser.py	/^    def get_int_attribute(self, name, default_value=None):$/;"	m	class:MpdObject
+get_large_id_grid	decoder/vcodec/util.py	/^def get_large_id_grid(size):$/;"	f
+get_loader	decoder/vcodec/dataset.py	/^def get_loader(is_train, root, mv_dir, args):$/;"	f
+get_models	decoder/vcodec/util.py	/^def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):$/;"	f
+get_ms_ssim	decoder/vcodec/util.py	/^def get_ms_ssim(original, compared):$/;"	f
+get_period_attribute	utils/mpdparser.py	/^    def get_period_attribute(self, name):$/;"	m	class:MpdObject
+get_psnr	decoder/vcodec/util.py	/^def get_psnr(original, compared):$/;"	f
+get_text_attribute	utils/mpdparser.py	/^    def get_text_attribute(self, name):$/;"	m	class:MpdObject
+gpus	decoder/vcodec/train.py	/^gpus = [int(gpu) for gpu in args.gpus.split(',')]$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='# decoder layers to fuse context information into.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='# encoder layers to fuse context information into.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='# iterations of progressive encoding\/decoding.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='# training crops per example.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Batch size for evaluation.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Batch size.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Bottle neck size.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Checkpoint name to load. (Do nothing if not specified.)')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Checkpoint name to save.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Distance to left interpolation source.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Distance to right interpolation source.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Evaluation period.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='GPU indices separated by comma, e.g. \\"0,1\\".')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Gradient clipping.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='If true, save output images during eval.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='If true, write compressed codes during eval.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Iteraction of checkpoint to load.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='LR decay factor.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Learning rate.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Max training iterations.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Model checkpoint period.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Output directory (for compressed codes & output images).')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Patch size.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Path to eval data.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Path to model folder.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Path to motion vectors of evaluation set.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Path to motion vectors of training set.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Path to training data.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Reducing # channels in U-net by this factor.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Schedule milestones.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='True: video compression model. False: image compression.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Whether to fuse context features into encoder.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Whether to stack context frames as encoder input.')$/;"	v
+help	decoder/vcodec/train_options.py	/^                    help='Whether to use motion information to warp U-net features.')$/;"	v
+hrch	decoder/vcodec/testVTL.py	/^hrch = [i for i in range(3)]$/;"	v
+idecoder	decoder/decode.py	/^idecoder = path_import(idecoder_path)$/;"	v
+idecoder	video_decoder.py	/^idecoder = path_import(idecoder_path)$/;"	v
+idecoder_path	decoder/decode.py	/^idecoder_path = os.path.join(root, 'icodec\/decoder.py')$/;"	v
+idecoder_path	video_decoder.py	/^idecoder_path = os.path.join(root, 'icodec\/decoder.py')$/;"	v
+image_decode	decoder/icodec/decoder.py	/^def image_decode(codes, decoder, iterations=16, cuda=True):$/;"	f
+in_img	decoder/vcodec/train.py	/^        in_img = res$/;"	v
+inconv	decoder/vcodec/unet_parts.py	/^class inconv(nn.Module):$/;"	c
+index	decoder/icodec/train.py	/^        index = (epoch - 1) * len(train_loader) + batch$/;"	v
+init_lstm	decoder/vcodec/util.py	/^def init_lstm(batch_size, height, width):$/;"	f
+input_codes	decoder/icodec/decoder.py	/^    input_codes = args.input$/;"	v
+input_file	decoder/icodec/encoder.py	/^    input_file = args.input$/;"	v
+is_image_file	decoder/icodec/dataset.py	/^def is_image_file(filename):$/;"	f
+is_train	decoder/vcodec/train.py	/^  is_train=True,$/;"	v
+iterations	decoder/icodec/decoder.py	/^    iterations = args.iterations$/;"	v
+iterations	decoder/icodec/encoder.py	/^    iterations = args.iterations$/;"	v
+iters	decoder/vcodec/run_training.py	/^iters = [i for i in range(1, 11)]$/;"	v
+iters	decoder/vcodec/run_training.py	/^iters = [i for i in range(8, 11)]$/;"	v
+itrs	decoder/vcodec/testVTL.py	/^itrs = [i for i in range(1, 11)]$/;"	v
+jpeg_bpp	decoder/icodec/test/draw_rd.py	/^    jpeg_bpp = np.mean(jpeg_bpp, axis=0)$/;"	v
+jpeg_bpp	decoder/icodec/test/draw_rd.py	/^jpeg_bpp = np.array([$/;"	v
+jpeg_ssim	decoder/icodec/test/draw_rd.py	/^    jpeg_ssim = np.mean(jpeg_ssim, axis=0)$/;"	v
+jpeg_ssim	decoder/icodec/test/draw_rd.py	/^jpeg_ssim = jpeg_ssim[:, :-1]$/;"	v
+jpeg_ssim	decoder/icodec/test/draw_rd.py	/^jpeg_ssim = np.genfromtxt('test\/jpeg_ssim.csv', delimiter=',')$/;"	v
+just_resumed	decoder/vcodec/train.py	/^            just_resumed = False$/;"	v
+just_resumed	decoder/vcodec/train.py	/^    just_resumed = True$/;"	v
+just_resumed	decoder/vcodec/train.py	/^just_resumed = False$/;"	v
+lastSegmentThroughput	utils/downloader.py	/^	def lastSegmentThroughput(self):$/;"	m	class:client
+last_epoch	decoder/icodec/train.py	/^    last_epoch = args.checkpoint$/;"	v
+last_epoch	decoder/icodec/train.py	/^last_epoch = 0$/;"	v
+line	decoder/icodec/test/draw_rd.py	/^line = True$/;"	v
+loss	decoder/icodec/train.py	/^        loss = sum(losses) \/ args.iterations$/;"	v
+loss	decoder/vcodec/train.py	/^        loss = (rec1_loss+rec2_loss)*0.5$/;"	v
+losses	decoder/icodec/train.py	/^        losses = []$/;"	v
+losses	decoder/vcodec/train.py	/^        losses = []$/;"	v
+lr	decoder/icodec/train.py	/^    lr=args.lr)$/;"	v
+lr	decoder/vcodec/train.py	/^    lr=args.lr)$/;"	v
+lstm_bpp	decoder/icodec/test/draw_rd.py	/^    lstm_bpp = np.arange(1, 17) \/ 192 * 24$/;"	v
+lstm_bpp	decoder/icodec/test/draw_rd.py	/^    lstm_bpp = np.stack([np.arange(1, 17) for _ in range(24)]) \/ 192 * 24$/;"	v
+lstm_ssim	decoder/icodec/test/draw_rd.py	/^    lstm_ssim = np.mean(lstm_ssim, axis=0)$/;"	v
+lstm_ssim	decoder/icodec/test/draw_rd.py	/^lstm_ssim = lstm_ssim[:, :-1]$/;"	v
+lstm_ssim	decoder/icodec/test/draw_rd.py	/^lstm_ssim = np.genfromtxt('test\/lstm_ssim.csv', delimiter=',')$/;"	v
+main	decoder/icodec/metric.py	/^def main():$/;"	f
+main	decoder/vcodec/metric.py	/^def main():$/;"	f
+milestones	decoder/vcodec/train.py	/^milestones = [int(s) for s in args.schedule.split(',')]$/;"	v
+model	decoder/icodec/decoder.py	/^    model = args.model$/;"	v
+model	decoder/icodec/encoder.py	/^    model = args.model$/;"	v
+modeldir	decoder/vcodec/run_training.py	/^    modeldir = 'h0\/model_iters_'+str(itr)$/;"	v
+modeldir	decoder/vcodec/run_training.py	/^    modeldir = 'h1\/model_iters_'+str(itr)$/;"	v
+msssim	decoder/icodec/metric.py	/^def msssim(original, compared):$/;"	f
+msssim	decoder/vcodec/metric.py	/^def msssim(original, compared):$/;"	f
+net	decoder/vcodec/train.py	/^    net = nn.DataParallel(net, device_ids=gpus)$/;"	v
+nets	decoder/vcodec/train.py	/^nets = [encoder, binarizer, decoder, d2]$/;"	v
+np_to_torch	decoder/vcodec/dataset.py	/^def np_to_torch(img):$/;"	f
+out_img	decoder/vcodec/train.py	/^            out_img = out_img + output.data$/;"	v
+out_img	decoder/vcodec/train.py	/^        out_img = torch.zeros(1, 3, height, width).cuda() + 0.5$/;"	v
+outconv	decoder/vcodec/unet_parts.py	/^class outconv(nn.Module):$/;"	c
+output_file	decoder/icodec/decoder.py	/^    output_file = args.output$/;"	v
+output_file	decoder/icodec/encoder.py	/^    output_file = args.output$/;"	v
+output_suffix	decoder/vcodec/train.py	/^                    output_suffix='iter%d' % train_iter)$/;"	v
+params	decoder/vcodec/train.py	/^params = [{'params': net.parameters()} for net in nets]$/;"	v
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:AdaptationSet
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:Mpd
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:MpdObject
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:Period
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:Representation
+parse	utils/mpdparser.py	/^    def parse(self):$/;"	m	class:SegmentTemplate
+parser	decoder/icodec/decoder.py	/^    parser = argparse.ArgumentParser()$/;"	v
+parser	decoder/icodec/encoder.py	/^    parser = argparse.ArgumentParser()$/;"	v
+parser	decoder/icodec/metric.py	/^parser = argparse.ArgumentParser()$/;"	v
+parser	decoder/icodec/train.py	/^parser = argparse.ArgumentParser()$/;"	v
+parser	decoder/vcodec/train_options.py	/^parser = argparse.ArgumentParser()$/;"	v
+patches	decoder/icodec/train.py	/^        patches = Variable(data.cuda())$/;"	v
+path_import	decoder/decode.py	/^def path_import(absolute_path):$/;"	f
+path_import	video_decoder.py	/^def path_import(absolute_path):$/;"	f
+play	utils/downloader.py	/^	def play(self):$/;"	m	class:client
+playThread	utils/downloader.py	/^	def playThread(self):$/;"	m	class:client
+prepare_batch	decoder/vcodec/util.py	/^def prepare_batch(batch, v_compress, warp):$/;"	f
+prepare_inputs	decoder/vcodec/util.py	/^def prepare_inputs(crops, args, unet_output1, unet_output2):$/;"	f
+prepare_unet_output	decoder/vcodec/util.py	/^def prepare_unet_output(unet, unet_input, flows, warp):$/;"	f
+psnr	decoder/icodec/metric.py	/^def psnr(original, compared):$/;"	f
+psnr	decoder/vcodec/metric.py	/^def psnr(original, compared):$/;"	f
+read_bmv	decoder/vcodec/dataset.py	/^def read_bmv(fn):$/;"	f
+read_codes_from_file	decoder/vcodec/decode.py	/^def read_codes_from_file(args):$/;"	f
+read_data_from_file	decoder/vcodec/decode.py	/^def read_data_from_file(argslist):$/;"	f
+read_models_from_file	decoder/vcodec/decode.py	/^def read_models_from_file(model_path, heirarchy, args):$/;"	f
+rearrange_list	decoder/vcodec/decode.py	/^def rearrange_list(input_list):$/;"	f
+rec1_loss	decoder/vcodec/train.py	/^        rec1_loss = sum(losses) \/ args.iterations$/;"	v
+rec2_loss	decoder/vcodec/train.py	/^        rec2_loss = (in_img - output).abs().mean()$/;"	v
+repIdForNextSegment	utils/downloader.py	/^	def repIdForNextSegment(self, tput = 0):$/;"	m	class:Abr
+res	decoder/icodec/train.py	/^            res = res - output$/;"	v
+res	decoder/icodec/train.py	/^        res = patches - 0.5$/;"	v
+res	decoder/vcodec/train.py	/^            res = res - output$/;"	v
+reset_parameters	decoder/icodec/modules/conv_rnn.py	/^    def reset_parameters(self):$/;"	m	class:ConvLSTMCell
+reset_parameters	decoder/vcodec/modules/conv_rnn.py	/^    def reset_parameters(self):$/;"	m	class:ConvLSTMCell
+resume	decoder/icodec/train.py	/^def resume(epoch=None):$/;"	f
+resume	decoder/vcodec/train.py	/^def resume(model_name, index):$/;"	f
+reverse_rearrange_list	decoder/vcodec/decode.py	/^def reverse_rearrange_list(input_list):$/;"	f
+root	decoder/decode.py	/^root = os.path.dirname(os.path.realpath(__file__))$/;"	v
+root	decoder/icodec/decoder.py	/^root = os.path.dirname(os.path.realpath(__file__))$/;"	v
+root	decoder/vcodec/decode.py	/^root = os.path.dirname(os.path.realpath(__file__))$/;"	v
+root	video_decoder.py	/^root = '.\/decoder\/'#os.path.dirname(os.path.realpath(__file__))$/;"	v
+run_eval	decoder/vcodec/evaluate.py	/^def run_eval(model, eval_loader, args, output_suffix=''):$/;"	f
+save	decoder/icodec/train.py	/^def save(index, epoch=True):$/;"	f
+save	decoder/vcodec/train.py	/^def save(index):$/;"	f
+saveFile	utils/downloader.py	/^def saveFile(dest, fileName, data):$/;"	f
+save_codes	decoder/vcodec/evaluate.py	/^def save_codes(name, codes):$/;"	f
+save_eccv_output_images	decoder/vcodec/evaluate.py	/^def save_eccv_output_images(name, ex_imgs):$/;"	f
+save_numpy_array_as_image	decoder/vcodec/util.py	/^def save_numpy_array_as_image(filename, arr):$/;"	f
+save_output_images	decoder/vcodec/evaluate.py	/^def save_output_images(name, ex_imgs):$/;"	f
+save_torch_array_as_image	decoder/vcodec/util.py	/^def save_torch_array_as_image(filename, arr):$/;"	f
+scheduler	decoder/icodec/train.py	/^scheduler = LS.MultiStepLR(solver, milestones=[3, 10, 20, 50, 100], gamma=0.5)$/;"	v
+scheduler	decoder/vcodec/train.py	/^scheduler = LS.MultiStepLR(solver, milestones=milestones, gamma=args.gamma)$/;"	v
+segmentDownloadThread	utils/downloader.py	/^	def segmentDownloadThread(self):$/;"	m	class:client
+set_eval	decoder/vcodec/util.py	/^def set_eval(models):$/;"	f
+set_train	decoder/vcodec/util.py	/^def set_train(models):$/;"	f
+solver	decoder/icodec/train.py	/^solver = optim.Adam($/;"	v
+solver	decoder/vcodec/train.py	/^solver = optim.Adam($/;"	v
+startTime	dash_client.py	/^startTime = time.time()$/;"	v
+train_iter	decoder/vcodec/train.py	/^    train_iter = args.load_iter$/;"	v
+train_iter	decoder/vcodec/train.py	/^train_iter = 0$/;"	v
+train_loader	decoder/icodec/train.py	/^train_loader = data.DataLoader($/;"	v
+train_loader	decoder/vcodec/train.py	/^train_loader = get_loader($/;"	v
+train_set	decoder/icodec/train.py	/^train_set = dataset.ImageFolder(root=args.train, transform=train_transform)$/;"	v
+train_transform	decoder/icodec/train.py	/^train_transform = transforms.Compose([$/;"	v
+transpose_to_grid	decoder/vcodec/util.py	/^def transpose_to_grid(frame2):$/;"	f
+unet_output1	decoder/vcodec/train.py	/^            unet_output1 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
+unet_output2	decoder/vcodec/train.py	/^            unet_output2 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
+up	decoder/vcodec/unet_parts.py	/^class up(nn.Module):$/;"	c
+url	dash_client.py	/^url = "http:\/\/130.245.144.102:5000\/video1\/dash_tiled.mpd"$/;"	v
+vd	dash_client.py	/^vd = downloader.client(url, currDir)$/;"	v
+vdecoder	decoder/decode.py	/^vdecoder = path_import(vdecoder_path)$/;"	v
+vdecoder	video_decoder.py	/^vdecoder = path_import(vdecoder_path)$/;"	v
+vdecoder_path	decoder/decode.py	/^vdecoder_path = os.path.join(root, 'vcodec\/decode.py')$/;"	v
+vdecoder_path	video_decoder.py	/^vdecoder_path = os.path.join(root, 'vcodec\/decode.py')$/;"	v
+video_decode	decoder/decode.py	/^def video_decode(idecodermodel, vdecodermodels, codes, flows, argslist):$/;"	f
+video_decode	decoder/vcodec/decode.py	/^def video_decode(models, flows_list, codes_list, argslist):$/;"	f
+video_decode	video_decoder.py	/^def video_decode(idecodermodel, vdecodermodels, codes, flows, argslist):$/;"	f
+warp_unet_outputs	decoder/vcodec/util.py	/^def warp_unet_outputs(flows, unet_output1, unet_output2):$/;"	f
+width	decoder/vcodec/train.py	/^            width=crops[0].size(3))$/;"	v

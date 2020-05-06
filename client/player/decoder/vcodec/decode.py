@@ -208,6 +208,8 @@ def video_decode(models, flows_list, codes_list, argslist):
     flows_list = rearrange_list(flows_list)
     codes_list = rearrange_list(codes_list)
 
+    frames = []
+
     for heirarchy, layer in enumerate(decode_order):
 
         args = argslist[heirarchy]
@@ -231,7 +233,9 @@ def video_decode(models, flows_list, codes_list, argslist):
                 
                 out_img = util.forward_decoder(models[heirarchy], code, flows, ctx_frames, args.heirarchy)
 
-            util.save_numpy_array_as_image(os.path.join(args.output_path,fn), out_img)
+            #util.save_numpy_array_as_image(os.path.join(args.output_path,fn), out_img)
+            frames.append(out_img)
+    return frames
 
 
 # read batches from file
