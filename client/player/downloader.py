@@ -6,15 +6,16 @@ import math
 import time
 import sys
 import threading
+from BBA0 import BBA0 
+from abr import abr 
 from queue import Queue
 
 def downloadFile(url):
 	data = None
 	try:
 		with urllib.request.urlopen(url) as f:
-			# print(f.read(50))
 			data = f.read()
-		# print("downloaded:{}".format(url))
+	
 	except urllib.error.URLError as err:
 		print("Error {} for {}".format(err,url))
 	return data
@@ -27,28 +28,32 @@ def saveFile(dest, fileName, data):
 		f.write(data)
 
 def extractCodes(segment):
+	# extract codes and flows from zip file.
+	# TODO: add extraction code
 	print("extracting codes from zip file:[{}]".format(segment))
 
 	return segment
 
 
-
 class client:
-	def __init__(self, url, dest):
-		baseUrl, filename = os.path.split(url)
+	def __init__(self, args):
+		baseUrl, filename = os.path.split(args.url)
+		
 		print(baseUrl)
+
 		self.baseUrl = baseUrl
 		self.filename = filename.split(".")[0]
-		# print(self.filename)
-		self.destination = os.path.join(dest + "/" + self.filename)
+
+		# TODO: saving downloaded files is not required. Remove it.
+		self.destination = os.path.join(args.downloadLoc + "/" + self.filename)
 		try:
 			os.mkdir(self.destination)
 		except OSError as err:
 			print(err)
 
 
-		mpdContent = downloadFile(url)
-		saveFile(self.destination, os.path.split(url)[1], mpdContent)
+		mpdContent = downloadFile(args.url)
+		saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
 
 		self.currentSegment = 0
 		self.manifestData = mpdparser.ManifestParser(mpdContent)
@@ -56,22 +61,31 @@ class client:
 
 		self.totalSegments = self.getTotalSegments()
 		
-		self.lock = threading.Lock()
+		self.lock = threading.Lock() # this lock is primarily for current buffer level.
 
-		self.buffer = 60 #buffer time in seconds
+		self.totalBuffer = args.bufferSize #buffer time in seconds
+		self.currBuffer = 0
+
 		self.segmentQueue = Queue(maxsize=0)
 		self.frameQueue = Queue(maxsize=0)
 
-		self.abr = Abr(self.manifestData)
+		if args.abr == "BBA0":
+			self.abr = BBA0(self.manifestData)
+		else:
+			self.abr = abr(self.manifestData)
 
 
 
 	def getDuration(self):
+		# return total duration from manifest file
+
 		dur = self.manifestData.mpd.periods[0].duration
 		print("media duration:{}".format(dur))
 		return dur
 	
 	def getTotalSegments(self):
+		# calculates total number of video segments from manifest file
+
 		ret = 0.0
 		rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
 
@@ -82,8 +96,10 @@ class client:
 		return ret
 
 
-	# downloads next required segment from server with repId representation ID 
+	
 	def fetchNextSegment(self, repId = 0):
+		# downloads next required segment from server with repId representation ID 
+		# and return true if successfully downloaded
 
 		if not repId:
 			return
@@ -96,7 +112,7 @@ class client:
 			# print("rep id {} {}, received parameter {} {}".format(rep.id,type(rep.id), repId, type(repId)))
 			if rep.id == repId:
 				fName = rep.media.replace("$Number$",str(self.currentSegment + 1))
-				# print("fname:{}".format(fName))
+				# print("fName:{}".format(fName))
 				segmentDuration = rep.duration / rep.timescale
 				break
 				
@@ -117,12 +133,19 @@ class client:
 			self.currentSegment += 1
 
 			with self.lock:
-					self.buffer -= segmentDuration
+					self.currBuffer += segmentDuration
+			
+			ret = True
+		else:
+			print("Error: downloaded segment is none!! Playback will stop shortly")
+			ret = False
 		
-
-
-	# returns throuhput value of last segement downloaded in bits/seconds
+		return ret
+		
+	
 	def lastSegmentThroughput(self):
+		# returns throughput value of last segment downloaded in bits/seconds
+
 		if self.currentSegment == 0:
 			return 0
 
@@ -130,18 +153,24 @@ class client:
 
 
 	def segmentDownloadThread(self):
+		# thread to continuously downloads next segment based on selected abr rule.
 
 		while self.currentSegment < self.totalSegments:
 			with self.lock:
-				currBuff = self.buffer
+				currBuff = self.currBuffer
 			
 			rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
 			segmentDuration = rep.duration / rep.timescale
 
-			if currBuff >= segmentDuration:
-				repId = self.abr.repIdForNextSegment(self.lastSegmentThroughput())
+			playerStats = {}
+			playerStats["lastTput"] = self.lastSegmentThroughput()
+			playerStats["currBuffer"] = currBuff
+
+			if self.totalBuffer - currBuff >= segmentDuration:
+				repId = self.abr.repIdForNextSegment(playerStats)
 				print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, repId))
-				self.fetchNextSegment(repId)
+				if not self.fetchNextSegment(repId):
+					break
 			else:
 				time.sleep(0.5)
 		
@@ -149,7 +178,7 @@ class client:
 
 
 	def playThread(self):
-		
+		# thread to play decoded frames received from decoder
 
 		while True:
 			frame = self.frameQueue.get()
@@ -158,27 +187,13 @@ class client:
 				break
 			time.sleep(2)
 			with self.lock:
-				self.buffer += 2
+				self.currBuffer -= 2
 			
 			print("Played segment:[{}]".format(frame))
 
-		# currentFrame = 0
-		# rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
-		# segmentDuration = rep.duration / rep.timescale
-
-		# while currentFrame < self.totalSegments:
-
-		# 	if currentFrame <= self.currentSegment:
-		# 		print("playing {} frame,".format(currentFrame+1))
-		# 		time.sleep(segmentDuration)
-		# 		with self.lock:
-		# 			self.buffer += segmentDuration
-		# 		currentFrame += 1
-		# 	else:
-		# 		time.sleep(1)
-
 
 	def decodeThread(self):
+		# thread to call decoder on segments waiting in queue
 
 		while True:
 			segment = self.segmentQueue.get()
@@ -191,10 +206,8 @@ class client:
 			print("Decoded segment:{}".format(frames))
 			self.frameQueue.put(frames)
 
-
-
-
 	def play(self):
+		# function to start 3 threads, downloading, decoding and playing
 
 		downt = threading.Thread(target=self.segmentDownloadThread )
 		downt.start()
@@ -208,34 +221,9 @@ class client:
 		dect.join()
 		pt.join()
 
-		
-class Abr:
-	def __init__(self, manifestData):
-		self.manifestData = manifestData
-	
-	# estimates representation id for next segment to be downloaded on the basis
-	# throughPut(tput) of last downloaded segment
-	def repIdForNextSegment(self, tput = 0):
-
-		if not tput:
-			return 1
-		
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
-
-		repId = 1
-		for rep in adpSet.representations:
-			if rep.bandwidth > tput:
-				repId = rep.id - 1
-				break
-			repId = rep.id
-		
-		if repId >= 1:
-			return repId
-		else:
-			return 1
-		
 
 
 def decode(a):
+	# dummy function
 	time.sleep(0.5)
 	return a
