@@ -55,15 +55,14 @@ python3 -u train.py \
   --v-compress --warp --stack --fuse-encoder \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
-  --max-train-iters 20000 \
-  --checkpoint-iters 5000 \
-  --eval-iters 20000 \
+  --max-train-iters 100000 \
+  --checkpoint-iters 20000 \
+  --eval-iters 100000 \
   --model-dir ${modeldir} \
   --batch-size 2 \
-  --schedule "10000,12000,14000,16000,18000" \
   --iterations ${iters} \
   --load-model-name "demo" \
-  --load-iter 20000 \
+  --load-iter 100000 \
   --in-dir ${indir} \
   --out-dir ${outdir} \
   --save-out-img \

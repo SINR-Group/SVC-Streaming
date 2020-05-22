@@ -1,0 +1,183 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Binarizer	network.py	/^class Binarizer(nn.Module):$/;"	c
+ConvLSTMCell	modules/conv_rnn.py	/^class ConvLSTMCell(ConvRNNCellBase):$/;"	c
+ConvRNNCellBase	modules/conv_rnn.py	/^class ConvRNNCellBase(nn.Module):$/;"	c
+DecoderCell	network.py	/^class DecoderCell(nn.Module):$/;"	c
+EncoderCell	network.py	/^class EncoderCell(nn.Module):$/;"	c
+ImageFolder	dataset.py	/^class ImageFolder(data.Dataset):$/;"	c
+MultiScaleSSIM	metric.py	/^def MultiScaleSSIM(img1,$/;"	f
+Sign	functions/sign.py	/^class Sign(Function):$/;"	c
+Sign	modules/sign.py	/^class Sign(nn.Module):$/;"	c
+UNet	unet.py	/^class UNet(nn.Module):$/;"	c
+_FSpecialGauss	metric.py	/^def _FSpecialGauss(size, sigma):$/;"	f
+_SSIMForMultiScale	metric.py	/^def _SSIMForMultiScale(img1,$/;"	f
+__getitem__	dataset.py	/^    def __getitem__(self, index):$/;"	m	class:ImageFolder	file:
+__init__	dataset.py	/^    def __init__(self, is_train, root, mv_dir, args):$/;"	m	class:ImageFolder
+__init__	functions/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	modules/conv_rnn.py	/^    def __init__(self,$/;"	m	class:ConvLSTMCell
+__init__	modules/sign.py	/^    def __init__(self):$/;"	m	class:Sign
+__init__	network.py	/^    def __init__(self, bits):$/;"	m	class:Binarizer
+__init__	network.py	/^    def __init__(self, v_compress, shrink, bits, fuse_level, level):$/;"	m	class:DecoderCell
+__init__	network.py	/^    def __init__(self, v_compress, stack, fuse_encoder, fuse_level):$/;"	m	class:EncoderCell
+__init__	unet.py	/^    def __init__(self, n_channels, shrink):$/;"	m	class:UNet
+__init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:double_conv
+__init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:down
+__init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:inconv
+__init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch):$/;"	m	class:outconv
+__init__	unet_parts.py	/^    def __init__(self, in_ch, out_ch, bilinear=True):$/;"	m	class:up
+__len__	dataset.py	/^    def __len__(self):$/;"	m	class:ImageFolder	file:
+__repr__	modules/conv_rnn.py	/^    def __repr__(self):$/;"	m	class:ConvRNNCellBase	file:
+_load_image_list	dataset.py	/^    def _load_image_list(self):$/;"	m	class:ImageFolder
+args	train.py	/^  args=args$/;"	v
+args	train.py	/^args = parser.parse_args()$/;"	v
+as_img_array	util.py	/^def as_img_array(image):$/;"	f
+backward	functions/sign.py	/^    def backward(ctx, grad_output):$/;"	m	class:Sign
+batch_size	train.py	/^            batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),$/;"	v
+batch_t0	train.py	/^        batch_t0 = time.time()$/;"	v
+batch_t1	train.py	/^        batch_t1 = time.time()$/;"	v
+bits	train.py	/^  bits=args.bits,$/;"	v
+bp_t0	train.py	/^        bp_t0 = time.time()$/;"	v
+bp_t1	train.py	/^        bp_t1 = time.time()$/;"	v
+codes	train.py	/^        codes = binarizer(encoded)$/;"	v
+crop_cv2	dataset.py	/^def crop_cv2(img, patch):$/;"	f
+decoder_fuse_level	train.py	/^  decoder_fuse_level=args.decoder_fuse_level)$/;"	v
+default_loader	dataset.py	/^def default_loader(path):$/;"	f
+double_conv	unet_parts.py	/^class double_conv(nn.Module):$/;"	c
+down	unet_parts.py	/^class down(nn.Module):$/;"	c
+down_sample	util.py	/^down_sample = nn.AvgPool2d(2, stride=2)$/;"	v
+encoder_fuse_level	train.py	/^  encoder_fuse_level=args.encoder_fuse_level,$/;"	v
+encoder_input	train.py	/^            encoder_input = res$/;"	v
+encoder_input	train.py	/^            encoder_input = torch.cat([frame1, res, frame2], dim=1)$/;"	v
+eval_begin	train.py	/^                eval_begin = time.time()$/;"	v
+eval_forward	util.py	/^def eval_forward(model, batch, args):$/;"	f
+eval_loaders	train.py	/^            eval_loaders = get_eval_loaders()$/;"	v
+evaluate	util.py	/^def evaluate(original, out_imgs):$/;"	f
+evaluate_all	util.py	/^def evaluate_all(original, out_imgs):$/;"	f
+finish_batch	evaluate.py	/^def finish_batch(args, filenames, original, out_imgs,$/;"	f
+flip_cv2	dataset.py	/^def flip_cv2(img, patch):$/;"	f
+forward	functions/sign.py	/^    def forward(ctx, input, is_training=True):$/;"	m	class:Sign
+forward	modules/conv_rnn.py	/^    def forward(self, input, hidden):$/;"	m	class:ConvLSTMCell
+forward	modules/sign.py	/^    def forward(self, x):$/;"	m	class:Sign
+forward	network.py	/^    def forward(self, input):$/;"	m	class:Binarizer
+forward	network.py	/^    def forward(self, input, hidden1, hidden2, hidden3, hidden4,$/;"	m	class:DecoderCell
+forward	network.py	/^    def forward(self, input, hidden1, hidden2, hidden3,$/;"	m	class:EncoderCell
+forward	unet.py	/^    def forward(self, x):$/;"	m	class:UNet
+forward	unet_parts.py	/^    def forward(self, x):$/;"	m	class:double_conv
+forward	unet_parts.py	/^    def forward(self, x):$/;"	m	class:down
+forward	unet_parts.py	/^    def forward(self, x):$/;"	m	class:inconv
+forward	unet_parts.py	/^    def forward(self, x):$/;"	m	class:outconv
+forward	unet_parts.py	/^    def forward(self, x1, x2):$/;"	m	class:up
+forward_ctx	util.py	/^def forward_ctx(unet, ctx_frames):$/;"	f
+forward_model	util.py	/^def forward_model(model, cooked_batch, ctx_frames, args, v_compress,$/;"	f
+get_bmv	dataset.py	/^def get_bmv(img, fns):$/;"	f
+get_bmv_filenames	dataset.py	/^def get_bmv_filenames(mv_dir, main_fn):$/;"	f
+get_eval_loaders	train.py	/^def get_eval_loaders():$/;"	f
+get_flows	util.py	/^def get_flows(flow):$/;"	f
+get_frame_data	dataset.py	/^    def get_frame_data(self, filename):$/;"	m	class:ImageFolder
+get_group_data	dataset.py	/^    def get_group_data(self, filename):$/;"	m	class:ImageFolder
+get_group_filenames	dataset.py	/^def get_group_filenames(filename, img_idx, distance1, distance2):$/;"	f
+get_id_grids	util.py	/^def get_id_grids(size):$/;"	f
+get_identity_grid	dataset.py	/^def get_identity_grid(shape):$/;"	f
+get_identity_grid	util.py	/^def get_identity_grid(size):$/;"	f
+get_large_id_grid	util.py	/^def get_large_id_grid(size):$/;"	f
+get_loader	dataset.py	/^def get_loader(is_train, root, mv_dir, args):$/;"	f
+get_models	util.py	/^def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):$/;"	f
+get_ms_ssim	util.py	/^def get_ms_ssim(original, compared):$/;"	f
+get_prev_models	train.py	/^def get_prev_models(prev_levels=0):$/;"	f
+get_psnr	util.py	/^def get_psnr(original, compared):$/;"	f
+gpus	train.py	/^gpus = [int(gpu) for gpu in args.gpus.split(',')]$/;"	v
+help	train_options.py	/^                    help='# decoder layers to fuse context information into.')$/;"	v
+help	train_options.py	/^                    help='# encoder layers to fuse context information into.')$/;"	v
+help	train_options.py	/^                    help='# iterations of progressive encoding\/decoding.')$/;"	v
+help	train_options.py	/^                    help='# training crops per example.')$/;"	v
+help	train_options.py	/^                    help='Batch size for evaluation.')$/;"	v
+help	train_options.py	/^                    help='Batch size.')$/;"	v
+help	train_options.py	/^                    help='Bottle neck size.')$/;"	v
+help	train_options.py	/^                    help='Checkpoint name to load. (Do nothing if not specified.)')$/;"	v
+help	train_options.py	/^                    help='Checkpoint name to save.')$/;"	v
+help	train_options.py	/^                    help='Distance to left interpolation source.')$/;"	v
+help	train_options.py	/^                    help='Distance to right interpolation source.')$/;"	v
+help	train_options.py	/^                    help='Evaluation period.')$/;"	v
+help	train_options.py	/^                    help='GPU indices separated by comma, e.g. \\"0,1\\".')$/;"	v
+help	train_options.py	/^                    help='Gradient clipping.')$/;"	v
+help	train_options.py	/^                    help='If true, save output images during eval.')$/;"	v
+help	train_options.py	/^                    help='If true, write compressed codes during eval.')$/;"	v
+help	train_options.py	/^                    help='Iteraction of checkpoint to load.')$/;"	v
+help	train_options.py	/^                    help='LR decay factor.')$/;"	v
+help	train_options.py	/^                    help='Learning rate.')$/;"	v
+help	train_options.py	/^                    help='Max training iterations.')$/;"	v
+help	train_options.py	/^                    help='Model checkpoint period.')$/;"	v
+help	train_options.py	/^                    help='Output directory (for compressed codes & output images).')$/;"	v
+help	train_options.py	/^                    help='Patch size.')$/;"	v
+help	train_options.py	/^                    help='Path to eval data.')$/;"	v
+help	train_options.py	/^                    help='Path to model folder.')$/;"	v
+help	train_options.py	/^                    help='Path to motion vectors of evaluation set.')$/;"	v
+help	train_options.py	/^                    help='Path to motion vectors of training set.')$/;"	v
+help	train_options.py	/^                    help='Path to training data.')$/;"	v
+help	train_options.py	/^                    help='Previous Levels.')$/;"	v
+help	train_options.py	/^                    help='Reducing # channels in U-net by this factor.')$/;"	v
+help	train_options.py	/^                    help='Schedule milestones.')$/;"	v
+help	train_options.py	/^                    help='True: video compression model. False: image compression.')$/;"	v
+help	train_options.py	/^                    help='Whether to fuse context features into encoder.')$/;"	v
+help	train_options.py	/^                    help='Whether to stack context frames as encoder input.')$/;"	v
+help	train_options.py	/^                    help='Whether to use motion information to warp U-net features.')$/;"	v
+inconv	unet_parts.py	/^class inconv(nn.Module):$/;"	c
+init_lstm	util.py	/^def init_lstm(batch_size, height, width, args):$/;"	f
+is_train	train.py	/^  is_train=True,$/;"	v
+just_resumed	train.py	/^            just_resumed = False$/;"	v
+just_resumed	train.py	/^    just_resumed = True$/;"	v
+just_resumed	train.py	/^just_resumed = False$/;"	v
+level	train.py	/^level = args.prev_levels$/;"	v
+loss	train.py	/^        loss = sum(losses) \/ args.iterations$/;"	v
+losses	train.py	/^        losses = []$/;"	v
+lr	train.py	/^    lr=args.lr)$/;"	v
+main	metric.py	/^def main():$/;"	f
+milestones	train.py	/^milestones = [int(s) for s in args.schedule.split(',')]$/;"	v
+msssim	metric.py	/^def msssim(original, compared):$/;"	f
+net	train.py	/^    net = nn.DataParallel(net, device_ids=gpus)$/;"	v
+nets	train.py	/^nets = [encoder, binarizer, decoder]$/;"	v
+new_codes	train.py	/^        new_codes = torch.cat(old_codes+[codes], dim=1)$/;"	v
+np_to_torch	dataset.py	/^def np_to_torch(img):$/;"	f
+old_binarizer	train.py	/^            old_binarizer = bn[level].cuda()$/;"	v
+old_codes	train.py	/^        old_codes=[]$/;"	v
+old_encoded	train.py	/^        old_encoded=[]$/;"	v
+old_encoder	train.py	/^            old_encoder = en[level].cuda()$/;"	v
+old_encoder_hs	train.py	/^        old_encoder_hs = []$/;"	v
+out_img	train.py	/^        out_img = out_img + output.data$/;"	v
+out_img	train.py	/^        out_img = torch.zeros(1, 3, height, width).cuda() + 0.5$/;"	v
+outconv	unet_parts.py	/^class outconv(nn.Module):$/;"	c
+output_suffix	train.py	/^                    output_suffix='iter%d' % train_iter)$/;"	v
+params	train.py	/^params = [{'params': net.parameters()} for net in nets]$/;"	v
+parser	train_options.py	/^parser = argparse.ArgumentParser()$/;"	v
+prepare_batch	util.py	/^def prepare_batch(batch, v_compress, warp):$/;"	f
+prepare_inputs	util.py	/^def prepare_inputs(crops, args, unet_output1, unet_output2):$/;"	f
+prepare_unet_output	util.py	/^def prepare_unet_output(unet, unet_input, flows, warp):$/;"	f
+psnr	metric.py	/^def psnr(original, compared):$/;"	f
+read_bmv	dataset.py	/^def read_bmv(fn):$/;"	f
+res	train.py	/^        res = res - output$/;"	v
+reset_parameters	modules/conv_rnn.py	/^    def reset_parameters(self):$/;"	m	class:ConvLSTMCell
+resume	train.py	/^def resume(load_model_name, index, level=0):$/;"	f
+run_eval	evaluate.py	/^def run_eval(model, eval_loader, args, output_suffix=''):$/;"	f
+save	train.py	/^def save(index, level=0):$/;"	f
+save_codes	evaluate.py	/^def save_codes(name, codes):$/;"	f
+save_numpy_array_as_image	util.py	/^def save_numpy_array_as_image(filename, arr):$/;"	f
+save_output_images	evaluate.py	/^def save_output_images(name, ex_imgs):$/;"	f
+save_torch_array_as_image	util.py	/^def save_torch_array_as_image(filename, arr):$/;"	f
+scheduler	train.py	/^scheduler = LS.MultiStepLR(solver, milestones=milestones, gamma=args.gamma)$/;"	v
+set_eval	util.py	/^def set_eval(models):$/;"	f
+set_train	util.py	/^def set_train(models):$/;"	f
+solver	train.py	/^solver = optim.Adam($/;"	v
+train_iter	train.py	/^    train_iter = args.load_iter$/;"	v
+train_iter	train.py	/^train_iter = 0$/;"	v
+train_loader	train.py	/^train_loader = get_loader($/;"	v
+transpose_to_grid	util.py	/^def transpose_to_grid(frame2):$/;"	f
+unet_output1	train.py	/^            unet_output1 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
+unet_output2	train.py	/^            unet_output2 = Variable(torch.zeros(args.batch_size,)).cuda()$/;"	v
+up	unet_parts.py	/^class up(nn.Module):$/;"	c
+warp_unet_outputs	util.py	/^def warp_unet_outputs(flows, unet_output1, unet_output2):$/;"	f
+width	train.py	/^            width=crops[0].size(3), args=args)$/;"	v

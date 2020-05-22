@@ -32,7 +32,7 @@ def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):
         v_compress=v_compress, shrink=args.shrink,
         bits=bits,
         fuse_level=decoder_fuse_level
-    ).cuda()
+    )#.cuda()
 
     if v_compress:
         unet = UNet(3, args.shrink).cuda()
@@ -276,68 +276,55 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
     code_arr=[]
     eccv_dec_time = 0
     eccv_dec_times = []
-    eccv_codes = get_codes(fnames, args, osuffix, 1)
-    for itr in range(iterations):
-        code = eccv_codes[itr]
-        code = code.unsqueeze(0)
+    #eccv_codes = get_codes(fnames, args, osuffix, 1)
+    #for itr in range(iterations):
+    #    code = eccv_codes[itr]
+    #    code = code.unsqueeze(0)
 
-        #if args.v_compress and args.stack:
-        #    encoder_input = torch.cat([frame1, res, frame2], dim=1)
-        #else:
-        #    encoder_input = res
+    #    eccv_dec_start = datetime.datetime.now()
 
-        ## Encode.
-        #encoded, encoder_h_1, encoder_h_2, encoder_h_3 = encoder(
-        #    encoder_input, encoder_h_1, encoder_h_2, encoder_h_3,
-        #    enc_unet_output1, enc_unet_output2)
+    #    eccv_output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
+    #        code, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4,
+    #        dec_unet_output1, dec_unet_output2)
 
-        ## Binarize.
-        #code = binarizer(encoded)
-        #print (code1.shape, code.shape)
+    #    torch.cuda.synchronize()
 
-        eccv_dec_start = datetime.datetime.now()
+    #    res = res - eccv_output
+    #    eccv_out_img = eccv_out_img + eccv_output.data.cpu()
+    #    eccv_out_img_np = eccv_out_img.numpy().clip(0, 1)
 
-        eccv_output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
-            code, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4,
-            dec_unet_output1, dec_unet_output2)
+    #    eccv_dec_end = datetime.datetime.now()
+    #    eccv_dec_time += (eccv_dec_end - eccv_dec_start).microseconds
+    #    eccv_dec_times.append(eccv_dec_time)
+    #    #print("ECCV Decoding time: {}us @ iter{}".format(eccv_dec_time, itr))
 
-        torch.cuda.synchronize()
+    #    eccv_out_imgs.append(eccv_out_img_np)
+    #    losses.append(float(res.abs().mean().data.cpu().numpy()))
 
-        res = res - eccv_output
-        eccv_out_img = eccv_out_img + eccv_output.data.cpu()
-        eccv_out_img_np = eccv_out_img.numpy().clip(0, 1)
+    dec_start = datetime.datetime.now()
 
-        eccv_dec_end = datetime.datetime.now()
-        eccv_dec_time += (eccv_dec_end - eccv_dec_start).microseconds
-        eccv_dec_times.append(eccv_dec_time)
-        #print("ECCV Decoding time: {}us @ iter{}".format(eccv_dec_time, itr))
-
-        eccv_out_imgs.append(eccv_out_img_np)
-        losses.append(float(res.abs().mean().data.cpu().numpy()))
-
-    #dec_start = datetime.datetime.now()
-
-    #code = get_codes(fnames, args, osuffix, 0)
+    code = get_codes(fnames, args, osuffix, 0)
     #b,d,h,w= code.shape
     ##code = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
 
-    #(output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
-    #        code, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
-    #        dec_unet_output1, dec_unet_output2)
+    (output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
+            code, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
+            dec_unet_output1, dec_unet_output2)
 
-    #torch.cuda.synchronize()
+    torch.cuda.synchronize()
 
-    #out_img = out_img + output.data.cpu()
-    #out_img_np = out_img.numpy().clip(0, 1)
+    out_img = out_img + output.data.cpu()
+    out_img_np = out_img.numpy().clip(0, 1)
 
-    #dec_end = datetime.datetime.now()
+    dec_end = datetime.datetime.now()
 
     #print('ECCV Decoding Times: ' % '\t'.join(['%.5f' % el for el in eccv_dec_times.tolist()]))
     #print ("Results: Encoding time: {}us \t ECCV Decoding time: {}us \t Our Decoding time: {}us".format((dec_start-enc_start).microseconds, eccv_dec_time, (dec_end-dec_start).microseconds, eccv_dec_time))
-    print ("ECCV Decoding time:{}".format(eccv_dec_time))
+    print ("Decoding time: {}us".format((dec_end-dec_start).microseconds))
+    #print ("ECCV Decoding time:{}".format(eccv_dec_time))
 
-    #out_imgs.append(out_img_np)
-    #losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))
+    out_imgs.append(out_img_np)
+    losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))
 
     return original, np.array(out_imgs), np.array(losses), np.array(eccv_out_imgs)
 

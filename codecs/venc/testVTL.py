@@ -1,7 +1,10 @@
 import os
 import numpy as np
 
-itrs = [i for i in range(1, 11)]
+#itrs = [i for i in range(1, 11)]
+
+itrs = [2, 3]
+
 hrch = [i for i in range(3)]
 
 for h in hrch:

@@ -1,7 +1,8 @@
 import os
 import numpy as np
 
-iters = [i for i in range(1, 2)]
+iters = [i for i in range(1, 11)]
+iters = [1, 2, 5]
 
 dataset = 'vtl'
 opath = '/home/mallesh/deepvideo/data/'+dataset+'/test/'
@@ -43,23 +44,26 @@ for itr in iters:
     recframes = os.listdir('output_'+str(itr)+'/images')
     irecframes = os.listdir('../../icodec/'+dataset+'/images/')
     bpp_itr = []
+    sizes = []
     for rframe in recframes:
         if rframe in irecframes:
             continue
         oframe = opath+rframe
         size = get_flows_size(rframe) + get_code_size(rframe, 0)
-        bpp = size/(get_number_of_pixels(dataset))
+        bpp = size*8/(get_number_of_pixels(dataset))
         bpp_itr.append(bpp)
+        sizes.append(size*8)
 
-        os.system('python ../metric.py -o '+oframe+' -c output_'+str(itr)+'/images/'+rframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
+        #os.system('python ../metric.py -o '+oframe+' -c output_'+str(itr)+'/images/'+rframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
 
     for irframe in irecframes:
         oframe = opath+irframe
         size = get_code_size(irframe, 1)
-        bpp = size/(get_number_of_pixels(dataset))
+        bpp = size*8/(get_number_of_pixels(dataset))
         bpp_itr.append(bpp)
+        sizes.append(size*8)
 
-        os.system('python ../metric.py -o '+oframe+' -c ../../icodec/'+dataset+'/images/'+irframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
+        #os.system('python ../metric.py -o '+oframe+' -c ../../icodec/'+dataset+'/images/'+irframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
     lines = open('output_'+str(itr)+'/quality_'+str(itr)+'.txt', 'r')
     psnr = []
     ssim = []
@@ -67,4 +71,4 @@ for itr in iters:
         line = line.strip().split(' ')
         psnr.append(float(line[0]))
         ssim.append(float(line[1]))
-    print ('iteration:', itr, '\tbpp:', np.mean(bpp_itr), '\tpsnr:', np.mean(psnr), '\tmsssim:', np.mean(ssim))
+    print ('iteration:', itr, '\tbpp:', np.mean(bpp_itr), 'bitrate:', np.mean(sizes)/3.23, '\tpsnr:', np.mean(psnr), '\tmsssim:', np.mean(ssim))

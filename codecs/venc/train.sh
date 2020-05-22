@@ -8,10 +8,10 @@ modeldir=$2
 iters=$3
 outdir=$4
 
-train="/home/mallesh/deepvideo/data/dhf1k/train"
+train="/home/mallesh/deepvideo/data/kinetics/train"
 eval="/home/mallesh/deepvideo/data/vtl/test"
 #eval="/home/mallesh/deepvideo/data/dhf1k/eval"
-train_mv="/home/mallesh/deepvideo/data/dhf1k/train_mv"
+train_mv="/home/mallesh/deepvideo/data/kinetics/train_mv"
 eval_mv="/home/mallesh/deepvideo/data/vtl/test_mv"
 #eval_mv="/home/mallesh/deepvideo/data/dhf1k/eval_mv"
 
@@ -54,14 +54,13 @@ python3 -u train.py \
   --v-compress --warp --stack --fuse-encoder \
   --bits ${bits} \
   --distance1 ${distance1} --distance2 ${distance2} \
-  --max-train-iters 20000 \
-  --checkpoint-iters 5000 \
-  --eval-iters 20000 \
+  --max-train-iters 100000 \
+  --checkpoint-iters 20000 \
+  --eval-iters 100000 \
   --model-dir ${modeldir} \
   --batch-size 2 \
-  --schedule "10000,12000,14000,16000,18000" \
   --iterations ${iters} \
-  --load-model-name "demo" \
-  --load-iter 20000 \
   --out-dir ${outdir} \
   --save-codes \
+  --load-model-name "demo" \
+  --load-iter 100000 \

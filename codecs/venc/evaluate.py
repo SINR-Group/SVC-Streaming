@@ -17,7 +17,6 @@ from dataset import get_loader
 def save_codes(name, codes):
   codes = (codes.astype(np.int8) + 1) // 2
   export = np.packbits(codes.reshape(-1))
-  print(codes.shape)
   np.savez_compressed(
       name + '.codes',
       shape=codes.shape,
@@ -26,7 +25,6 @@ def save_codes(name, codes):
 def save_eccv_codes(name, codes):
   codes = (codes.astype(np.int8) + 1) // 2
   export = np.packbits(codes.reshape(-1))
-  print(codes.shape)
   np.savez_compressed(
       name + '.eccv.codes',
       shape=codes.shape,
