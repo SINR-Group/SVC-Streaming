@@ -1,6 +1,6 @@
 import os
 
-for itr in [1, 2, 3, 5]:
+for itr in range(1, 11):
     if not os.path.exists('vcodes/'+str(itr)):
         os.makedirs('vcodes/'+str(itr))
     for h in range(3):

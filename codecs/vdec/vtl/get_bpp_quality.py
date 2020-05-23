@@ -2,7 +2,6 @@ import os
 import numpy as np
 
 iters = [i for i in range(1, 11)]
-iters = [1, 2, 5]
 
 dataset = 'vtl'
 opath = '/home/mallesh/deepvideo/data/'+dataset+'/test/'
@@ -65,6 +64,7 @@ for itr in iters:
 
         #os.system('python ../metric.py -o '+oframe+' -c ../../icodec/'+dataset+'/images/'+irframe+' >> output_'+str(itr)+'/quality_'+str(itr)+'.txt')
     lines = open('output_'+str(itr)+'/quality_'+str(itr)+'.txt', 'r')
+    lines = lines.readlines()
     psnr = []
     ssim = []
     for line in lines:

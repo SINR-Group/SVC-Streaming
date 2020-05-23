@@ -1,0 +1,1265 @@
+Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=9, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_9', num_crops=2, out_dir='vtl_output/hrch_2_itr9', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
+1510250 images loaded.
+	distance=1/2
+Loader for 1510250 images (755125 batches) created.
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(72, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h2/model_iters_9/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h2/model_iters_9/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h2/model_iters_9/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h2/model_iters_9/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h2/model_iters_9/demo_d2_00100000.pth...
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.032459; Rec2 Loss: 0.022803; Backprop: 0.0447 sec; Batch: 0.3849 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Creating directory vtl_output/hrch_2_itr9/iter100001/codes.
+Creating directory vtl_output/hrch_2_itr9/iter100001/images.
+Encoding time:95256
+Encoding time:94739
+Encoding time:94123
+Encoding time:94078
+Encoding time:94028
+Encoding time:94039
+Encoding time:94595
+Encoding time:94093
+Encoding time:94200
+Encoding time:93999
+Encoding time:94296
+Encoding time:94265
+Encoding time:94024
+Encoding time:94479
+Encoding time:94150
+Encoding time:94174
+Encoding time:96704
+Encoding time:94117
+Encoding time:94135
+Encoding time:94290
+Encoding time:94672
+Encoding time:94917
+Encoding time:94292
+Encoding time:94074
+Encoding time:94561
+Encoding time:94711
+Encoding time:94420
+Encoding time:94415
+Encoding time:94279
+Encoding time:94648
+Encoding time:94515
+Encoding time:94319
+Encoding time:95075
+Encoding time:94761
+Encoding time:95005
+Encoding time:94696
+Encoding time:94266
+Encoding time:94526
+Encoding time:94823
+Encoding time:94421
+Encoding time:94083
+Encoding time:94614
+Encoding time:94463
+Encoding time:94464
+Encoding time:94309
+Encoding time:94418
+Encoding time:94649
+Encoding time:94621
+Encoding time:94421
+Encoding time:95010
+Encoding time:94610
+Encoding time:94647
+Encoding time:94721
+Encoding time:94729
+Encoding time:94179
+Encoding time:94258
+Encoding time:95079
+Encoding time:95142
+Encoding time:94539
+Encoding time:94428
+Encoding time:94721
+Encoding time:94635
+Encoding time:94872
+Encoding time:94577
+Encoding time:94624
+Encoding time:94713
+Encoding time:94966
+Encoding time:94301
+Encoding time:94395
+Encoding time:94702
+Encoding time:94738
+Encoding time:94846
+Encoding time:94444
+Encoding time:94840
+Encoding time:94575
+Encoding time:94706
+Encoding time:94478
+Encoding time:95754
+Encoding time:94555
+Encoding time:94981
+Encoding time:94832
+Encoding time:94683
+Encoding time:94645
+Encoding time:94624
+Encoding time:94634
+Encoding time:94610
+Encoding time:94540
+Encoding time:94636
+Encoding time:94666
+Encoding time:95093
+Encoding time:94679
+Encoding time:94826
+Encoding time:94684
+Encoding time:95044
+Encoding time:95412
+Encoding time:94693
+Encoding time:94978
+Encoding time:95649
+Encoding time:94783
+Encoding time:94758
+Encoding time:95075
+Encoding time:94670
+Encoding time:94995
+Encoding time:95055
+Encoding time:95095
+Encoding time:94579
+Encoding time:94981
+Encoding time:95198
+Encoding time:95108
+Encoding time:95072
+Encoding time:94929
+Encoding time:95653
+Encoding time:95112
+Encoding time:94820
+Encoding time:95232
+Encoding time:95347
+Encoding time:95058
+Encoding time:95021
+Encoding time:95186
+Encoding time:95049
+Encoding time:94918
+Encoding time:95039
+Encoding time:94976
+Encoding time:94732
+Encoding time:94930
+Encoding time:94867
+Encoding time:95210
+Encoding time:94891
+Encoding time:94937
+Encoding time:95052
+Encoding time:94926
+Encoding time:94867
+Encoding time:94963
+Encoding time:95230
+Encoding time:94823
+Encoding time:95020
+Encoding time:95481
+Encoding time:95561
+Encoding time:94966
+Encoding time:95008
+Encoding time:95138
+Encoding time:95210
+Encoding time:95087
+Encoding time:94938
+Encoding time:95236
+Encoding time:95146
+Encoding time:94801
+Encoding time:95372
+Encoding time:95109
+Encoding time:94603
+Encoding time:94693
+Encoding time:95078
+Encoding time:95202
+Encoding time:94831
+Encoding time:94872
+Encoding time:95183
+Encoding time:95555
+Encoding time:94890
+Encoding time:95042
+Encoding time:95320
+Encoding time:95365
+Encoding time:95007
+Encoding time:95210
+Encoding time:95255
+Encoding time:95552
+Encoding time:95166
+Encoding time:95408
+Encoding time:94998
+Encoding time:94924
+Encoding time:94983
+Encoding time:95208
+Encoding time:94982
+Encoding time:95159
+Encoding time:95535
+Encoding time:95036
+Encoding time:94941
+Encoding time:95158
+Encoding time:95112
+Encoding time:94994
+Encoding time:95663
+Encoding time:95231
+Encoding time:95121
+Encoding time:95007
+Encoding time:95459
+Encoding time:95692
+Encoding time:95087
+Encoding time:95050
+Encoding time:95147
+Encoding time:95220
+Encoding time:95106
+Encoding time:95235
+Encoding time:95276
+Encoding time:95766
+Encoding time:95145
+Encoding time:95141
+Encoding time:95049
+Encoding time:95162
+Encoding time:95423
+Encoding time:94839
+Encoding time:95276
+Encoding time:95177
+Encoding time:95653
+Encoding time:95428
+Encoding time:95011
+Encoding time:95257
+Encoding time:95285
+Encoding time:94919
+Encoding time:95119
+Encoding time:95123
+Encoding time:94882
+Encoding time:95247
+Encoding time:95081
+Encoding time:95522
+Encoding time:95220
+Encoding time:95576
+Encoding time:95302
+Encoding time:95301
+Encoding time:95103
+Encoding time:95054
+Encoding time:95403
+Encoding time:95325
+Encoding time:95056
+Encoding time:95293
+Encoding time:95640
+Encoding time:95285
+Encoding time:95326
+Encoding time:95496
+Encoding time:95032
+Encoding time:94909
+Encoding time:95359
+Encoding time:95480
+Encoding time:95018
+Encoding time:95059
+Encoding time:95400
+Encoding time:95108
+Encoding time:95740
+Encoding time:95481
+Encoding time:95171
+Encoding time:95395
+Encoding time:95168
+Encoding time:95664
+Encoding time:95053
+Encoding time:95185
+Encoding time:95301
+Encoding time:95050
+Encoding time:95081
+Encoding time:95349
+Encoding time:95323
+Encoding time:94996
+Encoding time:95153
+Encoding time:95651
+Encoding time:95519
+Encoding time:95317
+Encoding time:95303
+Encoding time:95433
+Encoding time:95002
+Encoding time:95091
+Encoding time:95470
+Encoding time:95100
+Encoding time:95004
+Encoding time:95225
+Encoding time:95445
+Encoding time:95550
+Encoding time:95214
+Encoding time:95037
+Encoding time:95362
+Encoding time:95267
+Encoding time:95331
+Encoding time:95284
+Encoding time:95350
+Encoding time:94954
+Encoding time:94986
+Encoding time:95150
+Encoding time:95434
+Encoding time:95006
+Encoding time:95275
+Encoding time:95044
+Encoding time:95638
+Encoding time:95147
+Encoding time:95142
+Encoding time:95099
+Encoding time:95424
+Encoding time:95135
+Encoding time:95288
+Encoding time:95266
+Encoding time:95593
+Encoding time:95140
+Encoding time:95121
+Encoding time:95092
+Encoding time:95204
+Encoding time:95434
+Encoding time:95439
+Encoding time:95261
+Encoding time:94982
+Encoding time:95595
+Encoding time:95340
+Encoding time:95550
+Encoding time:95097
+Encoding time:95533
+Encoding time:95505
+Encoding time:95192
+Encoding time:95191
+Encoding time:95515
+Encoding time:95385
+Encoding time:95169
+Encoding time:95156
+Encoding time:95573
+Encoding time:95009
+Encoding time:95743
+Encoding time:95482
+Encoding time:95271
+Encoding time:95276
+Encoding time:94989
+Encoding time:95447
+Encoding time:95107
+Encoding time:95001
+Encoding time:95332
+Encoding time:95932
+Encoding time:95161
+Encoding time:95190
+Encoding time:95460
+Encoding time:95259
+Encoding time:94960
+Encoding time:95458
+Encoding time:95681
+Encoding time:95198
+Encoding time:95129
+Encoding time:95582
+Encoding time:95507
+Encoding time:95253
+Encoding time:95425
+Encoding time:95238
+Encoding time:95166
+Encoding time:95061
+Encoding time:95219
+Encoding time:95843
+Encoding time:95075
+Encoding time:95134
+Encoding time:95185
+Encoding time:95497
+Encoding time:95131
+Encoding time:95023
+Encoding time:95130
+Encoding time:95621
+Encoding time:95290
+Encoding time:95276
+Encoding time:95446
+Encoding time:95255
+Encoding time:94866
+Encoding time:94921
+Encoding time:95719
+Encoding time:95168
+Encoding time:94858
+Encoding time:95457
+Encoding time:95237
+Encoding time:95090
+Encoding time:95131
+Encoding time:95051
+Encoding time:95563
+Encoding time:95133
+Encoding time:95618
+Encoding time:95069
+Encoding time:95636
+Encoding time:95142
+Encoding time:95101
+Encoding time:95448
+Encoding time:95266
+Encoding time:95371
+Encoding time:95172
+Encoding time:95124
+Encoding time:95286
+Encoding time:95049
+Encoding time:95562
+Encoding time:95585
+Encoding time:95146
+Encoding time:94903
+Encoding time:95318
+Encoding time:95491
+Encoding time:95066
+Encoding time:95219
+Encoding time:95058
+Encoding time:95544
+Encoding time:95367
+Encoding time:95465
+Encoding time:95159
+Encoding time:95475
+Encoding time:95771
+Encoding time:94970
+Encoding time:95333
+Encoding time:95441
+Encoding time:95660
+Encoding time:95115
+Encoding time:95173
+Encoding time:95483
+Encoding time:95728
+Encoding time:94988
+Encoding time:95233
+Encoding time:95549
+Encoding time:95585
+Encoding time:95136
+Encoding time:95598
+Encoding time:95399
+Encoding time:95505
+Encoding time:95486
+Encoding time:95155
+Encoding time:95621
+Encoding time:95103
+Encoding time:95303
+Encoding time:95459
+Encoding time:95777
+Encoding time:94993
+Encoding time:95338
+Encoding time:95498
+Encoding time:95712
+Encoding time:95361
+Encoding time:95342
+Encoding time:95808
+Encoding time:95511
+Encoding time:95276
+Encoding time:95244
+Encoding time:95601
+Encoding time:94912
+Encoding time:95254
+Encoding time:95576
+Encoding time:95500
+Encoding time:94807
+Encoding time:95359
+Encoding time:95517
+Encoding time:95282
+Encoding time:95034
+Encoding time:95017
+Encoding time:95568
+Encoding time:94900
+Encoding time:95041
+Encoding time:95268
+Encoding time:95486
+Encoding time:95148
+Encoding time:94767
+Encoding time:95008
+Encoding time:95476
+Encoding time:96007
+Encoding time:94981
+Encoding time:95104
+Encoding time:95414
+Encoding time:95383
+Encoding time:95324
+Encoding time:95025
+Encoding time:95844
+Encoding time:95030
+Encoding time:95172
+Encoding time:96081
+Encoding time:95389
+Encoding time:95196
+Encoding time:95039
+Encoding time:95408
+Encoding time:95550
+Encoding time:94820
+Encoding time:95286
+Encoding time:95574
+Encoding time:95176
+Encoding time:95194
+Encoding time:95485
+Encoding time:95162
+Encoding time:94913
+Encoding time:95180
+Encoding time:95428
+Encoding time:95470
+Encoding time:95023
+Encoding time:95113
+Encoding time:95622
+Encoding time:95621
+Encoding time:94890
+Encoding time:94961
+Encoding time:95438
+Encoding time:95169
+Encoding time:95099
+Encoding time:95515
+Encoding time:95297
+Encoding time:95194
+Encoding time:95152
+Encoding time:95490
+Encoding time:95428
+Encoding time:95176
+Encoding time:95127
+Encoding time:95480
+Encoding time:95791
+Encoding time:95218
+Encoding time:95372
+Encoding time:95702
+Encoding time:95328
+Encoding time:94853
+Encoding time:95133
+Encoding time:95905
+Encoding time:95020
+Encoding time:95198
+Encoding time:95449
+Encoding time:95621
+Encoding time:95277
+Encoding time:95151
+Encoding time:95085
+Encoding time:95635
+Encoding time:95408
+Encoding time:95167
+Encoding time:95354
+Encoding time:95637
+Encoding time:94931
+Encoding time:95490
+Encoding time:95490
+Encoding time:95442
+Encoding time:94939
+Encoding time:95929
+Encoding time:95470
+Encoding time:95260
+Encoding time:94939
+Encoding time:95422
+Encoding time:95635
+Encoding time:95229
+Encoding time:95319
+Encoding time:95418
+Encoding time:95334
+Encoding time:95023
+Encoding time:95203
+Encoding time:95409
+Encoding time:95590
+Encoding time:95440
+Encoding time:95116
+Encoding time:95323
+Encoding time:95204
+Encoding time:95222
+Encoding time:95037
+Encoding time:95208
+Encoding time:95689
+Encoding time:95696
+Encoding time:95531
+Encoding time:95140
+Encoding time:95613
+Encoding time:95562
+Encoding time:95025
+Encoding time:95217
+Encoding time:95617
+Encoding time:95556
+Encoding time:95302
+Encoding time:95822
+Encoding time:95967
+Encoding time:95330
+Encoding time:95094
+Encoding time:95332
+Encoding time:95640
+Encoding time:95614
+Encoding time:95232
+Encoding time:95063
+Encoding time:95378
+Encoding time:95687
+Encoding time:95256
+Encoding time:95726
+Encoding time:95544
+Encoding time:95474
+Encoding time:95177
+Encoding time:95297
+Encoding time:95609
+Encoding time:95321
+Encoding time:95264
+Encoding time:95530
+Encoding time:95726
+Encoding time:95152
+Encoding time:95212
+Encoding time:95512
+Encoding time:95357
+Encoding time:95302
+Encoding time:95308
+Encoding time:95811
+Encoding time:95132
+Encoding time:95469
+Encoding time:95370
+Encoding time:95541
+Encoding time:95147
+Encoding time:95384
+Encoding time:95547
+Encoding time:95409
+Encoding time:95139
+Encoding time:95382
+Encoding time:95494
+Encoding time:95157
+Encoding time:95226
+Encoding time:95429
+Encoding time:95290
+Encoding time:95364
+Encoding time:95215
+Encoding time:95716
+Encoding time:95088
+Encoding time:94850
+Encoding time:95448
+Encoding time:95454
+Encoding time:95091
+Encoding time:95863
+Encoding time:95524
+Encoding time:95227
+Encoding time:95088
+Encoding time:95255
+Encoding time:95514
+Encoding time:95228
+Encoding time:95212
+Encoding time:95183
+Encoding time:95754
+Encoding time:95032
+Encoding time:95276
+Encoding time:95587
+Encoding time:95299
+Encoding time:94915
+Encoding time:95183
+Encoding time:95651
+Encoding time:95129
+Encoding time:95497
+Encoding time:95100
+Encoding time:95452
+Encoding time:95023
+Encoding time:95117
+Encoding time:95216
+Encoding time:95531
+Encoding time:95038
+Encoding time:95188
+Encoding time:95400
+Encoding time:95794
+Encoding time:95211
+Encoding time:95426
+Encoding time:95653
+Encoding time:95323
+Encoding time:94994
+Encoding time:95272
+Encoding time:95500
+Encoding time:95377
+Encoding time:95158
+Encoding time:94829
+Encoding time:95517
+Encoding time:95068
+Encoding time:95029
+Encoding time:95587
+Encoding time:95786
+Encoding time:95486
+Encoding time:95126
+Encoding time:95411
+Encoding time:95339
+Encoding time:94955
+Encoding time:95125
+Encoding time:95445
+Encoding time:95377
+Encoding time:94967
+Encoding time:95094
+Encoding time:95460
+Encoding time:95186
+Encoding time:95034
+Encoding time:95442
+Encoding time:95214
+Encoding time:95160
+Encoding time:95089
+Encoding time:95686
+Encoding time:95199
+Encoding time:94970
+Encoding time:95217
+Encoding time:95482
+Encoding time:95407
+Encoding time:95199
+Encoding time:95332
+Encoding time:95778
+Encoding time:95427
+Encoding time:95228
+Encoding time:95476
+Encoding time:95269
+Encoding time:94845
+Encoding time:95537
+Encoding time:95595
+Encoding time:95133
+Encoding time:95139
+Encoding time:95312
+Encoding time:95568
+Encoding time:95219
+Encoding time:95135
+Encoding time:95484
+Encoding time:95076
+Encoding time:95080
+Encoding time:95172
+Encoding time:95795
+Encoding time:95199
+Encoding time:95090
+Encoding time:95464
+Encoding time:95814
+Encoding time:95209
+Encoding time:95193
+Encoding time:95874
+Encoding time:95730
+Encoding time:95262
+Encoding time:95318
+Encoding time:95225
+Encoding time:95863
+Encoding time:95112
+Encoding time:95660
+Encoding time:95522
+Encoding time:95122
+Encoding time:95005
+Encoding time:95162
+Encoding time:95537
+Encoding time:95314
+Encoding time:95328
+Encoding time:95253
+Encoding time:95365
+Encoding time:95287
+Encoding time:94861
+Encoding time:95304
+Encoding time:95703
+Encoding time:95316
+Encoding time:95162
+Encoding time:95065
+Encoding time:95654
+Encoding time:94908
+Encoding time:95206
+Encoding time:95349
+Encoding time:95635
+Encoding time:94915
+Encoding time:95088
+Encoding time:95545
+Encoding time:95216
+Encoding time:95534
+Encoding time:95188
+Encoding time:95657
+Encoding time:95561
+Encoding time:95119
+Encoding time:94999
+Encoding time:95538
+Encoding time:95482
+Encoding time:95119
+Encoding time:94974
+Encoding time:95646
+Encoding time:94925
+Encoding time:94891
+Encoding time:95340
+Encoding time:95592
+Encoding time:95344
+Encoding time:95321
+Encoding time:95075
+Encoding time:95764
+Encoding time:95023
+Encoding time:95025
+Encoding time:95609
+Encoding time:95567
+Encoding time:95100
+Encoding time:95308
+Encoding time:95423
+Encoding time:95479
+Encoding time:94795
+Encoding time:95466
+Encoding time:95557
+Encoding time:95069
+Encoding time:95228
+Encoding time:95323
+Encoding time:95247
+Encoding time:95185
+Encoding time:95139
+Encoding time:95339
+Encoding time:95520
+Encoding time:95253
+Encoding time:95119
+Encoding time:95272
+Encoding time:95805
+Encoding time:95109
+Encoding time:95770
+Encoding time:95860
+Encoding time:95312
+Encoding time:95229
+Encoding time:95298
+Encoding time:95158
+Encoding time:95599
+Encoding time:95361
+Encoding time:94970
+Encoding time:95118
+Encoding time:95061
+Encoding time:96169
+Encoding time:95372
+Encoding time:95199
+Encoding time:95347
+Encoding time:95304
+Encoding time:95070
+Encoding time:95372
+Encoding time:95521
+Encoding time:95532
+Encoding time:95049
+Encoding time:95298
+Encoding time:95158
+Encoding time:95046
+Encoding time:95179
+Encoding time:95485
+Encoding time:95017
+Encoding time:95100
+Encoding time:95047
+Encoding time:95418
+Encoding time:95005
+Encoding time:95007
+Encoding time:94962
+Encoding time:95661
+Encoding time:95070
+Encoding time:94886
+Encoding time:95094
+Encoding time:95620
+Encoding time:95060
+Encoding time:95064
+Encoding time:95194
+Encoding time:95589
+Encoding time:95268
+Encoding time:95187
+Encoding time:95679
+Encoding time:95410
+Encoding time:95561
+Encoding time:95831
+Encoding time:95472
+Encoding time:95014
+Encoding time:95441
+Encoding time:95635
+Encoding time:95010
+Encoding time:95051
+Encoding time:95431
+Encoding time:95574
+Encoding time:94842
+Encoding time:94894
+Encoding time:95489
+Encoding time:95516
+Encoding time:95096
+Encoding time:95273
+Encoding time:95448
+Encoding time:95494
+Encoding time:94982
+Encoding time:95186
+Encoding time:95796
+Encoding time:95220
+Encoding time:95040
+Encoding time:95835
+Encoding time:95549
+Encoding time:95079
+Encoding time:95473
+Encoding time:95684
+Encoding time:95028
+Encoding time:95252
+Encoding time:95870
+Encoding time:95841
+Encoding time:94986
+Encoding time:94940
+Encoding time:95531
+Encoding time:95319
+Encoding time:95147
+Encoding time:97582
+Encoding time:95714
+Encoding time:95141
+Encoding time:95307
+Encoding time:95563
+Encoding time:95661
+Encoding time:95377
+Encoding time:95836
+Encoding time:95472
+Encoding time:95510
+Encoding time:95128
+Encoding time:95367
+Encoding time:95524
+Encoding time:95573
+Encoding time:95194
+Encoding time:95020
+Encoding time:95424
+Encoding time:95450
+Encoding time:94900
+Encoding time:95386
+Encoding time:95469
+Encoding time:95364
+Encoding time:95539
+Encoding time:95751
+Encoding time:95273
+Encoding time:95517
+Encoding time:95682
+Encoding time:95356
+Encoding time:95656
+Encoding time:95081
+Encoding time:95775
+Encoding time:94930
+Encoding time:95195
+Encoding time:95269
+Encoding time:95943
+Encoding time:95563
+Encoding time:95536
+Encoding time:95070
+Encoding time:95199
+Encoding time:95498
+Encoding time:95361
+Encoding time:95281
+Encoding time:95079
+Encoding time:95419
+Encoding time:95375
+Encoding time:95197
+Encoding time:95530
+Encoding time:95581
+Encoding time:95008
+Encoding time:95686
+Encoding time:95651
+Encoding time:95218
+Encoding time:95415
+Encoding time:95503
+Encoding time:95120
+Encoding time:94912
+Encoding time:95243
+Encoding time:95308
+Encoding time:94958
+Encoding time:95248
+Encoding time:95719
+Encoding time:95381
+Encoding time:95260
+Encoding time:95699
+Encoding time:95221
+Encoding time:95339
+Encoding time:95329
+Encoding time:95587
+Encoding time:95150
+Encoding time:95017
+Encoding time:95578
+Encoding time:95177
+Encoding time:95228
+Encoding time:95777
+Encoding time:95159
+Encoding time:95320
+Encoding time:95396
+Encoding time:95499
+Encoding time:95126
+Encoding time:95608
+Encoding time:95680
+Encoding time:95090
+Encoding time:95280
+Encoding time:95567
+Encoding time:95489
+Encoding time:95034
+Encoding time:95352
+Encoding time:95704
+Encoding time:95389
+Encoding time:95161
+Encoding time:95490
+Encoding time:95284
+Encoding time:94878
+Encoding time:95032
+Encoding time:95339
+Encoding time:95193
+Encoding time:95025
+Encoding time:95167
+Encoding time:95609
+Encoding time:95383
+Encoding time:94846
+Encoding time:95132
+Encoding time:95553
+Encoding time:95166
+Encoding time:95244
+Encoding time:95483
+Encoding time:95674
+Encoding time:94889
+Encoding time:95466
+Encoding time:95553
+Encoding time:95282
+Encoding time:95072
+Encoding time:95570
+Encoding time:95720
+Encoding time:95087
+Encoding time:95103
+Encoding time:95221
+Encoding time:95710
+Encoding time:95067
+Encoding time:95052
+Encoding time:95160
+Encoding time:95622
+Encoding time:94793
+Encoding time:95340
+Encoding time:95295
+Encoding time:95636
+Encoding time:95540
+Encoding time:95321
+Encoding time:95421
+Encoding time:95536
+Encoding time:94858
+Encoding time:95355
+Encoding time:95649
+Encoding time:95662
+Encoding time:94956
+Encoding time:95671
+Encoding time:95292
+Encoding time:95173
+Encoding time:94970
+Encoding time:95194
+Encoding time:95702
+Encoding time:95130
+Encoding time:95142
+Encoding time:95357
+Encoding time:95746
+Encoding time:95352
+Encoding time:94997
+Encoding time:95496
+Encoding time:95366
+Encoding time:94821
+Encoding time:95062
+Encoding time:95104
+Encoding time:95586
+Encoding time:95074
+Encoding time:95437
+Encoding time:95533
+Encoding time:95824
+Encoding time:95014
+Encoding time:95369
+Encoding time:95364
+Encoding time:96067
+Encoding time:95107
+Encoding time:95003
+Encoding time:95303
+Encoding time:95615
+Encoding time:95598
+Encoding time:95206
+Encoding time:95388
+Encoding time:95330
+Encoding time:95333
+Encoding time:95311
+Encoding time:95708
+Encoding time:94919
+Encoding time:95077
+Encoding time:95183
+Encoding time:95188
+Encoding time:95045
+Encoding time:95179
+Encoding time:95586
+Encoding time:95389
+Encoding time:95006
+Encoding time:95139
+Encoding time:95640
+Encoding time:95154
+Encoding time:94988
+Encoding time:95408
+Encoding time:95647
+Encoding time:95123
+Encoding time:94998
+Encoding time:95068
+Encoding time:95295
+Encoding time:95051
+Encoding time:95050
+Encoding time:95458
+Encoding time:95798
+Encoding time:95502
+Encoding time:95158
+Encoding time:95111
+Encoding time:95274
+Encoding time:95203
+Encoding time:94961
+Encoding time:94981
+Encoding time:95519
+Encoding time:95613
+Encoding time:95084
+Encoding time:95210
+Encoding time:95619
+Encoding time:95321
+Encoding time:95044
+Encoding time:95584
+Encoding time:95627
+Encoding time:95275
+Encoding time:95169
+Encoding time:95130
+Encoding time:95297
+Encoding time:95750
+Encoding time:95042
+Encoding time:95260
+Encoding time:95302
+Encoding time:95125
+Encoding time:95091
+Encoding time:95033
+Encoding time:95074
+Encoding time:95581
+Encoding time:95288
+Encoding time:95100
+Encoding time:95152
+Encoding time:95038
+Encoding time:94981
+Encoding time:95121
+Encoding time:95777
+Encoding time:95479
+Encoding time:95435
+Encoding time:95350
+Encoding time:95697
+Encoding time:95084
+Encoding time:94897
+Encoding time:94694
+Encoding time:94735
+Encoding time:94884
+Encoding time:94933
+Evaluation @iter 100001 done in 313 secs
+TVL Loss   : 0.02755
+TVL MS-SSIM: 0.96154
+TVL PSNR   : 32.70435
+Training done.

@@ -161,146 +161,320 @@ Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 136 images loaded.
 	distance=6/6
 Loader for 136 images (136 batches) created.
-Decoding time: 15125us
-Decoding time: 16627us
-Decoding time: 15764us
-Decoding time: 16619us
-Decoding time: 16644us
-Decoding time: 16678us
-Decoding time: 16595us
-Decoding time: 16660us
-Decoding time: 16645us
-Decoding time: 16546us
-Decoding time: 16613us
-Decoding time: 16644us
-Decoding time: 16632us
-Decoding time: 16595us
-Decoding time: 16620us
-Decoding time: 16630us
-Decoding time: 16615us
-Decoding time: 16617us
-Decoding time: 16620us
-Decoding time: 16651us
-Decoding time: 16612us
-Decoding time: 16624us
-Decoding time: 16649us
-Decoding time: 16670us
-Decoding time: 16675us
-Decoding time: 16623us
-Decoding time: 16554us
-Decoding time: 16615us
-Decoding time: 16572us
-Decoding time: 16647us
-Decoding time: 16674us
-Decoding time: 16656us
-Decoding time: 16586us
-Decoding time: 16645us
-Decoding time: 16660us
-Decoding time: 16609us
-Decoding time: 16616us
-Decoding time: 16651us
-Decoding time: 16615us
-Decoding time: 16656us
-Decoding time: 16637us
-Decoding time: 16659us
-Decoding time: 16645us
-Decoding time: 16651us
-Decoding time: 16652us
-Decoding time: 16638us
-Decoding time: 16646us
-Decoding time: 16677us
-Decoding time: 16663us
-Decoding time: 16651us
-Decoding time: 16671us
-Decoding time: 16672us
-Decoding time: 16607us
-Decoding time: 16602us
-Decoding time: 16655us
-Decoding time: 16649us
-Decoding time: 16614us
-Decoding time: 16658us
-Decoding time: 16639us
-Decoding time: 16629us
-Decoding time: 16661us
-Decoding time: 16626us
-Decoding time: 16656us
-Decoding time: 16622us
-Decoding time: 16674us
-Decoding time: 16662us
-Decoding time: 16668us
-Decoding time: 16648us
-Decoding time: 16608us
-Decoding time: 16662us
-Decoding time: 16659us
-Decoding time: 16648us
-Decoding time: 16645us
-Decoding time: 16638us
-Decoding time: 16644us
-Decoding time: 16628us
-Decoding time: 16629us
-Decoding time: 16652us
-Decoding time: 16650us
-Decoding time: 16654us
-Decoding time: 16661us
-Decoding time: 16648us
-Decoding time: 16645us
-Decoding time: 16665us
-Decoding time: 16675us
-Decoding time: 16702us
-Decoding time: 16668us
-Decoding time: 16661us
-Decoding time: 16611us
-Decoding time: 16668us
-Decoding time: 16620us
-Decoding time: 16622us
-Decoding time: 16654us
-Decoding time: 16646us
-Decoding time: 16680us
-Decoding time: 16665us
-Decoding time: 16640us
-Decoding time: 16650us
-Decoding time: 16634us
-Decoding time: 16648us
-Decoding time: 16616us
-Decoding time: 16677us
-Decoding time: 16668us
-Decoding time: 16645us
-Decoding time: 16591us
-Decoding time: 16616us
-Decoding time: 16636us
-Decoding time: 16679us
-Decoding time: 15923us
-Decoding time: 16693us
-Decoding time: 15886us
-Decoding time: 16688us
-Decoding time: 16657us
-Decoding time: 16634us
-Decoding time: 16620us
-Decoding time: 16674us
-Decoding time: 16657us
-Decoding time: 16685us
-Decoding time: 16667us
-Decoding time: 16676us
-Decoding time: 16651us
-Decoding time: 15734us
-Decoding time: 16680us
-Decoding time: 16679us
-Decoding time: 15915us
-Decoding time: 15839us
-Decoding time: 15787us
-Decoding time: 16643us
-Decoding time: 16689us
-Decoding time: 16628us
-Decoding time: 16667us
-Decoding time: 16662us
-Decoding time: 16524us
-Decoding time: 16518us
-Decoding time: 16514us
-Decoding time: 16605us
-Evaluation @iter 100000 done in 22 secs
-TVL Loss   : 0.03984
-TVL MS-SSIM: 0.90374
-TVL PSNR   : 31.44281
+Evaluation @iter 100000 done in 16 secs
+TVL Loss   : 0.04189	0.03808
+TVL MS-SSIM: 
+TVL PSNR   : 
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h1/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h1/model_iters_2/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h1/model_iters_2/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h1/model_iters_2/demo_decoder_00100000.pth...
+                                                                                                                                                                                                                                                                                      Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h2/model_iters_2/demo_encoder_00100000.pth...
 Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h1/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
 	Encoder fuse level: 2
 	Decoder fuse level: 3
@@ -464,283 +638,341 @@ Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 272 images loaded.
 	distance=3/3
 Loader for 272 images (272 batches) created.
-Decoding time: 422686us
-Decoding time: 119194us
-Decoding time: 101494us
-Decoding time: 66409us
-Decoding time: 54991us
-Decoding time: 52118us
-Decoding time: 62698us
-Decoding time: 242715us
-Decoding time: 101342us
-Decoding time: 124452us
-Decoding time: 134204us
-Decoding time: 145069us
-Decoding time: 95445us
-Decoding time: 61833us
-Decoding time: 119545us
-Decoding time: 94391us
-Decoding time: 95317us
-Decoding time: 303136us
-Decoding time: 222748us
-Decoding time: 259021us
-Decoding time: 321627us
-Decoding time: 346269us
-Decoding time: 321425us
-Decoding time: 130447us
-Decoding time: 75615us
-Decoding time: 448379us
-Decoding time: 78197us
-Decoding time: 60877us
-Decoding time: 431447us
-Decoding time: 247122us
-Decoding time: 73216us
-Decoding time: 57237us
-Decoding time: 78417us
-Decoding time: 71983us
-Decoding time: 53351us
-Decoding time: 18806us
-Decoding time: 23898us
-Decoding time: 31413us
-Decoding time: 31207us
-Decoding time: 100238us
-Decoding time: 18828us
-Decoding time: 20350us
-Decoding time: 24971us
-Decoding time: 29566us
-Decoding time: 18807us
-Decoding time: 23630us
-Decoding time: 31151us
-Decoding time: 18812us
-Decoding time: 25144us
-Decoding time: 31393us
-Decoding time: 31473us
-Decoding time: 30766us
-Decoding time: 31610us
-Decoding time: 18823us
-Decoding time: 24435us
-Decoding time: 31115us
-Decoding time: 18826us
-Decoding time: 24519us
-Decoding time: 31142us
-Decoding time: 29663us
-Decoding time: 18828us
-Decoding time: 23391us
-Decoding time: 18819us
-Decoding time: 24648us
-Decoding time: 18839us
-Decoding time: 18831us
-Decoding time: 18811us
-Decoding time: 18771us
-Decoding time: 18811us
-Decoding time: 18824us
-Decoding time: 18841us
-Decoding time: 18803us
-Decoding time: 18829us
-Decoding time: 18792us
-Decoding time: 18825us
-Decoding time: 18821us
-Decoding time: 18799us
-Decoding time: 28593us
-Decoding time: 30855us
-Decoding time: 30999us
-Decoding time: 18842us
-Decoding time: 23038us
-Decoding time: 18817us
-Decoding time: 23822us
-Decoding time: 31586us
-Decoding time: 18837us
-Decoding time: 24065us
-Decoding time: 18772us
-Decoding time: 24664us
-Decoding time: 31422us
-Decoding time: 18781us
-Decoding time: 23923us
-Decoding time: 18825us
-Decoding time: 23910us
-Decoding time: 18858us
-Decoding time: 24407us
-Decoding time: 18822us
-Decoding time: 24366us
-Decoding time: 31247us
-Decoding time: 83071us
-Decoding time: 18827us
-Decoding time: 18812us
-Decoding time: 18809us
-Decoding time: 18796us
-Decoding time: 18791us
-Decoding time: 18812us
-Decoding time: 18749us
-Decoding time: 23956us
-Decoding time: 30583us
-Decoding time: 18798us
-Decoding time: 23700us
-Decoding time: 18793us
-Decoding time: 24441us
-Decoding time: 18816us
-Decoding time: 23906us
-Decoding time: 32046us
-Decoding time: 31357us
-Decoding time: 18803us
-Decoding time: 25015us
-Decoding time: 18813us
-Decoding time: 18792us
-Decoding time: 24317us
-Decoding time: 31729us
-Decoding time: 46185us
-Decoding time: 24636us
-Decoding time: 18791us
-Decoding time: 18800us
-Decoding time: 18817us
-Decoding time: 18830us
-Decoding time: 18801us
-Decoding time: 17908us
-Decoding time: 24611us
-Decoding time: 30741us
-Decoding time: 31696us
-Decoding time: 31774us
-Decoding time: 31641us
-Decoding time: 18802us
-Decoding time: 23483us
-Decoding time: 29933us
-Decoding time: 30087us
-Decoding time: 30045us
-Decoding time: 30415us
-Decoding time: 30523us
-Decoding time: 30824us
-Decoding time: 29949us
-Decoding time: 30235us
-Decoding time: 30060us
-Decoding time: 18099us
-Decoding time: 17798us
-Decoding time: 17870us
-Decoding time: 17939us
-Decoding time: 17947us
-Decoding time: 17982us
-Decoding time: 18799us
-Decoding time: 23446us
-Decoding time: 31028us
-Decoding time: 30993us
-Decoding time: 31126us
-Decoding time: 77002us
-Decoding time: 30490us
-Decoding time: 31008us
-Decoding time: 31025us
-Decoding time: 29944us
-Decoding time: 29828us
-Decoding time: 31269us
-Decoding time: 31737us
-Decoding time: 31083us
-Decoding time: 31854us
-Decoding time: 17963us
-Decoding time: 18003us
-Decoding time: 17978us
-Decoding time: 18096us
-Decoding time: 18010us
-Decoding time: 18088us
-Decoding time: 17914us
-Decoding time: 25092us
-Decoding time: 31210us
-Decoding time: 32189us
-Decoding time: 31186us
-Decoding time: 31530us
-Decoding time: 31849us
-Decoding time: 31768us
-Decoding time: 31868us
-Decoding time: 31594us
-Decoding time: 31214us
-Decoding time: 31731us
-Decoding time: 30744us
-Decoding time: 78357us
-Decoding time: 31675us
-Decoding time: 18117us
-Decoding time: 18012us
-Decoding time: 18027us
-Decoding time: 17936us
-Decoding time: 18032us
-Decoding time: 18035us
-Decoding time: 17992us
-Decoding time: 23179us
-Decoding time: 31114us
-Decoding time: 30208us
-Decoding time: 30545us
-Decoding time: 30632us
-Decoding time: 18811us
-Decoding time: 24594us
-Decoding time: 18779us
-Decoding time: 24664us
-Decoding time: 18817us
-Decoding time: 24471us
-Decoding time: 31765us
-Decoding time: 18779us
-Decoding time: 24461us
-Decoding time: 46592us
-Decoding time: 24961us
-Decoding time: 31207us
-Decoding time: 18818us
-Decoding time: 24182us
-Decoding time: 32014us
-Decoding time: 18819us
-Decoding time: 24796us
-Decoding time: 18800us
-Decoding time: 26247us
-Decoding time: 18781us
-Decoding time: 24897us
-Decoding time: 31900us
-Decoding time: 31460us
-Decoding time: 31992us
-Decoding time: 18790us
-Decoding time: 24411us
-Decoding time: 31839us
-Decoding time: 32004us
-Decoding time: 18800us
-Decoding time: 25669us
-Decoding time: 18800us
-Decoding time: 24711us
-Decoding time: 31761us
-Decoding time: 30099us
-Decoding time: 18832us
-Decoding time: 24340us
-Decoding time: 18824us
-Decoding time: 24460us
-Decoding time: 18814us
-Decoding time: 24941us
-Decoding time: 31189us
-Decoding time: 19061us
-Decoding time: 18817us
-Decoding time: 18767us
-Decoding time: 18810us
-Decoding time: 18776us
-Decoding time: 18804us
-Decoding time: 24676us
-Decoding time: 18799us
-Decoding time: 25033us
-Decoding time: 31074us
-Decoding time: 25531us
-Decoding time: 18830us
-Decoding time: 24979us
-Decoding time: 18789us
-Decoding time: 24863us
-Decoding time: 31966us
-Decoding time: 18790us
-Decoding time: 25877us
-Decoding time: 18786us
-Decoding time: 23826us
-Decoding time: 26412us
-Decoding time: 18838us
-Decoding time: 24823us
-Decoding time: 31660us
-Decoding time: 31993us
-Decoding time: 18831us
-Decoding time: 27710us
-Decoding time: 19280us
-Decoding time: 27119us
-Decoding time: 21315us
-Evaluation @iter 100000 done in 53 secs
-TVL Loss   : 0.04168
-TVL MS-SSIM: 0.90057
-TVL PSNR   : 31.06817
-Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/eval', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/eval_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h0/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/eval', train_mv='/home/mallesh/deepvideo/data/eval_mv', v_compress=True, warp=True)
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h0/model_iters_2/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h0/model_iters_2/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h0/model_iters_2/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h0/model_iters_2/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h0/model_iters_2/demo_d2_00100000.pth...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/eval...
+136 images loaded.
+	distance=6/6
+Loader for 136 images (136 batches) created.
+Evaluation @iter 100000 done in 15 secs
+TVL Loss   : 0.04221	0.03880
+TVL MS-SSIM: 
+TVL PSNR   : 
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/eval', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/eval_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h1/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/eval', train_mv='/home/mallesh/deepvideo/data/eval_mv', v_compress=True, warp=True)
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h1/model_iters_2/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h1/model_iters_2/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h1/model_iters_2/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h1/model_iters_2/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h1/model_iters_2/demo_d2_00100000.pth...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/eval...
+272 images loaded.
+	distance=3/3
+Loader for 272 images (272 batches) created.
+Evaluation @iter 100000 done in 32 secs
+TVL Loss   : 0.04294	0.04051
+TVL MS-SSIM: 
+TVL PSNR   : 
+Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/eval', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/eval_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_2', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/eval', train_mv='/home/mallesh/deepvideo/data/eval_mv', v_compress=True, warp=True)
 	Encoder fuse level: 1
 	Decoder fuse level: 1
 	Decoder fuse level: 1
@@ -899,1099 +1131,11 @@ Loading decoder from ../vcodec/h2/model_iters_2/demo_decoder_00100000.pth...
 Loading unet from ../vcodec/h2/model_iters_2/demo_unet_00100000.pth...
 Loading d2 from ../vcodec/h2/model_iters_2/demo_d2_00100000.pth...
 
-Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+Creating loader for /home/mallesh/deepvideo/data/vtl/eval...
 1088 images loaded.
 	distance=1/2
 Loader for 1088 images (1088 batches) created.
-Decoding time: 18787us
-Decoding time: 21418us
-Decoding time: 16666us
-Decoding time: 21836us
-Decoding time: 15925us
-Decoding time: 22632us
-Decoding time: 17231us
-Decoding time: 15903us
-Decoding time: 15828us
-Decoding time: 15914us
-Decoding time: 15875us
-Decoding time: 16725us
-Decoding time: 16704us
-Decoding time: 16709us
-Decoding time: 25508us
-Decoding time: 16710us
-Decoding time: 22102us
-Decoding time: 16672us
-Decoding time: 24143us
-Decoding time: 16724us
-Decoding time: 24113us
-Decoding time: 16704us
-Decoding time: 66914us
-Decoding time: 16672us
-Decoding time: 24124us
-Decoding time: 16654us
-Decoding time: 22073us
-Decoding time: 16686us
-Decoding time: 21531us
-Decoding time: 99071us
-Decoding time: 16684us
-Decoding time: 22435us
-Decoding time: 16725us
-Decoding time: 22979us
-Decoding time: 16712us
-Decoding time: 16751us
-Decoding time: 16729us
-Decoding time: 16693us
-Decoding time: 16689us
-Decoding time: 15971us
-Decoding time: 16690us
-Decoding time: 16677us
-Decoding time: 16678us
-Decoding time: 26380us
-Decoding time: 16678us
-Decoding time: 24659us
-Decoding time: 16635us
-Decoding time: 23198us
-Decoding time: 16694us
-Decoding time: 21993us
-Decoding time: 16731us
-Decoding time: 22823us
-Decoding time: 16664us
-Decoding time: 22897us
-Decoding time: 16670us
-Decoding time: 24606us
-Decoding time: 16752us
-Decoding time: 16664us
-Decoding time: 16641us
-Decoding time: 22940us
-Decoding time: 16695us
-Decoding time: 16655us
-Decoding time: 23098us
-Decoding time: 16682us
-Decoding time: 22592us
-Decoding time: 16683us
-Decoding time: 22831us
-Decoding time: 16680us
-Decoding time: 16704us
-Decoding time: 16672us
-Decoding time: 16707us
-Decoding time: 16704us
-Decoding time: 28663us
-Decoding time: 28745us
-Decoding time: 16697us
-Decoding time: 23233us
-Decoding time: 29181us
-Decoding time: 16683us
-Decoding time: 22872us
-Decoding time: 16704us
-Decoding time: 22757us
-Decoding time: 16719us
-Decoding time: 22223us
-Decoding time: 58549us
-Decoding time: 28191us
-Decoding time: 17938us
-Decoding time: 22453us
-Decoding time: 16686us
-Decoding time: 21043us
-Decoding time: 98571us
-Decoding time: 17000us
-Decoding time: 16680us
-Decoding time: 16712us
-Decoding time: 16714us
-Decoding time: 16675us
-Decoding time: 16704us
-Decoding time: 16704us
-Decoding time: 16694us
-Decoding time: 16686us
-Decoding time: 23981us
-Decoding time: 16689us
-Decoding time: 25081us
-Decoding time: 16661us
-Decoding time: 23286us
-Decoding time: 16672us
-Decoding time: 22902us
-Decoding time: 16686us
-Decoding time: 24038us
-Decoding time: 16678us
-Decoding time: 23330us
-Decoding time: 16725us
-Decoding time: 22673us
-Decoding time: 16689us
-Decoding time: 22724us
-Decoding time: 16658us
-Decoding time: 22164us
-Decoding time: 16664us
-Decoding time: 24010us
-Decoding time: 16742us
-Decoding time: 23523us
-Decoding time: 16441us
-Decoding time: 21466us
-Decoding time: 16687us
-Decoding time: 16712us
-Decoding time: 16699us
-Decoding time: 16709us
-Decoding time: 16669us
-Decoding time: 16691us
-Decoding time: 16731us
-Decoding time: 16712us
-Decoding time: 21717us
-Decoding time: 16803us
-Decoding time: 23602us
-Decoding time: 16662us
-Decoding time: 22703us
-Decoding time: 16568us
-Decoding time: 22634us
-Decoding time: 16669us
-Decoding time: 23487us
-Decoding time: 16655us
-Decoding time: 22292us
-Decoding time: 16652us
-Decoding time: 22599us
-Decoding time: 16666us
-Decoding time: 24770us
-Decoding time: 16718us
-Decoding time: 21766us
-Decoding time: 16670us
-Decoding time: 22613us
-Decoding time: 16677us
-Decoding time: 89464us
-Decoding time: 16678us
-Decoding time: 21159us
-Decoding time: 16704us
-Decoding time: 23108us
-Decoding time: 16820us
-Decoding time: 16651us
-Decoding time: 16725us
-Decoding time: 16671us
-Decoding time: 16723us
-Decoding time: 16716us
-Decoding time: 16679us
-Decoding time: 16660us
-Decoding time: 16698us
-Decoding time: 24388us
-Decoding time: 16658us
-Decoding time: 23173us
-Decoding time: 16659us
-Decoding time: 22382us
-Decoding time: 17133us
-Decoding time: 23294us
-Decoding time: 16697us
-Decoding time: 23071us
-Decoding time: 16712us
-Decoding time: 22691us
-Decoding time: 16630us
-Decoding time: 23099us
-Decoding time: 16660us
-Decoding time: 23758us
-Decoding time: 16720us
-Decoding time: 22106us
-Decoding time: 97467us
-Decoding time: 16639us
-Decoding time: 22260us
-Decoding time: 16654us
-Decoding time: 22543us
-Decoding time: 16665us
-Decoding time: 22412us
-Decoding time: 17765us
-Decoding time: 16702us
-Decoding time: 16671us
-Decoding time: 16645us
-Decoding time: 16661us
-Decoding time: 16672us
-Decoding time: 16673us
-Decoding time: 16667us
-Decoding time: 16680us
-Decoding time: 25220us
-Decoding time: 16667us
-Decoding time: 22588us
-Decoding time: 16726us
-Decoding time: 23211us
-Decoding time: 16654us
-Decoding time: 23227us
-Decoding time: 16685us
-Decoding time: 58633us
-Decoding time: 16690us
-Decoding time: 22351us
-Decoding time: 29309us
-Decoding time: 16685us
-Decoding time: 20880us
-Decoding time: 16646us
-Decoding time: 16684us
-Decoding time: 16930us
-Decoding time: 23412us
-Decoding time: 17250us
-Decoding time: 16691us
-Decoding time: 16651us
-Decoding time: 16668us
-Decoding time: 16684us
-Decoding time: 16696us
-Decoding time: 16663us
-Decoding time: 16675us
-Decoding time: 16660us
-Decoding time: 26467us
-Decoding time: 16663us
-Decoding time: 23551us
-Decoding time: 16988us
-Decoding time: 24246us
-Decoding time: 16678us
-Decoding time: 23493us
-Decoding time: 16671us
-Decoding time: 23296us
-Decoding time: 16710us
-Decoding time: 23283us
-Decoding time: 58478us
-Decoding time: 16684us
-Decoding time: 24391us
-Decoding time: 16688us
-Decoding time: 23103us
-Decoding time: 16698us
-Decoding time: 23622us
-Decoding time: 16661us
-Decoding time: 18747us
-Decoding time: 23416us
-Decoding time: 18064us
-Decoding time: 23124us
-Decoding time: 17690us
-Decoding time: 16699us
-Decoding time: 16696us
-Decoding time: 16654us
-Decoding time: 16713us
-Decoding time: 16671us
-Decoding time: 16666us
-Decoding time: 16663us
-Decoding time: 16669us
-Decoding time: 22908us
-Decoding time: 16667us
-Decoding time: 22668us
-Decoding time: 16691us
-Decoding time: 23094us
-Decoding time: 16630us
-Decoding time: 23917us
-Decoding time: 17052us
-Decoding time: 23625us
-Decoding time: 16691us
-Decoding time: 51879us
-Decoding time: 16700us
-Decoding time: 22718us
-Decoding time: 16679us
-Decoding time: 23521us
-Decoding time: 16668us
-Decoding time: 16671us
-Decoding time: 23432us
-Decoding time: 16784us
-Decoding time: 22760us
-Decoding time: 16670us
-Decoding time: 23881us
-Decoding time: 16677us
-Decoding time: 23086us
-Decoding time: 18205us
-Decoding time: 16685us
-Decoding time: 16655us
-Decoding time: 16693us
-Decoding time: 16662us
-Decoding time: 16690us
-Decoding time: 16699us
-Decoding time: 16668us
-Decoding time: 16690us
-Decoding time: 27112us
-Decoding time: 16686us
-Decoding time: 24549us
-Decoding time: 29438us
-Decoding time: 16675us
-Decoding time: 24737us
-Decoding time: 16687us
-Decoding time: 24364us
-Decoding time: 16690us
-Decoding time: 22317us
-Decoding time: 16704us
-Decoding time: 22813us
-Decoding time: 16637us
-Decoding time: 76686us
-Decoding time: 24961us
-Decoding time: 16946us
-Decoding time: 23616us
-Decoding time: 15904us
-Decoding time: 22973us
-Decoding time: 15912us
-Decoding time: 23702us
-Decoding time: 16680us
-Decoding time: 23639us
-Decoding time: 16680us
-Decoding time: 22004us
-Decoding time: 17126us
-Decoding time: 16690us
-Decoding time: 16656us
-Decoding time: 16661us
-Decoding time: 16712us
-Decoding time: 16680us
-Decoding time: 16645us
-Decoding time: 16681us
-Decoding time: 29134us
-Decoding time: 16680us
-Decoding time: 24983us
-Decoding time: 16647us
-Decoding time: 25205us
-Decoding time: 17155us
-Decoding time: 24558us
-Decoding time: 16801us
-Decoding time: 24540us
-Decoding time: 16705us
-Decoding time: 26602us
-Decoding time: 16664us
-Decoding time: 16757us
-Decoding time: 17091us
-Decoding time: 16696us
-Decoding time: 24748us
-Decoding time: 17059us
-Decoding time: 21295us
-Decoding time: 23111us
-Decoding time: 16898us
-Decoding time: 25246us
-Decoding time: 17824us
-Decoding time: 23390us
-Decoding time: 16716us
-Decoding time: 24942us
-Decoding time: 18360us
-Decoding time: 16705us
-Decoding time: 16703us
-Decoding time: 16731us
-Decoding time: 16700us
-Decoding time: 16737us
-Decoding time: 16728us
-Decoding time: 16722us
-Decoding time: 27597us
-Decoding time: 16708us
-Decoding time: 23943us
-Decoding time: 16796us
-Decoding time: 21457us
-Decoding time: 23598us
-Decoding time: 16640us
-Decoding time: 24657us
-Decoding time: 16647us
-Decoding time: 16657us
-Decoding time: 24013us
-Decoding time: 16638us
-Decoding time: 24666us
-Decoding time: 16663us
-Decoding time: 24458us
-Decoding time: 16822us
-Decoding time: 23754us
-Decoding time: 16620us
-Decoding time: 22850us
-Decoding time: 16644us
-Decoding time: 25092us
-Decoding time: 17561us
-Decoding time: 23792us
-Decoding time: 16638us
-Decoding time: 24530us
-Decoding time: 17145us
-Decoding time: 16609us
-Decoding time: 16648us
-Decoding time: 16629us
-Decoding time: 16634us
-Decoding time: 17895us
-Decoding time: 16653us
-Decoding time: 16662us
-Decoding time: 16631us
-Decoding time: 28150us
-Decoding time: 16625us
-Decoding time: 22251us
-Decoding time: 16615us
-Decoding time: 16675us
-Decoding time: 23915us
-Decoding time: 30886us
-Decoding time: 16611us
-Decoding time: 24511us
-Decoding time: 16636us
-Decoding time: 23834us
-Decoding time: 16658us
-Decoding time: 23305us
-Decoding time: 16614us
-Decoding time: 24495us
-Decoding time: 16665us
-Decoding time: 24222us
-Decoding time: 16753us
-Decoding time: 23248us
-Decoding time: 16648us
-Decoding time: 24323us
-Decoding time: 16639us
-Decoding time: 22734us
-Decoding time: 16604us
-Decoding time: 23826us
-Decoding time: 16684us
-Decoding time: 16615us
-Decoding time: 16639us
-Decoding time: 16664us
-Decoding time: 16613us
-Decoding time: 16675us
-Decoding time: 16637us
-Decoding time: 16675us
-Decoding time: 16607us
-Decoding time: 16651us
-Decoding time: 25283us
-Decoding time: 30875us
-Decoding time: 16641us
-Decoding time: 24129us
-Decoding time: 16600us
-Decoding time: 18932us
-Decoding time: 21791us
-Decoding time: 21536us
-Decoding time: 21844us
-Decoding time: 21234us
-Decoding time: 21679us
-Decoding time: 22114us
-Decoding time: 22162us
-Decoding time: 21640us
-Decoding time: 21110us
-Decoding time: 21936us
-Decoding time: 21972us
-Decoding time: 22010us
-Decoding time: 21252us
-Decoding time: 22382us
-Decoding time: 16633us
-Decoding time: 16653us
-Decoding time: 16651us
-Decoding time: 16630us
-Decoding time: 16596us
-Decoding time: 16650us
-Decoding time: 60719us
-Decoding time: 23783us
-Decoding time: 23863us
-Decoding time: 16650us
-Decoding time: 22895us
-Decoding time: 23798us
-Decoding time: 25632us
-Decoding time: 24858us
-Decoding time: 23882us
-Decoding time: 24755us
-Decoding time: 24560us
-Decoding time: 24726us
-Decoding time: 23750us
-Decoding time: 23445us
-Decoding time: 23804us
-Decoding time: 24386us
-Decoding time: 25523us
-Decoding time: 16643us
-Decoding time: 16639us
-Decoding time: 16655us
-Decoding time: 16629us
-Decoding time: 16672us
-Decoding time: 16664us
-Decoding time: 16576us
-Decoding time: 16688us
-Decoding time: 25085us
-Decoding time: 24184us
-Decoding time: 23138us
-Decoding time: 25072us
-Decoding time: 25909us
-Decoding time: 47721us
-Decoding time: 23925us
-Decoding time: 22934us
-Decoding time: 16627us
-Decoding time: 21180us
-Decoding time: 16724us
-Decoding time: 16683us
-Decoding time: 16638us
-Decoding time: 16630us
-Decoding time: 20137us
-Decoding time: 16419us
-Decoding time: 16617us
-Decoding time: 15887us
-Decoding time: 16635us
-Decoding time: 15933us
-Decoding time: 16665us
-Decoding time: 21589us
-Decoding time: 16643us
-Decoding time: 16657us
-Decoding time: 16653us
-Decoding time: 16638us
-Decoding time: 16638us
-Decoding time: 16637us
-Decoding time: 16651us
-Decoding time: 16648us
-Decoding time: 24640us
-Decoding time: 23521us
-Decoding time: 28030us
-Decoding time: 22449us
-Decoding time: 21219us
-Decoding time: 20179us
-Decoding time: 24863us
-Decoding time: 23160us
-Decoding time: 16640us
-Decoding time: 19929us
-Decoding time: 22213us
-Decoding time: 26194us
-Decoding time: 20841us
-Decoding time: 19761us
-Decoding time: 21034us
-Decoding time: 16658us
-Decoding time: 16741us
-Decoding time: 16677us
-Decoding time: 16699us
-Decoding time: 17300us
-Decoding time: 15886us
-Decoding time: 16665us
-Decoding time: 16645us
-Decoding time: 15907us
-Decoding time: 16629us
-Decoding time: 16648us
-Decoding time: 16691us
-Decoding time: 16672us
-Decoding time: 18902us
-Decoding time: 16672us
-Decoding time: 16730us
-Decoding time: 17181us
-Decoding time: 26364us
-Decoding time: 21817us
-Decoding time: 21482us
-Decoding time: 21121us
-Decoding time: 21038us
-Decoding time: 22635us
-Decoding time: 20825us
-Decoding time: 16706us
-Decoding time: 21822us
-Decoding time: 20343us
-Decoding time: 17243us
-Decoding time: 21330us
-Decoding time: 23650us
-Decoding time: 16786us
-Decoding time: 21259us
-Decoding time: 16714us
-Decoding time: 16694us
-Decoding time: 16733us
-Decoding time: 16667us
-Decoding time: 16718us
-Decoding time: 16738us
-Decoding time: 16669us
-Decoding time: 16706us
-Decoding time: 27106us
-Decoding time: 16679us
-Decoding time: 24694us
-Decoding time: 16719us
-Decoding time: 22723us
-Decoding time: 16722us
-Decoding time: 24476us
-Decoding time: 16851us
-Decoding time: 19822us
-Decoding time: 24631us
-Decoding time: 16696us
-Decoding time: 22052us
-Decoding time: 16712us
-Decoding time: 22782us
-Decoding time: 16765us
-Decoding time: 16706us
-Decoding time: 23948us
-Decoding time: 17211us
-Decoding time: 16696us
-Decoding time: 16682us
-Decoding time: 25334us
-Decoding time: 16789us
-Decoding time: 16772us
-Decoding time: 16688us
-Decoding time: 16742us
-Decoding time: 16728us
-Decoding time: 16685us
-Decoding time: 16751us
-Decoding time: 16705us
-Decoding time: 16682us
-Decoding time: 16712us
-Decoding time: 24152us
-Decoding time: 29179us
-Decoding time: 16722us
-Decoding time: 23816us
-Decoding time: 16675us
-Decoding time: 24526us
-Decoding time: 16688us
-Decoding time: 25816us
-Decoding time: 16726us
-Decoding time: 24405us
-Decoding time: 16685us
-Decoding time: 22823us
-Decoding time: 16678us
-Decoding time: 15939us
-Decoding time: 25542us
-Decoding time: 16336us
-Decoding time: 22878us
-Decoding time: 28491us
-Decoding time: 16827us
-Decoding time: 24277us
-Decoding time: 17154us
-Decoding time: 22731us
-Decoding time: 16715us
-Decoding time: 22627us
-Decoding time: 17077us
-Decoding time: 16722us
-Decoding time: 16729us
-Decoding time: 16699us
-Decoding time: 16685us
-Decoding time: 16733us
-Decoding time: 16712us
-Decoding time: 16656us
-Decoding time: 16704us
-Decoding time: 16755us
-Decoding time: 23599us
-Decoding time: 16635us
-Decoding time: 22988us
-Decoding time: 16731us
-Decoding time: 22066us
-Decoding time: 16698us
-Decoding time: 24339us
-Decoding time: 16695us
-Decoding time: 50869us
-Decoding time: 16714us
-Decoding time: 16716us
-Decoding time: 23813us
-Decoding time: 16695us
-Decoding time: 23427us
-Decoding time: 16693us
-Decoding time: 22929us
-Decoding time: 16701us
-Decoding time: 24084us
-Decoding time: 16690us
-Decoding time: 24233us
-Decoding time: 16845us
-Decoding time: 23641us
-Decoding time: 16698us
-Decoding time: 16721us
-Decoding time: 15992us
-Decoding time: 16694us
-Decoding time: 16694us
-Decoding time: 16719us
-Decoding time: 15983us
-Decoding time: 16666us
-Decoding time: 15935us
-Decoding time: 24757us
-Decoding time: 15940us
-Decoding time: 21831us
-Decoding time: 16261us
-Decoding time: 21714us
-Decoding time: 15937us
-Decoding time: 22207us
-Decoding time: 28743us
-Decoding time: 15944us
-Decoding time: 15940us
-Decoding time: 23250us
-Decoding time: 28602us
-Decoding time: 15931us
-Decoding time: 24076us
-Decoding time: 15987us
-Decoding time: 21123us
-Decoding time: 16117us
-Decoding time: 20865us
-Decoding time: 15953us
-Decoding time: 24451us
-Decoding time: 15992us
-Decoding time: 21731us
-Decoding time: 15982us
-Decoding time: 15980us
-Decoding time: 15963us
-Decoding time: 15994us
-Decoding time: 15755us
-Decoding time: 15962us
-Decoding time: 15967us
-Decoding time: 15781us
-Decoding time: 28171us
-Decoding time: 16144us
-Decoding time: 22443us
-Decoding time: 28594us
-Decoding time: 28688us
-Decoding time: 15946us
-Decoding time: 23363us
-Decoding time: 29173us
-Decoding time: 15912us
-Decoding time: 16734us
-Decoding time: 21830us
-Decoding time: 28565us
-Decoding time: 28044us
-Decoding time: 17015us
-Decoding time: 22639us
-Decoding time: 15926us
-Decoding time: 21856us
-Decoding time: 15932us
-Decoding time: 22754us
-Decoding time: 16004us
-Decoding time: 15904us
-Decoding time: 15868us
-Decoding time: 15799us
-Decoding time: 15883us
-Decoding time: 15956us
-Decoding time: 15920us
-Decoding time: 15912us
-Decoding time: 25051us
-Decoding time: 15907us
-Decoding time: 22738us
-Decoding time: 15997us
-Decoding time: 20983us
-Decoding time: 15951us
-Decoding time: 22792us
-Decoding time: 28889us
-Decoding time: 15921us
-Decoding time: 22269us
-Decoding time: 15937us
-Decoding time: 15965us
-Decoding time: 28932us
-Decoding time: 15936us
-Decoding time: 21300us
-Decoding time: 28428us
-Decoding time: 15930us
-Decoding time: 21872us
-Decoding time: 16018us
-Decoding time: 22633us
-Decoding time: 28745us
-Decoding time: 16478us
-Decoding time: 15991us
-Decoding time: 16070us
-Decoding time: 16017us
-Decoding time: 16013us
-Decoding time: 15953us
-Decoding time: 15928us
-Decoding time: 15976us
-Decoding time: 26406us
-Decoding time: 15958us
-Decoding time: 22974us
-Decoding time: 28587us
-Decoding time: 28369us
-Decoding time: 15918us
-Decoding time: 23077us
-Decoding time: 29181us
-Decoding time: 28791us
-Decoding time: 15949us
-Decoding time: 22841us
-Decoding time: 93876us
-Decoding time: 16067us
-Decoding time: 22170us
-Decoding time: 28274us
-Decoding time: 27616us
-Decoding time: 15949us
-Decoding time: 21248us
-Decoding time: 16633us
-Decoding time: 15946us
-Decoding time: 16031us
-Decoding time: 15776us
-Decoding time: 15976us
-Decoding time: 15930us
-Decoding time: 15965us
-Decoding time: 15804us
-Decoding time: 23680us
-Decoding time: 28255us
-Decoding time: 15957us
-Decoding time: 20637us
-Decoding time: 16422us
-Decoding time: 19511us
-Decoding time: 22326us
-Decoding time: 15991us
-Decoding time: 21443us
-Decoding time: 16189us
-Decoding time: 21555us
-Decoding time: 28256us
-Decoding time: 17382us
-Decoding time: 22852us
-Decoding time: 16737us
-Decoding time: 22170us
-Decoding time: 16746us
-Decoding time: 16718us
-Decoding time: 21631us
-Decoding time: 16697us
-Decoding time: 23183us
-Decoding time: 16767us
-Decoding time: 23211us
-Decoding time: 16712us
-Decoding time: 16712us
-Decoding time: 16027us
-Decoding time: 15873us
-Decoding time: 15878us
-Decoding time: 15974us
-Decoding time: 15990us
-Decoding time: 16027us
-Decoding time: 15952us
-Decoding time: 22001us
-Decoding time: 15905us
-Decoding time: 20370us
-Decoding time: 15954us
-Decoding time: 21754us
-Decoding time: 15938us
-Decoding time: 22980us
-Decoding time: 15729us
-Decoding time: 24081us
-Decoding time: 16729us
-Decoding time: 22953us
-Decoding time: 17094us
-Decoding time: 21351us
-Decoding time: 16693us
-Decoding time: 22437us
-Decoding time: 16723us
-Decoding time: 16731us
-Decoding time: 57206us
-Decoding time: 17844us
-Decoding time: 16737us
-Decoding time: 16740us
-Decoding time: 16711us
-Decoding time: 15972us
-Decoding time: 16698us
-Decoding time: 16689us
-Decoding time: 16706us
-Decoding time: 16732us
-Decoding time: 16716us
-Decoding time: 22264us
-Decoding time: 16698us
-Decoding time: 20869us
-Decoding time: 16684us
-Decoding time: 23495us
-Decoding time: 16673us
-Decoding time: 22969us
-Decoding time: 16730us
-Decoding time: 23764us
-Decoding time: 16894us
-Decoding time: 23629us
-Decoding time: 16710us
-Decoding time: 24491us
-Decoding time: 16662us
-Decoding time: 22546us
-Decoding time: 16707us
-Decoding time: 22365us
-Decoding time: 16722us
-Decoding time: 16681us
-Decoding time: 20300us
-Decoding time: 16683us
-Decoding time: 22369us
-Decoding time: 16686us
-Decoding time: 23892us
-Decoding time: 17447us
-Decoding time: 16696us
-Decoding time: 16711us
-Decoding time: 16692us
-Decoding time: 16719us
-Decoding time: 16723us
-Decoding time: 16712us
-Decoding time: 16717us
-Decoding time: 16701us
-Decoding time: 27292us
-Decoding time: 16745us
-Decoding time: 24024us
-Decoding time: 16710us
-Decoding time: 23906us
-Decoding time: 16698us
-Decoding time: 23307us
-Decoding time: 16708us
-Decoding time: 21970us
-Decoding time: 16715us
-Decoding time: 23584us
-Decoding time: 16703us
-Decoding time: 22443us
-Decoding time: 16687us
-Decoding time: 68718us
-Decoding time: 16671us
-Decoding time: 16705us
-Decoding time: 22860us
-Decoding time: 16725us
-Decoding time: 22610us
-Decoding time: 16688us
-Decoding time: 22796us
-Decoding time: 16700us
-Decoding time: 22668us
-Decoding time: 17062us
-Decoding time: 16695us
-Decoding time: 16710us
-Decoding time: 16690us
-Decoding time: 16703us
-Decoding time: 16660us
-Decoding time: 16723us
-Decoding time: 16750us
-Decoding time: 16734us
-Decoding time: 16731us
-Decoding time: 22484us
-Decoding time: 16698us
-Decoding time: 23348us
-Decoding time: 16822us
-Decoding time: 23799us
-Decoding time: 17013us
-Decoding time: 23445us
-Decoding time: 16706us
-Decoding time: 24227us
-Decoding time: 16701us
-Decoding time: 21776us
-Decoding time: 16743us
-Decoding time: 16698us
-Decoding time: 16717us
-Decoding time: 23718us
-Decoding time: 16725us
-Decoding time: 24097us
-Decoding time: 16683us
-Decoding time: 22269us
-Decoding time: 16706us
-Decoding time: 23002us
-Decoding time: 16686us
-Decoding time: 23097us
-Decoding time: 16687us
-Decoding time: 22689us
-Decoding time: 16710us
-Decoding time: 16693us
-Decoding time: 16685us
-Decoding time: 16713us
-Decoding time: 16734us
-Decoding time: 16719us
-Decoding time: 16674us
-Decoding time: 16717us
-Decoding time: 16730us
-Decoding time: 16720us
-Decoding time: 25034us
-Decoding time: 16712us
-Decoding time: 23292us
-Decoding time: 16708us
-Decoding time: 23082us
-Decoding time: 16677us
-Decoding time: 22242us
-Decoding time: 16700us
-Decoding time: 16740us
-Decoding time: 16722us
-Decoding time: 23305us
-Decoding time: 16700us
-Decoding time: 23635us
-Decoding time: 16693us
-Decoding time: 23734us
-Decoding time: 16716us
-Decoding time: 24370us
-Decoding time: 17320us
-Decoding time: 23851us
-Decoding time: 16689us
-Decoding time: 22412us
-Decoding time: 16707us
-Decoding time: 23085us
-Decoding time: 16716us
-Decoding time: 22927us
-Decoding time: 16703us
-Decoding time: 16722us
-Decoding time: 16719us
-Decoding time: 16722us
-Decoding time: 16801us
-Decoding time: 16711us
-Decoding time: 23539us
-Decoding time: 16687us
-Decoding time: 22773us
-Decoding time: 16710us
-Decoding time: 24029us
-Decoding time: 16637us
-Decoding time: 23357us
-Decoding time: 16704us
-Decoding time: 16720us
-Decoding time: 22342us
-Decoding time: 16793us
-Decoding time: 20327us
-Decoding time: 23793us
-Decoding time: 16714us
-Decoding time: 23778us
-Decoding time: 16714us
-Decoding time: 23349us
-Decoding time: 28646us
-Decoding time: 16703us
-Decoding time: 23847us
-Decoding time: 22433us
-Decoding time: 15889us
-Decoding time: 15963us
-Decoding time: 15859us
-Decoding time: 15990us
-Decoding time: 15876us
-Decoding time: 15875us
-Decoding time: 15715us
-Decoding time: 27740us
-Decoding time: 15868us
-Decoding time: 22753us
-Decoding time: 28124us
-Decoding time: 16678us
-Decoding time: 22068us
-Decoding time: 16670us
-Decoding time: 21980us
-Decoding time: 16712us
-Decoding time: 16665us
-Decoding time: 16656us
-Decoding time: 21911us
-Decoding time: 28501us
-Decoding time: 15746us
-Decoding time: 23765us
-Decoding time: 28224us
-Decoding time: 28607us
-Decoding time: 16640us
-Decoding time: 20717us
-Decoding time: 16659us
-Decoding time: 21923us
-Decoding time: 16425us
-Decoding time: 16656us
-Decoding time: 16630us
-Decoding time: 15929us
-Decoding time: 16683us
-Decoding time: 16658us
-Decoding time: 16628us
-Decoding time: 15898us
-Decoding time: 27872us
-Decoding time: 28271us
-Decoding time: 16663us
-Decoding time: 21847us
-Decoding time: 19761us
-Decoding time: 27644us
-Decoding time: 28832us
-Decoding time: 27119us
-Decoding time: 16665us
-Decoding time: 21642us
-Decoding time: 16683us
-Decoding time: 16692us
-Decoding time: 22022us
-Decoding time: 16650us
-Decoding time: 45014us
-Decoding time: 22425us
-Decoding time: 15881us
-Decoding time: 22212us
-Decoding time: 16659us
-Decoding time: 21411us
-Decoding time: 16653us
-Decoding time: 16656us
-Decoding time: 16647us
-Decoding time: 16640us
-Decoding time: 18423us
-Decoding time: 16655us
-Decoding time: 16668us
-Decoding time: 16632us
-Decoding time: 16703us
-Decoding time: 16640us
-Decoding time: 25928us
-Decoding time: 29356us
-Decoding time: 27168us
-Decoding time: 16654us
-Decoding time: 21357us
-Decoding time: 16666us
-Decoding time: 22394us
-Decoding time: 16646us
-Decoding time: 21557us
-Decoding time: 16648us
-Decoding time: 21989us
-Decoding time: 16644us
-Decoding time: 16686us
-Decoding time: 21110us
-Decoding time: 16664us
-Decoding time: 23244us
-Decoding time: 21342us
-Decoding time: 27096us
-Decoding time: 16630us
-Decoding time: 21814us
-Decoding time: 16666us
-Decoding time: 15787us
-Decoding time: 16682us
-Decoding time: 16652us
-Decoding time: 16639us
-Decoding time: 16554us
-Decoding time: 16589us
-Decoding time: 16625us
-Decoding time: 25309us
-Decoding time: 16668us
-Decoding time: 21471us
-Decoding time: 16650us
-Decoding time: 22080us
-Decoding time: 20530us
-Decoding time: 26719us
-Decoding time: 16644us
-Decoding time: 24103us
-Decoding time: 17739us
-Decoding time: 25566us
-Decoding time: 17510us
-Evaluation @iter 100000 done in 182 secs
-TVL Loss   : 0.04252
-TVL MS-SSIM: 0.89657
-TVL PSNR   : 31.05103
+Evaluation @iter 100000 done in 123 secs
+TVL Loss   : 0.04388	0.04282
+TVL MS-SSIM: 
+TVL PSNR   : 

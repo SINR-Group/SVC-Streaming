@@ -1,0 +1,1997 @@
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=10, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h0/model_iters_10', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(160, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h0/model_iters_10/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h0/model_iters_10/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h0/model_iters_10/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h0/model_iters_10/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h0/model_iters_10/demo_d2_00100000.pth...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+136 images loaded.
+	distance=6/6
+Loader for 136 images (136 batches) created.
+Decoding time: 14979us
+Decoding time: 15813us
+Decoding time: 16721us
+Decoding time: 15981us
+Decoding time: 16725us
+Decoding time: 16780us
+Decoding time: 16699us
+Decoding time: 16665us
+Decoding time: 16777us
+Decoding time: 16670us
+Decoding time: 16724us
+Decoding time: 16723us
+Decoding time: 16705us
+Decoding time: 16678us
+Decoding time: 16733us
+Decoding time: 16700us
+Decoding time: 16626us
+Decoding time: 16698us
+Decoding time: 16693us
+Decoding time: 16742us
+Decoding time: 16716us
+Decoding time: 16714us
+Decoding time: 16742us
+Decoding time: 16683us
+Decoding time: 16724us
+Decoding time: 16716us
+Decoding time: 16654us
+Decoding time: 16736us
+Decoding time: 16715us
+Decoding time: 16737us
+Decoding time: 16717us
+Decoding time: 16752us
+Decoding time: 16877us
+Decoding time: 16709us
+Decoding time: 16743us
+Decoding time: 16716us
+Decoding time: 16735us
+Decoding time: 16742us
+Decoding time: 16763us
+Decoding time: 16721us
+Decoding time: 16762us
+Decoding time: 16715us
+Decoding time: 16755us
+Decoding time: 16702us
+Decoding time: 16722us
+Decoding time: 16728us
+Decoding time: 16731us
+Decoding time: 16713us
+Decoding time: 16721us
+Decoding time: 16755us
+Decoding time: 16721us
+Decoding time: 16718us
+Decoding time: 16725us
+Decoding time: 16717us
+Decoding time: 16764us
+Decoding time: 16750us
+Decoding time: 16730us
+Decoding time: 16666us
+Decoding time: 16721us
+Decoding time: 16739us
+Decoding time: 16685us
+Decoding time: 16689us
+Decoding time: 16709us
+Decoding time: 16688us
+Decoding time: 16730us
+Decoding time: 16739us
+Decoding time: 16674us
+Decoding time: 16721us
+Decoding time: 16743us
+Decoding time: 16762us
+Decoding time: 16724us
+Decoding time: 16737us
+Decoding time: 16746us
+Decoding time: 16734us
+Decoding time: 16755us
+Decoding time: 16655us
+Decoding time: 16729us
+Decoding time: 16738us
+Decoding time: 16730us
+Decoding time: 16750us
+Decoding time: 16721us
+Decoding time: 16710us
+Decoding time: 16748us
+Decoding time: 16748us
+Decoding time: 16752us
+Decoding time: 16750us
+Decoding time: 16698us
+Decoding time: 16752us
+Decoding time: 16753us
+Decoding time: 16749us
+Decoding time: 16736us
+Decoding time: 16720us
+Decoding time: 16766us
+Decoding time: 16724us
+Decoding time: 16747us
+Decoding time: 16722us
+Decoding time: 16669us
+Decoding time: 16754us
+Decoding time: 16735us
+Decoding time: 16656us
+Decoding time: 16726us
+Decoding time: 16755us
+Decoding time: 16745us
+Decoding time: 16735us
+Decoding time: 16786us
+Decoding time: 16689us
+Decoding time: 16749us
+Decoding time: 16744us
+Decoding time: 16698us
+Decoding time: 16468us
+Decoding time: 16697us
+Decoding time: 16705us
+Decoding time: 16756us
+Decoding time: 16768us
+Decoding time: 16763us
+Decoding time: 16761us
+Decoding time: 16751us
+Decoding time: 16760us
+Decoding time: 16754us
+Decoding time: 16774us
+Decoding time: 16752us
+Decoding time: 16727us
+Decoding time: 16679us
+Decoding time: 16727us
+Decoding time: 16759us
+Decoding time: 16714us
+Decoding time: 16714us
+Decoding time: 16744us
+Decoding time: 16737us
+Decoding time: 16728us
+Decoding time: 16733us
+Decoding time: 16739us
+Decoding time: 16621us
+Decoding time: 16600us
+Decoding time: 16592us
+Decoding time: 16616us
+Evaluation @iter 100000 done in 22 secs
+TVL Loss   : 0.03093
+TVL MS-SSIM: 0.95177
+TVL PSNR   : 32.24085
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=10, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h1/model_iters_10', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(160, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h1/model_iters_10/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h1/model_iters_10/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h1/model_iters_10/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h1/model_iters_10/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h1/model_iters_10/demo_d2_00100000.pth...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+272 images loaded.
+	distance=3/3
+Loader for 272 images (272 batches) created.
+Decoding time: 17350us
+Decoding time: 18633us
+Decoding time: 38121us
+Decoding time: 18559us
+Decoding time: 35997us
+Decoding time: 21684us
+Decoding time: 32100us
+Decoding time: 18191us
+Decoding time: 18084us
+Decoding time: 28091us
+Decoding time: 17972us
+Decoding time: 18832us
+Decoding time: 18036us
+Decoding time: 18833us
+Decoding time: 18847us
+Decoding time: 18859us
+Decoding time: 18849us
+Decoding time: 18829us
+Decoding time: 18850us
+Decoding time: 18721us
+Decoding time: 18018us
+Decoding time: 18846us
+Decoding time: 17821us
+Decoding time: 17983us
+Decoding time: 17805us
+Decoding time: 18016us
+Decoding time: 18824us
+Decoding time: 18812us
+Decoding time: 18821us
+Decoding time: 18870us
+Decoding time: 18865us
+Decoding time: 18867us
+Decoding time: 18862us
+Decoding time: 18834us
+Decoding time: 18850us
+Decoding time: 17958us
+Decoding time: 18822us
+Decoding time: 18835us
+Decoding time: 18903us
+Decoding time: 18806us
+Decoding time: 18856us
+Decoding time: 18881us
+Decoding time: 18860us
+Decoding time: 18847us
+Decoding time: 18829us
+Decoding time: 18844us
+Decoding time: 18819us
+Decoding time: 18855us
+Decoding time: 18863us
+Decoding time: 18870us
+Decoding time: 18859us
+Decoding time: 18836us
+Decoding time: 18874us
+Decoding time: 18861us
+Decoding time: 18858us
+Decoding time: 18833us
+Decoding time: 18833us
+Decoding time: 18829us
+Decoding time: 18822us
+Decoding time: 18878us
+Decoding time: 18877us
+Decoding time: 18836us
+Decoding time: 18824us
+Decoding time: 18834us
+Decoding time: 18854us
+Decoding time: 18860us
+Decoding time: 18829us
+Decoding time: 18847us
+Decoding time: 18873us
+Decoding time: 18851us
+Decoding time: 18889us
+Decoding time: 18829us
+Decoding time: 18844us
+Decoding time: 18817us
+Decoding time: 18843us
+Decoding time: 18849us
+Decoding time: 18847us
+Decoding time: 18856us
+Decoding time: 18864us
+Decoding time: 18900us
+Decoding time: 18813us
+Decoding time: 18794us
+Decoding time: 18823us
+Decoding time: 18846us
+Decoding time: 18840us
+Decoding time: 18850us
+Decoding time: 18821us
+Decoding time: 18843us
+Decoding time: 18852us
+Decoding time: 18856us
+Decoding time: 18816us
+Decoding time: 18855us
+Decoding time: 18863us
+Decoding time: 18872us
+Decoding time: 18871us
+Decoding time: 18833us
+Decoding time: 18849us
+Decoding time: 18821us
+Decoding time: 18862us
+Decoding time: 18846us
+Decoding time: 18810us
+Decoding time: 18860us
+Decoding time: 18853us
+Decoding time: 18828us
+Decoding time: 18847us
+Decoding time: 18834us
+Decoding time: 18823us
+Decoding time: 18880us
+Decoding time: 18863us
+Decoding time: 18827us
+Decoding time: 18821us
+Decoding time: 18844us
+Decoding time: 18804us
+Decoding time: 18849us
+Decoding time: 18817us
+Decoding time: 18836us
+Decoding time: 18806us
+Decoding time: 18874us
+Decoding time: 18854us
+Decoding time: 19547us
+Decoding time: 18823us
+Decoding time: 18886us
+Decoding time: 18768us
+Decoding time: 18842us
+Decoding time: 18852us
+Decoding time: 18843us
+Decoding time: 18839us
+Decoding time: 18873us
+Decoding time: 18825us
+Decoding time: 18852us
+Decoding time: 18838us
+Decoding time: 18800us
+Decoding time: 18794us
+Decoding time: 18868us
+Decoding time: 18894us
+Decoding time: 18846us
+Decoding time: 18866us
+Decoding time: 18825us
+Decoding time: 18820us
+Decoding time: 18859us
+Decoding time: 18837us
+Decoding time: 18812us
+Decoding time: 18857us
+Decoding time: 18821us
+Decoding time: 18785us
+Decoding time: 18844us
+Decoding time: 18842us
+Decoding time: 18826us
+Decoding time: 18842us
+Decoding time: 18867us
+Decoding time: 18817us
+Decoding time: 18798us
+Decoding time: 18834us
+Decoding time: 18836us
+Decoding time: 18855us
+Decoding time: 18803us
+Decoding time: 18834us
+Decoding time: 18834us
+Decoding time: 18821us
+Decoding time: 18850us
+Decoding time: 18827us
+Decoding time: 18868us
+Decoding time: 18851us
+Decoding time: 18866us
+Decoding time: 18856us
+Decoding time: 18832us
+Decoding time: 18807us
+Decoding time: 18878us
+Decoding time: 18808us
+Decoding time: 18848us
+Decoding time: 18864us
+Decoding time: 18837us
+Decoding time: 18783us
+Decoding time: 18801us
+Decoding time: 18860us
+Decoding time: 18809us
+Decoding time: 18815us
+Decoding time: 18854us
+Decoding time: 18794us
+Decoding time: 18825us
+Decoding time: 18839us
+Decoding time: 18822us
+Decoding time: 18823us
+Decoding time: 18833us
+Decoding time: 18831us
+Decoding time: 18823us
+Decoding time: 18810us
+Decoding time: 18805us
+Decoding time: 18827us
+Decoding time: 18857us
+Decoding time: 18819us
+Decoding time: 18863us
+Decoding time: 18824us
+Decoding time: 18838us
+Decoding time: 18060us
+Decoding time: 18808us
+Decoding time: 18867us
+Decoding time: 18835us
+Decoding time: 18856us
+Decoding time: 18847us
+Decoding time: 18840us
+Decoding time: 18831us
+Decoding time: 18847us
+Decoding time: 18787us
+Decoding time: 18849us
+Decoding time: 18849us
+Decoding time: 18830us
+Decoding time: 18834us
+Decoding time: 18811us
+Decoding time: 18837us
+Decoding time: 18842us
+Decoding time: 18858us
+Decoding time: 18840us
+Decoding time: 18827us
+Decoding time: 18821us
+Decoding time: 18799us
+Decoding time: 18856us
+Decoding time: 18822us
+Decoding time: 18861us
+Decoding time: 18829us
+Decoding time: 18801us
+Decoding time: 18820us
+Decoding time: 18853us
+Decoding time: 18867us
+Decoding time: 33836us
+Decoding time: 18835us
+Decoding time: 18869us
+Decoding time: 18011us
+Decoding time: 18059us
+Decoding time: 18038us
+Decoding time: 18035us
+Decoding time: 17994us
+Decoding time: 17989us
+Decoding time: 18005us
+Decoding time: 18028us
+Decoding time: 18079us
+Decoding time: 18052us
+Decoding time: 17987us
+Decoding time: 17846us
+Decoding time: 17984us
+Decoding time: 17982us
+Decoding time: 17784us
+Decoding time: 17984us
+Decoding time: 17911us
+Decoding time: 17872us
+Decoding time: 17873us
+Decoding time: 17995us
+Decoding time: 18003us
+Decoding time: 17934us
+Decoding time: 17944us
+Decoding time: 17771us
+Decoding time: 17959us
+Decoding time: 17980us
+Decoding time: 17872us
+Decoding time: 18075us
+Decoding time: 17952us
+Decoding time: 17898us
+Decoding time: 17963us
+Decoding time: 18074us
+Decoding time: 17998us
+Decoding time: 17870us
+Decoding time: 17959us
+Decoding time: 18055us
+Decoding time: 17977us
+Decoding time: 17991us
+Decoding time: 17986us
+Decoding time: 18025us
+Decoding time: 17981us
+Decoding time: 18752us
+Decoding time: 18716us
+Decoding time: 18757us
+Decoding time: 18753us
+Evaluation @iter 100000 done in 45 secs
+TVL Loss   : 0.03335
+TVL MS-SSIM: 0.93559
+TVL PSNR   : 32.10264
+Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', in_dir='input', iterations=10, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_10', num_crops=2, out_dir='output', patch=64, save_codes=True, save_model_name='demo', save_out_img=True, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/dhf1k/train', train_mv='/home/mallesh/deepvideo/data/dhf1k/train_mv', v_compress=True, warp=True)
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(80, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h2/model_iters_10/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h2/model_iters_10/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h2/model_iters_10/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h2/model_iters_10/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h2/model_iters_10/demo_d2_00100000.pth...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Decoding time: 15116us
+Decoding time: 15986us
+Decoding time: 16677us
+Decoding time: 16653us
+Decoding time: 16642us
+Decoding time: 16689us
+Decoding time: 15903us
+Decoding time: 15863us
+Decoding time: 15867us
+Decoding time: 15590us
+Decoding time: 15886us
+Decoding time: 15644us
+Decoding time: 15875us
+Decoding time: 15852us
+Decoding time: 15850us
+Decoding time: 15842us
+Decoding time: 15847us
+Decoding time: 15589us
+Decoding time: 15871us
+Decoding time: 15855us
+Decoding time: 15900us
+Decoding time: 15825us
+Decoding time: 15821us
+Decoding time: 15852us
+Decoding time: 15852us
+Decoding time: 15789us
+Decoding time: 15900us
+Decoding time: 15881us
+Decoding time: 15903us
+Decoding time: 15863us
+Decoding time: 15708us
+Decoding time: 15733us
+Decoding time: 15890us
+Decoding time: 15716us
+Decoding time: 15829us
+Decoding time: 16090us
+Decoding time: 15839us
+Decoding time: 17864us
+Decoding time: 15846us
+Decoding time: 15857us
+Decoding time: 15850us
+Decoding time: 15865us
+Decoding time: 15874us
+Decoding time: 15837us
+Decoding time: 15846us
+Decoding time: 15830us
+Decoding time: 15850us
+Decoding time: 15797us
+Decoding time: 15861us
+Decoding time: 15843us
+Decoding time: 15881us
+Decoding time: 15845us
+Decoding time: 15842us
+Decoding time: 15865us
+Decoding time: 15800us
+Decoding time: 15894us
+Decoding time: 15818us
+Decoding time: 15841us
+Decoding time: 15863us
+Decoding time: 15890us
+Decoding time: 15853us
+Decoding time: 15846us
+Decoding time: 15892us
+Decoding time: 15810us
+Decoding time: 15844us
+Decoding time: 15802us
+Decoding time: 15895us
+Decoding time: 15957us
+Decoding time: 15894us
+Decoding time: 15762us
+Decoding time: 15876us
+Decoding time: 15823us
+Decoding time: 15829us
+Decoding time: 15930us
+Decoding time: 15896us
+Decoding time: 15806us
+Decoding time: 15836us
+Decoding time: 15820us
+Decoding time: 15877us
+Decoding time: 15844us
+Decoding time: 15857us
+Decoding time: 15825us
+Decoding time: 15838us
+Decoding time: 15887us
+Decoding time: 15837us
+Decoding time: 15853us
+Decoding time: 15874us
+Decoding time: 15863us
+Decoding time: 15859us
+Decoding time: 15864us
+Decoding time: 15870us
+Decoding time: 15824us
+Decoding time: 15824us
+Decoding time: 15886us
+Decoding time: 15871us
+Decoding time: 15862us
+Decoding time: 15827us
+Decoding time: 15905us
+Decoding time: 15879us
+Decoding time: 15916us
+Decoding time: 15828us
+Decoding time: 15876us
+Decoding time: 15869us
+Decoding time: 15832us
+Decoding time: 15839us
+Decoding time: 15901us
+Decoding time: 15829us
+Decoding time: 15849us
+Decoding time: 15877us
+Decoding time: 15865us
+Decoding time: 15884us
+Decoding time: 15917us
+Decoding time: 15817us
+Decoding time: 15856us
+Decoding time: 15866us
+Decoding time: 15861us
+Decoding time: 15901us
+Decoding time: 15874us
+Decoding time: 15854us
+Decoding time: 15914us
+Decoding time: 15827us
+Decoding time: 15933us
+Decoding time: 16005us
+Decoding time: 15752us
+Decoding time: 15739us
+Decoding time: 15795us
+Decoding time: 15829us
+Decoding time: 15871us
+Decoding time: 15906us
+Decoding time: 15849us
+Decoding time: 15744us
+Decoding time: 15893us
+Decoding time: 15856us
+Decoding time: 15909us
+Decoding time: 15857us
+Decoding time: 15890us
+Decoding time: 15853us
+Decoding time: 15830us
+Decoding time: 15859us
+Decoding time: 15882us
+Decoding time: 15862us
+Decoding time: 15553us
+Decoding time: 15678us
+Decoding time: 15526us
+Decoding time: 15865us
+Decoding time: 15851us
+Decoding time: 15673us
+Decoding time: 15869us
+Decoding time: 15863us
+Decoding time: 15883us
+Decoding time: 15890us
+Decoding time: 15727us
+Decoding time: 15744us
+Decoding time: 15696us
+Decoding time: 15766us
+Decoding time: 15794us
+Decoding time: 15561us
+Decoding time: 15865us
+Decoding time: 15699us
+Decoding time: 15805us
+Decoding time: 15595us
+Decoding time: 15787us
+Decoding time: 15790us
+Decoding time: 15877us
+Decoding time: 15854us
+Decoding time: 15856us
+Decoding time: 15660us
+Decoding time: 15855us
+Decoding time: 15571us
+Decoding time: 15826us
+Decoding time: 15883us
+Decoding time: 15732us
+Decoding time: 15780us
+Decoding time: 15867us
+Decoding time: 15727us
+Decoding time: 15694us
+Decoding time: 15751us
+Decoding time: 15854us
+Decoding time: 16591us
+Decoding time: 16597us
+Decoding time: 16691us
+Decoding time: 16567us
+Decoding time: 15869us
+Decoding time: 16594us
+Decoding time: 16650us
+Decoding time: 16651us
+Decoding time: 16630us
+Decoding time: 16684us
+Decoding time: 16626us
+Decoding time: 16667us
+Decoding time: 16684us
+Decoding time: 16609us
+Decoding time: 16637us
+Decoding time: 16629us
+Decoding time: 44372us
+Decoding time: 16661us
+Decoding time: 16681us
+Decoding time: 16610us
+Decoding time: 16643us
+Decoding time: 16622us
+Decoding time: 16624us
+Decoding time: 16682us
+Decoding time: 16635us
+Decoding time: 16637us
+Decoding time: 16598us
+Decoding time: 16660us
+Decoding time: 16624us
+Decoding time: 16604us
+Decoding time: 16633us
+Decoding time: 16784us
+Decoding time: 16681us
+Decoding time: 15836us
+Decoding time: 16662us
+Decoding time: 16642us
+Decoding time: 16653us
+Decoding time: 15816us
+Decoding time: 16617us
+Decoding time: 15801us
+Decoding time: 16624us
+Decoding time: 16643us
+Decoding time: 16656us
+Decoding time: 16629us
+Decoding time: 16642us
+Decoding time: 16591us
+Decoding time: 16670us
+Decoding time: 16647us
+Decoding time: 16646us
+Decoding time: 16627us
+Decoding time: 15827us
+Decoding time: 16657us
+Decoding time: 15875us
+Decoding time: 18202us
+Decoding time: 15855us
+Decoding time: 15713us
+Decoding time: 15829us
+Decoding time: 15843us
+Decoding time: 15878us
+Decoding time: 15807us
+Decoding time: 15793us
+Decoding time: 15880us
+Decoding time: 15831us
+Decoding time: 15765us
+Decoding time: 15868us
+Decoding time: 15801us
+Decoding time: 15757us
+Decoding time: 15812us
+Decoding time: 15873us
+Decoding time: 15567us
+Decoding time: 15818us
+Decoding time: 15849us
+Decoding time: 15796us
+Decoding time: 15900us
+Decoding time: 15851us
+Decoding time: 15856us
+Decoding time: 15808us
+Decoding time: 15828us
+Decoding time: 15766us
+Decoding time: 15743us
+Decoding time: 15801us
+Decoding time: 15813us
+Decoding time: 15838us
+Decoding time: 15920us
+Decoding time: 15859us
+Decoding time: 15874us
+Decoding time: 15822us
+Decoding time: 15883us
+Decoding time: 15880us
+Decoding time: 15837us
+Decoding time: 15854us
+Decoding time: 15814us
+Decoding time: 15889us
+Decoding time: 15852us
+Decoding time: 15843us
+Decoding time: 15862us
+Decoding time: 15822us
+Decoding time: 15908us
+Decoding time: 15891us
+Decoding time: 15852us
+Decoding time: 15827us
+Decoding time: 15823us
+Decoding time: 15759us
+Decoding time: 15770us
+Decoding time: 15824us
+Decoding time: 15866us
+Decoding time: 15819us
+Decoding time: 15883us
+Decoding time: 15824us
+Decoding time: 15886us
+Decoding time: 15785us
+Decoding time: 15788us
+Decoding time: 15609us
+Decoding time: 15823us
+Decoding time: 15771us
+Decoding time: 15780us
+Decoding time: 15895us
+Decoding time: 15840us
+Decoding time: 15803us
+Decoding time: 15897us
+Decoding time: 15803us
+Decoding time: 15887us
+Decoding time: 15862us
+Decoding time: 15874us
+Decoding time: 15859us
+Decoding time: 15822us
+Decoding time: 15831us
+Decoding time: 15789us
+Decoding time: 15803us
+Decoding time: 15862us
+Decoding time: 15851us
+Decoding time: 15873us
+Decoding time: 15864us
+Decoding time: 15855us
+Decoding time: 15817us
+Decoding time: 15747us
+Decoding time: 15859us
+Decoding time: 15867us
+Decoding time: 15842us
+Decoding time: 15915us
+Decoding time: 15836us
+Decoding time: 15838us
+Decoding time: 15767us
+Decoding time: 15877us
+Decoding time: 15770us
+Decoding time: 15920us
+Decoding time: 15848us
+Decoding time: 15818us
+Decoding time: 15826us
+Decoding time: 15884us
+Decoding time: 15872us
+Decoding time: 15842us
+Decoding time: 15836us
+Decoding time: 15890us
+Decoding time: 15798us
+Decoding time: 15873us
+Decoding time: 15900us
+Decoding time: 15858us
+Decoding time: 15815us
+Decoding time: 15870us
+Decoding time: 15749us
+Decoding time: 15929us
+Decoding time: 15809us
+Decoding time: 15735us
+Decoding time: 15858us
+Decoding time: 15829us
+Decoding time: 15805us
+Decoding time: 15882us
+Decoding time: 15813us
+Decoding time: 15722us
+Decoding time: 15782us
+Decoding time: 15840us
+Decoding time: 15859us
+Decoding time: 15885us
+Decoding time: 15858us
+Decoding time: 15818us
+Decoding time: 15714us
+Decoding time: 15903us
+Decoding time: 15918us
+Decoding time: 15699us
+Decoding time: 15821us
+Decoding time: 15919us
+Decoding time: 15900us
+Decoding time: 15833us
+Decoding time: 16082us
+Decoding time: 15862us
+Decoding time: 15848us
+Decoding time: 15898us
+Decoding time: 15838us
+Decoding time: 15866us
+Decoding time: 15964us
+Decoding time: 15808us
+Decoding time: 15854us
+Decoding time: 15842us
+Decoding time: 15838us
+Decoding time: 15680us
+Decoding time: 15809us
+Decoding time: 15850us
+Decoding time: 15796us
+Decoding time: 15872us
+Decoding time: 15855us
+Decoding time: 15857us
+Decoding time: 15747us
+Decoding time: 15884us
+Decoding time: 15804us
+Decoding time: 15826us
+Decoding time: 15868us
+Decoding time: 15776us
+Decoding time: 15841us
+Decoding time: 15829us
+Decoding time: 15866us
+Decoding time: 15929us
+Decoding time: 15828us
+Decoding time: 15887us
+Decoding time: 15840us
+Decoding time: 15873us
+Decoding time: 15844us
+Decoding time: 15863us
+Decoding time: 15831us
+Decoding time: 15836us
+Decoding time: 15811us
+Decoding time: 15862us
+Decoding time: 15818us
+Decoding time: 15855us
+Decoding time: 15845us
+Decoding time: 15852us
+Decoding time: 15811us
+Decoding time: 15760us
+Decoding time: 15778us
+Decoding time: 15874us
+Decoding time: 15824us
+Decoding time: 15881us
+Decoding time: 15873us
+Decoding time: 15901us
+Decoding time: 15706us
+Decoding time: 15886us
+Decoding time: 15839us
+Decoding time: 15900us
+Decoding time: 15751us
+Decoding time: 15891us
+Decoding time: 15820us
+Decoding time: 15840us
+Decoding time: 15923us
+Decoding time: 15853us
+Decoding time: 15839us
+Decoding time: 15832us
+Decoding time: 15864us
+Decoding time: 15824us
+Decoding time: 15812us
+Decoding time: 16637us
+Decoding time: 15773us
+Decoding time: 16656us
+Decoding time: 15847us
+Decoding time: 16601us
+Decoding time: 16635us
+Decoding time: 16639us
+Decoding time: 16651us
+Decoding time: 16620us
+Decoding time: 16661us
+Decoding time: 16654us
+Decoding time: 16697us
+Decoding time: 16615us
+Decoding time: 16603us
+Decoding time: 16632us
+Decoding time: 16640us
+Decoding time: 16606us
+Decoding time: 15822us
+Decoding time: 16658us
+Decoding time: 16624us
+Decoding time: 16589us
+Decoding time: 16626us
+Decoding time: 16626us
+Decoding time: 16674us
+Decoding time: 16631us
+Decoding time: 16655us
+Decoding time: 15907us
+Decoding time: 16662us
+Decoding time: 16636us
+Decoding time: 16663us
+Decoding time: 16615us
+Decoding time: 16663us
+Decoding time: 16612us
+Decoding time: 16659us
+Decoding time: 16646us
+Decoding time: 16620us
+Decoding time: 16598us
+Decoding time: 16635us
+Decoding time: 16627us
+Decoding time: 16645us
+Decoding time: 16616us
+Decoding time: 16614us
+Decoding time: 16657us
+Decoding time: 16653us
+Decoding time: 16630us
+Decoding time: 16658us
+Decoding time: 16625us
+Decoding time: 16643us
+Decoding time: 16636us
+Decoding time: 16633us
+Decoding time: 16624us
+Decoding time: 16646us
+Decoding time: 16605us
+Decoding time: 16629us
+Decoding time: 16634us
+Decoding time: 16651us
+Decoding time: 16611us
+Decoding time: 15862us
+Decoding time: 16640us
+Decoding time: 16643us
+Decoding time: 16636us
+Decoding time: 16664us
+Decoding time: 16684us
+Decoding time: 16632us
+Decoding time: 16643us
+Decoding time: 15876us
+Decoding time: 16610us
+Decoding time: 15818us
+Decoding time: 15845us
+Decoding time: 15773us
+Decoding time: 15845us
+Decoding time: 15878us
+Decoding time: 15836us
+Decoding time: 15855us
+Decoding time: 15832us
+Decoding time: 15692us
+Decoding time: 15783us
+Decoding time: 15691us
+Decoding time: 15874us
+Decoding time: 15648us
+Decoding time: 15882us
+Decoding time: 15835us
+Decoding time: 15711us
+Decoding time: 15760us
+Decoding time: 15861us
+Decoding time: 15761us
+Decoding time: 15761us
+Decoding time: 15855us
+Decoding time: 15893us
+Decoding time: 15858us
+Decoding time: 15884us
+Decoding time: 15833us
+Decoding time: 15885us
+Decoding time: 15880us
+Decoding time: 15847us
+Decoding time: 15828us
+Decoding time: 15836us
+Decoding time: 15823us
+Decoding time: 15868us
+Decoding time: 15825us
+Decoding time: 15875us
+Decoding time: 15843us
+Decoding time: 15696us
+Decoding time: 15901us
+Decoding time: 15871us
+Decoding time: 15839us
+Decoding time: 15908us
+Decoding time: 15930us
+Decoding time: 15859us
+Decoding time: 15740us
+Decoding time: 16625us
+Decoding time: 16657us
+Decoding time: 16624us
+Decoding time: 16668us
+Decoding time: 16610us
+Decoding time: 16639us
+Decoding time: 16624us
+Decoding time: 16673us
+Decoding time: 16614us
+Decoding time: 16670us
+Decoding time: 16676us
+Decoding time: 16631us
+Decoding time: 16615us
+Decoding time: 16589us
+Decoding time: 16635us
+Decoding time: 16664us
+Decoding time: 16654us
+Decoding time: 16634us
+Decoding time: 16635us
+Decoding time: 16634us
+Decoding time: 16640us
+Decoding time: 15787us
+Decoding time: 15904us
+Decoding time: 15759us
+Decoding time: 15900us
+Decoding time: 15849us
+Decoding time: 15924us
+Decoding time: 15892us
+Decoding time: 15936us
+Decoding time: 15907us
+Decoding time: 15928us
+Decoding time: 15814us
+Decoding time: 15897us
+Decoding time: 15848us
+Decoding time: 15895us
+Decoding time: 15859us
+Decoding time: 15774us
+Decoding time: 15728us
+Decoding time: 15864us
+Decoding time: 15825us
+Decoding time: 15871us
+Decoding time: 15885us
+Decoding time: 15901us
+Decoding time: 15866us
+Decoding time: 15855us
+Decoding time: 15870us
+Decoding time: 15889us
+Decoding time: 15857us
+Decoding time: 15898us
+Decoding time: 15841us
+Decoding time: 15734us
+Decoding time: 15912us
+Decoding time: 15892us
+Decoding time: 15630us
+Decoding time: 15911us
+Decoding time: 15889us
+Decoding time: 15913us
+Decoding time: 15906us
+Decoding time: 15926us
+Decoding time: 15909us
+Decoding time: 16633us
+Decoding time: 16625us
+Decoding time: 16625us
+Decoding time: 16641us
+Decoding time: 16643us
+Decoding time: 16655us
+Decoding time: 16611us
+Decoding time: 16630us
+Decoding time: 16634us
+Decoding time: 16606us
+Decoding time: 16657us
+Decoding time: 16651us
+Decoding time: 16626us
+Decoding time: 16624us
+Decoding time: 16635us
+Decoding time: 16666us
+Decoding time: 16640us
+Decoding time: 16668us
+Decoding time: 15919us
+Decoding time: 16645us
+Decoding time: 16672us
+Decoding time: 16652us
+Decoding time: 15853us
+Decoding time: 16647us
+Decoding time: 15871us
+Decoding time: 16661us
+Decoding time: 15847us
+Decoding time: 16627us
+Decoding time: 15779us
+Decoding time: 16629us
+Decoding time: 16669us
+Decoding time: 16621us
+Decoding time: 16623us
+Decoding time: 16654us
+Decoding time: 16644us
+Decoding time: 16594us
+Decoding time: 16619us
+Decoding time: 16626us
+Decoding time: 16638us
+Decoding time: 16612us
+Decoding time: 16637us
+Decoding time: 15874us
+Decoding time: 16663us
+Decoding time: 15878us
+Decoding time: 16615us
+Decoding time: 15870us
+Decoding time: 16662us
+Decoding time: 16676us
+Decoding time: 16647us
+Decoding time: 15853us
+Decoding time: 16657us
+Decoding time: 16703us
+Decoding time: 16647us
+Decoding time: 16649us
+Decoding time: 16625us
+Decoding time: 16692us
+Decoding time: 16667us
+Decoding time: 16622us
+Decoding time: 16645us
+Decoding time: 15947us
+Decoding time: 16623us
+Decoding time: 16660us
+Decoding time: 16628us
+Decoding time: 16618us
+Decoding time: 16654us
+Decoding time: 16639us
+Decoding time: 16638us
+Decoding time: 16613us
+Decoding time: 16630us
+Decoding time: 16660us
+Decoding time: 16657us
+Decoding time: 16629us
+Decoding time: 16622us
+Decoding time: 16682us
+Decoding time: 16633us
+Decoding time: 16608us
+Decoding time: 16589us
+Decoding time: 16640us
+Decoding time: 16620us
+Decoding time: 16677us
+Decoding time: 16611us
+Decoding time: 16637us
+Decoding time: 16653us
+Decoding time: 16661us
+Decoding time: 16628us
+Decoding time: 16669us
+Decoding time: 16650us
+Decoding time: 16594us
+Decoding time: 16644us
+Decoding time: 16669us
+Decoding time: 16599us
+Decoding time: 16653us
+Decoding time: 16625us
+Decoding time: 16652us
+Decoding time: 16669us
+Decoding time: 16657us
+Decoding time: 16663us
+Decoding time: 16671us
+Decoding time: 16610us
+Decoding time: 16638us
+Decoding time: 16604us
+Decoding time: 16669us
+Decoding time: 16610us
+Decoding time: 16669us
+Decoding time: 16673us
+Decoding time: 16677us
+Decoding time: 16626us
+Decoding time: 16603us
+Decoding time: 16678us
+Decoding time: 16645us
+Decoding time: 16642us
+Decoding time: 16631us
+Decoding time: 16663us
+Decoding time: 16631us
+Decoding time: 16660us
+Decoding time: 16654us
+Decoding time: 16670us
+Decoding time: 16610us
+Decoding time: 16656us
+Decoding time: 16603us
+Decoding time: 16658us
+Decoding time: 16653us
+Decoding time: 16604us
+Decoding time: 16654us
+Decoding time: 16645us
+Decoding time: 16644us
+Decoding time: 16606us
+Decoding time: 16588us
+Decoding time: 16660us
+Decoding time: 16657us
+Decoding time: 16633us
+Decoding time: 16688us
+Decoding time: 16655us
+Decoding time: 16659us
+Decoding time: 16650us
+Decoding time: 16623us
+Decoding time: 16633us
+Decoding time: 16633us
+Decoding time: 16651us
+Decoding time: 16651us
+Decoding time: 16636us
+Decoding time: 16661us
+Decoding time: 16641us
+Decoding time: 16624us
+Decoding time: 16642us
+Decoding time: 16670us
+Decoding time: 16667us
+Decoding time: 16628us
+Decoding time: 16664us
+Decoding time: 16672us
+Decoding time: 16628us
+Decoding time: 16646us
+Decoding time: 16650us
+Decoding time: 16627us
+Decoding time: 16590us
+Decoding time: 16637us
+Decoding time: 16647us
+Decoding time: 16673us
+Decoding time: 16634us
+Decoding time: 16683us
+Decoding time: 16643us
+Decoding time: 16639us
+Decoding time: 16641us
+Decoding time: 16628us
+Decoding time: 16635us
+Decoding time: 16640us
+Decoding time: 16658us
+Decoding time: 16644us
+Decoding time: 16619us
+Decoding time: 16656us
+Decoding time: 16669us
+Decoding time: 16662us
+Decoding time: 16614us
+Decoding time: 16604us
+Decoding time: 16638us
+Decoding time: 16661us
+Decoding time: 15957us
+Decoding time: 16633us
+Decoding time: 16669us
+Decoding time: 16664us
+Decoding time: 16653us
+Decoding time: 16672us
+Decoding time: 16629us
+Decoding time: 16614us
+Decoding time: 16654us
+Decoding time: 16635us
+Decoding time: 16615us
+Decoding time: 16625us
+Decoding time: 16641us
+Decoding time: 16659us
+Decoding time: 16636us
+Decoding time: 16627us
+Decoding time: 16623us
+Decoding time: 16626us
+Decoding time: 16630us
+Decoding time: 16612us
+Decoding time: 16610us
+Decoding time: 16641us
+Decoding time: 16628us
+Decoding time: 16634us
+Decoding time: 16647us
+Decoding time: 16660us
+Decoding time: 16655us
+Decoding time: 16623us
+Decoding time: 16626us
+Decoding time: 16621us
+Decoding time: 16602us
+Decoding time: 16621us
+Decoding time: 16624us
+Decoding time: 16645us
+Decoding time: 16538us
+Decoding time: 16629us
+Decoding time: 16604us
+Decoding time: 16614us
+Decoding time: 16626us
+Decoding time: 16636us
+Decoding time: 16624us
+Decoding time: 16639us
+Decoding time: 16631us
+Decoding time: 16631us
+Decoding time: 16603us
+Decoding time: 16635us
+Decoding time: 16649us
+Decoding time: 16626us
+Decoding time: 16613us
+Decoding time: 16651us
+Decoding time: 16602us
+Decoding time: 16615us
+Decoding time: 16597us
+Decoding time: 16622us
+Decoding time: 16602us
+Decoding time: 16680us
+Decoding time: 16603us
+Decoding time: 16655us
+Decoding time: 16624us
+Decoding time: 16633us
+Decoding time: 16639us
+Decoding time: 16625us
+Decoding time: 16619us
+Decoding time: 16605us
+Decoding time: 16636us
+Decoding time: 16617us
+Decoding time: 16637us
+Decoding time: 16625us
+Decoding time: 16628us
+Decoding time: 16634us
+Decoding time: 16679us
+Decoding time: 16666us
+Decoding time: 16601us
+Decoding time: 16614us
+Decoding time: 16630us
+Decoding time: 16642us
+Decoding time: 16638us
+Decoding time: 16634us
+Decoding time: 16663us
+Decoding time: 16629us
+Decoding time: 16629us
+Decoding time: 16629us
+Decoding time: 16628us
+Decoding time: 16639us
+Decoding time: 16647us
+Decoding time: 16685us
+Decoding time: 16614us
+Decoding time: 21802us
+Decoding time: 16658us
+Decoding time: 16652us
+Decoding time: 16640us
+Decoding time: 16622us
+Decoding time: 16612us
+Decoding time: 16633us
+Decoding time: 16615us
+Decoding time: 16630us
+Decoding time: 16624us
+Decoding time: 16667us
+Decoding time: 16616us
+Decoding time: 16634us
+Decoding time: 16618us
+Decoding time: 16618us
+Decoding time: 16608us
+Decoding time: 16634us
+Decoding time: 15752us
+Decoding time: 15838us
+Decoding time: 29726us
+Decoding time: 15790us
+Decoding time: 15828us
+Decoding time: 15819us
+Decoding time: 15877us
+Decoding time: 15869us
+Decoding time: 15888us
+Decoding time: 15826us
+Decoding time: 15896us
+Decoding time: 15864us
+Decoding time: 15884us
+Decoding time: 15784us
+Decoding time: 15867us
+Decoding time: 15843us
+Decoding time: 15845us
+Decoding time: 15804us
+Decoding time: 15946us
+Decoding time: 15787us
+Decoding time: 15884us
+Decoding time: 15885us
+Decoding time: 15874us
+Decoding time: 15805us
+Decoding time: 15860us
+Decoding time: 15794us
+Decoding time: 15844us
+Decoding time: 15888us
+Decoding time: 15899us
+Decoding time: 15859us
+Decoding time: 15852us
+Decoding time: 15852us
+Decoding time: 15851us
+Decoding time: 15853us
+Decoding time: 15801us
+Decoding time: 15892us
+Decoding time: 15939us
+Decoding time: 15931us
+Decoding time: 15890us
+Decoding time: 15836us
+Decoding time: 15858us
+Decoding time: 15854us
+Decoding time: 15911us
+Decoding time: 15866us
+Decoding time: 15899us
+Decoding time: 15841us
+Decoding time: 15891us
+Decoding time: 15888us
+Decoding time: 15850us
+Decoding time: 15840us
+Decoding time: 15870us
+Decoding time: 15848us
+Decoding time: 15855us
+Decoding time: 15886us
+Decoding time: 15916us
+Decoding time: 15897us
+Decoding time: 15885us
+Decoding time: 15858us
+Decoding time: 16628us
+Decoding time: 16653us
+Decoding time: 16664us
+Decoding time: 16682us
+Decoding time: 16664us
+Decoding time: 16670us
+Decoding time: 16651us
+Decoding time: 16613us
+Decoding time: 16643us
+Decoding time: 16703us
+Decoding time: 16666us
+Decoding time: 16618us
+Decoding time: 16650us
+Decoding time: 16629us
+Decoding time: 16638us
+Decoding time: 16657us
+Decoding time: 16664us
+Decoding time: 15869us
+Decoding time: 16643us
+Decoding time: 15834us
+Decoding time: 16667us
+Decoding time: 15921us
+Decoding time: 16683us
+Decoding time: 15829us
+Decoding time: 16627us
+Decoding time: 16688us
+Decoding time: 16656us
+Decoding time: 16662us
+Decoding time: 16644us
+Decoding time: 16653us
+Decoding time: 16641us
+Decoding time: 16635us
+Decoding time: 16669us
+Decoding time: 16643us
+Decoding time: 16636us
+Decoding time: 16623us
+Decoding time: 16589us
+Decoding time: 16653us
+Decoding time: 16663us
+Decoding time: 16618us
+Decoding time: 16637us
+Decoding time: 16634us
+Decoding time: 16617us
+Decoding time: 16610us
+Decoding time: 16654us
+Decoding time: 16660us
+Decoding time: 16650us
+Decoding time: 16660us
+Decoding time: 16670us
+Decoding time: 16598us
+Decoding time: 16632us
+Decoding time: 16609us
+Decoding time: 16628us
+Decoding time: 16636us
+Decoding time: 16635us
+Decoding time: 16643us
+Decoding time: 16646us
+Decoding time: 16654us
+Decoding time: 16613us
+Decoding time: 16619us
+Decoding time: 16620us
+Decoding time: 15816us
+Decoding time: 15889us
+Decoding time: 15860us
+Decoding time: 15914us
+Decoding time: 15893us
+Decoding time: 15840us
+Decoding time: 15882us
+Decoding time: 15822us
+Decoding time: 15853us
+Decoding time: 15937us
+Decoding time: 15794us
+Decoding time: 15835us
+Decoding time: 15881us
+Decoding time: 15879us
+Decoding time: 15916us
+Decoding time: 15819us
+Decoding time: 15829us
+Decoding time: 15897us
+Decoding time: 15854us
+Decoding time: 15814us
+Decoding time: 15889us
+Decoding time: 15891us
+Decoding time: 15845us
+Decoding time: 15888us
+Decoding time: 15828us
+Decoding time: 15888us
+Decoding time: 15844us
+Decoding time: 15841us
+Decoding time: 15856us
+Decoding time: 15851us
+Decoding time: 15853us
+Decoding time: 15946us
+Decoding time: 15861us
+Decoding time: 15828us
+Decoding time: 15856us
+Decoding time: 15846us
+Decoding time: 15875us
+Decoding time: 15864us
+Decoding time: 15837us
+Decoding time: 15860us
+Decoding time: 15879us
+Decoding time: 15708us
+Decoding time: 15625us
+Decoding time: 15852us
+Decoding time: 15814us
+Decoding time: 15845us
+Decoding time: 15809us
+Decoding time: 15852us
+Decoding time: 15804us
+Decoding time: 15848us
+Decoding time: 15907us
+Decoding time: 15886us
+Decoding time: 15866us
+Decoding time: 15797us
+Decoding time: 15802us
+Decoding time: 15883us
+Decoding time: 15770us
+Decoding time: 15877us
+Decoding time: 15915us
+Decoding time: 15873us
+Decoding time: 15806us
+Decoding time: 15819us
+Decoding time: 15883us
+Decoding time: 15860us
+Decoding time: 15907us
+Decoding time: 15905us
+Decoding time: 15796us
+Decoding time: 15894us
+Decoding time: 15835us
+Decoding time: 15916us
+Decoding time: 15832us
+Decoding time: 15882us
+Decoding time: 15845us
+Decoding time: 15930us
+Decoding time: 15844us
+Decoding time: 15839us
+Decoding time: 15812us
+Decoding time: 15858us
+Decoding time: 15717us
+Decoding time: 15661us
+Decoding time: 15828us
+Decoding time: 15815us
+Decoding time: 16680us
+Decoding time: 15896us
+Decoding time: 16611us
+Decoding time: 16649us
+Decoding time: 16648us
+Decoding time: 16656us
+Decoding time: 16571us
+Decoding time: 16542us
+Decoding time: 16546us
+Decoding time: 16561us
+Evaluation @iter 100000 done in 179 secs
+TVL Loss   : 0.03567
+TVL MS-SSIM: 0.93554
+TVL PSNR   : 31.47227
