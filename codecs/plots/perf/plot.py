@@ -37,12 +37,12 @@ h265 = []
 for line in lines:
     line = line.strip().split(' ')
     bpp3.append(float(line[0]))
-    h265.append(float(line[1])+0.03)
+    h265.append(float(line[1]))
 
-plt.plot(bpp1, onetime, marker='D', color='magenta', markersize=24, markeredgecolor='black', linewidth=6, label='DVC Onetime')
-plt.plot(bpp1, itr, marker='s', color='skyblue', markersize=20, markeredgecolor='black', linewidth=6, label='DVC Iterative')
-plt.plot(bpp3, h265, marker='o', color='maroon', markersize=28, markeredgecolor='black', linewidth=12, label='MPEG H.265')
-plt.plot(bpp2, h264, marker='^', color='orange', markersize=32, markeredgecolor='black', linewidth=12, label='Google VP9')
+plt.plot(bpp1, onetime, marker='D', color='magenta', markersize=24, markeredgecolor='black', linewidth=6, label='Residual-Onetime')
+plt.plot(bpp1, itr, marker='s', color='skyblue', markersize=20, markeredgecolor='black', linewidth=6, label='Residual-Iterative')
+plt.plot(bpp2, h264, marker='^', color='orange', markersize=32, markeredgecolor='black', linewidth=12, label='H.265')
+plt.plot(bpp3, h265, marker='o', color='maroon', markersize=28, markeredgecolor='black', linewidth=12, label='VP9')
 
 #plt.ylim([0.85, 1])
 plt.xlim([0.5, 1])
