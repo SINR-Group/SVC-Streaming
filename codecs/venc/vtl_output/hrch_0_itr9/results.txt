@@ -1,4 +1,4 @@
-Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=9, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h0/model_iters_9', num_crops=2, out_dir='vtl_output/hrch_0_itr9', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
+Namespace(batch_size=2, bits=32, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=6, distance2=6, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=9, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h0/model_iters_9', num_crops=2, out_dir='vtl_output/hrch_0_itr9', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
 
 Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
 188743 images loaded.
@@ -13,17 +13,17 @@ Loader for 188743 images (94372 batches) created.
   (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
   (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
 ), Binarizer(
-  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (conv): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
   (sign): Sign()
 ), DecoderCell(
-  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (conv1): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
   (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
   (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
   (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
   (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
   (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
 ), DecoderCell2(
-  (conv1): Conv2d(144, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (conv1): Conv2d(288, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
   (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
   (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
   (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
@@ -161,151 +161,153 @@ Loading binarizer from ../vcodec/h0/model_iters_9/demo_binarizer_00100000.pth...
 Loading decoder from ../vcodec/h0/model_iters_9/demo_decoder_00100000.pth...
 Loading unet from ../vcodec/h0/model_iters_9/demo_unet_00100000.pth...
 Loading d2 from ../vcodec/h0/model_iters_9/demo_d2_00100000.pth...
-[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.015802; Rec2 Loss: 0.011912; Backprop: 0.0443 sec; Batch: 0.3802 sec
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.007042; Rec2 Loss: 0.005842; Backprop: 0.0448 sec; Batch: 0.3757 sec
 Start evaluation...
 
 Creating loader for /home/mallesh/deepvideo/data/vtl/test...
 136 images loaded.
 	distance=6/6
 Loader for 136 images (136 batches) created.
-Encoding time:95391
-Encoding time:93908
-Encoding time:93908
-Encoding time:94274
-Encoding time:94147
-Encoding time:94231
-Encoding time:94199
-Encoding time:94117
-Encoding time:94051
-Encoding time:94182
-Encoding time:93999
-Encoding time:94190
-Encoding time:94178
-Encoding time:93841
-Encoding time:93969
-Encoding time:93792
-Encoding time:94155
-Encoding time:94274
-Encoding time:94217
-Encoding time:94083
-Encoding time:94618
-Encoding time:94199
-Encoding time:94135
-Encoding time:94380
-Encoding time:94489
-Encoding time:93934
-Encoding time:94168
-Encoding time:94297
-Encoding time:94125
-Encoding time:94304
-Encoding time:94757
-Encoding time:94649
-Encoding time:94389
-Encoding time:94535
-Encoding time:94106
-Encoding time:94394
-Encoding time:94093
-Encoding time:94305
-Encoding time:94615
-Encoding time:94418
-Encoding time:94955
-Encoding time:94514
-Encoding time:94842
-Encoding time:94514
-Encoding time:94733
-Encoding time:94411
-Encoding time:94573
-Encoding time:94566
-Encoding time:94661
-Encoding time:94435
-Encoding time:94552
-Encoding time:94313
-Encoding time:94723
-Encoding time:94618
-Encoding time:94294
-Encoding time:95018
-Encoding time:94722
-Encoding time:94920
-Encoding time:94367
-Encoding time:94857
-Encoding time:94430
-Encoding time:94880
-Encoding time:94557
-Encoding time:94905
+Creating directory vtl_output/hrch_0_itr9/iter100001/codes.
+Creating directory vtl_output/hrch_0_itr9/iter100001/images.
+Encoding time:95522
+Encoding time:94267
+Encoding time:94703
+Encoding time:94970
+Encoding time:94518
 Encoding time:94511
-Encoding time:94853
-Encoding time:94405
-Encoding time:94742
-Encoding time:94424
-Encoding time:94731
-Encoding time:94409
-Encoding time:94568
-Encoding time:94852
-Encoding time:94665
-Encoding time:94797
-Encoding time:94430
-Encoding time:94829
-Encoding time:94648
-Encoding time:94858
-Encoding time:95022
-Encoding time:94925
-Encoding time:94523
-Encoding time:94863
-Encoding time:94776
-Encoding time:94671
-Encoding time:94612
-Encoding time:94681
-Encoding time:94450
-Encoding time:94831
-Encoding time:94412
-Encoding time:94689
-Encoding time:94681
-Encoding time:95128
-Encoding time:94367
-Encoding time:94499
-Encoding time:94751
-Encoding time:94769
-Encoding time:94783
-Encoding time:94320
-Encoding time:95045
-Encoding time:95441
-Encoding time:94958
-Encoding time:94635
-Encoding time:95049
-Encoding time:94564
-Encoding time:94818
-Encoding time:94546
-Encoding time:94647
-Encoding time:94477
-Encoding time:94807
-Encoding time:94824
-Encoding time:94784
-Encoding time:94612
-Encoding time:94772
-Encoding time:94878
-Encoding time:95041
-Encoding time:94869
-Encoding time:94536
-Encoding time:94803
-Encoding time:94857
-Encoding time:94890
-Encoding time:94351
-Encoding time:94860
-Encoding time:94792
-Encoding time:94837
-Encoding time:95001
-Encoding time:94923
-Encoding time:94569
-Encoding time:94956
-Encoding time:95047
-Encoding time:95097
-Encoding time:94662
+Encoding time:94374
+Encoding time:94620
+Encoding time:94510
+Encoding time:94819
+Encoding time:94401
+Encoding time:94624
+Encoding time:94365
+Encoding time:94529
+Encoding time:94489
+Encoding time:94693
+Encoding time:94440
 Encoding time:94608
-Encoding time:94960
+Encoding time:94766
+Encoding time:94567
+Encoding time:94809
+Encoding time:94890
+Encoding time:94621
+Encoding time:94712
+Encoding time:94754
+Encoding time:94514
+Encoding time:94339
+Encoding time:94837
+Encoding time:94531
+Encoding time:94585
+Encoding time:95306
+Encoding time:94325
+Encoding time:94947
+Encoding time:94487
+Encoding time:94579
+Encoding time:94845
+Encoding time:94536
+Encoding time:94495
+Encoding time:94692
 Encoding time:94575
-Encoding time:94555
+Encoding time:94561
+Encoding time:94499
+Encoding time:94833
+Encoding time:94663
+Encoding time:94852
+Encoding time:94836
+Encoding time:94338
+Encoding time:94193
+Encoding time:94791
+Encoding time:94959
+Encoding time:94750
+Encoding time:95110
+Encoding time:94524
+Encoding time:94899
+Encoding time:94957
+Encoding time:94502
+Encoding time:94615
+Encoding time:94848
+Encoding time:94512
+Encoding time:94470
+Encoding time:94901
+Encoding time:94600
+Encoding time:94700
+Encoding time:94717
+Encoding time:94768
+Encoding time:94601
+Encoding time:94550
+Encoding time:94646
+Encoding time:94601
+Encoding time:94876
+Encoding time:94745
+Encoding time:94790
+Encoding time:94910
+Encoding time:94536
+Encoding time:94895
+Encoding time:95129
+Encoding time:94897
+Encoding time:95041
+Encoding time:95215
+Encoding time:94978
+Encoding time:94858
+Encoding time:94985
+Encoding time:94766
+Encoding time:95119
+Encoding time:94895
+Encoding time:94473
+Encoding time:94792
+Encoding time:94926
+Encoding time:94732
+Encoding time:94826
+Encoding time:95362
+Encoding time:94823
+Encoding time:95066
+Encoding time:95178
+Encoding time:94867
+Encoding time:94813
+Encoding time:94824
+Encoding time:94906
+Encoding time:94524
+Encoding time:95158
+Encoding time:95243
+Encoding time:94798
+Encoding time:95012
+Encoding time:94717
+Encoding time:94950
+Encoding time:95124
+Encoding time:94895
+Encoding time:94823
+Encoding time:94804
+Encoding time:95165
+Encoding time:94805
+Encoding time:94690
+Encoding time:94960
+Encoding time:94706
+Encoding time:94713
+Encoding time:95406
+Encoding time:94807
+Encoding time:94877
+Encoding time:95068
+Encoding time:94910
+Encoding time:94920
+Encoding time:94852
+Encoding time:94986
+Encoding time:94946
+Encoding time:95010
+Encoding time:95443
+Encoding time:94915
+Encoding time:95474
+Encoding time:95121
+Encoding time:95193
+Encoding time:95314
+Encoding time:94857
+Encoding time:94737
+Encoding time:94828
+Encoding time:94919
+Encoding time:94693
 Evaluation @iter 100001 done in 39 secs
-TVL Loss   : 0.03150
-TVL MS-SSIM: 0.95173
-TVL PSNR   : 32.28899
+TVL Loss   : 0.02959
+TVL MS-SSIM: 0.96068
+TVL PSNR   : 32.38442
 Training done.

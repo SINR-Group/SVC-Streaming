@@ -1,0 +1,1265 @@
+Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=2, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_2', num_crops=2, out_dir='vtl_output/hrch_2_itr2', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
+1510250 images loaded.
+	distance=1/2
+Loader for 1510250 images (755125 batches) created.
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h2/model_iters_2/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h2/model_iters_2/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h2/model_iters_2/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h2/model_iters_2/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h2/model_iters_2/demo_d2_00100000.pth...
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.018018; Rec2 Loss: 0.017471; Backprop: 0.0114 sec; Batch: 0.2720 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Creating directory vtl_output/hrch_2_itr2/iter100001/codes.
+Creating directory vtl_output/hrch_2_itr2/iter100001/images.
+Encoding time:24163
+Encoding time:23572
+Encoding time:23034
+Encoding time:22152
+Encoding time:22091
+Encoding time:22096
+Encoding time:22082
+Encoding time:22102
+Encoding time:22033
+Encoding time:22021
+Encoding time:21818
+Encoding time:21320
+Encoding time:20690
+Encoding time:20748
+Encoding time:20704
+Encoding time:20770
+Encoding time:20691
+Encoding time:20564
+Encoding time:20678
+Encoding time:20143
+Encoding time:20391
+Encoding time:20189
+Encoding time:20244
+Encoding time:20254
+Encoding time:20105
+Encoding time:20179
+Encoding time:19897
+Encoding time:20261
+Encoding time:19889
+Encoding time:20224
+Encoding time:19910
+Encoding time:19953
+Encoding time:20019
+Encoding time:19810
+Encoding time:20165
+Encoding time:19915
+Encoding time:20237
+Encoding time:19900
+Encoding time:20227
+Encoding time:19865
+Encoding time:20259
+Encoding time:19882
+Encoding time:20139
+Encoding time:19871
+Encoding time:20098
+Encoding time:20019
+Encoding time:19979
+Encoding time:20075
+Encoding time:19935
+Encoding time:20006
+Encoding time:19922
+Encoding time:20176
+Encoding time:19975
+Encoding time:20305
+Encoding time:20061
+Encoding time:20414
+Encoding time:20093
+Encoding time:20422
+Encoding time:20229
+Encoding time:20188
+Encoding time:20430
+Encoding time:20302
+Encoding time:20561
+Encoding time:20274
+Encoding time:20430
+Encoding time:20340
+Encoding time:20266
+Encoding time:20403
+Encoding time:20192
+Encoding time:20387
+Encoding time:20110
+Encoding time:20101
+Encoding time:20374
+Encoding time:20218
+Encoding time:20384
+Encoding time:19869
+Encoding time:20230
+Encoding time:19877
+Encoding time:20251
+Encoding time:19914
+Encoding time:20110
+Encoding time:20066
+Encoding time:20056
+Encoding time:20194
+Encoding time:19979
+Encoding time:20262
+Encoding time:20023
+Encoding time:20083
+Encoding time:19881
+Encoding time:20254
+Encoding time:19907
+Encoding time:20265
+Encoding time:19874
+Encoding time:20257
+Encoding time:19902
+Encoding time:20250
+Encoding time:19827
+Encoding time:20335
+Encoding time:19982
+Encoding time:19910
+Encoding time:20088
+Encoding time:19919
+Encoding time:20143
+Encoding time:19930
+Encoding time:20139
+Encoding time:19895
+Encoding time:20181
+Encoding time:19822
+Encoding time:20282
+Encoding time:19828
+Encoding time:20302
+Encoding time:19902
+Encoding time:20296
+Encoding time:19832
+Encoding time:19996
+Encoding time:19832
+Encoding time:20353
+Encoding time:20109
+Encoding time:20243
+Encoding time:20159
+Encoding time:20074
+Encoding time:20021
+Encoding time:19980
+Encoding time:19934
+Encoding time:19937
+Encoding time:20076
+Encoding time:19885
+Encoding time:20126
+Encoding time:19828
+Encoding time:20174
+Encoding time:19848
+Encoding time:20212
+Encoding time:19821
+Encoding time:20183
+Encoding time:19846
+Encoding time:20185
+Encoding time:19923
+Encoding time:20245
+Encoding time:19835
+Encoding time:20195
+Encoding time:19852
+Encoding time:19924
+Encoding time:19945
+Encoding time:20140
+Encoding time:19829
+Encoding time:20153
+Encoding time:20007
+Encoding time:20123
+Encoding time:20086
+Encoding time:19844
+Encoding time:20211
+Encoding time:19820
+Encoding time:20242
+Encoding time:19863
+Encoding time:20238
+Encoding time:19851
+Encoding time:20145
+Encoding time:19841
+Encoding time:20100
+Encoding time:19925
+Encoding time:20000
+Encoding time:20011
+Encoding time:19906
+Encoding time:20264
+Encoding time:20026
+Encoding time:20296
+Encoding time:19913
+Encoding time:20162
+Encoding time:20057
+Encoding time:20072
+Encoding time:20040
+Encoding time:20009
+Encoding time:20262
+Encoding time:19924
+Encoding time:20195
+Encoding time:19894
+Encoding time:20290
+Encoding time:19934
+Encoding time:20277
+Encoding time:20039
+Encoding time:20343
+Encoding time:19963
+Encoding time:20193
+Encoding time:19950
+Encoding time:20146
+Encoding time:20112
+Encoding time:20017
+Encoding time:20176
+Encoding time:19946
+Encoding time:20248
+Encoding time:19920
+Encoding time:20320
+Encoding time:20029
+Encoding time:20303
+Encoding time:19934
+Encoding time:20292
+Encoding time:19951
+Encoding time:20225
+Encoding time:20083
+Encoding time:20074
+Encoding time:20165
+Encoding time:20049
+Encoding time:20237
+Encoding time:20012
+Encoding time:20210
+Encoding time:19979
+Encoding time:20205
+Encoding time:19935
+Encoding time:20243
+Encoding time:19966
+Encoding time:20341
+Encoding time:19950
+Encoding time:20324
+Encoding time:19936
+Encoding time:20589
+Encoding time:19950
+Encoding time:20262
+Encoding time:20054
+Encoding time:20077
+Encoding time:19936
+Encoding time:20067
+Encoding time:20186
+Encoding time:19948
+Encoding time:20215
+Encoding time:19965
+Encoding time:20218
+Encoding time:19938
+Encoding time:20286
+Encoding time:19959
+Encoding time:20329
+Encoding time:19953
+Encoding time:20297
+Encoding time:19932
+Encoding time:20331
+Encoding time:19939
+Encoding time:20391
+Encoding time:19968
+Encoding time:20360
+Encoding time:20086
+Encoding time:20119
+Encoding time:20153
+Encoding time:19900
+Encoding time:20252
+Encoding time:19914
+Encoding time:20331
+Encoding time:19919
+Encoding time:20326
+Encoding time:19890
+Encoding time:20338
+Encoding time:20307
+Encoding time:19928
+Encoding time:20381
+Encoding time:19946
+Encoding time:20360
+Encoding time:19966
+Encoding time:20327
+Encoding time:19929
+Encoding time:20200
+Encoding time:19998
+Encoding time:20075
+Encoding time:20204
+Encoding time:19937
+Encoding time:20259
+Encoding time:19908
+Encoding time:20287
+Encoding time:19898
+Encoding time:20305
+Encoding time:19997
+Encoding time:20331
+Encoding time:19921
+Encoding time:20322
+Encoding time:19963
+Encoding time:20356
+Encoding time:19935
+Encoding time:20182
+Encoding time:20113
+Encoding time:20029
+Encoding time:20177
+Encoding time:19946
+Encoding time:20264
+Encoding time:19903
+Encoding time:20211
+Encoding time:19939
+Encoding time:20326
+Encoding time:19922
+Encoding time:20279
+Encoding time:19940
+Encoding time:20303
+Encoding time:19920
+Encoding time:20257
+Encoding time:19939
+Encoding time:20120
+Encoding time:20022
+Encoding time:20026
+Encoding time:20293
+Encoding time:19973
+Encoding time:20256
+Encoding time:19885
+Encoding time:20264
+Encoding time:19959
+Encoding time:20324
+Encoding time:19930
+Encoding time:20303
+Encoding time:19948
+Encoding time:20307
+Encoding time:19957
+Encoding time:20321
+Encoding time:19936
+Encoding time:20338
+Encoding time:19940
+Encoding time:20184
+Encoding time:20102
+Encoding time:20021
+Encoding time:20122
+Encoding time:20079
+Encoding time:20260
+Encoding time:20102
+Encoding time:20390
+Encoding time:20062
+Encoding time:20243
+Encoding time:19932
+Encoding time:20294
+Encoding time:19881
+Encoding time:20303
+Encoding time:19899
+Encoding time:20334
+Encoding time:19951
+Encoding time:20246
+Encoding time:20066
+Encoding time:20080
+Encoding time:20088
+Encoding time:20047
+Encoding time:20218
+Encoding time:19932
+Encoding time:20203
+Encoding time:20016
+Encoding time:20296
+Encoding time:19906
+Encoding time:20311
+Encoding time:19911
+Encoding time:20342
+Encoding time:19933
+Encoding time:20322
+Encoding time:19971
+Encoding time:20289
+Encoding time:19929
+Encoding time:20127
+Encoding time:20076
+Encoding time:20145
+Encoding time:20191
+Encoding time:20116
+Encoding time:20269
+Encoding time:20103
+Encoding time:20131
+Encoding time:19919
+Encoding time:20301
+Encoding time:19942
+Encoding time:20342
+Encoding time:19940
+Encoding time:20178
+Encoding time:19950
+Encoding time:20065
+Encoding time:20200
+Encoding time:19978
+Encoding time:20183
+Encoding time:19943
+Encoding time:20265
+Encoding time:19943
+Encoding time:20254
+Encoding time:19943
+Encoding time:20256
+Encoding time:19930
+Encoding time:20370
+Encoding time:19921
+Encoding time:20341
+Encoding time:19964
+Encoding time:20233
+Encoding time:19950
+Encoding time:20171
+Encoding time:20067
+Encoding time:20036
+Encoding time:20222
+Encoding time:19990
+Encoding time:20256
+Encoding time:19974
+Encoding time:20264
+Encoding time:19931
+Encoding time:20182
+Encoding time:19955
+Encoding time:20413
+Encoding time:20164
+Encoding time:20413
+Encoding time:20321
+Encoding time:20165
+Encoding time:20098
+Encoding time:20007
+Encoding time:20476
+Encoding time:20168
+Encoding time:20394
+Encoding time:20363
+Encoding time:20181
+Encoding time:20015
+Encoding time:19965
+Encoding time:20623
+Encoding time:20250
+Encoding time:20479
+Encoding time:20396
+Encoding time:20279
+Encoding time:20120
+Encoding time:20025
+Encoding time:20466
+Encoding time:20137
+Encoding time:20436
+Encoding time:20277
+Encoding time:20390
+Encoding time:20044
+Encoding time:20041
+Encoding time:20287
+Encoding time:19928
+Encoding time:20350
+Encoding time:19931
+Encoding time:20338
+Encoding time:19949
+Encoding time:20325
+Encoding time:19930
+Encoding time:20226
+Encoding time:19966
+Encoding time:20070
+Encoding time:20116
+Encoding time:20021
+Encoding time:20207
+Encoding time:19929
+Encoding time:20285
+Encoding time:19933
+Encoding time:20288
+Encoding time:19950
+Encoding time:20291
+Encoding time:19935
+Encoding time:20332
+Encoding time:19918
+Encoding time:20351
+Encoding time:20163
+Encoding time:20014
+Encoding time:20116
+Encoding time:19969
+Encoding time:20224
+Encoding time:19917
+Encoding time:20319
+Encoding time:19936
+Encoding time:20330
+Encoding time:20005
+Encoding time:20328
+Encoding time:19954
+Encoding time:20229
+Encoding time:21095
+Encoding time:19960
+Encoding time:20254
+Encoding time:19966
+Encoding time:20262
+Encoding time:19925
+Encoding time:20319
+Encoding time:19897
+Encoding time:20355
+Encoding time:19932
+Encoding time:20335
+Encoding time:19939
+Encoding time:20253
+Encoding time:19966
+Encoding time:20090
+Encoding time:20160
+Encoding time:20050
+Encoding time:20204
+Encoding time:19920
+Encoding time:20247
+Encoding time:19925
+Encoding time:20292
+Encoding time:19909
+Encoding time:20374
+Encoding time:19919
+Encoding time:20369
+Encoding time:19900
+Encoding time:20244
+Encoding time:20138
+Encoding time:20017
+Encoding time:20233
+Encoding time:20046
+Encoding time:20342
+Encoding time:20022
+Encoding time:20436
+Encoding time:19939
+Encoding time:20307
+Encoding time:19932
+Encoding time:20269
+Encoding time:20156
+Encoding time:20045
+Encoding time:20220
+Encoding time:19913
+Encoding time:20297
+Encoding time:19946
+Encoding time:20358
+Encoding time:19917
+Encoding time:20297
+Encoding time:19921
+Encoding time:20219
+Encoding time:20139
+Encoding time:20304
+Encoding time:20266
+Encoding time:19931
+Encoding time:20270
+Encoding time:19914
+Encoding time:20369
+Encoding time:19925
+Encoding time:20354
+Encoding time:20034
+Encoding time:20274
+Encoding time:20194
+Encoding time:20074
+Encoding time:20350
+Encoding time:20140
+Encoding time:20327
+Encoding time:19916
+Encoding time:20353
+Encoding time:19955
+Encoding time:20369
+Encoding time:19967
+Encoding time:20334
+Encoding time:19951
+Encoding time:20238
+Encoding time:20100
+Encoding time:19993
+Encoding time:20208
+Encoding time:19960
+Encoding time:20279
+Encoding time:20001
+Encoding time:20376
+Encoding time:19932
+Encoding time:20310
+Encoding time:19891
+Encoding time:20289
+Encoding time:19956
+Encoding time:20155
+Encoding time:20134
+Encoding time:20119
+Encoding time:20262
+Encoding time:19938
+Encoding time:20339
+Encoding time:19934
+Encoding time:20365
+Encoding time:19957
+Encoding time:20212
+Encoding time:20100
+Encoding time:20032
+Encoding time:20226
+Encoding time:19930
+Encoding time:20281
+Encoding time:19974
+Encoding time:20338
+Encoding time:19941
+Encoding time:20335
+Encoding time:19919
+Encoding time:20314
+Encoding time:19911
+Encoding time:20231
+Encoding time:20118
+Encoding time:20027
+Encoding time:20252
+Encoding time:19925
+Encoding time:20307
+Encoding time:20034
+Encoding time:20462
+Encoding time:20085
+Encoding time:20234
+Encoding time:20295
+Encoding time:20053
+Encoding time:20230
+Encoding time:20032
+Encoding time:20393
+Encoding time:20059
+Encoding time:20453
+Encoding time:19958
+Encoding time:20271
+Encoding time:20091
+Encoding time:20023
+Encoding time:20250
+Encoding time:19964
+Encoding time:20240
+Encoding time:19954
+Encoding time:20069
+Encoding time:19941
+Encoding time:20347
+Encoding time:19930
+Encoding time:20367
+Encoding time:19992
+Encoding time:20150
+Encoding time:19961
+Encoding time:19906
+Encoding time:20276
+Encoding time:19929
+Encoding time:20352
+Encoding time:19910
+Encoding time:20343
+Encoding time:19950
+Encoding time:20291
+Encoding time:20012
+Encoding time:20155
+Encoding time:20028
+Encoding time:20085
+Encoding time:20186
+Encoding time:19969
+Encoding time:20238
+Encoding time:19973
+Encoding time:20265
+Encoding time:20020
+Encoding time:20335
+Encoding time:19921
+Encoding time:20362
+Encoding time:19918
+Encoding time:20293
+Encoding time:19950
+Encoding time:20194
+Encoding time:20170
+Encoding time:20057
+Encoding time:20358
+Encoding time:19932
+Encoding time:20268
+Encoding time:19953
+Encoding time:20323
+Encoding time:19967
+Encoding time:20204
+Encoding time:20134
+Encoding time:20092
+Encoding time:20148
+Encoding time:19930
+Encoding time:20329
+Encoding time:19964
+Encoding time:20081
+Encoding time:19951
+Encoding time:20330
+Encoding time:19966
+Encoding time:20336
+Encoding time:19910
+Encoding time:20376
+Encoding time:19938
+Encoding time:20227
+Encoding time:20103
+Encoding time:20110
+Encoding time:20088
+Encoding time:20036
+Encoding time:20151
+Encoding time:19906
+Encoding time:20324
+Encoding time:19904
+Encoding time:20339
+Encoding time:19903
+Encoding time:20333
+Encoding time:19943
+Encoding time:20294
+Encoding time:19932
+Encoding time:20227
+Encoding time:20019
+Encoding time:20167
+Encoding time:20075
+Encoding time:20034
+Encoding time:20165
+Encoding time:20048
+Encoding time:20141
+Encoding time:20106
+Encoding time:20250
+Encoding time:19967
+Encoding time:20385
+Encoding time:19928
+Encoding time:20405
+Encoding time:20086
+Encoding time:20432
+Encoding time:20080
+Encoding time:20281
+Encoding time:19995
+Encoding time:20007
+Encoding time:20228
+Encoding time:19925
+Encoding time:20297
+Encoding time:19930
+Encoding time:20307
+Encoding time:19970
+Encoding time:20357
+Encoding time:19940
+Encoding time:20174
+Encoding time:19997
+Encoding time:20141
+Encoding time:20085
+Encoding time:20019
+Encoding time:20223
+Encoding time:20045
+Encoding time:20297
+Encoding time:19935
+Encoding time:20229
+Encoding time:19934
+Encoding time:20284
+Encoding time:19879
+Encoding time:20347
+Encoding time:19934
+Encoding time:20331
+Encoding time:19948
+Encoding time:20340
+Encoding time:19931
+Encoding time:20273
+Encoding time:19926
+Encoding time:20183
+Encoding time:20046
+Encoding time:20037
+Encoding time:20219
+Encoding time:19958
+Encoding time:20415
+Encoding time:20060
+Encoding time:20411
+Encoding time:20063
+Encoding time:20436
+Encoding time:19963
+Encoding time:20124
+Encoding time:20279
+Encoding time:20161
+Encoding time:20522
+Encoding time:20159
+Encoding time:20462
+Encoding time:20155
+Encoding time:20329
+Encoding time:19952
+Encoding time:20212
+Encoding time:20057
+Encoding time:20091
+Encoding time:20080
+Encoding time:20012
+Encoding time:20181
+Encoding time:19920
+Encoding time:20237
+Encoding time:19921
+Encoding time:20335
+Encoding time:19927
+Encoding time:20320
+Encoding time:19983
+Encoding time:20279
+Encoding time:19963
+Encoding time:20131
+Encoding time:20089
+Encoding time:20049
+Encoding time:20209
+Encoding time:19990
+Encoding time:20254
+Encoding time:19921
+Encoding time:20321
+Encoding time:19928
+Encoding time:20334
+Encoding time:19922
+Encoding time:20331
+Encoding time:19900
+Encoding time:20303
+Encoding time:20031
+Encoding time:20066
+Encoding time:20183
+Encoding time:20076
+Encoding time:20176
+Encoding time:19926
+Encoding time:20349
+Encoding time:19906
+Encoding time:20384
+Encoding time:19958
+Encoding time:20265
+Encoding time:20061
+Encoding time:20099
+Encoding time:20185
+Encoding time:20070
+Encoding time:20188
+Encoding time:19900
+Encoding time:20309
+Encoding time:19954
+Encoding time:20435
+Encoding time:20045
+Encoding time:20125
+Encoding time:20234
+Encoding time:19947
+Encoding time:20285
+Encoding time:19968
+Encoding time:20242
+Encoding time:20036
+Encoding time:20351
+Encoding time:19947
+Encoding time:20244
+Encoding time:20092
+Encoding time:20038
+Encoding time:20243
+Encoding time:19949
+Encoding time:20281
+Encoding time:19963
+Encoding time:20314
+Encoding time:19927
+Encoding time:20289
+Encoding time:20164
+Encoding time:20185
+Encoding time:20091
+Encoding time:19999
+Encoding time:20284
+Encoding time:19967
+Encoding time:20800
+Encoding time:19917
+Encoding time:20324
+Encoding time:19948
+Encoding time:20335
+Encoding time:19892
+Encoding time:20285
+Encoding time:20050
+Encoding time:20043
+Encoding time:20310
+Encoding time:19895
+Encoding time:20294
+Encoding time:19906
+Encoding time:20369
+Encoding time:19943
+Encoding time:20334
+Encoding time:19900
+Encoding time:20337
+Encoding time:19930
+Encoding time:20307
+Encoding time:19951
+Encoding time:20266
+Encoding time:20028
+Encoding time:20216
+Encoding time:20091
+Encoding time:20073
+Encoding time:20038
+Encoding time:20047
+Encoding time:20221
+Encoding time:20022
+Encoding time:20279
+Encoding time:19967
+Encoding time:20260
+Encoding time:19932
+Encoding time:20385
+Encoding time:19905
+Encoding time:20313
+Encoding time:19920
+Encoding time:20203
+Encoding time:19942
+Encoding time:20057
+Encoding time:20187
+Encoding time:19937
+Encoding time:20275
+Encoding time:19932
+Encoding time:20359
+Encoding time:19955
+Encoding time:20316
+Encoding time:19930
+Encoding time:20337
+Encoding time:19985
+Encoding time:20199
+Encoding time:20102
+Encoding time:20076
+Encoding time:20125
+Encoding time:20021
+Encoding time:20185
+Encoding time:19981
+Encoding time:20205
+Encoding time:19976
+Encoding time:20369
+Encoding time:19929
+Encoding time:20290
+Encoding time:19921
+Encoding time:20343
+Encoding time:19911
+Encoding time:20174
+Encoding time:19984
+Encoding time:20232
+Encoding time:20116
+Encoding time:20145
+Encoding time:20291
+Encoding time:19965
+Encoding time:20137
+Encoding time:19932
+Encoding time:20311
+Encoding time:19916
+Encoding time:20327
+Encoding time:19916
+Encoding time:20261
+Encoding time:19930
+Encoding time:20045
+Encoding time:20219
+Encoding time:19953
+Encoding time:20250
+Encoding time:19914
+Encoding time:20295
+Encoding time:19949
+Encoding time:20312
+Encoding time:19934
+Encoding time:20334
+Encoding time:19957
+Encoding time:20321
+Encoding time:19960
+Encoding time:20380
+Encoding time:19930
+Encoding time:20313
+Encoding time:19980
+Encoding time:20202
+Encoding time:19965
+Encoding time:19951
+Encoding time:20068
+Encoding time:20158
+Encoding time:20114
+Encoding time:20108
+Encoding time:20123
+Encoding time:20045
+Encoding time:19987
+Encoding time:19980
+Encoding time:20230
+Encoding time:19932
+Encoding time:20281
+Encoding time:19951
+Encoding time:20363
+Encoding time:19925
+Encoding time:20288
+Encoding time:20034
+Encoding time:20184
+Encoding time:20141
+Encoding time:20078
+Encoding time:20245
+Encoding time:19991
+Encoding time:20247
+Encoding time:19995
+Encoding time:20406
+Encoding time:19915
+Encoding time:20340
+Encoding time:19904
+Encoding time:20239
+Encoding time:20023
+Encoding time:20144
+Encoding time:20133
+Encoding time:20015
+Encoding time:20321
+Encoding time:19978
+Encoding time:20318
+Encoding time:19953
+Encoding time:20331
+Encoding time:19958
+Encoding time:20108
+Encoding time:20212
+Encoding time:19957
+Encoding time:20382
+Encoding time:19928
+Encoding time:20380
+Encoding time:19990
+Encoding time:20186
+Encoding time:20219
+Encoding time:19950
+Encoding time:20335
+Encoding time:19974
+Encoding time:20364
+Encoding time:19961
+Encoding time:20238
+Encoding time:20192
+Encoding time:19956
+Encoding time:20390
+Encoding time:19982
+Encoding time:20397
+Encoding time:19944
+Encoding time:20212
+Encoding time:20220
+Encoding time:19983
+Encoding time:20326
+Encoding time:19954
+Encoding time:20389
+Encoding time:19957
+Encoding time:20148
+Encoding time:20282
+Encoding time:19985
+Encoding time:20397
+Encoding time:19968
+Encoding time:20377
+Encoding time:19997
+Encoding time:20233
+Encoding time:20272
+Encoding time:19967
+Encoding time:20394
+Encoding time:19950
+Encoding time:20377
+Encoding time:20028
+Encoding time:20243
+Encoding time:20173
+Encoding time:19982
+Encoding time:20323
+Encoding time:19991
+Encoding time:20315
+Encoding time:19991
+Encoding time:20349
+Encoding time:20008
+Encoding time:20107
+Encoding time:20279
+Encoding time:19999
+Encoding time:20370
+Encoding time:19985
+Encoding time:20350
+Encoding time:19944
+Encoding time:20107
+Encoding time:20220
+Encoding time:19980
+Encoding time:20369
+Encoding time:19979
+Encoding time:20355
+Encoding time:19969
+Encoding time:20239
+Encoding time:20190
+Encoding time:20056
+Encoding time:20198
+Encoding time:19938
+Encoding time:20333
+Encoding time:19999
+Encoding time:20287
+Encoding time:20035
+Encoding time:20177
+Encoding time:20044
+Encoding time:20032
+Encoding time:20212
+Encoding time:19946
+Encoding time:20433
+Encoding time:19930
+Encoding time:20349
+Encoding time:19938
+Encoding time:20308
+Encoding time:19951
+Encoding time:20258
+Encoding time:20079
+Encoding time:20075
+Encoding time:20284
+Encoding time:19932
+Encoding time:20361
+Encoding time:19936
+Encoding time:20392
+Encoding time:19984
+Encoding time:20256
+Encoding time:20172
+Encoding time:19907
+Encoding time:20176
+Encoding time:19977
+Encoding time:20376
+Encoding time:20025
+Encoding time:20413
+Encoding time:20079
+Encoding time:20412
+Encoding time:20179
+Encoding time:20101
+Encoding time:20363
+Encoding time:20053
+Encoding time:20339
+Encoding time:20072
+Encoding time:20115
+Encoding time:20212
+Encoding time:20017
+Encoding time:20412
+Encoding time:19949
+Encoding time:20482
+Encoding time:19958
+Encoding time:20183
+Encoding time:20168
+Encoding time:19997
+Encoding time:20247
+Encoding time:19969
+Encoding time:20358
+Encoding time:20095
+Encoding time:20372
+Encoding time:20062
+Encoding time:20425
+Encoding time:20089
+Encoding time:20301
+Encoding time:19977
+Encoding time:20181
+Encoding time:20142
+Encoding time:20024
+Encoding time:20284
+Encoding time:19888
+Encoding time:20287
+Encoding time:19931
+Encoding time:20392
+Encoding time:20003
+Encoding time:20356
+Encoding time:20077
+Encoding time:20045
+Encoding time:20003
+Encoding time:20174
+Encoding time:19735
+Encoding time:19907
+Encoding time:20208
+Evaluation @iter 100001 done in 187 secs
+TVL Loss   : 0.03083
+TVL MS-SSIM: 0.94747
+TVL PSNR   : 32.25333
+Training done.

@@ -1,0 +1,1265 @@
+Namespace(batch_size=2, bits=8, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=1, distance1=1, distance2=2, encoder_fuse_level=1, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=5, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h2/model_iters_5', num_crops=2, out_dir='vtl_output/hrch_2_itr5', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
+1510250 images loaded.
+	distance=1/2
+Loader for 1510250 images (755125 batches) created.
+	Encoder fuse level: 1
+	Decoder fuse level: 1
+	Decoder fuse level: 1
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 8, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(8, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(40, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(128, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h2/model_iters_5/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h2/model_iters_5/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h2/model_iters_5/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h2/model_iters_5/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h2/model_iters_5/demo_d2_00100000.pth...
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.053762; Rec2 Loss: 0.046721; Backprop: 0.0258 sec; Batch: 0.3239 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+1088 images loaded.
+	distance=1/2
+Loader for 1088 images (1088 batches) created.
+Creating directory vtl_output/hrch_2_itr5/iter100001/codes.
+Creating directory vtl_output/hrch_2_itr5/iter100001/images.
+Encoding time:51912
+Encoding time:51852
+Encoding time:51532
+Encoding time:51517
+Encoding time:51799
+Encoding time:51952
+Encoding time:52172
+Encoding time:51925
+Encoding time:51873
+Encoding time:51824
+Encoding time:51760
+Encoding time:51742
+Encoding time:51725
+Encoding time:51993
+Encoding time:51915
+Encoding time:51743
+Encoding time:51754
+Encoding time:51585
+Encoding time:51846
+Encoding time:51860
+Encoding time:51965
+Encoding time:52090
+Encoding time:51704
+Encoding time:51876
+Encoding time:51752
+Encoding time:51936
+Encoding time:51548
+Encoding time:51811
+Encoding time:51790
+Encoding time:51821
+Encoding time:51774
+Encoding time:52228
+Encoding time:51932
+Encoding time:51754
+Encoding time:51920
+Encoding time:52038
+Encoding time:52006
+Encoding time:52201
+Encoding time:51979
+Encoding time:51840
+Encoding time:51971
+Encoding time:52234
+Encoding time:51995
+Encoding time:52062
+Encoding time:52341
+Encoding time:52116
+Encoding time:52141
+Encoding time:52393
+Encoding time:52109
+Encoding time:52103
+Encoding time:52207
+Encoding time:52010
+Encoding time:51988
+Encoding time:51899
+Encoding time:52034
+Encoding time:52035
+Encoding time:52403
+Encoding time:52171
+Encoding time:52131
+Encoding time:52160
+Encoding time:51887
+Encoding time:51862
+Encoding time:52152
+Encoding time:51833
+Encoding time:51861
+Encoding time:52098
+Encoding time:51987
+Encoding time:51831
+Encoding time:51830
+Encoding time:51888
+Encoding time:51865
+Encoding time:51837
+Encoding time:51887
+Encoding time:52015
+Encoding time:51861
+Encoding time:52358
+Encoding time:52045
+Encoding time:51991
+Encoding time:52020
+Encoding time:52164
+Encoding time:52117
+Encoding time:51990
+Encoding time:52122
+Encoding time:51905
+Encoding time:52026
+Encoding time:52048
+Encoding time:51776
+Encoding time:52038
+Encoding time:51813
+Encoding time:51897
+Encoding time:51851
+Encoding time:52210
+Encoding time:52110
+Encoding time:52106
+Encoding time:52235
+Encoding time:52203
+Encoding time:52067
+Encoding time:52376
+Encoding time:52046
+Encoding time:51967
+Encoding time:51886
+Encoding time:51937
+Encoding time:51936
+Encoding time:52107
+Encoding time:52017
+Encoding time:51978
+Encoding time:51888
+Encoding time:51829
+Encoding time:51964
+Encoding time:51906
+Encoding time:51968
+Encoding time:52187
+Encoding time:52198
+Encoding time:52097
+Encoding time:52038
+Encoding time:51829
+Encoding time:51986
+Encoding time:51910
+Encoding time:52097
+Encoding time:51754
+Encoding time:52052
+Encoding time:52040
+Encoding time:52114
+Encoding time:51941
+Encoding time:51915
+Encoding time:51834
+Encoding time:51915
+Encoding time:52005
+Encoding time:52058
+Encoding time:52115
+Encoding time:52200
+Encoding time:52053
+Encoding time:52037
+Encoding time:52069
+Encoding time:52147
+Encoding time:52195
+Encoding time:52215
+Encoding time:52037
+Encoding time:52054
+Encoding time:51998
+Encoding time:52097
+Encoding time:52116
+Encoding time:52107
+Encoding time:52182
+Encoding time:52040
+Encoding time:52286
+Encoding time:52126
+Encoding time:52381
+Encoding time:52056
+Encoding time:52246
+Encoding time:52156
+Encoding time:52028
+Encoding time:52016
+Encoding time:51924
+Encoding time:52157
+Encoding time:52106
+Encoding time:51985
+Encoding time:51939
+Encoding time:52180
+Encoding time:52120
+Encoding time:52227
+Encoding time:51982
+Encoding time:52061
+Encoding time:52183
+Encoding time:52861
+Encoding time:52233
+Encoding time:52018
+Encoding time:52058
+Encoding time:52073
+Encoding time:52145
+Encoding time:52197
+Encoding time:52522
+Encoding time:52406
+Encoding time:52070
+Encoding time:52157
+Encoding time:52494
+Encoding time:52289
+Encoding time:52105
+Encoding time:51993
+Encoding time:52614
+Encoding time:52084
+Encoding time:52091
+Encoding time:52018
+Encoding time:52335
+Encoding time:52834
+Encoding time:52416
+Encoding time:52542
+Encoding time:52224
+Encoding time:52175
+Encoding time:52048
+Encoding time:52185
+Encoding time:52143
+Encoding time:52323
+Encoding time:52522
+Encoding time:52486
+Encoding time:52443
+Encoding time:52565
+Encoding time:52509
+Encoding time:52002
+Encoding time:52505
+Encoding time:52422
+Encoding time:52280
+Encoding time:52102
+Encoding time:52309
+Encoding time:52618
+Encoding time:52524
+Encoding time:52092
+Encoding time:52069
+Encoding time:52458
+Encoding time:52475
+Encoding time:52344
+Encoding time:52573
+Encoding time:52431
+Encoding time:52452
+Encoding time:52893
+Encoding time:52635
+Encoding time:52218
+Encoding time:52136
+Encoding time:52232
+Encoding time:52507
+Encoding time:52349
+Encoding time:52578
+Encoding time:51970
+Encoding time:52478
+Encoding time:52238
+Encoding time:52147
+Encoding time:52158
+Encoding time:52252
+Encoding time:52032
+Encoding time:52158
+Encoding time:52072
+Encoding time:52431
+Encoding time:52523
+Encoding time:52433
+Encoding time:52326
+Encoding time:52717
+Encoding time:52027
+Encoding time:52194
+Encoding time:52433
+Encoding time:52390
+Encoding time:52285
+Encoding time:52070
+Encoding time:52116
+Encoding time:52325
+Encoding time:52365
+Encoding time:52339
+Encoding time:52449
+Encoding time:52383
+Encoding time:52411
+Encoding time:52377
+Encoding time:52238
+Encoding time:52286
+Encoding time:52119
+Encoding time:52408
+Encoding time:52443
+Encoding time:52353
+Encoding time:52511
+Encoding time:52184
+Encoding time:52143
+Encoding time:52195
+Encoding time:52414
+Encoding time:52472
+Encoding time:52523
+Encoding time:52383
+Encoding time:52563
+Encoding time:52322
+Encoding time:52215
+Encoding time:52500
+Encoding time:52149
+Encoding time:52190
+Encoding time:52170
+Encoding time:52228
+Encoding time:52212
+Encoding time:52396
+Encoding time:52305
+Encoding time:52126
+Encoding time:52148
+Encoding time:52164
+Encoding time:52332
+Encoding time:52103
+Encoding time:52069
+Encoding time:52127
+Encoding time:52249
+Encoding time:52386
+Encoding time:52515
+Encoding time:52251
+Encoding time:52313
+Encoding time:52216
+Encoding time:52194
+Encoding time:52073
+Encoding time:52105
+Encoding time:52157
+Encoding time:52163
+Encoding time:52377
+Encoding time:52461
+Encoding time:52016
+Encoding time:52275
+Encoding time:52138
+Encoding time:52131
+Encoding time:52071
+Encoding time:52160
+Encoding time:52136
+Encoding time:52149
+Encoding time:52198
+Encoding time:52217
+Encoding time:52216
+Encoding time:52111
+Encoding time:52211
+Encoding time:52419
+Encoding time:52164
+Encoding time:52157
+Encoding time:52095
+Encoding time:52160
+Encoding time:52252
+Encoding time:52221
+Encoding time:52186
+Encoding time:52321
+Encoding time:52695
+Encoding time:52194
+Encoding time:52251
+Encoding time:52221
+Encoding time:52278
+Encoding time:52132
+Encoding time:52209
+Encoding time:51994
+Encoding time:52260
+Encoding time:52166
+Encoding time:52452
+Encoding time:52238
+Encoding time:52288
+Encoding time:52305
+Encoding time:52344
+Encoding time:52326
+Encoding time:52288
+Encoding time:52102
+Encoding time:52467
+Encoding time:52220
+Encoding time:52235
+Encoding time:52184
+Encoding time:52151
+Encoding time:52171
+Encoding time:52138
+Encoding time:52297
+Encoding time:52321
+Encoding time:52187
+Encoding time:52169
+Encoding time:52351
+Encoding time:52211
+Encoding time:52318
+Encoding time:52187
+Encoding time:52368
+Encoding time:52337
+Encoding time:52395
+Encoding time:52282
+Encoding time:52329
+Encoding time:52270
+Encoding time:52101
+Encoding time:52163
+Encoding time:52137
+Encoding time:52196
+Encoding time:52120
+Encoding time:52262
+Encoding time:52247
+Encoding time:52469
+Encoding time:52251
+Encoding time:52245
+Encoding time:52150
+Encoding time:52065
+Encoding time:52126
+Encoding time:52128
+Encoding time:52119
+Encoding time:52186
+Encoding time:52222
+Encoding time:52395
+Encoding time:52191
+Encoding time:52297
+Encoding time:52273
+Encoding time:52201
+Encoding time:52406
+Encoding time:52189
+Encoding time:52275
+Encoding time:52201
+Encoding time:52380
+Encoding time:52375
+Encoding time:52154
+Encoding time:52139
+Encoding time:52225
+Encoding time:52201
+Encoding time:52201
+Encoding time:52077
+Encoding time:52126
+Encoding time:52032
+Encoding time:52329
+Encoding time:52168
+Encoding time:52182
+Encoding time:52222
+Encoding time:52247
+Encoding time:52216
+Encoding time:52523
+Encoding time:52322
+Encoding time:52471
+Encoding time:52333
+Encoding time:52477
+Encoding time:52485
+Encoding time:52268
+Encoding time:52100
+Encoding time:52249
+Encoding time:52197
+Encoding time:52181
+Encoding time:52153
+Encoding time:52076
+Encoding time:52321
+Encoding time:52427
+Encoding time:52231
+Encoding time:52222
+Encoding time:52299
+Encoding time:52496
+Encoding time:52270
+Encoding time:52159
+Encoding time:52193
+Encoding time:52126
+Encoding time:52283
+Encoding time:52709
+Encoding time:52447
+Encoding time:52567
+Encoding time:52390
+Encoding time:52241
+Encoding time:52186
+Encoding time:52323
+Encoding time:52171
+Encoding time:52021
+Encoding time:52111
+Encoding time:52331
+Encoding time:52248
+Encoding time:52276
+Encoding time:52183
+Encoding time:52278
+Encoding time:52343
+Encoding time:52295
+Encoding time:52274
+Encoding time:52738
+Encoding time:52158
+Encoding time:52459
+Encoding time:52199
+Encoding time:52192
+Encoding time:52399
+Encoding time:52351
+Encoding time:52302
+Encoding time:52402
+Encoding time:52301
+Encoding time:52322
+Encoding time:52130
+Encoding time:52624
+Encoding time:52377
+Encoding time:52269
+Encoding time:52279
+Encoding time:52356
+Encoding time:52265
+Encoding time:52148
+Encoding time:52397
+Encoding time:52485
+Encoding time:52373
+Encoding time:52566
+Encoding time:52633
+Encoding time:52482
+Encoding time:52699
+Encoding time:52525
+Encoding time:52505
+Encoding time:52634
+Encoding time:52631
+Encoding time:52598
+Encoding time:52501
+Encoding time:52387
+Encoding time:52464
+Encoding time:52420
+Encoding time:52376
+Encoding time:52326
+Encoding time:52194
+Encoding time:52406
+Encoding time:52328
+Encoding time:52173
+Encoding time:52444
+Encoding time:52361
+Encoding time:52375
+Encoding time:52414
+Encoding time:52611
+Encoding time:52262
+Encoding time:52656
+Encoding time:52507
+Encoding time:52227
+Encoding time:52257
+Encoding time:52170
+Encoding time:52511
+Encoding time:52437
+Encoding time:52468
+Encoding time:52458
+Encoding time:52308
+Encoding time:52420
+Encoding time:52323
+Encoding time:52255
+Encoding time:52259
+Encoding time:52175
+Encoding time:52224
+Encoding time:52509
+Encoding time:52320
+Encoding time:52340
+Encoding time:52522
+Encoding time:52556
+Encoding time:52596
+Encoding time:52658
+Encoding time:52788
+Encoding time:52771
+Encoding time:52805
+Encoding time:52664
+Encoding time:52503
+Encoding time:52601
+Encoding time:52762
+Encoding time:52509
+Encoding time:52781
+Encoding time:52529
+Encoding time:52500
+Encoding time:52500
+Encoding time:52509
+Encoding time:52453
+Encoding time:52858
+Encoding time:52821
+Encoding time:52621
+Encoding time:52693
+Encoding time:52576
+Encoding time:52541
+Encoding time:52741
+Encoding time:52702
+Encoding time:52858
+Encoding time:53041
+Encoding time:52565
+Encoding time:52468
+Encoding time:52550
+Encoding time:52766
+Encoding time:52828
+Encoding time:52656
+Encoding time:52540
+Encoding time:52548
+Encoding time:52894
+Encoding time:52501
+Encoding time:52548
+Encoding time:52482
+Encoding time:52579
+Encoding time:52656
+Encoding time:52641
+Encoding time:52599
+Encoding time:52551
+Encoding time:52503
+Encoding time:52683
+Encoding time:52767
+Encoding time:52789
+Encoding time:52418
+Encoding time:52555
+Encoding time:52474
+Encoding time:52553
+Encoding time:52476
+Encoding time:52633
+Encoding time:52614
+Encoding time:52711
+Encoding time:52484
+Encoding time:52564
+Encoding time:52562
+Encoding time:52681
+Encoding time:52662
+Encoding time:52632
+Encoding time:52618
+Encoding time:52673
+Encoding time:52623
+Encoding time:52475
+Encoding time:52456
+Encoding time:52455
+Encoding time:52773
+Encoding time:52492
+Encoding time:52440
+Encoding time:52433
+Encoding time:52557
+Encoding time:52120
+Encoding time:52347
+Encoding time:52349
+Encoding time:52159
+Encoding time:52128
+Encoding time:52176
+Encoding time:52276
+Encoding time:52191
+Encoding time:52289
+Encoding time:52115
+Encoding time:52016
+Encoding time:52331
+Encoding time:52046
+Encoding time:52235
+Encoding time:52547
+Encoding time:52331
+Encoding time:52072
+Encoding time:52302
+Encoding time:52487
+Encoding time:52290
+Encoding time:52632
+Encoding time:52575
+Encoding time:52627
+Encoding time:52806
+Encoding time:52465
+Encoding time:52696
+Encoding time:52844
+Encoding time:52372
+Encoding time:52606
+Encoding time:52504
+Encoding time:52419
+Encoding time:52436
+Encoding time:52774
+Encoding time:52337
+Encoding time:52234
+Encoding time:52222
+Encoding time:52135
+Encoding time:52201
+Encoding time:52163
+Encoding time:52216
+Encoding time:52099
+Encoding time:52012
+Encoding time:52021
+Encoding time:52535
+Encoding time:52435
+Encoding time:52448
+Encoding time:52435
+Encoding time:52540
+Encoding time:52616
+Encoding time:52795
+Encoding time:52798
+Encoding time:52689
+Encoding time:52710
+Encoding time:52667
+Encoding time:52551
+Encoding time:52500
+Encoding time:52454
+Encoding time:52438
+Encoding time:52456
+Encoding time:52148
+Encoding time:52214
+Encoding time:52176
+Encoding time:52196
+Encoding time:52389
+Encoding time:52183
+Encoding time:52105
+Encoding time:52262
+Encoding time:52151
+Encoding time:52228
+Encoding time:52441
+Encoding time:52517
+Encoding time:52806
+Encoding time:52680
+Encoding time:52738
+Encoding time:52808
+Encoding time:52500
+Encoding time:52656
+Encoding time:52651
+Encoding time:52661
+Encoding time:52577
+Encoding time:52513
+Encoding time:52388
+Encoding time:52226
+Encoding time:52347
+Encoding time:52332
+Encoding time:52586
+Encoding time:52788
+Encoding time:52656
+Encoding time:52449
+Encoding time:52621
+Encoding time:52421
+Encoding time:52433
+Encoding time:52449
+Encoding time:52234
+Encoding time:52166
+Encoding time:52203
+Encoding time:52095
+Encoding time:52449
+Encoding time:52688
+Encoding time:52816
+Encoding time:52630
+Encoding time:52388
+Encoding time:52449
+Encoding time:52205
+Encoding time:52144
+Encoding time:52171
+Encoding time:52049
+Encoding time:52189
+Encoding time:52394
+Encoding time:52848
+Encoding time:52778
+Encoding time:52577
+Encoding time:52397
+Encoding time:52475
+Encoding time:52253
+Encoding time:52080
+Encoding time:52094
+Encoding time:52124
+Encoding time:52271
+Encoding time:52338
+Encoding time:52380
+Encoding time:52535
+Encoding time:52618
+Encoding time:52503
+Encoding time:52316
+Encoding time:52045
+Encoding time:52129
+Encoding time:51990
+Encoding time:52312
+Encoding time:52190
+Encoding time:52678
+Encoding time:52634
+Encoding time:52534
+Encoding time:52360
+Encoding time:52271
+Encoding time:52092
+Encoding time:52193
+Encoding time:52044
+Encoding time:52032
+Encoding time:52062
+Encoding time:52548
+Encoding time:52852
+Encoding time:52825
+Encoding time:52683
+Encoding time:52770
+Encoding time:52282
+Encoding time:52113
+Encoding time:51891
+Encoding time:52218
+Encoding time:52301
+Encoding time:52568
+Encoding time:52794
+Encoding time:52617
+Encoding time:52466
+Encoding time:52495
+Encoding time:52378
+Encoding time:52300
+Encoding time:52427
+Encoding time:52255
+Encoding time:52417
+Encoding time:52398
+Encoding time:52106
+Encoding time:52686
+Encoding time:52783
+Encoding time:52551
+Encoding time:52530
+Encoding time:52184
+Encoding time:52187
+Encoding time:51890
+Encoding time:52132
+Encoding time:52276
+Encoding time:52756
+Encoding time:52739
+Encoding time:52465
+Encoding time:52416
+Encoding time:52409
+Encoding time:52290
+Encoding time:52152
+Encoding time:52240
+Encoding time:52253
+Encoding time:52110
+Encoding time:52451
+Encoding time:52822
+Encoding time:52565
+Encoding time:52674
+Encoding time:52515
+Encoding time:52455
+Encoding time:52456
+Encoding time:52624
+Encoding time:52278
+Encoding time:52409
+Encoding time:52108
+Encoding time:52192
+Encoding time:52192
+Encoding time:52362
+Encoding time:53096
+Encoding time:52694
+Encoding time:52685
+Encoding time:52481
+Encoding time:52541
+Encoding time:52256
+Encoding time:52096
+Encoding time:51959
+Encoding time:52500
+Encoding time:52417
+Encoding time:52766
+Encoding time:52483
+Encoding time:52536
+Encoding time:52429
+Encoding time:52291
+Encoding time:52246
+Encoding time:52231
+Encoding time:52205
+Encoding time:52113
+Encoding time:52491
+Encoding time:52677
+Encoding time:52421
+Encoding time:52572
+Encoding time:52421
+Encoding time:52191
+Encoding time:52194
+Encoding time:52219
+Encoding time:52394
+Encoding time:52141
+Encoding time:52481
+Encoding time:52591
+Encoding time:52725
+Encoding time:52451
+Encoding time:52543
+Encoding time:52618
+Encoding time:52338
+Encoding time:52521
+Encoding time:51980
+Encoding time:52165
+Encoding time:52240
+Encoding time:52458
+Encoding time:52507
+Encoding time:52758
+Encoding time:52413
+Encoding time:52330
+Encoding time:52322
+Encoding time:52170
+Encoding time:52130
+Encoding time:52155
+Encoding time:52349
+Encoding time:52820
+Encoding time:52762
+Encoding time:52438
+Encoding time:52315
+Encoding time:52110
+Encoding time:51985
+Encoding time:52321
+Encoding time:52431
+Encoding time:52771
+Encoding time:53145
+Encoding time:52771
+Encoding time:52640
+Encoding time:52375
+Encoding time:52232
+Encoding time:52400
+Encoding time:52232
+Encoding time:52150
+Encoding time:52199
+Encoding time:52164
+Encoding time:52432
+Encoding time:52730
+Encoding time:52645
+Encoding time:52637
+Encoding time:52538
+Encoding time:52365
+Encoding time:52264
+Encoding time:52142
+Encoding time:51995
+Encoding time:52315
+Encoding time:52218
+Encoding time:52708
+Encoding time:52703
+Encoding time:52425
+Encoding time:52366
+Encoding time:52317
+Encoding time:52237
+Encoding time:52333
+Encoding time:52405
+Encoding time:52199
+Encoding time:52416
+Encoding time:52704
+Encoding time:52774
+Encoding time:52619
+Encoding time:52490
+Encoding time:52483
+Encoding time:52055
+Encoding time:52292
+Encoding time:52041
+Encoding time:52407
+Encoding time:52266
+Encoding time:52615
+Encoding time:52796
+Encoding time:52748
+Encoding time:52538
+Encoding time:52496
+Encoding time:52317
+Encoding time:52387
+Encoding time:52074
+Encoding time:52053
+Encoding time:52241
+Encoding time:52286
+Encoding time:52244
+Encoding time:52587
+Encoding time:52734
+Encoding time:52700
+Encoding time:52525
+Encoding time:52591
+Encoding time:52275
+Encoding time:52135
+Encoding time:52152
+Encoding time:52005
+Encoding time:52123
+Encoding time:52399
+Encoding time:52751
+Encoding time:52710
+Encoding time:52602
+Encoding time:52509
+Encoding time:52165
+Encoding time:52143
+Encoding time:52069
+Encoding time:52234
+Encoding time:52275
+Encoding time:52758
+Encoding time:52876
+Encoding time:52711
+Encoding time:52414
+Encoding time:52416
+Encoding time:52267
+Encoding time:52122
+Encoding time:52265
+Encoding time:52088
+Encoding time:52151
+Encoding time:52331
+Encoding time:52825
+Encoding time:52891
+Encoding time:52857
+Encoding time:52720
+Encoding time:52547
+Encoding time:52499
+Encoding time:52311
+Encoding time:52188
+Encoding time:52504
+Encoding time:52176
+Encoding time:52075
+Encoding time:52279
+Encoding time:52265
+Encoding time:52366
+Encoding time:52695
+Encoding time:52450
+Encoding time:52422
+Encoding time:52539
+Encoding time:52497
+Encoding time:52258
+Encoding time:52006
+Encoding time:52122
+Encoding time:52163
+Encoding time:52270
+Encoding time:52419
+Encoding time:52681
+Encoding time:52375
+Encoding time:52287
+Encoding time:52224
+Encoding time:52212
+Encoding time:52037
+Encoding time:51936
+Encoding time:52202
+Encoding time:52269
+Encoding time:52381
+Encoding time:52460
+Encoding time:52412
+Encoding time:52634
+Encoding time:52421
+Encoding time:52433
+Encoding time:52160
+Encoding time:52345
+Encoding time:52117
+Encoding time:52134
+Encoding time:52180
+Encoding time:52821
+Encoding time:52828
+Encoding time:52642
+Encoding time:52518
+Encoding time:52482
+Encoding time:52338
+Encoding time:52453
+Encoding time:52335
+Encoding time:52118
+Encoding time:52038
+Encoding time:52283
+Encoding time:52149
+Encoding time:52693
+Encoding time:52727
+Encoding time:52783
+Encoding time:52427
+Encoding time:52496
+Encoding time:52217
+Encoding time:52007
+Encoding time:52099
+Encoding time:52271
+Encoding time:52154
+Encoding time:52529
+Encoding time:52884
+Encoding time:52716
+Encoding time:52498
+Encoding time:52395
+Encoding time:52029
+Encoding time:52182
+Encoding time:52258
+Encoding time:52312
+Encoding time:52220
+Encoding time:52553
+Encoding time:52511
+Encoding time:52773
+Encoding time:52487
+Encoding time:52225
+Encoding time:52260
+Encoding time:52158
+Encoding time:52029
+Encoding time:52224
+Encoding time:52203
+Encoding time:52383
+Encoding time:52717
+Encoding time:52885
+Encoding time:52699
+Encoding time:52490
+Encoding time:52447
+Encoding time:52181
+Encoding time:52413
+Encoding time:52020
+Encoding time:52077
+Encoding time:52352
+Encoding time:52366
+Encoding time:52861
+Encoding time:52782
+Encoding time:52430
+Encoding time:52525
+Encoding time:52417
+Encoding time:52280
+Encoding time:52303
+Encoding time:52074
+Encoding time:52304
+Encoding time:52353
+Encoding time:52315
+Encoding time:52629
+Encoding time:52484
+Encoding time:52309
+Encoding time:52265
+Encoding time:52079
+Encoding time:52126
+Encoding time:52145
+Encoding time:52213
+Encoding time:52347
+Encoding time:52613
+Encoding time:52594
+Encoding time:52554
+Encoding time:52691
+Encoding time:52493
+Encoding time:52513
+Encoding time:52150
+Encoding time:52306
+Encoding time:52175
+Encoding time:52113
+Encoding time:52069
+Encoding time:52651
+Encoding time:52843
+Encoding time:52544
+Encoding time:52427
+Encoding time:52347
+Encoding time:52358
+Encoding time:52460
+Encoding time:52174
+Encoding time:52451
+Encoding time:52079
+Encoding time:52251
+Encoding time:52606
+Encoding time:52444
+Encoding time:52446
+Encoding time:52613
+Encoding time:52304
+Encoding time:52234
+Encoding time:52164
+Encoding time:52171
+Encoding time:52203
+Encoding time:52444
+Encoding time:52636
+Encoding time:52577
+Encoding time:52440
+Encoding time:52196
+Encoding time:52146
+Encoding time:52246
+Encoding time:52217
+Encoding time:52015
+Encoding time:52329
+Encoding time:52608
+Encoding time:52806
+Encoding time:52460
+Encoding time:52828
+Encoding time:52623
+Encoding time:52425
+Encoding time:52003
+Encoding time:51927
+Encoding time:52349
+Encoding time:51843
+Evaluation @iter 100001 done in 241 secs
+TVL Loss   : 0.02940
+TVL MS-SSIM: 0.95619
+TVL PSNR   : 32.22316
+Training done.

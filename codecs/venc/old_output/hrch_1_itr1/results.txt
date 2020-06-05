@@ -1,0 +1,449 @@
+Namespace(batch_size=2, bits=16, checkpoint_iters=20000, clip=0.5, decoder_fuse_level=3, distance1=3, distance2=3, encoder_fuse_level=2, eval='/home/mallesh/deepvideo/data/vtl/test', eval_batch_size=1, eval_iters=100000, eval_mv='/home/mallesh/deepvideo/data/vtl/test_mv', fuse_encoder=True, gamma=0.5, gpus='0', iterations=1, load_iter=100000, load_model_name='demo', lr=0.00025, max_train_iters=100000, model_dir='../vcodec/h1/model_iters_1', num_crops=2, out_dir='vtl_output/hrch_1_itr1', patch=64, save_codes=True, save_model_name='demo', save_out_img=False, schedule='50000,60000,70000,80000,90000', shrink=2, stack=True, train='/home/mallesh/deepvideo/data/kinetics/train', train_mv='/home/mallesh/deepvideo/data/kinetics/train_mv', v_compress=True, warp=True)
+
+Creating loader for /home/mallesh/deepvideo/data/kinetics/train...
+377536 images loaded.
+	distance=3/3
+Loader for 377536 images (188768 batches) created.
+	Encoder fuse level: 2
+	Decoder fuse level: 3
+	Decoder fuse level: 3
+[EncoderCell(
+  (conv): Conv2d(9, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), hidden_kernel_size=(1, 1))
+), Binarizer(
+  (conv): Conv2d(512, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (sign): Sign()
+), DecoderCell(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), DecoderCell2(
+  (conv1): Conv2d(16, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (rnn1): ConvLSTMCell(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn2): ConvLSTMCell(384, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(1, 1))
+  (rnn3): ConvLSTMCell(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (rnn4): ConvLSTMCell(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), hidden_kernel_size=(3, 3))
+  (conv2): Conv2d(32, 3, kernel_size=(1, 1), stride=(1, 1), bias=False)
+), UNet(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): up(
+    (up): UpsamplingBilinear2d(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+)]
+Loading demo@iter 100000
+Loading encoder from ../vcodec/h1/model_iters_1/demo_encoder_00100000.pth...
+Loading binarizer from ../vcodec/h1/model_iters_1/demo_binarizer_00100000.pth...
+Loading decoder from ../vcodec/h1/model_iters_1/demo_decoder_00100000.pth...
+Loading unet from ../vcodec/h1/model_iters_1/demo_unet_00100000.pth...
+Loading d2 from ../vcodec/h1/model_iters_1/demo_d2_00100000.pth...
+[TRAIN] Iter[100001]; LR: 0.00025; Rec1 Loss: 0.021463; Rec2 Loss: 0.021983; Backprop: 0.0069 sec; Batch: 0.2778 sec
+Start evaluation...
+
+Creating loader for /home/mallesh/deepvideo/data/vtl/test...
+272 images loaded.
+	distance=3/3
+Loader for 272 images (272 batches) created.
+Creating directory vtl_output/hrch_1_itr1/iter100001/codes.
+Creating directory vtl_output/hrch_1_itr1/iter100001/images.
+Encoding time:15022
+Encoding time:14220
+Encoding time:14132
+Encoding time:14163
+Encoding time:14119
+Encoding time:14121
+Encoding time:14129
+Encoding time:14157
+Encoding time:13438
+Encoding time:13399
+Encoding time:13400
+Encoding time:13406
+Encoding time:13397
+Encoding time:13403
+Encoding time:12908
+Encoding time:12863
+Encoding time:12870
+Encoding time:12906
+Encoding time:12881
+Encoding time:12827
+Encoding time:12839
+Encoding time:12847
+Encoding time:12860
+Encoding time:12878
+Encoding time:12864
+Encoding time:12875
+Encoding time:13365
+Encoding time:13625
+Encoding time:13856
+Encoding time:13613
+Encoding time:13215
+Encoding time:13232
+Encoding time:13190
+Encoding time:13198
+Encoding time:13209
+Encoding time:13254
+Encoding time:12596
+Encoding time:12539
+Encoding time:12542
+Encoding time:12562
+Encoding time:12556
+Encoding time:12195
+Encoding time:12205
+Encoding time:12243
+Encoding time:12210
+Encoding time:12225
+Encoding time:11884
+Encoding time:11892
+Encoding time:11928
+Encoding time:11910
+Encoding time:11932
+Encoding time:11802
+Encoding time:11843
+Encoding time:11837
+Encoding time:11805
+Encoding time:11921
+Encoding time:11921
+Encoding time:11821
+Encoding time:11819
+Encoding time:11836
+Encoding time:11822
+Encoding time:11749
+Encoding time:11845
+Encoding time:11796
+Encoding time:11805
+Encoding time:11752
+Encoding time:11762
+Encoding time:11753
+Encoding time:11746
+Encoding time:11753
+Encoding time:11794
+Encoding time:11765
+Encoding time:12458
+Encoding time:12759
+Encoding time:12884
+Encoding time:12698
+Encoding time:12708
+Encoding time:13121
+Encoding time:13429
+Encoding time:13661
+Encoding time:13394
+Encoding time:12983
+Encoding time:12944
+Encoding time:12923
+Encoding time:12942
+Encoding time:12942
+Encoding time:12939
+Encoding time:12952
+Encoding time:12914
+Encoding time:12941
+Encoding time:12945
+Encoding time:12999
+Encoding time:12326
+Encoding time:12334
+Encoding time:12257
+Encoding time:12322
+Encoding time:12283
+Encoding time:12335
+Encoding time:12272
+Encoding time:12330
+Encoding time:12350
+Encoding time:12331
+Encoding time:12265
+Encoding time:12576
+Encoding time:12973
+Encoding time:13336
+Encoding time:13132
+Encoding time:13128
+Encoding time:13146
+Encoding time:13687
+Encoding time:13997
+Encoding time:14156
+Encoding time:13899
+Encoding time:13468
+Encoding time:13457
+Encoding time:13500
+Encoding time:13500
+Encoding time:13477
+Encoding time:13490
+Encoding time:12911
+Encoding time:12907
+Encoding time:12831
+Encoding time:12843
+Encoding time:12831
+Encoding time:12848
+Encoding time:12836
+Encoding time:12832
+Encoding time:12827
+Encoding time:12847
+Encoding time:12905
+Encoding time:12581
+Encoding time:12536
+Encoding time:12549
+Encoding time:12543
+Encoding time:12539
+Encoding time:12104
+Encoding time:12072
+Encoding time:12101
+Encoding time:12112
+Encoding time:12148
+Encoding time:11752
+Encoding time:11753
+Encoding time:11770
+Encoding time:11757
+Encoding time:11803
+Encoding time:11781
+Encoding time:11771
+Encoding time:11768
+Encoding time:11762
+Encoding time:11808
+Encoding time:11763
+Encoding time:11760
+Encoding time:11779
+Encoding time:11748
+Encoding time:11823
+Encoding time:11793
+Encoding time:12631
+Encoding time:12979
+Encoding time:13083
+Encoding time:12859
+Encoding time:12847
+Encoding time:12782
+Encoding time:12750
+Encoding time:12797
+Encoding time:12776
+Encoding time:12396
+Encoding time:12375
+Encoding time:12347
+Encoding time:12357
+Encoding time:12367
+Encoding time:12181
+Encoding time:14192
+Encoding time:12169
+Encoding time:12203
+Encoding time:12233
+Encoding time:12264
+Encoding time:12198
+Encoding time:12219
+Encoding time:12182
+Encoding time:12226
+Encoding time:12191
+Encoding time:12434
+Encoding time:12895
+Encoding time:13123
+Encoding time:12935
+Encoding time:12992
+Encoding time:13126
+Encoding time:13486
+Encoding time:13835
+Encoding time:14059
+Encoding time:13786
+Encoding time:13218
+Encoding time:13219
+Encoding time:13217
+Encoding time:13203
+Encoding time:13246
+Encoding time:13199
+Encoding time:13200
+Encoding time:13210
+Encoding time:13210
+Encoding time:13220
+Encoding time:13200
+Encoding time:12827
+Encoding time:12767
+Encoding time:12762
+Encoding time:12783
+Encoding time:12782
+Encoding time:12767
+Encoding time:12778
+Encoding time:12756
+Encoding time:12774
+Encoding time:12768
+Encoding time:12777
+Encoding time:12468
+Encoding time:12399
+Encoding time:12405
+Encoding time:12376
+Encoding time:12391
+Encoding time:11961
+Encoding time:11979
+Encoding time:11945
+Encoding time:11975
+Encoding time:11968
+Encoding time:11763
+Encoding time:11745
+Encoding time:11838
+Encoding time:11821
+Encoding time:11781
+Encoding time:11816
+Encoding time:11795
+Encoding time:11731
+Encoding time:11760
+Encoding time:11766
+Encoding time:11788
+Encoding time:12573
+Encoding time:12906
+Encoding time:12977
+Encoding time:12765
+Encoding time:12775
+Encoding time:13194
+Encoding time:13525
+Encoding time:13749
+Encoding time:13480
+Encoding time:13039
+Encoding time:12921
+Encoding time:12940
+Encoding time:12929
+Encoding time:12942
+Encoding time:12937
+Encoding time:12949
+Encoding time:12922
+Encoding time:12951
+Encoding time:12929
+Encoding time:12980
+Encoding time:12251
+Encoding time:12237
+Encoding time:12230
+Encoding time:12240
+Encoding time:12241
+Encoding time:11852
+Encoding time:11849
+Encoding time:11850
+Encoding time:11772
+Encoding time:11877
+Encoding time:11916
+Encoding time:11874
+Encoding time:11853
+Encoding time:11838
+Encoding time:11672
+Encoding time:11661
+Encoding time:12296
+Encoding time:12546
+Evaluation @iter 100001 done in 44 secs
+TVL Loss   : 0.03887
+TVL MS-SSIM: 0.90857
+TVL PSNR   : 31.50787
+Training done.

@@ -34,7 +34,6 @@ def get_loader(is_train, root, mv_dir, args):
 
 
 def default_loader(path):
-    #print(path)
     cv2_img = cv2.imread(path)
     if cv2_img is None:
         print (path, cv2_img)

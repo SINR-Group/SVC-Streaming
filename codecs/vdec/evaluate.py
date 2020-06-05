@@ -54,8 +54,8 @@ def finish_batch(args, filenames, original, out_imgs,
       if args.save_out_img:
         save_output_images(
           os.path.join(args.in_dir, 'cframes', filename),
-          eccv_out_imgs[:, ex_idx, :, :, :]
-          #out_imgs[:, ex_idx, :, :, :]
+          #eccv_out_imgs[:, ex_idx, :, :, :]
+          out_imgs[:, ex_idx, :, :, :]
         )
         #save_eccv_output_images(
         #  os.path.join(args.out_dir, output_suffix, 'eccv', filename),
