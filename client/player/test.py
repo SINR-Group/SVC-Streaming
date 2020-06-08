@@ -4,8 +4,8 @@ import sys
 import downloader
 import argparse
 
-url = "http://130.245.144.152:5000/video/output.mpd"
-# url = "http://130.245.144.102:5000/video1/dash_tiled.mpd"
+#url = "http://130.245.144.152:5000/video/output.mpd"
+url = "http://130.245.144.102:5000/video1/dash_tiled.mpd"
 currDir = os.getcwd()
 
 parser = argparse.ArgumentParser(description ='Search some files')
