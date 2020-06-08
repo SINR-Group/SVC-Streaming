@@ -86,7 +86,7 @@ parser.add_argument('--save-codes', action='store_true',
                     help='If true, write compressed codes during eval.')
 parser.add_argument('--save-out-img', action='store_true',
                     help='If true, save output images during eval.')
-parser.add_argument('--checkpoint-iters', type=int, default=5000,
+parser.add_argument('--checkpoint-iters', type=int, default=10000,
                     help='Model checkpoint period.')
 parser.add_argument('--eval-iters', type=int, default=10000,
                     help='Evaluation period.')

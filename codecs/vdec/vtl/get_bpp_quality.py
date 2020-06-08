@@ -71,4 +71,5 @@ for itr in iters:
         line = line.strip().split(' ')
         psnr.append(float(line[0]))
         ssim.append(float(line[1]))
-    print ('iteration:', itr, '\tbpp:', np.mean(bpp_itr), 'bitrate:', np.mean(sizes)/3.23, '\tpsnr:', np.mean(psnr), '\tmsssim:', np.mean(ssim))
+    #print ('iteration:', itr, '\tbpp:', np.mean(bpp_itr), 'bitrate:', np.mean(sizes)/3.23, '\tpsnr:', np.mean(psnr), '\tmsssim:', np.mean(ssim))
+    print (np.mean(bpp_itr), np.mean(ssim))

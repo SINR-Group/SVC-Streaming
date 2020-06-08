@@ -11,10 +11,8 @@ outdir=$5
 
 train="/home/mallesh/deepvideo/data/dhf1k/train"
 eval="/home/mallesh/deepvideo/data/vtl/test"
-#eval="/home/mallesh/deepvideo/data/dhf1k/eval"
 train_mv="/home/mallesh/deepvideo/data/dhf1k/train_mv"
 eval_mv="/home/mallesh/deepvideo/data/vtl/test_mv"
-#eval_mv="/home/mallesh/deepvideo/data/dhf1k/eval_mv"
 
 if [[ ${hier} == "0" ]]; then
   distance1=6

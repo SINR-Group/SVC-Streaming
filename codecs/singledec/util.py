@@ -221,7 +221,7 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
                                                                       width,
                                                                       args)
 
-    (_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_rnn(batch_size,height,width,args)
+    '''(_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_rnn(batch_size,height,width,args)'''
 
     original = res.data.cpu().numpy() + 0.5
 
@@ -252,8 +252,13 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
 
     codes = []
     prev_psnr = 0.0
-    code_arr=[]
-    for _ in range(iterations):
+    #code_arr=[]
+
+    b,d,h,w= batch_size, args.bits, height//16, width//16
+    code_arr=[torch.zeros(b,d,h,w).cuda() for i in range(args.iterations)]
+    #cum_output_dd = torch.zeros(1, 3, height, width)
+
+    for i in range(iterations):
 
         if args.v_compress and args.stack:
             encoder_input = torch.cat([frame1, res, frame2], dim=1)
@@ -267,7 +272,9 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
 
         # Binarize.
         code = binarizer(encoded)
-        code_arr.append(code)
+        #code_arr=[torch.zeros(b,d,h,w).cuda() for j in range(args.iterations)]
+        code_arr[i] =code
+        #code_arr.append(code)
         #if args.save_codes:
         #    codes.append(code.data.cpu().numpy())
 
@@ -281,18 +288,18 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
         #out_imgs.append(out_img_np)
         #losses.append(float(res.abs().mean().data.cpu().numpy()))
 
-    b,d,h,w= code.shape
-    code = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
-    (output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
-            code, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
-            dec_unet_output1, dec_unet_output2)
-    if args.save_codes:
-        codes.append(code.data.cpu().numpy())
+        (d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_d2(batch_size,height,width,args)
+        code_d2 = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
+        (output_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
+                code_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
+                dec_unet_output1, dec_unet_output2)
+        if args.save_codes:
+            codes.append(code_d2.data.cpu().numpy())
 
-    out_img = out_img + output.data.cpu()
-    out_img_np = out_img.numpy().clip(0, 1)
-    out_imgs.append(out_img_np)
-    losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))
+        out_img_new = out_img + output_d2.data.cpu()
+        out_img_np = out_img_new.numpy().clip(0, 1)
+        out_imgs.append(out_img_np)
+        losses.append(float((in_img - output_d2).abs().mean().data.cpu().numpy()))
 
     return original, np.array(out_imgs), np.array(losses), np.array(codes)
 
@@ -415,4 +422,28 @@ def init_lstm(batch_size, height, width, args):
     return (encoder_h_1, encoder_h_2, encoder_h_3, 
             decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4)
 
+def init_d2(batch_size, height, width, args):
 
+    decoder_h_1 = (Variable(
+        torch.zeros(batch_size, 512, height // 16, width // 16)),
+                   Variable(
+                       torch.zeros(batch_size, 512, height // 16, width // 16)))
+    decoder_h_2 = (Variable(
+        torch.zeros(batch_size, 512, height // 8, width // 8)),
+                   Variable(
+                       torch.zeros(batch_size, 512, height // 8, width // 8)))
+    decoder_h_3 = (Variable(
+        torch.zeros(batch_size, 256, height // 4, width // 4)),
+                   Variable(
+                       torch.zeros(batch_size, 256, height // 4, width // 4)))
+    decoder_h_4 = (Variable(
+        torch.zeros(batch_size, 256 if False else 128, height // 2, width // 2)),
+                   Variable(
+                       torch.zeros(batch_size, 256 if False else 128, height // 2, width // 2)))
+
+    decoder_h_1 = (decoder_h_1[0].cuda(), decoder_h_1[1].cuda())
+    decoder_h_2 = (decoder_h_2[0].cuda(), decoder_h_2[1].cuda())
+    decoder_h_3 = (decoder_h_3[0].cuda(), decoder_h_3[1].cuda())
+    decoder_h_4 = (decoder_h_4[0].cuda(), decoder_h_4[1].cuda())
+
+    return (decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4)

@@ -1,7 +1,7 @@
 import os
 
-iters = [i for i in range(1, 11)]
-hrch = [i for i in range(3)]
+iters = [i for i in range(1, 2)]
+hrch = [i for i in range(1)]
 
 for itr in iters:
     if not os.path.exists('vtl/output_'+str(itr)):

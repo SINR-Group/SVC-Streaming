@@ -153,7 +153,7 @@ def get_prev_models(prev_levels=0, index=20000):
 
     return en, bn, un
 
-en, bn, un = get_prev_models(args.prev_levels, 20000)
+en, bn, un = get_prev_models(args.prev_levels, 100000)
 
 current_level = args.prev_levels
 
@@ -172,10 +172,11 @@ while True:
 
     for batch, (crops, ctx_frames, _) in enumerate(train_loader):
         scheduler.step()
-        train_iter += 1
 
         if train_iter > args.max_train_iters:
           break
+
+        train_iter += 1
 
         batch_t0 = time.time()
 
@@ -303,6 +304,7 @@ while True:
             set_train(nets)
             just_resumed = False
 
+    print ('batch complete\n')
 
     if train_iter > args.max_train_iters:
       print('Training done.')

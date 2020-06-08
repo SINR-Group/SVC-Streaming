@@ -63,7 +63,7 @@ if len(gpus) > 1:
 
 params = [{'params': net.parameters()} for net in nets]
 
-code.interact(local=locals()) ########
+#code.interact(local=locals()) ########
 
 solver = optim.Adam(
     params,

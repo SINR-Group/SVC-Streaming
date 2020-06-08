@@ -42,6 +42,7 @@ fi
 # (for the demo data it's okay.)
 
 
+#python3 -u train.py \
 python -u train.py \
   --train ${train} \
   --eval ${eval} \
@@ -58,7 +59,3 @@ python -u train.py \
   --model-dir "model" \
   --save-model-name "kinetics_l0" \
   --batch-size 4
-  #--schedule "10000,12000,14000,16000,18000" 
-
-    #--load-model-name "demo" \
-    #--load-iter 20000 \
