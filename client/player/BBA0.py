@@ -11,7 +11,7 @@ class BBA0(abr):
 		# self.buffer = 0
 	
 
-	def repIdForNextSegment(self, playerStats):
+	def getNextBitrate(self, playerStats):
 		# implements BBA0 algorithm from paper
 
 		currBuffer = playerStats["currBuffer"]
@@ -60,12 +60,12 @@ class BBA0(abr):
 			rateNext = rMax
 		elif funCurrBuffer >= ratePlus:
 			for i in range(len(bitrates) - 1 , -1 , -1):
-				if bitrates[i] < funCurrBuffer:
+				if bitrates[i] <= funCurrBuffer:
 					rateNext = bitrates[i]
 					break
 		elif funCurrBuffer <= rateMinus:
 			for i in range(len(bitrates)):
-				if bitrates[i] > funCurrBuffer:
+				if bitrates[i] >= funCurrBuffer:
 					rateNext = bitrates[i]
 					break
 		else:
@@ -73,8 +73,8 @@ class BBA0(abr):
 		
 		self.ratePrev = rateNext
 
-
-		return self.getCorrespondingRepId(rateNext)
+		return rateNext
+		# return self.getCorrespondingRepId(rateNext)
 
 
 	def fCurrBuffer(self, currBuffer, step, rateMap):

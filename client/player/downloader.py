@@ -6,7 +6,8 @@ import math
 import time
 import sys
 import threading
-from BBA0 import BBA0 
+from BBA0 import BBA0
+from Bola import Bola
 from abr import abr 
 from queue import Queue
 
@@ -37,6 +38,7 @@ def extractCodes(segment):
 
 class client:
 	def __init__(self, args):
+		self.args = args
 		baseUrl, filename = os.path.split(args.url)
 		
 		print(baseUrl)
@@ -53,7 +55,7 @@ class client:
 
 
 		mpdContent = downloadFile(args.url)
-		saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
+		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
 
 		self.currentSegment = 0
 		self.manifestData = mpdparser.ManifestParser(mpdContent)
@@ -71,8 +73,18 @@ class client:
 
 		if args.abr == "BBA0":
 			self.abr = BBA0(self.manifestData)
+		elif args.abr == 'Bola':
+			self.abr = Bola(self.manifestData, args)
 		else:
 			self.abr = abr(self.manifestData)
+
+		self.perf_param = {}
+		self.perf_param['bitrate_change'] = []
+		self.perf_param['prev_rate'] = 0
+		self.perf_param['change_count'] = 0
+		self.perf_param['rebuffer_time'] = 0.0
+		self.perf_param['avg_bitrate'] = 0.0
+		self.perf_param['avg_bitrate_change'] = 0.0
 
 
 
@@ -97,11 +109,11 @@ class client:
 
 
 	
-	def fetchNextSegment(self, repId = 0):
+	def fetchNextSegment(self, bitrate = 0):
 		# downloads next required segment from server with repId representation ID 
 		# and return true if successfully downloaded
 
-		if not repId:
+		if not bitrate:
 			return
 		adp_set = self.manifestData.mpd.periods[0].adaptation_sets[0]
 
@@ -109,10 +121,10 @@ class client:
 		segmentDuration = 0
 
 		for rep in adp_set.representations:
-			# print("rep id {} {}, received parameter {} {}".format(rep.id,type(rep.id), repId, type(repId)))
-			if rep.id == repId:
+			# print("rep id {} {}, received parameter {} {}".format(rep.bandwidth,type(rep.bandwidth), bitrate, type(bitrate)))
+			if rep.bandwidth == bitrate:
 				fName = rep.media.replace("$Number$",str(self.currentSegment + 1))
-				# print("fName:{}".format(fName))
+				print("fName:{}".format(fName))
 				segmentDuration = rep.duration / rep.timescale
 				break
 				
@@ -124,12 +136,21 @@ class client:
 		if data is not None:
 			self.lastDownloadTime = endTime - startTime
 			self.lastDownloadSize = sys.getsizeof(data)
-
+			
 			self.segmentQueue.put(fName)
 			print("Downloaded segment:[{}]".format(fName))
 
-			saveFile(self.destination, fName, data)
+			# saveFile(self.destination, fName, data)
+			
+			# QOE parameters update 
+			self.perf_param['bitrate_change'].append((self.currentSegment + 1,  bitrate))
+			self.perf_param['avg_bitrate'] += bitrate
+			self.perf_param['avg_bitrate_change'] += abs(bitrate - self.perf_param['prev_rate'])
 
+			if not self.perf_param['prev_rate'] or self.perf_param['prev_rate'] != bitrate:
+				self.perf_param['prev_rate'] = bitrate
+				self.perf_param['change_count'] += 1
+			
 			self.currentSegment += 1
 
 			with self.lock:
@@ -151,6 +172,14 @@ class client:
 
 		return (self.lastDownloadSize * 8.0 ) / self.lastDownloadTime
 
+	def getCorrespondingRepId(self, bitrate):
+		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
+		
+		for rep in adpSet.representations:
+			if int(rep.bandwidth) == bitrate:
+				return rep.id
+		
+		return -1 #states no representation with given bitrate found
 
 	def segmentDownloadThread(self):
 		# thread to continuously downloads next segment based on selected abr rule.
@@ -165,11 +194,12 @@ class client:
 			playerStats = {}
 			playerStats["lastTput"] = self.lastSegmentThroughput()
 			playerStats["currBuffer"] = currBuff
+			# playerStats['empty_buffer_size'] = self.args.bufferSize - currBuff
 
 			if self.totalBuffer - currBuff >= segmentDuration:
-				repId = self.abr.repIdForNextSegment(playerStats)
-				print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, repId))
-				if not self.fetchNextSegment(repId):
+				rateNext = self.abr.getNextBitrate(playerStats)
+				# print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, rateNext))
+				if not self.fetchNextSegment(rateNext):
 					break
 			else:
 				time.sleep(0.5)
@@ -179,12 +209,25 @@ class client:
 
 	def playThread(self):
 		# thread to play decoded frames received from decoder
-
+		
+		# this flag is to mark start of play back.
+		playback_started = False
 		while True:
+
+			rebuff_start = time.time()
 			frame = self.frameQueue.get()
+			rebuff_end = time.time()
+
 			if frame == "done":
 				print("played all frames")
 				break
+			
+			if not playback_started:
+				playback_started = True
+				self.perf_param['startup_delay'] = time.time()
+			else:
+				self.perf_param['rebuffer_time'] += (rebuff_end - rebuff_start)
+
 			time.sleep(2)
 			with self.lock:
 				self.currBuffer -= 2
@@ -220,6 +263,9 @@ class client:
 		downt.join()
 		dect.join()
 		pt.join()
+
+		self.perf_param['avg_bitrate'] /= self.totalSegments
+		self.perf_param['avg_bitrate_change'] /= (self.totalSegments - 1)
 
 
 

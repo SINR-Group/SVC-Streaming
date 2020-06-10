@@ -8,26 +8,42 @@ class abr:
 	
 	# estimates representation id for next segment to be downloaded on the basis
 	# throughPut(tput) of last downloaded segment
-	def repIdForNextSegment(self, playerStats):
+	def getNextBitrate(self, playerStats):
 
 		tput = playerStats["lastTput"]
+		
+		bitrateList = self.getBitrateList()
+		bitrateList = sorted(bitrateList)
+		rateNext = bitrateList[0]
+		
+		# tput will be 0 for very first segment
 
 		if not tput:
-			return 1
-		
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
+			return rateNext
 
-		repId = 1
-		for rep in adpSet.representations:
-			if rep.bandwidth > tput:
-				repId = rep.id - 1
+		for bt in bitrateList:
+			if bt <= tput:
+				rateNext = bt
+			else:
 				break
-			repId = rep.id
+			
+		return rateNext
+
+		# adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
+
+		# repId = 1
 		
-		if repId >= 1:
-			return repId
-		else:
-			return 1
+		# for rep in adpSet.representations:
+		# 	if rep.bandwidth > tput:
+		# 		repId = rep.id - 1
+		# 		rateNext
+		# 		break
+		# 	repId = rep.id
+		
+		# if repId >= 1:
+		# 	return repId
+		# else:
+		# 	return 1
 	
 	def getBitrateList(self):
 		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
