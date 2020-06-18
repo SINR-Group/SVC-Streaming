@@ -5,6 +5,7 @@ import os
 import math
 import time
 import sys
+import json
 import threading
 from BBA0 import BBA0
 from Bola import Bola
@@ -54,11 +55,13 @@ class client:
 			print(err)
 
 
-		mpdContent = downloadFile(args.url)
+		# mpdContent = downloadFile(args.url)
 		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
+		self.video_properties = json.loads(downloadFile(self.baseUrl+'/'+'video_properties.json'))
 
-		self.currentSegment = 0
-		self.manifestData = mpdparser.ManifestParser(mpdContent)
+		self.currentSegment = self.video_properties['start_number'] - 1
+
+		# self.manifestData = mpdparser.ManifestParser(mpdContent)
 		self.lastDownloadSize = self.lastDownloadTime = -1
 
 		self.totalSegments = self.getTotalSegments()
@@ -72,11 +75,14 @@ class client:
 		self.frameQueue = Queue(maxsize=0)
 
 		if args.abr == "BBA0":
-			self.abr = BBA0(self.manifestData)
+			self.abr = BBA0(self.video_properties, args)
 		elif args.abr == 'Bola':
-			self.abr = Bola(self.manifestData, args)
+			self.abr = Bola(self.video_properties, args)
+		elif args.abr == 'tputRule':
+			self.abr = abr(self.video_properties, args)
 		else:
-			self.abr = abr(self.manifestData)
+			print("Error!! No right rule specified")
+			return
 
 		self.perf_param = {}
 		self.perf_param['bitrate_change'] = []
@@ -90,22 +96,11 @@ class client:
 
 	def getDuration(self):
 		# return total duration from manifest file
-
-		dur = self.manifestData.mpd.periods[0].duration
-		print("media duration:{}".format(dur))
-		return dur
+		return self.video_properties['total_duration']
 	
 	def getTotalSegments(self):
 		# calculates total number of video segments from manifest file
-
-		ret = 0.0
-		rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
-
-		ret = math.ceil((1.0 * self.getDuration() * rep.timescale) / rep.duration)
-		print("totalSegments:[{}], rep ID [{}], rep timeScale [{}] rep duration [{}]".format(ret, rep.id, 
-				rep.timescale, rep.duration))
-
-		return ret
+		return self.video_properties['total_segments']
 
 
 	
@@ -115,17 +110,17 @@ class client:
 
 		if not bitrate:
 			return
-		adp_set = self.manifestData.mpd.periods[0].adaptation_sets[0]
 
 		fName = None
 		segmentDuration = 0
+		fName = self.video_properties['media'] 
 
-		for rep in adp_set.representations:
+		for i, b in enumerate(self.video_properties['bitrates']):
 			# print("rep id {} {}, received parameter {} {}".format(rep.bandwidth,type(rep.bandwidth), bitrate, type(bitrate)))
-			if rep.bandwidth == bitrate:
-				fName = rep.media.replace("$Number$",str(self.currentSegment + 1))
+			if b == bitrate:
+				fName = fName.replace("$REPID$",str(i+1)).replace("$Number$",str(self.currentSegment + 1))
 				print("fName:{}".format(fName))
-				segmentDuration = rep.duration / rep.timescale
+				segmentDuration = self.video_properties['duration'] / self.video_properties['timescale']
 				break
 				
 
@@ -164,20 +159,20 @@ class client:
 		return ret
 		
 	
-	def lastSegmentThroughput(self):
+	def lastSegmentThroughput_kbps(self):
 		# returns throughput value of last segment downloaded in bits/seconds
 
-		if self.currentSegment == 0:
+		if self.currentSegment == self.video_properties['start_number'] - 1:
 			return 0
+		# returns kilobits per second
+		return (self.lastDownloadSize * 0.008 ) / self.lastDownloadTime
 
-		return (self.lastDownloadSize * 8.0 ) / self.lastDownloadTime
 
 	def getCorrespondingRepId(self, bitrate):
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
 		
-		for rep in adpSet.representations:
-			if int(rep.bandwidth) == bitrate:
-				return rep.id
+		for i,b in enumerate(self.video_properties['bitrates']):
+			if b == bitrate:
+				return i + 1
 		
 		return -1 #states no representation with given bitrate found
 
@@ -188,12 +183,12 @@ class client:
 			with self.lock:
 				currBuff = self.currBuffer
 			
-			rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
-			segmentDuration = rep.duration / rep.timescale
+			segmentDuration = self.video_properties['duration'] / self.video_properties['timescale']
 
 			playerStats = {}
-			playerStats["lastTput"] = self.lastSegmentThroughput()
+			playerStats["lastTput_kbps"] = self.lastSegmentThroughput_kbps()
 			playerStats["currBuffer"] = currBuff
+			playerStats["segment_Idx"] = self.currentSegment + 1
 			# playerStats['empty_buffer_size'] = self.args.bufferSize - currBuff
 
 			if self.totalBuffer - currBuff >= segmentDuration:

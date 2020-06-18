@@ -2,8 +2,8 @@ from abr import abr
 		
 class BBA0(abr):
 
-	def __init__(self, manifestData):
-		super(BBA0, self).__init__(manifestData)
+	def __init__(self, video_properties, args):
+		super(BBA0, self).__init__(video_properties, args)
 		self.reservoir = 8
 		self.cushion = 46
 
@@ -74,7 +74,6 @@ class BBA0(abr):
 		self.ratePrev = rateNext
 
 		return rateNext
-		# return self.getCorrespondingRepId(rateNext)
 
 
 	def fCurrBuffer(self, currBuffer, step, rateMap):
