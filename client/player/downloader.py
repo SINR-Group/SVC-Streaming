@@ -9,6 +9,7 @@ import json
 import threading
 from BBA0 import BBA0
 from Bola import Bola
+from MPC import MPC
 from abr import abr 
 from queue import Queue
 
@@ -80,6 +81,8 @@ class client:
 			self.abr = Bola(self.video_properties, args)
 		elif args.abr == 'tputRule':
 			self.abr = abr(self.video_properties, args)
+		elif args.abr == 'MPC':
+			self.abr = MPC(self.video_properties, args)
 		else:
 			print("Error!! No right rule specified")
 			return
@@ -178,8 +181,8 @@ class client:
 
 	def segmentDownloadThread(self):
 		# thread to continuously downloads next segment based on selected abr rule.
-
-		while self.currentSegment < self.totalSegments:
+		while self.currentSegment < 50:
+		# while self.currentSegment < self.totalSegments:
 			with self.lock:
 				currBuff = self.currBuffer
 			
