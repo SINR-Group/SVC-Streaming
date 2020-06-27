@@ -6,7 +6,8 @@ import argparse
 import pprint as pp
 
 # url = "http://130.245.144.152:5000/video/output.mpd"
-url = "http://130.245.144.152:5000/video1/dash_tiled.mpd"
+# url = "http://130.245.144.152:5000/video1/dash_tiled.mpd"
+url = 'http://130.245.144.152:5000/video1/video_properties.json'
 # url = "http://130.245.144.102:5000/video1/dash_tiled.mpd"
 
 currDir = os.getcwd()

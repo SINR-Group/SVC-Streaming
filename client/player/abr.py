@@ -43,3 +43,6 @@ class abr:
 
 	def getSegmentDuration(self):
 		return self.video_properties['duration'] / self.video_properties['timescale']
+	
+	def getTotalSegments(self):
+		return self.video_properties['total_segments']

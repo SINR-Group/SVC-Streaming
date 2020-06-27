@@ -7,7 +7,7 @@ import time
 MPC_STARTUP_STATE = "startup"
 MPC_STEADY_STATE = "steady"
 
-look_ahead_segments = 2
+look_ahead_segments = 5
 keep_past_segment = 5
 
 # bitrate combinations for look_ahead_segments. will be used to calculate QOE.
@@ -21,18 +21,15 @@ class MPC(abr):
     def __init__(self, manifestData, video_properties):
         super(MPC, self).__init__(manifestData, video_properties)
         print('USING MPC abr')
-        self.prev_tput_pred = deque()
-        self.prev_tput_observed = deque()
+        self.prev_tput_pred = []
+        self.prev_tput_observed = []
+        self.prev_error = []
         self.state = MPC_STEADY_STATE
         self.prev_bitrate = 0
 
     
     def getNextBitrate(self, playerStats):
-        if playerStats['lastTput_kbps']:
-            self.prev_tput_observed.append(playerStats['lastTput_kbps'])
-
-        if len(self.prev_tput_observed) > keep_past_segment:
-            self.prev_tput_observed.popleft()
+        self.prev_tput_observed.append(playerStats['lastTput_kbps'])
         
         tput_pred = self.throughput_pred()
 
@@ -54,23 +51,28 @@ class MPC(abr):
             curr_qoe = 0
             curr_buffer = buffer_level
             seg_idx = segment_idx
-            last_bitrate = prev_bitrate
+            last_bitrate = prev_bitrate * 0.001
 
             for i, b in enumerate(combo):
-                curr_bitrate = self.video_properties['bitrates'][b]
-                segment_size = self.video_properties['segment_size_bytes'][seg_idx][b]
+                curr_bitrate = self.video_properties['bitrates'][b] * 0.001 # since curr_bitrate is in bits per sec
+                # segment_size = self.video_properties['segment_size_bytes'][seg_idx][b]
+                segment_size = curr_bitrate * 2 * 125
                 download_time = segment_size / (tput_pred * 125) # convert kilobits per sec to bytes per second 1000/8
-                # print('size:{}, downloadtime:{}, tput:{}'.format(segment_size, download_time, tput_pred))
+                print('size:{}, downloadtime:{}, tput:{}'.format(segment_size, download_time, tput_pred))
                 rebuf_time =  download_time - curr_buffer
                 
-                curr_buffer += (self.getSegmentDuration() - download_time)
+                curr_buffer -= download_time
+                if curr_buffer < 0:
+                    curr_buffer = 0.0
 
-                curr_qoe += curr_bitrate
+                curr_buffer += self.getSegmentDuration()
+
+                curr_qoe += curr_bitrate 
                 curr_qoe -= (LAMBDA * abs(last_bitrate - curr_bitrate))
                 curr_qoe -= (MU * rebuf_time)
 
                 last_bitrate = curr_bitrate
-            
+            # print('combo:{} score:{}'.format(combo, curr_qoe))
             if curr_qoe > max_qoe:
                 max_qoe = curr_qoe
                 best_bitrate = self.video_properties['bitrates'][combo[0]]
@@ -83,29 +85,31 @@ class MPC(abr):
         # basic MPC - throughput prediction from paper by harmonic mean
         
         rev_sum = 0.0
-        for a in self.prev_tput_observed:
+        rev_count = 0
+        last_N_tput = self.prev_tput_observed[-5:]
+
+        for a in last_N_tput:
             if a != 0:
+                rev_count += 1
                 rev_sum += (1/a)
         print('observed:{}'.format(self.prev_tput_observed))
         print('pred:{}'.format(self.prev_tput_pred))
 
-        try:        
-            harmonic_mean = len(self.prev_tput_observed) / rev_sum
-            max_error = -1.0
-            
-            for i in range(len(self.prev_tput_observed)):
-                max_error = max(abs(self.prev_tput_observed[i] - self.prev_tput_pred[i]), max_error)
-            
-            # robust MPC- lower bound for tput from harmonic mean
-            next_tput = harmonic_mean / (1 + max_error)
+        harmonic_mean = 0
+        if rev_sum != 0:
+            harmonic_mean = rev_count / rev_sum
 
-        except ZeroDivisionError:
-            next_tput = 214.0
+        max_error = 0
+
+        if len(self.prev_tput_pred) > 0:
+            error = abs(self.prev_tput_observed[-1] - self.prev_tput_pred[-1]) / self.prev_tput_observed[-1]
+            self.prev_error.append(error)
+            max_error = max(self.prev_error[-5:])
+
+        # robust MPC- lower bound for tput from harmonic mean
+        next_tput = harmonic_mean / (1 + max_error)
 
         self.prev_tput_pred.append(next_tput)
-
-        if len(self.prev_tput_pred) > keep_past_segment:
-            self.prev_tput_pred.popleft()
 
         return next_tput
 

@@ -7,6 +7,7 @@ import time
 import sys
 import json
 import threading
+from BBA2 import BBA2
 from BBA0 import BBA0
 from Bola import Bola
 from MPC import MPC
@@ -15,13 +16,20 @@ from queue import Queue
 
 def downloadFile(url):
 	data = None
+	tput = 0
 	try:
+		startTime = time.time()
 		with urllib.request.urlopen(url) as f:
 			data = f.read()
-	
+		endTime = time.time() 
+		s = sys.getsizeof(data) # bytes
+		t = endTime - startTime # seconds
+		tput = (s * 0.008) / t # kilobits per second
+		# print('{}bytes, {}sec, {}kbps'.format(s,t,tput))
+
 	except urllib.error.URLError as err:
 		print("Error {} for {}".format(err,url))
-	return data
+	return data, tput
 
 def saveFile(dest, fileName, data):
 	if data is None:
@@ -58,13 +66,13 @@ class client:
 
 		# mpdContent = downloadFile(args.url)
 		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
-		self.video_properties = json.loads(downloadFile(self.baseUrl+'/'+'video_properties.json'))
+		data, tput = downloadFile(self.baseUrl+'/'+'video_properties.json')
+		self.video_properties = json.loads(data)
+		self.last_tput = tput
 
 		self.currentSegment = self.video_properties['start_number'] - 1
 
 		# self.manifestData = mpdparser.ManifestParser(mpdContent)
-		self.lastDownloadSize = self.lastDownloadTime = -1
-
 		self.totalSegments = self.getTotalSegments()
 		
 		self.lock = threading.Lock() # this lock is primarily for current buffer level.
@@ -83,6 +91,8 @@ class client:
 			self.abr = abr(self.video_properties, args)
 		elif args.abr == 'MPC':
 			self.abr = MPC(self.video_properties, args)
+		elif args.abr == 'BBA2':
+			self.abr = BBA2(self.video_properties, args)
 		else:
 			print("Error!! No right rule specified")
 			return
@@ -96,7 +106,6 @@ class client:
 		self.perf_param['avg_bitrate_change'] = 0.0
 
 
-
 	def getDuration(self):
 		# return total duration from manifest file
 		return self.video_properties['total_duration']
@@ -106,7 +115,6 @@ class client:
 		return self.video_properties['total_segments']
 
 
-	
 	def fetchNextSegment(self, bitrate = 0):
 		# downloads next required segment from server with repId representation ID 
 		# and return true if successfully downloaded
@@ -128,12 +136,14 @@ class client:
 				
 
 		startTime = time.time()
-		data = downloadFile(self.baseUrl + "/" + fName)
+		data, tput = downloadFile(self.baseUrl + "/" + fName)
 		endTime = time.time()
 
 		if data is not None:
 			self.lastDownloadTime = endTime - startTime
 			self.lastDownloadSize = sys.getsizeof(data)
+
+			self.last_tput = tput
 			
 			self.segmentQueue.put(fName)
 			print("Downloaded segment:[{}]".format(fName))
@@ -163,12 +173,9 @@ class client:
 		
 	
 	def lastSegmentThroughput_kbps(self):
-		# returns throughput value of last segment downloaded in bits/seconds
+		# returns throughput value of last segment downloaded in kbps
+		return self.last_tput
 
-		if self.currentSegment == self.video_properties['start_number'] - 1:
-			return 0
-		# returns kilobits per second
-		return (self.lastDownloadSize * 0.008 ) / self.lastDownloadTime
 
 
 	def getCorrespondingRepId(self, bitrate):
@@ -181,8 +188,8 @@ class client:
 
 	def segmentDownloadThread(self):
 		# thread to continuously downloads next segment based on selected abr rule.
-		while self.currentSegment < 50:
-		# while self.currentSegment < self.totalSegments:
+		# while self.currentSegment < 50:
+		while self.currentSegment + 1 < self.totalSegments:
 			with self.lock:
 				currBuff = self.currBuffer
 			
