@@ -9,6 +9,7 @@ from nw_simulate import nw
 app = Flask(__name__)
 app.debug = True
 nw = nw()
+isNormalNW = False
 
 # Routes
 @app.route('/')
@@ -18,20 +19,31 @@ def root():
 @app.route('/<path:path>')
 def static_proxy(path):
   # send_static_file will guess the correct MIME type
+  
   return app.send_static_file(path)
 
 @app.route('/networkTrace', methods=['GET'])
 def startNWtrace():
+	global isNormalNW
 	
 	fileName = request.args['file']
 	print('======================================================================')
 	print(fileName)
+	if fileName == 'normal_nw':
+		isNormalNW = True
+		return 'No Change in nw conditions. Normal.'
+
 	nw.start(fileName)
 
 	return 'Network conditions from :{}'.format(fileName)
 
 @app.route('/stopNWtrace')
 def stopNWtrace():
+	global isNormalNW
+
+	if isNormalNW == True:
+		isNormalNW = False
+		return 'Already normal.'
 	nw.stop()
 	return 'Stopped'
 
