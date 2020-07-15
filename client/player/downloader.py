@@ -104,6 +104,7 @@ class client:
 		self.perf_param['rebuffer_time'] = 0.0
 		self.perf_param['avg_bitrate'] = 0.0
 		self.perf_param['avg_bitrate_change'] = 0.0
+		self.perf_param['rebuffer_count'] = 0
 
 
 	def getDuration(self):
@@ -158,6 +159,7 @@ class client:
 			if not self.perf_param['prev_rate'] or self.perf_param['prev_rate'] != bitrate:
 				self.perf_param['prev_rate'] = bitrate
 				self.perf_param['change_count'] += 1
+
 			
 			self.currentSegment += 1
 
@@ -199,7 +201,6 @@ class client:
 			playerStats["lastTput_kbps"] = self.lastSegmentThroughput_kbps()
 			playerStats["currBuffer"] = currBuff
 			playerStats["segment_Idx"] = self.currentSegment + 1
-			# playerStats['empty_buffer_size'] = self.args.bufferSize - currBuff
 
 			if self.totalBuffer - currBuff >= segmentDuration:
 				rateNext = self.abr.getNextBitrate(playerStats)
@@ -222,6 +223,7 @@ class client:
 			rebuff_start = time.time()
 			frame = self.frameQueue.get()
 			rebuff_end = time.time()
+			
 
 			if frame == "done":
 				print("played all frames")
@@ -232,7 +234,14 @@ class client:
 				self.perf_param['startup_delay'] = time.time()
 			else:
 				self.perf_param['rebuffer_time'] += (rebuff_end - rebuff_start)
+			
+			# if time to get frame from queue is greater than 10^-4sec. considering it as rebuffer event.
+			# as it takes at least 10^-5 sec to get any frame from queue.
 
+			if rebuff_end - rebuff_start > 0.0001:
+				print('rebuffer_time:{}'.format(rebuff_end - rebuff_start))
+				self.perf_param['rebuffer_count'] += 1
+			
 			time.sleep(2)
 			with self.lock:
 				self.currBuffer -= 2
