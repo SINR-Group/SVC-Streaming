@@ -44,8 +44,8 @@ def stopNWtrace():
 	if isNormalNW == True:
 		isNormalNW = False
 		return 'Already normal.'
-	nw.stop()
-	return 'Stopped'
+	return nw.stop()
+	# return 'Stopped'
 
 
 if __name__ == '__main__':

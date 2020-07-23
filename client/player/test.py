@@ -37,8 +37,9 @@ args = parser.parse_args()
 
 
 # rules = ['tputRule', 'BBA0', 'BBA2', 'Bola']
-rules = ['BBA2']
-nw_files = nw_filenames.logs3g
+rules = ['Bola']
+# nw_files = nw_filenames.logs3g
+nw_files=['3Glogs/report.2011-01-04_0820CET.json', '4Glogs/report_bus_0011.json']
 
 
 # uncomment following line if streaming with out any network trace
@@ -47,11 +48,10 @@ nw_files = nw_filenames.logs3g
 final_perf = {}
 for rule in rules:
 	args.abr = rule
+	perf_with_nw = {}
 
 	for nw_f in nw_files:
 		args.nw = nw_f
-		perf_with_nw = {}
-
 		with urllib.request.urlopen(nw_trace_start_url + nw_f) as f:
 			print(f.read())
 
@@ -77,7 +77,7 @@ for rule in rules:
 		vd.perf_param['MPC_QOE'] = vd.perf_param['avg_bitrate'] - (lamb * vd.perf_param['avg_bitrate_change']) \
 									- (mu * vd.perf_param['rebuffer_time']) - (mu * vd.perf_param['startup_delay'])
 
-		vd.perf_param.pop('bitrate_change')
+		# vd.perf_param.pop('bitrate_change')
 		vd.perf_param.pop('prev_rate')
 		perf_with_nw[nw_f] = vd.perf_param
 		# pp.pprint(vd.perf_param)

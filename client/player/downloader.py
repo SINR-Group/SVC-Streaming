@@ -67,6 +67,7 @@ class client:
 		# mpdContent = downloadFile(args.url)
 		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
 		data, tput = downloadFile(self.baseUrl+'/'+'video_properties.json')
+		print(data)
 		self.video_properties = json.loads(data)
 		self.last_tput = tput
 
@@ -105,6 +106,7 @@ class client:
 		self.perf_param['avg_bitrate'] = 0.0
 		self.perf_param['avg_bitrate_change'] = 0.0
 		self.perf_param['rebuffer_count'] = 0
+		self.perf_param['tput_observed'] = []
 
 
 	def getDuration(self):
@@ -113,6 +115,7 @@ class client:
 	
 	def getTotalSegments(self):
 		# calculates total number of video segments from manifest file
+		return 60
 		return self.video_properties['total_segments']
 
 
@@ -153,6 +156,7 @@ class client:
 			
 			# QOE parameters update 
 			self.perf_param['bitrate_change'].append((self.currentSegment + 1,  bitrate))
+			self.perf_param['tput_observed'].append((self.currentSegment + 1,  tput))
 			self.perf_param['avg_bitrate'] += bitrate
 			self.perf_param['avg_bitrate_change'] += abs(bitrate - self.perf_param['prev_rate'])
 

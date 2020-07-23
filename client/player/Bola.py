@@ -23,7 +23,7 @@ class Bola(abr):
 
         # default value for gamma variable is set to 5(as said in paper). and V is calculated as 
         # specified by paper.
-        self.gp = args.gp
+        # self.gp = args.gp
 
         # Vp calculated freshly for each new segment
         # self.Vp = (self.buffer_size - self.segment_size) / (self.utilities[-1] + self.gp)
@@ -38,7 +38,7 @@ class Bola(abr):
         seg_sizes = self.video_properties['segment_size_bytes'][seg_idx]
         sM = seg_sizes[0] # NOTE: it assumes that size in json are stored in ascending order
 
-        self.utilities = [math.log(s/sM) for s in file_sizes]
+        self.utilities = [math.log(s/sM) for s in seg_sizes]
 
         self.gp = 1 - self.utilities[0] + (self.utilities[-1] - self.utilities[0]) / (target_buffer / minmum_buffer - 1)
         self.Vp = minmum_buffer / (self.utilities[0] + self.gp - 1)

@@ -67,6 +67,7 @@ class nw:
 	def stop(self):
 		self.flag = False
 		self.thread.join()
+		return 'Nw Stopped'
 
 
 # to add new handle
