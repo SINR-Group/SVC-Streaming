@@ -35,7 +35,8 @@ def startNWtrace():
 
 	nw.start(fileName)
 
-	return 'Network conditions from :{}'.format(fileName)
+	ret = 'Network conditions from :{}'.format(fileName)
+	return ret
 
 @app.route('/stopNWtrace')
 def stopNWtrace():
