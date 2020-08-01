@@ -29,7 +29,12 @@ class nw:
 
 		create_handle_cmd[11] = str(self.traces[0]['latency_ms']) + 'ms'
 		process = subprocess.Popen(create_handle_cmd)
-		limit_bandwidth_cmd[12] = str(self.traces[0]['bandwidth_kbps'])+"kbit"
+		
+		b = self.traces[0]['bandwidth_kbps']
+		if b <= 0:
+			b = 1
+		
+		limit_bandwidth_cmd[12] = str(b)+"kbit"
 		limit_bandwidth_cmd[3] = "add"
 		process = subprocess.Popen(limit_bandwidth_cmd)
 		time.sleep(self.traces[0]['duration_ms'] * 0.001)
@@ -38,19 +43,20 @@ class nw:
 		limit_bandwidth_cmd[3] = "change"
 		idx = 1
 
-		while self.flag:
-			if idx == 0:
-				process = subprocess.Popen(check_cmd, stdout = subprocess.PIPE)
-				print(idx)
-				print(process.communicate())
+		while self.flag:			
+			b = self.traces[idx]['bandwidth_kbps']
+			if b <= 0:
+				b = 1
 
-			limit_bandwidth_cmd[12] = str(self.traces[idx]['bandwidth_kbps'])+"kbit"
-			# print(str(limit_bandwidth_cmd))
+			limit_bandwidth_cmd[12] = str(b)+"kbit"
+			print(' '.join(limit_bandwidth_cmd))
 			process = subprocess.run(limit_bandwidth_cmd)
 			time.sleep(self.traces[idx]['duration_ms'] * 0.001)
 			idx = (idx + 1) % len(self.traces)
 		
 		process = subprocess.Popen(del_cmd)
+
+		print('thread exiting')
 		
 
 
@@ -59,6 +65,7 @@ class nw:
 		with open('nw_logs/'+fileName, 'r') as f:
 			self.traces = json.loads(f.read())
 		
+		# print('starting thread')
 		self.flag = True
 		self.thread = threading.Thread(target=self.nwThread)
 		self.thread.start()
