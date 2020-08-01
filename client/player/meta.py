@@ -1,6 +1,6 @@
 import nw_filenames
 
-base_url = 'http://130.245.144.152:5000/'
+base_url = 'http://130.245.144.100:5000/'
 manifest_path = 'video1/video_properties.json'
 
 # rules = ['tputRule', 'BBA0', 'BBA2', 'Bola']
