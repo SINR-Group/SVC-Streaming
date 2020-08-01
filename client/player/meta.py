@@ -12,8 +12,10 @@ rules = ['Bola']
 nw_files=['normal_nw']
 
 # number of segments to download. -1 will download full video.
-lastSeg = 60
+lastSeg = 30
 
 nw_trace_start_url = base_url + 'networkTrace?file='
 nw_trace_stop_url = base_url + 'stopNWtrace'
+
+resultFileName = 'results60_'
 

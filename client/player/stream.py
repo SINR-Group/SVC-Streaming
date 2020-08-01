@@ -69,7 +69,7 @@ for rule in meta.rules:
 
 
 for rule in meta.rules:
-	with open('results_60' + rule + '.json', 'w') as out:
+	with open(meta.resultFileName + rule + '.json', 'w') as out:
 		json.dump(final_perf[rule], out, indent=4)
 
 
