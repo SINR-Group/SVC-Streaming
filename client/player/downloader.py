@@ -109,7 +109,7 @@ class client:
 		return self.video_properties['total_segments']
 
 
-	def fetchNextSegment(self, bitrate = 0):
+	def fetchNextSegment(self, segmentIdx,bitrate = 0):
 		# downloads next required segment from server with repId representation ID 
 		# and return true if successfully downloaded
 
@@ -123,7 +123,7 @@ class client:
 		for i, b in enumerate(self.video_properties['bitrates']):
 			# print("rep id {} {}, received parameter {} {}".format(rep.bandwidth,type(rep.bandwidth), bitrate, type(bitrate)))
 			if b == bitrate:
-				fName = fName.replace("$REPID$",str(i+1)).replace("$Number$",str(self.currentSegment + 1))
+				fName = fName.replace("$REPID$",str(i+1)).replace("$Number$",str(segmentIdx))
 				print("fName:{}".format(fName))
 				segmentDuration = self.video_properties['duration'] / self.video_properties['timescale']
 				break
@@ -139,14 +139,14 @@ class client:
 
 			self.last_tput = tput
 			
-			self.segmentQueue.put((self.currentSegment + 1, fName))
+			self.segmentQueue.put((segmentIdx, fName))
 			print("Downloaded segment:<{}>".format(fName))
 
 			# saveFile(self.destination, fName, data)
 			
 			# QOE parameters update 
-			self.perf_param['bitrate_change'].append((self.currentSegment + 1,  bitrate))
-			self.perf_param['tput_observed'].append((self.currentSegment + 1,  tput))
+			self.perf_param['bitrate_change'].append((segmentIdx,  bitrate))
+			self.perf_param['tput_observed'].append((segmentIdx,  tput))
 			self.perf_param['avg_bitrate'] += bitrate
 			self.perf_param['avg_bitrate_change'] += abs(bitrate - self.perf_param['prev_rate'])
 
@@ -154,8 +154,8 @@ class client:
 				self.perf_param['prev_rate'] = bitrate
 				self.perf_param['change_count'] += 1
 
-			
-			self.currentSegment += 1
+			if segmentIdx == self.currentSegment + 1:
+				self.currentSegment += 1
 
 			with self.lock:
 					self.currBuffer += segmentDuration
@@ -166,7 +166,6 @@ class client:
 			ret = False
 		
 		return ret
-		
 	
 	def lastSegmentThroughput_kbps(self):
 		# returns throughput value of last segment downloaded in kbps
@@ -197,10 +196,21 @@ class client:
 
 			if self.totalBuffer - currBuff >= segmentDuration:
 				rateNext = self.abr.getNextBitrate(playerStats)
-
+				#See if any available segment can be enhanced
+				enhancedSegmentIdx = None
+				if self.currentSegment + 1 > 2:
+					for i, b in enumerate(self.video_properties['bitrates']):
+						if b == rateNext:
+							enhancedSegmentIdx = self.segmentQueue.checkEnhance(i)
+							break
+				if enhancedSegmentIdx == None:
+					enhancedSegmentIdx = self.currentSegment + 1
+				else:
+					print("Enhancement for segment Idx : ",enhancedSegmentIdx)
+				#TODO : Check if any change reqd 
 				self.perf_param['buffer_level'].append((self.currentSegment + 1, currBuff))
 				# print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, rateNext))
-				if not self.fetchNextSegment(rateNext):
+				if not self.fetchNextSegment(enhancedSegmentIdx,rateNext):
 					break
 			else:
 				time.sleep(0.5)
@@ -315,6 +325,31 @@ class buffer:
 			del self.data[self.nextSegmentIdx]
 			self.nextSegmentIdx += 1
 
+		return ret
+
+	def checkEnhance(self,bitRate):
+		ret = None
+		
+		with self.mutex:
+			doEnhance = False
+			for segmentIdx in range(self.nextSegmentIdx,-1,-1):
+				if segmentIdx not in self.data:
+					break
+				segments = [segment[1] for segment in self.data[segmentIdx]]
+				maxDownloadedRate = None
+				for segment in segments:
+					rateIdx = segment.find("_dash")
+					#as segmentName is video_rate_dash..
+					rate = int(segment[6:rateIdx])
+					if maxDownloadedRate == None:
+						maxDownloadedRate = rate
+					else:
+						maxDownloadedRate = max(maxDownloadedRate,rate)
+				if maxDownloadedRate < bitRate:
+					doEnhance = True
+					break
+			if doEnhance:
+				ret = segmentIdx
 		return ret
 		
 
