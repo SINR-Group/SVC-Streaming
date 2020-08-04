@@ -267,6 +267,7 @@ class client:
 
 			frames = decode(extractCodes(segment))
 			print("Decoded segment:{}".format(frames))
+			
 			self.frameQueue.put(frames)
 
 	def play(self):
@@ -291,7 +292,7 @@ class client:
 
 def decode(a):
 	# dummy function
-	time.sleep(0.5)
+	time.sleep(1)
 	return a
 
 # class to put downloaded segments in a buffer
@@ -300,6 +301,7 @@ class buffer:
 		self.data = defaultdict(list)
 		self.nextSegmentIdx = None
 		self.mutex = Condition()
+		self.lastSegmentIdx = None
 		
 	
 	# segment is tuple (segId, segName, data)
@@ -308,7 +310,10 @@ class buffer:
 		with self.mutex:
 			if self.nextSegmentIdx == None:
 				self.nextSegmentIdx = segment[0]
-			
+			if self.lastSegmentIdx == None:
+				self.lastSegmentIdx = segment[0]
+
+			self.lastSegmentIdx = max(self.lastSegmentIdx, segment[0])
 			self.data[segment[0]].append(segment)
 			self.mutex.notifyAll()
 	
@@ -322,6 +327,7 @@ class buffer:
 				self.mutex.wait()
 			
 			ret = self.data[self.nextSegmentIdx]
+			print('deleting ', self.nextSegmentIdx)
 			del self.data[self.nextSegmentIdx]
 			self.nextSegmentIdx += 1
 
@@ -329,14 +335,23 @@ class buffer:
 
 	def checkEnhance(self,bitRate):
 		ret = None
+		# print('next rate for enhance',bitRate)
 		
 		with self.mutex:
 			doEnhance = False
-			for segmentIdx in range(self.nextSegmentIdx,-1,-1):
+			# print('curr self idx',self.lastSegmentIdx)
+			for segmentIdx in range(self.lastSegmentIdx,-1,-1):
+
 				if segmentIdx not in self.data:
 					break
+				# else:
+				# 	print('aakash it is present', segmentIdx)
 				segments = [segment[1] for segment in self.data[segmentIdx]]
 				maxDownloadedRate = None
+				# print('aakash seg idx ', segmentIdx)
+				# print('aakash data list', self.data[segmentIdx])
+				# print('45678987654678908765678987656789765678',segments)
+
 				for segment in segments:
 					rateIdx = segment.find("_dash")
 					#as segmentName is video_rate_dash..
