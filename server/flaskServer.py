@@ -25,6 +25,7 @@ def static_proxy(path):
 @app.route('/networkTrace', methods=['GET'])
 def startNWtrace():
 	global isNormalNW
+	isNormalNW = False
 	
 	fileName = request.args['file']
 	print('======================================================================')
