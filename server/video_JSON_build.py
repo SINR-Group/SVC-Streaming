@@ -31,6 +31,6 @@ for i in range(0,TOTAL_SEGMENTS):
 properties['segment_size_bytes'] = segments_size
 
 # writes dict to file
-with open('video_properties.json','w') as f :
+with open(VIDEO_PATH + '/video_properties.json','w') as f :
     json.dump(properties, f)
 

@@ -7,52 +7,32 @@ import pprint as pp
 import urllib.request
 import nw_filenames
 import json
+import argparse
+import meta
 
-# url = "http://130.245.144.152:5000/video/output.mpd"
-# url = "http://130.245.144.152:5000/video1/dash_tiled.mpd"
-url = 'http://130.245.144.152:5000/video1/video_properties.json'
-nw_trace_start_url = 'http://130.245.144.152:5000/networkTrace?file='
-nw_trace_stop_url ='http://130.245.144.152:5000/stopNWtrace'
-# url = "http://130.245.144.102:5000/video1/dash_tiled.mpd"
-
-currDir = os.getcwd()
-
-parser = argparse.ArgumentParser(description ='Search some files')
+parser = argparse.ArgumentParser(description = 'Search some files')
 
 parser.add_argument("--url", dest="url", action="store", 
-						default=url, help="url of manifest file of video")
+						default= meta.base_url + meta.manifest_path, help="url of manifest file of video")
 parser.add_argument("--abr", dest="abr", action="store", 
 						default="tputRule", help="ABR rule to download video" )
 parser.add_argument("-b", dest="bufferSize", action="store",
 						default=60, help="Buffer size for video playback")
 parser.add_argument("--gp", dest="gp", action='store', default=5,
 					  help = '(gamma p) product in seconds')
-parser.add_argument("--loc", dest="downloadLoc", action="store", 
-						default=currDir, help="location to save downloaded files")
-parser.add_argument('--nw', dest='nw', action='store',
-						default='report.2010-09-13_1003CEST.json', help='nw trace file to test algorithm')
-# TODO: this argument will be removed
+
 
 args = parser.parse_args()
-
-
-# rules = ['tputRule', 'BBA0', 'BBA2', 'Bola']
-rules = ['Bola']
-# nw_files = nw_filenames.logs3g
-nw_files=['3Glogs/report.2011-01-04_0820CET.json', '4Glogs/report_bus_0011.json']
-
-
-# uncomment following line if streaming with out any network trace
-# nw_files=['normal_nw']
+args.lastSeg = meta.lastSeg
 
 final_perf = {}
-for rule in rules:
+for rule in meta.rules:
 	args.abr = rule
 	perf_with_nw = {}
 
-	for nw_f in nw_files:
+	for nw_f in meta.nw_files:
 		args.nw = nw_f
-		with urllib.request.urlopen(nw_trace_start_url + nw_f) as f:
+		with urllib.request.urlopen(meta.nw_trace_start_url + nw_f) as f:
 			print(f.read())
 
 
@@ -82,14 +62,14 @@ for rule in rules:
 		perf_with_nw[nw_f] = vd.perf_param
 		# pp.pprint(vd.perf_param)
 
+		with urllib.request.urlopen(meta.nw_trace_stop_url) as f:
+			print(f.read())
+
 	final_perf[rule] = perf_with_nw
 
-	with urllib.request.urlopen(nw_trace_stop_url) as f:
-		print(f.read())
 
-# change _3g or _4g accordingly for correct file name.
-for rule in rules:
-	with open('results_' + rule + '_3g.json', 'w') as out:
+for rule in meta.rules:
+	with open(meta.resultFileName + rule + '.json', 'w') as out:
 		json.dump(final_perf[rule], out, indent=4)
 
 

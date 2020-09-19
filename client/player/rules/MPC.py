@@ -1,4 +1,4 @@
-from abr import abr
+from .abr import abr
 import math
 from collections import deque
 import itertools

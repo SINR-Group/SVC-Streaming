@@ -1,18 +1,16 @@
 
 import urllib.request
-import mpdparser
 import os
 import math
 import time
 import sys
 import json
 import threading
-from BBA2 import BBA2
-from BBA0 import BBA0
-from Bola import Bola
-from MPC import MPC
-from abr import abr 
+from rules import Bola, BBA0, BBA2, MPC, abr
 from queue import Queue
+from collections import defaultdict
+from threading import Condition
+
 
 def downloadFile(url):
 	data = None
@@ -50,24 +48,14 @@ class client:
 	def __init__(self, args):
 		self.args = args
 		baseUrl, filename = os.path.split(args.url)
-		
-		print(baseUrl)
 
 		self.baseUrl = baseUrl
 		self.filename = filename.split(".")[0]
 
-		# TODO: saving downloaded files is not required. Remove it.
-		self.destination = os.path.join(args.downloadLoc + "/" + self.filename)
-		try:
-			os.mkdir(self.destination)
-		except OSError as err:
-			print(err)
-
-
 		# mpdContent = downloadFile(args.url)
 		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
 		data, tput = downloadFile(self.baseUrl+'/'+'video_properties.json')
-		print(data)
+		
 		self.video_properties = json.loads(data)
 		self.last_tput = tput
 
@@ -81,7 +69,7 @@ class client:
 		self.totalBuffer = args.bufferSize #buffer time in seconds
 		self.currBuffer = 0
 
-		self.segmentQueue = Queue(maxsize=0)
+		self.segmentQueue = buffer()
 		self.frameQueue = Queue(maxsize=0)
 
 		if args.abr == "BBA0":
@@ -107,6 +95,7 @@ class client:
 		self.perf_param['avg_bitrate_change'] = 0.0
 		self.perf_param['rebuffer_count'] = 0
 		self.perf_param['tput_observed'] = []
+		self.perf_param['buffer_level'] = []
 
 
 	def getDuration(self):
@@ -115,7 +104,8 @@ class client:
 	
 	def getTotalSegments(self):
 		# calculates total number of video segments from manifest file
-		return 60
+		if self.args.lastSeg != -1:
+			return self.args.lastSeg
 		return self.video_properties['total_segments']
 
 
@@ -149,8 +139,8 @@ class client:
 
 			self.last_tput = tput
 			
-			self.segmentQueue.put(fName)
-			print("Downloaded segment:[{}]".format(fName))
+			self.segmentQueue.put((self.currentSegment + 1, fName))
+			print("Downloaded segment:<{}>".format(fName))
 
 			# saveFile(self.destination, fName, data)
 			
@@ -183,7 +173,6 @@ class client:
 		return self.last_tput
 
 
-
 	def getCorrespondingRepId(self, bitrate):
 		
 		for i,b in enumerate(self.video_properties['bitrates']):
@@ -194,7 +183,7 @@ class client:
 
 	def segmentDownloadThread(self):
 		# thread to continuously downloads next segment based on selected abr rule.
-		# while self.currentSegment < 50:
+		
 		while self.currentSegment + 1 < self.totalSegments:
 			with self.lock:
 				currBuff = self.currBuffer
@@ -208,13 +197,15 @@ class client:
 
 			if self.totalBuffer - currBuff >= segmentDuration:
 				rateNext = self.abr.getNextBitrate(playerStats)
+
+				self.perf_param['buffer_level'].append((self.currentSegment + 1, currBuff))
 				# print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, rateNext))
 				if not self.fetchNextSegment(rateNext):
 					break
 			else:
 				time.sleep(0.5)
 		
-		self.segmentQueue.put("done")
+		self.segmentQueue.put((self.currentSegment + 1, "done"))
 
 
 	def playThread(self):
@@ -250,7 +241,7 @@ class client:
 			with self.lock:
 				self.currBuffer -= 2
 			
-			print("Played segment:[{}]".format(frame))
+			print("Played segment:<{}>".format(frame))
 
 
 	def decodeThread(self):
@@ -258,9 +249,10 @@ class client:
 
 		while True:
 			segment = self.segmentQueue.get()
-			if segment == "done":
+			print('from decode',segment)
+			if segment[0][1] == "done":
 				print("All segments downloaded")
-				self.frameQueue.put(segment)
+				self.frameQueue.put(segment[0][1])
 				break
 
 			frames = decode(extractCodes(segment))
@@ -291,3 +283,41 @@ def decode(a):
 	# dummy function
 	time.sleep(0.5)
 	return a
+
+# class to put downloaded segments in a buffer
+class buffer:
+	def __init__(self):
+		self.data = defaultdict(list)
+		self.nextSegmentIdx = None
+		self.mutex = Condition()
+		
+	
+	# segment is tuple (segId, segName, data)
+	def put(self, segment):
+		# appends new segment data at segment index
+		with self.mutex:
+			if self.nextSegmentIdx == None:
+				self.nextSegmentIdx = segment[0]
+			
+			self.data[segment[0]].append(segment)
+			self.mutex.notifyAll()
+	
+	def get(self):
+		# return with list of different bitrate files of same segment
+		# wait till next segment is available. next segment self.nextSegment
+		ret = None
+		
+		with self.mutex:
+			while len(self.data[self.nextSegmentIdx]) == 0:
+				self.mutex.wait()
+			
+			ret = self.data[self.nextSegmentIdx]
+			del self.data[self.nextSegmentIdx]
+			self.nextSegmentIdx += 1
+
+		return ret
+		
+
+
+
+

@@ -1,4 +1,4 @@
-from abr import abr
+from .abr import abr
 
 BBA2_STEADY_STATE = 'steady'
 BBA2_STARTUP_STATE = 'startup'

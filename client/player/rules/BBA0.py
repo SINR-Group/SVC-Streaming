@@ -1,4 +1,4 @@
-from abr import abr
+from .abr import abr
 		
 class BBA0(abr):
 
