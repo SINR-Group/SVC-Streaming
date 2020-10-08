@@ -3,7 +3,6 @@ from scipy.misc import imsave
 import cv2
 import numpy as np
 import time
-import os
 
 import torch
 from torch.autograd import Variable
@@ -14,7 +13,6 @@ import network
 from metric import msssim, psnr
 from unet import UNet
 
-import datetime
 
 def get_models(args, v_compress, bits, encoder_fuse_level, decoder_fuse_level):
 
@@ -126,7 +124,7 @@ def set_train(models):
             m.train()
 
 
-def eval_forward(model, batch, args, fnames, osuffix):
+def eval_forward(model, batch, args):
     batch, ctx_frames = batch
     cooked_batch = prepare_batch(
         batch, args.v_compress, args.warp)
@@ -140,7 +138,7 @@ def eval_forward(model, batch, args, fnames, osuffix):
         v_compress=args.v_compress,
         iterations=args.iterations,
         encoder_fuse_level=args.encoder_fuse_level,
-        decoder_fuse_level=args.decoder_fuse_level, fnames=fnames, osuffix=osuffix)
+        decoder_fuse_level=args.decoder_fuse_level)
 
 
 def prepare_unet_output(unet, unet_input, flows, warp):
@@ -203,31 +201,12 @@ def forward_ctx(unet, ctx_frames):
 
     return unet_output1, unet_output2
 
-def get_codes(filenames, args, output_suffix):
-    for ex_idx, filename in enumerate(filenames):
-        filename = filename.split('/')[-1]
-        cname = os.path.join(args.out_dir, output_suffix, 'codes', filename)
-        print (cname)
-
-        content = np.load(cname+'.codes.npz')
-        codes = np.unpackbits(content['codes'])
-        codes = np.reshape(codes, content['shape']).astype(np.float32) * 2 - 1
-        codes = torch.from_numpy(codes)
-
-        iters, batch_size, channels, height, width = codes.size()
-        print (codes.shape, iters, batch_size, channels, height, width)
-
-        codes = Variable(codes, volatile=True)
-        codes = codes.cuda()
-    return codes
 
 def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
-                  iterations, encoder_fuse_level, decoder_fuse_level, fnames, osuffix):
+                  iterations, encoder_fuse_level, decoder_fuse_level):
     encoder, binarizer, decoder, d2, unet = model
     res, _, _, flows = cooked_batch
     in_img = res
-
-    enc_start = datetime.datetime.now()
 
     ctx_frames = Variable(ctx_frames.cuda()) - 0.5
     frame1 = ctx_frames[:, :3]
@@ -242,14 +221,12 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
                                                                       width,
                                                                       args)
 
-    (_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_rnn(batch_size,height,width,args)
+    '''(_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_rnn(batch_size,height,width,args)'''
 
     original = res.data.cpu().numpy() + 0.5
 
     out_img = torch.zeros(1, 3, height, width) + 0.5
-    eccv_out_img = torch.zeros(1, 3, height, width) + 0.5
     out_imgs = []
-    eccv_out_imgs = []
     losses = []
 
     # UNet.
@@ -274,12 +251,14 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
             dec_unet_output2[jj] = None
 
     codes = []
-    eccv_codes = []
     prev_psnr = 0.0
-    code_arr=[]
-    eccv_dec_time = 0
-    eccv_dec_times = []
-    for itr in range(iterations):
+    #code_arr=[]
+
+    b,d,h,w= batch_size, args.bits, height//16, width//16
+    code_arr=[torch.zeros(b,d,h,w).cuda() for i in range(args.iterations)]
+    #cum_output_dd = torch.zeros(1, 3, height, width)
+
+    for i in range(iterations):
 
         if args.v_compress and args.stack:
             encoder_input = torch.cat([frame1, res, frame2], dim=1)
@@ -293,58 +272,36 @@ def forward_model(model, cooked_batch, ctx_frames, args, v_compress,
 
         # Binarize.
         code = binarizer(encoded)
-        code_arr.append(code)
-        if args.save_codes:
-            eccv_codes.append(code.data.cpu().numpy())
+        #code_arr=[torch.zeros(b,d,h,w).cuda() for j in range(args.iterations)]
+        code_arr[i] =code
+        #code_arr.append(code)
+        #if args.save_codes:
+        #    codes.append(code.data.cpu().numpy())
 
-        torch.cuda.synchronize()
-        eccv_dec_start = datetime.datetime.now()
-
-        eccv_output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
+        output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4 = decoder(
             code, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4,
             dec_unet_output1, dec_unet_output2)
 
-        torch.cuda.synchronize()
-
-        res = res - eccv_output
-        eccv_out_img = eccv_out_img + eccv_output.data.cpu()
-        eccv_out_img_np = eccv_out_img.numpy().clip(0, 1)
-
-        eccv_dec_end = datetime.datetime.now()
-        eccv_dec_time += (eccv_dec_end - eccv_dec_start).microseconds
-        eccv_dec_times.append(eccv_dec_time)
-        #print("ECCV Decoding time: {}us @ iter{}".format(eccv_dec_time, itr))
-
-        eccv_out_imgs.append(eccv_out_img_np)
+        res = res - output
+        #out_img = out_img + output.data.cpu()
+        #out_img_np = out_img.numpy().clip(0, 1)
+        #out_imgs.append(out_img_np)
         #losses.append(float(res.abs().mean().data.cpu().numpy()))
 
-    dec_start = datetime.datetime.now()
+        (d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_d2(batch_size,height,width,args)
+        code_d2 = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
+        (output_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
+                code_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
+                dec_unet_output1, dec_unet_output2)
+        if args.save_codes:
+            codes.append(code_d2.data.cpu().numpy())
 
-    b,d,h,w= code.shape
-    code = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
-    #print (code.shape)
-    (output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
-            code, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
-            dec_unet_output1, dec_unet_output2)
+        out_img_new = out_img + output_d2.data.cpu()
+        out_img_np = out_img_new.numpy().clip(0, 1)
+        out_imgs.append(out_img_np)
+        losses.append(float((in_img - output_d2).abs().mean().data.cpu().numpy()))
 
-    torch.cuda.synchronize()
-
-    if args.save_codes:
-        codes.append(code.data.cpu().numpy())
-
-    out_img = out_img + output.data.cpu()
-    out_img_np = out_img.numpy().clip(0, 1)
-
-    dec_end = datetime.datetime.now()
-
-    #print('ECCV Decoding Times: ' % '\t'.join(['%.5f' % el for el in eccv_dec_times.tolist()]))
-    #print ("Results: Encoding time: {}us \t ECCV Decoding time: {}us \t Our Decoding time: {}us".format((dec_start-enc_start).microseconds, eccv_dec_time, (dec_end-dec_start).microseconds, eccv_dec_time))
-    print ("Encoding time:{}".format(eccv_dec_time))
-
-    out_imgs.append(out_img_np)
-    losses.append(float((in_img - output).abs().mean().data.cpu().numpy()))
-
-    return original, np.array(out_imgs), np.array(losses), np.array(codes), np.array(eccv_out_imgs), np.array(eccv_codes)
+    return original, np.array(out_imgs), np.array(losses), np.array(codes)
 
 
 def save_numpy_array_as_image(filename, arr):
@@ -464,5 +421,31 @@ def init_lstm(batch_size, height, width, args):
 
     return (encoder_h_1, encoder_h_2, encoder_h_3, 
             decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4)
+
+def init_d2(batch_size, height, width, args):
+
+    decoder_h_1 = (Variable(
+        torch.zeros(batch_size, 512, height // 16, width // 16)),
+                   Variable(
+                       torch.zeros(batch_size, 512, height // 16, width // 16)))
+    decoder_h_2 = (Variable(
+        torch.zeros(batch_size, 512, height // 8, width // 8)),
+                   Variable(
+                       torch.zeros(batch_size, 512, height // 8, width // 8)))
+    decoder_h_3 = (Variable(
+        torch.zeros(batch_size, 256, height // 4, width // 4)),
+                   Variable(
+                       torch.zeros(batch_size, 256, height // 4, width // 4)))
+    decoder_h_4 = (Variable(
+        torch.zeros(batch_size, 256 if False else 128, height // 2, width // 2)),
+                   Variable(
+                       torch.zeros(batch_size, 256 if False else 128, height // 2, width // 2)))
+
+    decoder_h_1 = (decoder_h_1[0].cuda(), decoder_h_1[1].cuda())
+    decoder_h_2 = (decoder_h_2[0].cuda(), decoder_h_2[1].cuda())
+    decoder_h_3 = (decoder_h_3[0].cuda(), decoder_h_3[1].cuda())
+    decoder_h_4 = (decoder_h_4[0].cuda(), decoder_h_4[1].cuda())
+
+    return (decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4)
 
 

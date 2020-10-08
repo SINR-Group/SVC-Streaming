@@ -23,9 +23,9 @@ parser.add_argument('--eval-mv', type=str,
 ######## Model ########
 parser.add_argument('--v-compress', action='store_true',
                     help='True: video compression model. False: image compression.')
-parser.add_argument('--iterations', type=int, default=10, 
+parser.add_argument('--iterations', type=int, default=1, 
                     help='# iterations of progressive encoding/decoding.')
-parser.add_argument('--bits', default=16, type=int, 
+parser.add_argument('--bits', default=32, type=int, 
                     help='Bottle neck size.')
 parser.add_argument('--patch', default=64, type=int, 
                     help='Patch size.')

@@ -11,10 +11,12 @@ from torch.autograd import Variable
 from dataset import get_loader
 from evaluate import run_eval
 from train_options import parser
-from util import get_models, init_lstm, set_train, set_eval
+from util import get_models, init_lstm, set_train, set_eval, init_d2
 from util import prepare_inputs, forward_ctx
 
 import network
+
+import code
 
 args = parser.parse_args()
 print(args)
@@ -29,7 +31,7 @@ train_loader = get_loader(
 def get_eval_loaders():
   # We can extend this dict to evaluate on multiple datasets.
   eval_loaders = {
-    'TVL': get_loader(
+    'VTL': get_loader(
         is_train=False,
         root=args.eval, mv_dir=args.eval_mv,
         args=args),
@@ -45,7 +47,7 @@ encoder, binarizer, decoder, unet = get_models(
   encoder_fuse_level=args.encoder_fuse_level,
   decoder_fuse_level=args.decoder_fuse_level)
 
-d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level, itrs=args.iterations).cuda()
+d2 = network.DecoderCell2(v_compress=args.v_compress, shrink=args.shrink,bits=args.bits,fuse_level=args.decoder_fuse_level).cuda()
 
 nets = [encoder, binarizer, decoder, d2]
 if unet is not None:
@@ -61,6 +63,8 @@ if len(gpus) > 1:
 
 params = [{'params': net.parameters()} for net in nets]
 
+#code.interact(local=locals()) ########
+
 solver = optim.Adam(
     params,
     lr=args.lr)
@@ -74,7 +78,7 @@ if not os.path.exists(args.model_dir):
 
 ############### Checkpoints ###############
 def resume(model_name, index):
-  names = ['encoder', 'binarizer', 'decoder', 'unet', 'd2']
+  names = ['encoder', 'binarizer', 'decoder', 'd2', 'unet']
 
   for net_idx, net in enumerate(nets):
     if net is not None:
@@ -88,7 +92,7 @@ def resume(model_name, index):
 
 
 def save(index):
-  names = ['encoder', 'binarizer', 'decoder', 'unet', 'd2']
+  names = ['encoder', 'binarizer', 'decoder', 'd2', 'unet']
 
   for net_idx, net in enumerate(nets):
     if net is not None:
@@ -116,11 +120,10 @@ while True:
 
     for batch, (crops, ctx_frames, _) in enumerate(train_loader):
         scheduler.step()
+        train_iter += 1
 
         if train_iter > args.max_train_iters:
           break
-
-        train_iter += 1
 
         batch_t0 = time.time()
 
@@ -132,9 +135,9 @@ while True:
             batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),
             width=crops[0].size(3), args=args)
 
-        (_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_lstm(
+        '''(_,_,_,d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_lstm(
             batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),
-            width=crops[0].size(3), args=args)
+            width=crops[0].size(3), args=args)'''
 
         # Forward U-net.
         if args.v_compress:
@@ -148,14 +151,20 @@ while True:
         in_img = res
 
         losses = []
+        rec2_losses = []
 
         bp_t0 = time.time()
-        _, _, height, width = res.size()
+        batch_size, _, height, width = res.size()
 
         out_img = torch.zeros(1, 3, height, width).cuda() + 0.5
 
-        code_arr=[]
-        for _ in range(args.iterations):
+        #code_arr=[]
+        b,d,h,w= batch_size, args.bits, height//16, width//16
+        code_arr=[torch.zeros(b,d,h,w).cuda() for i in range(args.iterations)]
+        #print(res.shape)
+        #cum_output_d2 = torch.zeros(1, 3, height, width).cuda()
+        
+        for i in range(args.iterations):
             if args.v_compress and args.stack:
                 encoder_input = torch.cat([frame1, res, frame2], dim=1)
             else:
@@ -169,7 +178,8 @@ while True:
             # Binarize.
             codes = binarizer(encoded)
             #print(codes.shape)
-            code_arr.append(codes)
+            #code_arr=[torch.zeros(b,d,h,w).cuda() for j in range(args.iterations)]
+            code_arr[i] = codes
 
             # Decode.
             (output, decoder_h_1, decoder_h_2, decoder_h_3, decoder_h_4) = decoder(
@@ -180,24 +190,31 @@ while True:
             out_img = out_img + output.data
             losses.append(res.abs().mean())
 
-        b,d,h,w= codes.shape
-        codes = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
-        #print(codes.shape)
-        (output, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
-                codes, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
-                warped_unet_output1, warped_unet_output2)
+            (d2_h_1, d2_h_2, d2_h_3, d2_h_4) = init_d2(
+                batch_size=(crops[0].size(0) * args.num_crops), height=crops[0].size(2),
+                width=crops[0].size(3), args=args)
 
-        rec2_loss = (in_img - output).abs().mean()
+            #b,d,h,w= codes.shape
+            codes_d2 = torch.stack(code_arr, dim=1).reshape(b,-1,h,w)
+            #print('iter',i,codes_d2)
+            (output_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4) = d2(
+                    codes_d2, d2_h_1, d2_h_2, d2_h_3, d2_h_4,
+                    warped_unet_output1, warped_unet_output2)
+            #cum_output_d2 += output_d2
+
+            rec2_losses.append((in_img - output_d2).abs().mean())
+            #rec2_losses.append((in_img - cum_output_d2).abs().mean())
 
         bp_t1 = time.time()
 
         rec1_loss = sum(losses) / args.iterations
+        rec2_loss = sum(rec2_losses) / args.iterations
         loss = (rec1_loss+rec2_loss)*0.5
         loss.backward()
 
         for net in [encoder, binarizer, decoder, unet, d2]:
             if net is not None:
-                torch.nn.utils.clip_grad_norm(net.parameters(), args.clip)
+                torch.nn.utils.clip_grad_norm_(net.parameters(), args.clip)
 
         solver.step()
 
@@ -220,7 +237,7 @@ while True:
         if train_iter % args.checkpoint_iters == 0:
             save(train_iter)
 
-        if just_resumed or train_iter % args.eval_iters == 0 or train_iter == 100000:
+        if just_resumed or train_iter % args.eval_iters == 0:
             print('Start evaluation...')
 
             set_eval(nets)
