@@ -5,20 +5,31 @@ import os
 import math
 import time
 import sys
+import json
 import threading
-from BBA0 import BBA0 
+from BBA2 import BBA2
+from BBA0 import BBA0
+from Bola import Bola
+from MPC import MPC
 from abr import abr 
 from queue import Queue
 
 def downloadFile(url):
 	data = None
+	tput = 0
 	try:
+		startTime = time.time()
 		with urllib.request.urlopen(url) as f:
 			data = f.read()
-	
+		endTime = time.time() 
+		s = sys.getsizeof(data) # bytes
+		t = endTime - startTime # seconds
+		tput = (s * 0.008) / t # kilobits per second
+		# print('{}bytes, {}sec, {}kbps'.format(s,t,tput))
+
 	except urllib.error.URLError as err:
 		print("Error {} for {}".format(err,url))
-	return data
+	return data, tput
 
 def saveFile(dest, fileName, data):
 	if data is None:
@@ -37,6 +48,7 @@ def extractCodes(segment):
 
 class client:
 	def __init__(self, args):
+		self.args = args
 		baseUrl, filename = os.path.split(args.url)
 		
 		print(baseUrl)
@@ -52,13 +64,16 @@ class client:
 			print(err)
 
 
-		mpdContent = downloadFile(args.url)
-		saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
+		# mpdContent = downloadFile(args.url)
+		# saveFile(self.destination, os.path.split(args.url)[1], mpdContent)
+		data, tput = downloadFile(self.baseUrl+'/'+'video_properties.json')
+		print(data)
+		self.video_properties = json.loads(data)
+		self.last_tput = tput
 
-		self.currentSegment = 0
-		self.manifestData = mpdparser.ManifestParser(mpdContent)
-		self.lastDownloadSize = self.lastDownloadTime = -1
+		self.currentSegment = self.video_properties['start_number'] - 1
 
+		# self.manifestData = mpdparser.ManifestParser(mpdContent)
 		self.totalSegments = self.getTotalSegments()
 		
 		self.lock = threading.Lock() # this lock is primarily for current buffer level.
@@ -70,66 +85,86 @@ class client:
 		self.frameQueue = Queue(maxsize=0)
 
 		if args.abr == "BBA0":
-			self.abr = BBA0(self.manifestData)
+			self.abr = BBA0(self.video_properties, args)
+		elif args.abr == 'Bola':
+			self.abr = Bola(self.video_properties, args)
+		elif args.abr == 'tputRule':
+			self.abr = abr(self.video_properties, args)
+		elif args.abr == 'MPC':
+			self.abr = MPC(self.video_properties, args)
+		elif args.abr == 'BBA2':
+			self.abr = BBA2(self.video_properties, args)
 		else:
-			self.abr = abr(self.manifestData)
+			print("Error!! No right rule specified")
+			return
 
+		self.perf_param = {}
+		self.perf_param['bitrate_change'] = []
+		self.perf_param['prev_rate'] = 0
+		self.perf_param['change_count'] = 0
+		self.perf_param['rebuffer_time'] = 0.0
+		self.perf_param['avg_bitrate'] = 0.0
+		self.perf_param['avg_bitrate_change'] = 0.0
+		self.perf_param['rebuffer_count'] = 0
+		self.perf_param['tput_observed'] = []
 
 
 	def getDuration(self):
 		# return total duration from manifest file
-
-		dur = self.manifestData.mpd.periods[0].duration
-		print("media duration:{}".format(dur))
-		return dur
+		return self.video_properties['total_duration']
 	
 	def getTotalSegments(self):
 		# calculates total number of video segments from manifest file
-
-		ret = 0.0
-		rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
-
-		ret = math.ceil((1.0 * self.getDuration() * rep.timescale) / rep.duration)
-		print("totalSegments:[{}], rep ID [{}], rep timeScale [{}] rep duration [{}]".format(ret, rep.id, 
-				rep.timescale, rep.duration))
-
-		return ret
+		return 60
+		return self.video_properties['total_segments']
 
 
-	
-	def fetchNextSegment(self, repId = 0):
+	def fetchNextSegment(self, bitrate = 0):
 		# downloads next required segment from server with repId representation ID 
 		# and return true if successfully downloaded
 
-		if not repId:
+		if not bitrate:
 			return
-		adp_set = self.manifestData.mpd.periods[0].adaptation_sets[0]
 
 		fName = None
 		segmentDuration = 0
+		fName = self.video_properties['media'] 
 
-		for rep in adp_set.representations:
-			# print("rep id {} {}, received parameter {} {}".format(rep.id,type(rep.id), repId, type(repId)))
-			if rep.id == repId:
-				fName = rep.media.replace("$Number$",str(self.currentSegment + 1))
-				# print("fName:{}".format(fName))
-				segmentDuration = rep.duration / rep.timescale
+		for i, b in enumerate(self.video_properties['bitrates']):
+			# print("rep id {} {}, received parameter {} {}".format(rep.bandwidth,type(rep.bandwidth), bitrate, type(bitrate)))
+			if b == bitrate:
+				fName = fName.replace("$REPID$",str(i+1)).replace("$Number$",str(self.currentSegment + 1))
+				print("fName:{}".format(fName))
+				segmentDuration = self.video_properties['duration'] / self.video_properties['timescale']
 				break
 				
 
 		startTime = time.time()
-		data = downloadFile(self.baseUrl + "/" + fName)
+		data, tput = downloadFile(self.baseUrl + "/" + fName)
 		endTime = time.time()
 
 		if data is not None:
 			self.lastDownloadTime = endTime - startTime
 			self.lastDownloadSize = sys.getsizeof(data)
 
+			self.last_tput = tput
+			
 			self.segmentQueue.put(fName)
 			print("Downloaded segment:[{}]".format(fName))
 
-			saveFile(self.destination, fName, data)
+			# saveFile(self.destination, fName, data)
+			
+			# QOE parameters update 
+			self.perf_param['bitrate_change'].append((self.currentSegment + 1,  bitrate))
+			self.perf_param['tput_observed'].append((self.currentSegment + 1,  tput))
+			self.perf_param['avg_bitrate'] += bitrate
+			self.perf_param['avg_bitrate_change'] += abs(bitrate - self.perf_param['prev_rate'])
 
+			if not self.perf_param['prev_rate'] or self.perf_param['prev_rate'] != bitrate:
+				self.perf_param['prev_rate'] = bitrate
+				self.perf_param['change_count'] += 1
+
+			
 			self.currentSegment += 1
 
 			with self.lock:
@@ -143,33 +178,38 @@ class client:
 		return ret
 		
 	
-	def lastSegmentThroughput(self):
-		# returns throughput value of last segment downloaded in bits/seconds
+	def lastSegmentThroughput_kbps(self):
+		# returns throughput value of last segment downloaded in kbps
+		return self.last_tput
 
-		if self.currentSegment == 0:
-			return 0
 
-		return (self.lastDownloadSize * 8.0 ) / self.lastDownloadTime
 
+	def getCorrespondingRepId(self, bitrate):
+		
+		for i,b in enumerate(self.video_properties['bitrates']):
+			if b == bitrate:
+				return i + 1
+		
+		return -1 #states no representation with given bitrate found
 
 	def segmentDownloadThread(self):
 		# thread to continuously downloads next segment based on selected abr rule.
-
-		while self.currentSegment < self.totalSegments:
+		# while self.currentSegment < 50:
+		while self.currentSegment + 1 < self.totalSegments:
 			with self.lock:
 				currBuff = self.currBuffer
 			
-			rep = self.manifestData.mpd.periods[0].adaptation_sets[0].representations[0]
-			segmentDuration = rep.duration / rep.timescale
+			segmentDuration = self.video_properties['duration'] / self.video_properties['timescale']
 
 			playerStats = {}
-			playerStats["lastTput"] = self.lastSegmentThroughput()
+			playerStats["lastTput_kbps"] = self.lastSegmentThroughput_kbps()
 			playerStats["currBuffer"] = currBuff
+			playerStats["segment_Idx"] = self.currentSegment + 1
 
 			if self.totalBuffer - currBuff >= segmentDuration:
-				repId = self.abr.repIdForNextSegment(playerStats)
-				print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, repId))
-				if not self.fetchNextSegment(repId):
+				rateNext = self.abr.getNextBitrate(playerStats)
+				# print("fetching segment number [{}] from representation [{}]".format(self.currentSegment+1, rateNext))
+				if not self.fetchNextSegment(rateNext):
 					break
 			else:
 				time.sleep(0.5)
@@ -179,12 +219,33 @@ class client:
 
 	def playThread(self):
 		# thread to play decoded frames received from decoder
-
+		
+		# this flag is to mark start of play back.
+		playback_started = False
 		while True:
+
+			rebuff_start = time.time()
 			frame = self.frameQueue.get()
+			rebuff_end = time.time()
+			
+
 			if frame == "done":
 				print("played all frames")
 				break
+			
+			if not playback_started:
+				playback_started = True
+				self.perf_param['startup_delay'] = time.time()
+			else:
+				self.perf_param['rebuffer_time'] += (rebuff_end - rebuff_start)
+			
+			# if time to get frame from queue is greater than 10^-4sec. considering it as rebuffer event.
+			# as it takes at least 10^-5 sec to get any frame from queue.
+
+			if rebuff_end - rebuff_start > 0.0001:
+				print('rebuffer_time:{}'.format(rebuff_end - rebuff_start))
+				self.perf_param['rebuffer_count'] += 1
+			
 			time.sleep(2)
 			with self.lock:
 				self.currBuffer -= 2
@@ -220,6 +281,9 @@ class client:
 		downt.join()
 		dect.join()
 		pt.join()
+
+		self.perf_param['avg_bitrate'] /= self.totalSegments
+		self.perf_param['avg_bitrate_change'] /= (self.totalSegments - 1)
 
 
 

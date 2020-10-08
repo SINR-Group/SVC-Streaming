@@ -3,45 +3,46 @@
 # basic throughput rule.
 
 class abr:
-	def __init__(self, manifestData):
-		self.manifestData = manifestData
+	def __init__(self, video_properties, args):
+		self.video_properties = video_properties
+		self.args = args
 	
 	# estimates representation id for next segment to be downloaded on the basis
 	# throughPut(tput) of last downloaded segment
-	def repIdForNextSegment(self, playerStats):
+	def getNextBitrate(self, playerStats):
 
-		tput = playerStats["lastTput"]
+		tput = playerStats["lastTput_kbps"] * 1000
+		bitrateList = self.getBitrateList()
+		bitrateList = sorted(bitrateList)
+		rateNext = bitrateList[0]
+		
+		# tput will be 0 for very first segment
 
 		if not tput:
-			return 1
-		
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
+			return rateNext
 
-		repId = 1
-		for rep in adpSet.representations:
-			if rep.bandwidth > tput:
-				repId = rep.id - 1
+		for bt in bitrateList:
+			if bt <= tput:
+				rateNext = bt
+			else:
 				break
-			repId = rep.id
-		
-		if repId >= 1:
-			return repId
-		else:
-			return 1
+			
+		return rateNext
 	
 	def getBitrateList(self):
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
-		bitrateList = []
-		for rep in adpSet.representations:
-			bitrateList.append(int(rep.bandwidth))
-		
+		bitrateList = self.video_properties['bitrates']
 		return bitrateList
 	
 	def getCorrespondingRepId(self, bitrate):
-		adpSet = self.manifestData.mpd.periods[0].adaptation_sets[0]
-		
-		for rep in adpSet.representations:
-			if int(rep.bandwidth) == bitrate:
-				return rep.id
+
+		for i,b in enumerate(self.video_properties['bitrates']):
+			if b == bitrate:
+				return i + 1
 		
 		return -1 #states no representation with given bitrate found
+
+	def getSegmentDuration(self):
+		return self.video_properties['duration'] / self.video_properties['timescale']
+	
+	def getTotalSegments(self):
+		return self.video_properties['total_segments']
